@@ -11,7 +11,7 @@ if __name__ == "__main__":
     pdfmetrics.registerFont(TTFont('Theano-Modern', 'TheanoModern-Regular.ttf'))
     data = []
     parser = PDFBuilder(data, "input/template_prop.properties")
-    pdf = SimpleDocTemplate("output/mypdf.pdf", pagesize=letter)
+    pdf = SimpleDocTemplate("mypdf.pdf", pagesize=letter)
     doc = etree.parse("input/template.xml")
 
     task_groups = doc.findall("taskGroup")
