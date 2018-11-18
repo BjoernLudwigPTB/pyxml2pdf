@@ -21,7 +21,8 @@ class PDFBuilder:
         self._table_style = TableStyle()
         self._creator = Creator()
         self._task_manager = TaskBuilder(properties)
-        pdfmetrics.registerFont(TTFont('Theano-Modern', 'PdfVisualisation/TheanoModern-Regular.ttf'))
+        pdfmetrics.registerFont(TTFont(
+            'Theano-Modern', 'PdfVisualisation/TheanoModern-Regular.ttf'))
 
     def parse_xml_data(self, title, object_data, groups, signature):
         styles = getSampleStyleSheet()
@@ -34,7 +35,8 @@ class PDFBuilder:
         if title is not None:
             title_style = styles["Heading1"]
             title_style.alignment = 1
-            self._elements.append(Paragraph(self._task_manager.read_settings(title.text), title_style))
+            self._elements.append(Paragraph(
+                self._task_manager.read_settings(title.text), title_style))
             self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
         else:
             print("TITLE NOT FOUND")
@@ -45,9 +47,10 @@ class PDFBuilder:
             object_style.fontName = "Theano-Modern"
 
             for item in object_data:
-                row = self._creator.create_table_fixed([[Paragraph(item.tag.replace(".", " "), object_style),
-                                                         Paragraph(item.text, object_style)]],
-                                                       [3.0 * inch, 5.0 * inch], self._table_style.normal)
+                row = self._creator.create_table_fixed(
+                    [[Paragraph(item.tag.replace(".", " "), object_style),
+                      Paragraph(item.text, object_style)]],
+                    [3.0 * inch, 5.0 * inch], self._table_style.normal)
                 self._elements.append(row)
             self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
         else:
@@ -60,16 +63,19 @@ class PDFBuilder:
                     if task_group.get("available") == "false":
                         continue
                 print(task_group.tag, end="")
-                self._task_manager.make_row(self._elements, task_group, "description", self._table_style.heading,
-                                  "     ", styles["Heading2"])
+                self._task_manager.make_row(
+                    self._elements, task_group, "description",
+                    self._table_style.heading, "     ", styles["Heading2"])
 
                 for sub_task_group in task_group:
                     if sub_task_group.get("available"):
                         if sub_task_group.get("available") == "false":
                             continue
                     print("\n   " + sub_task_group.tag, end="")
-                    self._task_manager.make_row(self._elements, sub_task_group, "description",
-                                                self._table_style.sub_heading, "          ", styles["Heading4"])
+                    self._task_manager.make_row(
+                        self._elements, sub_task_group, "description",
+                        self._table_style.sub_heading, "          ",
+                        styles["Heading4"])
 
                     for sub_task in sub_task_group:
                         if sub_task.get("available"):
@@ -80,10 +86,13 @@ class PDFBuilder:
                                 if task.get("available") == "false":
                                     continue
                             print("\n     " + task.tag, end="")
-                            self._task_manager.make_row(self._elements, task, "description", self._table_style.normal,
-                                          "            ", styles["Heading6"])
+                            self._task_manager.make_row(
+                                self._elements, task, "description",
+                                self._table_style.normal, "            ",
+                                styles["Heading6"])
 
-                            self._task_manager.pick_task(task.get("class"), task.get("type"), task)
+                            self._task_manager.pick_task(
+                                task.get("class"), task.get("type"), task)
 
                             row = []
                             row.append(self._task_manager.run())
@@ -98,21 +107,25 @@ class PDFBuilder:
             print("Use Signature class to define what to do!")
         else:
             if state != Signature.NONE:
-                style_right = ParagraphStyle(name='right', parent=styles['Normal'], alignment=TA_RIGHT)
+                style_right = ParagraphStyle(
+                    name='right', parent=styles['Normal'], alignment=TA_RIGHT)
 
                 self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
 
                 if state == Signature.MANUAL_DATE:
-                    self._elements.append(Table([[Paragraph("Signature: .....................................",
-                                                            styles["Normal"]),
-                                                  Paragraph("Date: .....................................",
-                                                            style_right)]]))
+                    self._elements.append(
+                        Table([[Paragraph(
+                            "Signature: .....................................",
+                            styles["Normal"]), Paragraph(
+                            "Date: .....................................",
+                            style_right)]]))
 
                 elif state == Signature.AUTO_DATE:
                     self._elements.append(
-                        Table([[Paragraph("Signature: .....................................", styles["Normal"]),
-                                Paragraph(datetime.datetime.now().date().__str__(), style_right)]]))
+                        Table([[Paragraph(
+                            "Signature: .....................................",
+                            styles["Normal"]), Paragraph(
+                            datetime.datetime.now().date().__str__(),
+                            style_right)]]))
 
                 self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
-
-

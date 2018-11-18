@@ -1,5 +1,4 @@
 import sys
-from colorama import Fore, Back, Style
 from Core.Initializer import *
 
 
@@ -18,5 +17,5 @@ if __name__ == "__main__":
     validation()
     init = Initializer()
     init.build(sys.argv[1], sys.argv[2], sys.argv[3], Signature.AUTO_DATE)
-    print("\n" + Fore.GREEN + Back.BLUE + Style.BRIGHT +
-          "--------------------------------------DONE--------------------------------------")
+    print("\n"
+          "-------------------------------DONE-------------------------------")

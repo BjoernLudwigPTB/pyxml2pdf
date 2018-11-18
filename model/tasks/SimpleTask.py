@@ -7,8 +7,10 @@ class SimpleTask(Task):
     def __init__(self, task, properties):
         self._task = task
 
-        self._length_dict = {"hook": [6.0], "state": [0.5, 0.5, 0.5, 0.5], "comment": [2.0]}
-        self._type_task_dict = {"hook": "settings", "state": "checkbox", "comment": "text"}
+        self._length_dict = {
+            "hook": [6.0], "state": [0.5, 0.5, 0.5, 0.5], "comment": [2.0]}
+        self._type_task_dict = {
+            "hook": "settings", "state": "checkbox", "comment": "text"}
 
         Task.__init__(self, properties, self._type_task_dict)
 
@@ -30,6 +32,8 @@ class SimpleTask(Task):
 
         self.resize_table()
 
-        row = self._creator.create_table_fixed(self._desc_tasks, self._active_objects, table_style.normal)
+        row = self._creator.create_table_fixed(self._desc_tasks,
+                                               self._active_objects,
+                                               table_style.normal)
 
         return row

@@ -31,4 +31,3 @@ class Creator:
         desc[0].append(FlowableRect(5, 5, True if task == "true" else False))
         desc[0].append(Paragraph("No", styles))
         desc[0].append(FlowableRect(5, 5, False if task == "true" else True))
-

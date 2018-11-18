@@ -41,5 +41,3 @@ class TaskBuilder:
 
                 row = self._creator.create_table(desc, 8.0, table_style)
                 elements.append(row)
-
-
