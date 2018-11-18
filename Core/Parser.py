@@ -22,7 +22,7 @@ class PDFBuilder:
         self._creator = Creator()
         self._task_manager = TaskBuilder(properties)
         pdfmetrics.registerFont(TTFont(
-            'Theano-Modern', 'PdfVisualisation/TheanoModern-Regular.ttf'))
+            'News-Goth-BT', 'PdfVisualisation/news gothic bt.ttf'))
 
     def parse_xml_data(self, title, object_data, groups, signature):
         styles = getSampleStyleSheet()
@@ -44,7 +44,7 @@ class PDFBuilder:
     def parse_object_data(self, object_data, styles):
         if object_data is not None:
             object_style = styles["Normal"]
-            object_style.fontName = "Theano-Modern"
+            object_style.fontName = "News-Goth-BT"
 
             for item in object_data:
                 row = self._creator.create_table_fixed(
