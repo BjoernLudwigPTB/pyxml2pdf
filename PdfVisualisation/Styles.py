@@ -1,6 +1,3 @@
-from reportlab.lib import colors
-
-
 class Styles:
 
     align_center = ('ALIGN', (0, 0), (-1, -1), 'CENTER')
