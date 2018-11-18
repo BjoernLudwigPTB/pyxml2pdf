@@ -1,4 +1,6 @@
-from PdfVisualisation.Creator import *
+from reportlab.platypus import Paragraph
+
+from PdfVisualisation.Creator import Creator
 
 
 class TaskBuilder:

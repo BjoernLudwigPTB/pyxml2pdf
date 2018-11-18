@@ -1,4 +1,5 @@
-from Core.Initializer import *
+from Core.Initializer import Initializer
+from Core.Parser import Signature
 
 
 if __name__ == "__main__":

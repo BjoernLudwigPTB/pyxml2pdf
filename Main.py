@@ -1,5 +1,7 @@
 import sys
-from Core.Initializer import *
+
+from Core.Initializer import Initializer
+from Core.Parser import Signature
 
 
 def validation():

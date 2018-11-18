@@ -1,6 +1,8 @@
-from model.tasks.TaskBuilder import *
-from PdfVisualisation.Creator import *
+from reportlab.lib.pagesizes import inch
 from reportlab.platypus import Paragraph
+
+from PdfVisualisation.Creator import Creator
+from model.tasks.TaskBuilder import TaskBuilder
 
 
 class Task:

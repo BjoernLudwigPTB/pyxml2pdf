@@ -1,12 +1,16 @@
-from reportlab.platypus import TableStyle
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from model.tasks.TaskBuilder import *
-from PdfVisualisation.TableStyle import *
+import datetime
+from enum import Enum
+
 from reportlab.lib.enums import TA_RIGHT
+from reportlab.lib.pagesizes import inch
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from enum import Enum
-import datetime
+from reportlab.platypus import Paragraph, TableStyle, Table
+
+from PdfVisualisation.Creator import Creator
+from PdfVisualisation.TableStyle import TableStyle
+from model.tasks.TaskBuilder import TaskBuilder
 
 
 class Signature(Enum):

@@ -1,7 +1,8 @@
-from reportlab.platypus import SimpleDocTemplate
-from reportlab.lib.pagesizes import letter
 from lxml import etree
-from Core.Parser import *
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate
+
+from Core.Parser import PDFBuilder
 
 
 class Initializer:

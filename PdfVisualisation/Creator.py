@@ -1,7 +1,7 @@
-from PdfVisualisation.FlowableRect import *
 from reportlab.lib.pagesizes import inch
-from reportlab.platypus import Table
-from reportlab.platypus import Paragraph
+from reportlab.platypus import Paragraph, Table
+
+from PdfVisualisation.FlowableRect import FlowableRect
 
 
 class Creator:

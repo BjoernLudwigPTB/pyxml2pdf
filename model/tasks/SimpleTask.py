@@ -1,6 +1,7 @@
-from model.tasks.Task import *
-from PdfVisualisation.TableStyle import *
 from reportlab.lib.styles import getSampleStyleSheet
+
+from PdfVisualisation.TableStyle import TableStyle
+from model.tasks.Task import Task
 
 
 class SimpleTask(Task):
