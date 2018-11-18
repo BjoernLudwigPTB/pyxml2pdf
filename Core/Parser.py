@@ -94,8 +94,7 @@ class PDFBuilder:
                             self._task_manager.pick_task(
                                 task.get("class"), task.get("type"), task)
 
-                            row = []
-                            row.append(self._task_manager.run())
+                            row = [self._task_manager.run()]
 
                             for element in row:
                                 self._elements.append(element)
