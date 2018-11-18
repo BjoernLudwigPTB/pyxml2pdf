@@ -1,4 +1,6 @@
-from PdfVisualisation.Styles import *
+from reportlab.lib import colors
+
+from PdfVisualisation.Styles import Styles
 
 
 class TableStyle:
