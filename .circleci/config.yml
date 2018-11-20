@@ -38,11 +38,10 @@ jobs:
         - ./venv
         key: v1-dependencies-{{ checksum "requirements.txt" }}
 
-    # Set up Code Climate
+    # Set up Code Climate by downloading test reporter as a static binary
     - run:
         name: Setup Code Climate test-reporter
         command: |
-        # download test reporter as a static binary
           curl -L 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64' > ./cc-test-reporter
           chmod +x ./cc-test-reporter
 
