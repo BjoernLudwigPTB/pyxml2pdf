@@ -46,14 +46,14 @@ jobs:
           chmod +x ./cc-test-reporter
 
     # Run coverage! We use pytest's test-runner (https://pytest.org)
+    # 1. Notify Code Climate of a pending test report using `before-build`
+    # 2. Upload test report to Code Climate using `after-build`
     - run:
         name: run tests
         command: |
           . venv/bin/activate
-        # notify Code Climate of a pending test report using `before-build`
           ./cc-test-reporter before-build
           pytest --cov=XMLToPDFConverter > pytest.xml
-        # upload test report to Code Climate using `after-build`
           ./cc-test-reporter after-build --coverage-input-type pytest \
                    --exit-code $?
 
