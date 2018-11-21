@@ -3,3 +3,4 @@ lxml
 pytest
 pytest-cov
 reportlab
+requests

@@ -5,8 +5,8 @@ from Core.Parser import Signature
 def convert():
     init = Initializer()
     init.build(
-        "input/template.xml", "output/mypdf.pdf",
-        "input/template_prop.properties", Signature.AUTO_DATE)
+        "input/kursdaten.xml", "output/kursdaten.pdf",
+        "input/kursdaten_prop.properties", Signature.AUTO_DATE)
     print("\n"
           "-------------------------------DONE-------------------------------")
 
