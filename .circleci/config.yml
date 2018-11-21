@@ -49,7 +49,7 @@ jobs:
           ./cc-test-reporter before-build
           coverage run MainPredefined.py
           coverage xml
-          coverage report > coverage.log
+          coverage report -m --omit venv/ > coverage.log
           ./cc-test-reporter after-build --coverage-input-type coverage.py \
                    --exit-code $?
 
