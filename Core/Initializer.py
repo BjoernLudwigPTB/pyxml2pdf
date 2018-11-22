@@ -14,10 +14,8 @@ class Initializer:
         pdf = SimpleDocTemplate(output_t, pagesize=landscape(A5))
         doc = ElementTree.parse(input_t)
 
-        task_groups = doc.findall("taskGroup")
-        title = doc.find("title")
-        object_data = doc.find("object.data")
+        courses = doc.findall("kurs")
 
-        parser.parse_xml_data(title, object_data, task_groups, signature)
+        parser.parse_xml_data(courses)
 
         pdf.build(self.__data)

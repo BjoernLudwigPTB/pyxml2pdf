@@ -3,20 +3,20 @@ from reportlab.platypus import Paragraph
 from PdfVisualisation.Creator import Creator
 
 
-class TaskBuilder:
+class CourseBuilder:
     def __init__(self, properties):
         self._creator = Creator()
         self._settings = open(properties).read().split("\n")
-        self._task = None
+        self._course = None
         self._prop = properties
 
-    def pick_task(self, path, name, task):
+    def pick_course(self, path, name, task):
         module = __import__(path, fromlist=[name])
         class_ = getattr(module, name)(task, self._prop)
-        self._task = class_
+        self._course = class_
 
     def run(self):
-        return self._task.make_task()
+        return self._course.make_course()
 
     def read_settings(self, description):
         if not description:
