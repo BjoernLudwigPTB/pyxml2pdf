@@ -2,7 +2,7 @@ from Core.Downloader import Downloader
 
 
 def test_downloader_init():
-    dl = Downloader('https://github.com/')
+    Downloader('https://github.com/')
 
 
 def test_downloader_download():
