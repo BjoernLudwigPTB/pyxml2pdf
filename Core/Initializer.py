@@ -1,5 +1,5 @@
-from lxml import etree
-from reportlab.lib.pagesizes import letter
+from defusedxml import ElementTree
+from reportlab.lib.pagesizes import landscape, A5
 from reportlab.platypus import SimpleDocTemplate
 
 from Core.Parser import PDFBuilder
@@ -11,8 +11,8 @@ class Initializer:
 
     def build(self, input_t, output_t, properties_t, signature):
         parser = PDFBuilder(self.__data, properties_t)
-        pdf = SimpleDocTemplate(output_t, pagesize=letter)
-        doc = etree.parse(input_t)
+        pdf = SimpleDocTemplate(output_t, pagesize=landscape(A5))
+        doc = ElementTree.parse(input_t)
 
         task_groups = doc.findall("taskGroup")
         title = doc.find("title")
