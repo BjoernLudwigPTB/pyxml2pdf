@@ -1,12 +1,25 @@
+from Core.Downloader import Downloader
 from Core.Initializer import Initializer
 from Core.Parser import Signature
 
 
 def convert():
+    input_folder = 'input/'
+    domain = 'https://alpinclub-berlin.de/kv/'
+    xml_filename = 'kursdaten.xml'
+    xml_path = input_folder + xml_filename
+    url = domain + xml_filename
+    input_path = input_folder + xml_filename
+    properties_filename = 'kursdaten_prop.properties'
+    properties_path = input_folder + properties_filename
+    output_folder = 'output/'
+    output_filename = 'kursdaten.pdf'
+    output_path = output_folder + output_filename
+    dl = Downloader(url)
+    dl.download(xml_path)
     init = Initializer()
     init.build(
-        "input/kursdaten.xml", "output/kursdaten.pdf",
-        "input/kursdaten_prop.properties", Signature.AUTO_DATE)
+        input_path, output_path, properties_path, Signature.AUTO_DATE)
     print("\n"
           "-------------------------------DONE-------------------------------")
 
