@@ -67,7 +67,6 @@ class PDFBuilder:
                     self._elements, course, "description",
                     self._table_style.heading, "     ", styles["Heading2"])
 
-
                 for sub_task_group in course:
                     if sub_task_group.get("available"):
                         if sub_task_group.get("available") == "false":
