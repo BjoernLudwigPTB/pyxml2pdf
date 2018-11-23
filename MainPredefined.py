@@ -1,6 +1,5 @@
 from Core.Downloader import Downloader
 from Core.Initializer import Initializer
-from Core.Parser import Signature
 
 
 def convert():
@@ -19,7 +18,7 @@ def convert():
     dl.download(xml_path)
     init = Initializer()
     init.build(
-        input_path, output_path, properties_path, Signature.AUTO_DATE)
+        input_path, output_path, properties_path)
     print("\n"
           "-------------------------------DONE-------------------------------")
 
