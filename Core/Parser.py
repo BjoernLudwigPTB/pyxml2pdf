@@ -25,6 +25,15 @@ class PDFBuilder:
         self.parse_questionnaire(courses, styles)
 
     def parse_title(self, title, styles):
+        """
+        Determine the desired title for the table and create a first
+        paragraph for it in the pdf.
+
+        Parameters
+        ----------
+        :param str title: the title of the table
+        :param reportlab.lib.styles.StyleSheet1 styles: all styles in the pdf
+        """
         if title is not None:
             title_style = styles["Heading1"]
             title_style.alignment = 1

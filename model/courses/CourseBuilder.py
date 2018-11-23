@@ -19,6 +19,13 @@ class CourseBuilder:
         return self._course.make_course()
 
     def read_settings(self, description):
+        """
+        Find the desired entry from the properties file by its descritption.
+
+        :param str description: this is the string for which to look in the
+        contents
+        :return str: this is the interpreted string
+        """
         if not description:
             return description
         for elem in self._settings:

@@ -15,9 +15,9 @@ class Initializer:
 
         Parameters
         ----------
-            :type input_t: str := path to input xml-file
-            :type output_t:str := path to pdf file containing result
-            :type properties_t:str := path to text file containing properties
+        :param str input_t: path to input xml-file
+        :param str output_t: path to pdf file containing result
+        :param str properties_t: path to text file containing properties
         """
 
         parser = PDFBuilder(self.__data, properties_t)
