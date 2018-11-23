@@ -4,7 +4,6 @@ from enum import Enum
 from reportlab.lib.enums import TA_RIGHT
 from reportlab.lib.pagesizes import inch
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.validators import isInstanceOf
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph, Table
