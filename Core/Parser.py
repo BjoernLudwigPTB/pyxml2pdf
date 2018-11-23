@@ -4,6 +4,7 @@ from enum import Enum
 from reportlab.lib.enums import TA_RIGHT
 from reportlab.lib.pagesizes import inch
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.validators import isInstanceOf
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph, Table
@@ -106,7 +107,7 @@ class PDFBuilder:
             print("NO TASK GROUP FOUND")
 
     def parse_signature(self, styles, state):
-        if type(state) is not Signature:
+        if not isinstance(state, Signature):
             print("Use Signature class to define what to do!")
         else:
             if state != Signature.NONE:
