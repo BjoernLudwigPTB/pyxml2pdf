@@ -6,7 +6,7 @@ from reportlab.lib.pagesizes import inch
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import Paragraph, TableStyle, Table
+from reportlab.platypus import Paragraph, Table
 
 from PdfVisualisation.Creator import Creator
 from PdfVisualisation.TableStyle import TableStyle
@@ -108,7 +108,7 @@ class PDFBuilder:
             print("NO TASK GROUP FOUND")
 
     def parse_signature(self, styles, state):
-        if type(state) != Signature:
+        if not isinstance(state, Signature):
             print("Use Signature class to define what to do!")
         else:
             if state != Signature.NONE:
