@@ -1,22 +1,12 @@
-import datetime
-from enum import Enum
-
-from reportlab.lib.enums import TA_RIGHT
 from reportlab.lib.pagesizes import inch
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import Paragraph, Table
+from reportlab.platypus import Paragraph
 
 from PdfVisualisation.Creator import Creator
 from PdfVisualisation.TableStyle import TableStyle
 from model.courses.CourseBuilder import CourseBuilder
-
-
-class Signature(Enum):
-    AUTO_DATE = 0
-    MANUAL_DATE = 1
-    NONE = 2
 
 
 class PDFBuilder:
@@ -31,9 +21,8 @@ class PDFBuilder:
     def parse_xml_data(self, courses):
         styles = getSampleStyleSheet()
         self.parse_title('Kursverwaltung', styles)
-        #self.parse_object_data(object_data, styles)
+        # self.parse_object_data(object_data, styles)
         self.parse_questionnaire(courses, styles)
-        #self.parse_signature(styles, signature)
 
     def parse_title(self, title, styles):
         if title is not None:
@@ -106,31 +95,3 @@ class PDFBuilder:
                                     self._elements.append(element)
         else:
             print("NO TASK GROUP FOUND")
-
-    def parse_signature(self, styles, state):
-        if not isinstance(state, Signature):
-            print("Use Signature class to define what to do!")
-        else:
-            if state != Signature.NONE:
-                style_right = ParagraphStyle(
-                    name='right', parent=styles['Normal'], alignment=TA_RIGHT)
-
-                self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
-
-                if state == Signature.MANUAL_DATE:
-                    self._elements.append(
-                        Table([[Paragraph(
-                            "Signature: .....................................",
-                            styles["Normal"]), Paragraph(
-                            "Date: .....................................",
-                            style_right)]]))
-
-                elif state == Signature.AUTO_DATE:
-                    self._elements.append(
-                        Table([[Paragraph(
-                            "Signature: .....................................",
-                            styles["Normal"]), Paragraph(
-                            datetime.datetime.now().date().__str__(),
-                            style_right)]]))
-
-                self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))

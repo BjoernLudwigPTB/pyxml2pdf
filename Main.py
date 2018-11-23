@@ -1,7 +1,6 @@
 import sys
 
 from Core.Initializer import Initializer
-from Core.Parser import Signature
 
 
 def validation():
@@ -18,6 +17,6 @@ def validation():
 if __name__ == "__main__":
     validation()
     init = Initializer()
-    init.build(sys.argv[1], sys.argv[2], sys.argv[3], Signature.AUTO_DATE)
+    init.build(sys.argv[1], sys.argv[2], sys.argv[3])
     print("\n"
           "-------------------------------DONE-------------------------------")
