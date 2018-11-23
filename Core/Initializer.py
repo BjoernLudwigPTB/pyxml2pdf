@@ -1,3 +1,5 @@
+from typing import List, Any
+
 from defusedxml.ElementTree import parse
 from reportlab.lib.pagesizes import landscape, A5
 from reportlab.platypus import SimpleDocTemplate
@@ -6,6 +8,8 @@ from Core.Parser import PDFBuilder
 
 
 class Initializer:
+    __data: List[Any]
+
     def __init__(self):
         self.__data = []
 
@@ -26,6 +30,6 @@ class Initializer:
 
         courses = doc.findall("kurs")
 
-        parser.parse_xml_data(courses)
+        parser.parse_xml_data(self.__data, courses)
 
         pdf.build(self.__data)

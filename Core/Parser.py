@@ -18,10 +18,10 @@ class PDFBuilder:
         pdfmetrics.registerFont(TTFont(
             'News-Goth-BT', 'PdfVisualisation/news gothic bt.ttf'))
 
-    def parse_xml_data(self, courses):
+    def parse_xml_data(self, object_data, courses):
         styles = getSampleStyleSheet()
         self.parse_title('Kursverwaltung', styles)
-        # self.parse_object_data(object_data, styles)
+        self.parse_object_data(object_data, styles)
         self.parse_questionnaire(courses, styles)
 
     def parse_title(self, title, styles):
@@ -61,8 +61,7 @@ class PDFBuilder:
     def parse_questionnaire(self, courses, styles):
         if courses is not None:
             for course in courses:
-                for course_data in course:
-                    print('course.tag ' + course.tag + ": " + course_data.tag)
+                # for course_data in course:
                     if course.get("available"):
                         if course.get("available") == "false":
                             continue
