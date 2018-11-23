@@ -2,37 +2,37 @@ from reportlab.lib.pagesizes import inch
 from reportlab.platypus import Paragraph
 
 from PdfVisualisation.Creator import Creator
-from model.tasks.TaskBuilder import TaskBuilder
+from model.courses.CourseBuilder import CourseBuilder
 
 
-class Task:
+class Course:
     def __init__(self, properties, type_task):
         self._creator = Creator()
-        self._task_manager = TaskBuilder(properties)
+        self._task_manager = CourseBuilder(properties)
 
-        self._desc_tasks = [[]]
+        self._desc_courses = [[]]
         self._active_objects = []
 
-        self._task_dict = {}
+        self._course_dict = {}
         self._attributes_dict = {}
-        self._type_task_dict = type_task
+        self._type_course_dict = type_task
 
     def add_attribute(self, task):
-        self._task_dict.update({task.tag: task.text})
+        self._course_dict.update({task.tag: task.text})
         if task.get("available"):
             self._attributes_dict.update({task.tag: task.get("available")})
         else:
             self._attributes_dict.update({task.tag: "true"})
 
     def make_tag(self, key, styles):
-        if self._type_task_dict[key] == "settings":
-            self._desc_tasks[0].append(Paragraph(
-                self._task_manager.read_settings(self._task_dict[key]), styles))
-        elif self._type_task_dict[key] == "checkbox":
+        if self._type_course_dict[key] == "settings":
+            self._desc_courses[0].append(Paragraph(
+                self._task_manager.read_settings(self._course_dict[key]), styles))
+        elif self._type_course_dict[key] == "checkbox":
             self._creator.make_checkbox_form(
-                self._task_dict[key], self._desc_tasks, styles)
-        elif self._type_task_dict[key] == "text":
-            self._desc_tasks[0].append(Paragraph(self._task_dict[key], styles))
+                self._course_dict[key], self._desc_courses, styles)
+        elif self._type_course_dict[key] == "text":
+            self._desc_courses[0].append(Paragraph(self._course_dict[key], styles))
 
     def resize_table(self):
         if sum(sum(self._active_objects, [])) > 8.0:
