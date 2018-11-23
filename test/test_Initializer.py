@@ -1,6 +1,6 @@
-from Core.Initializer import Initializer
-
 import pytest
+
+from Core.Initializer import Initializer
 
 
 @pytest.fixture

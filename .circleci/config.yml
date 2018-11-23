@@ -15,6 +15,13 @@ jobs:
     # Checkout code.
     - checkout
 
+    # Create test-result folder.
+    - run:
+        name: Create test result folder
+        command: |
+          mkdir test-results
+          mkdir test-results/pytest
+
     # Download and cache dependencies.
     - restore_cache:
         keys:
@@ -23,7 +30,7 @@ jobs:
         - v1-dependencies-
 
     - run:
-        name: install dependencies
+        name: Install dependencies
         command: |
           python3 -m venv venv
           . venv/bin/activate
@@ -35,7 +42,7 @@ jobs:
         key: v1-dependencies-{{ checksum "requirements.txt" }}
 
     - run:
-        name: install Codacy reporter
+        name: Install Codacy reporter
         command: |
           python3 -m venv venv
           . venv/bin/activate
@@ -43,7 +50,7 @@ jobs:
 
     # Set up Code Climate by downloading test reporter as a static binary
     - run:
-        name: Setup Code Climate test-reporter
+        name: Set up Code Climate test-reporter
         command: |
           curl -L 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64' > ./cc-test-reporter
           chmod +x ./cc-test-reporter
@@ -54,19 +61,23 @@ jobs:
     # 3. Upload test report to Codacy using `python-codacy-coverage`
     # 4. Produce normal report to show in CircleCI 'test-reports'
     - run:
-        name: run tests
+        name: Produce coverage report
         command: |
           . venv/bin/activate
           ./cc-test-reporter before-build
-          coverage run --source=. --omit=./venv/* MainPredefined.py
-          coverage xml
+          python -m pytest -v --cov=. test/ \
+           --junitxml=test_results/pytest/pytest.xml
+          coverage xml --omit=venv/*
           ./cc-test-reporter after-build --coverage-input-type coverage.py \
               --exit-code $?
           python-codacy-coverage -r coverage.xml
-          coverage report -m > coverage.log
-
+          mv coverage.xml ./test_results/pytest/
+          coverage report -m --omit=venv/* > test_results/pytest/coverage.log
 
     # Store test results.
     - store_artifacts:
-        path: coverage.log
-        destination: test-reports
+        path: test_results
+        destination: test_results
+
+    - store_test_results:
+        path: test_results
