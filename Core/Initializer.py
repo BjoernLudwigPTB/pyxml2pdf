@@ -11,13 +11,13 @@ class Initializer:
 
     def build(self, input_t, output_t, properties_t):
         """
-        Least-squares fit of a digital FIR filter to a given frequency response.
+        Coordinate the construction of the pdf result.
 
         Parameters
         ----------
-            input_t : path to input xml-file
-            output_t : path to pdf file containing result
-            properties_t : path to text file containing properties
+            :type input_t: str := path to input xml-file
+            :type output_t:str := path to pdf file containing result
+            :type properties_t:str := path to text file containing properties
         """
 
         parser = PDFBuilder(self.__data, properties_t)
