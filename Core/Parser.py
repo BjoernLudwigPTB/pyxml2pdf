@@ -20,9 +20,8 @@ class PDFBuilder:
 
     def parse_xml_data(self, object_data, courses):
         styles = getSampleStyleSheet()
-        self.parse_title('Kursverwaltung', styles)
-        self.parse_object_data(object_data, styles)
-        self.parse_questionnaire(courses, styles)
+        self.parse_title('title.no1', styles)
+        self.parse_courses(courses, styles)
 
     def parse_title(self, title, styles):
         """
@@ -43,63 +42,62 @@ class PDFBuilder:
         else:
             print("TITLE NOT FOUND")
 
-    def parse_object_data(self, object_data, styles):
-        if object_data is not None:
-            object_style = styles["Normal"]
-            object_style.fontName = "News-Goth-BT"
+    def parse_course_data(self, course_data, styles):
+        if course_data is not None:
+            course_style = styles["Normal"]
+            course_style.fontName = "News-Goth-BT"
 
-            for item in object_data:
-                row = self._creator.create_table_fixed(
-                    [[Paragraph(item.tag.replace(".", " "), object_style),
-                      Paragraph(item.text, object_style)]],
-                    [3.0 * inch, 5.0 * inch], self._table_style.normal)
-                self._elements.append(row)
+            for item in course_data:
+                if item.text:
+                    row = self._creator.create_table_fixed(
+                        [[Paragraph(item.tag, course_style),
+                          Paragraph(item.text, course_style)]],
+                        [3.0 * inch, 5.0 * inch], self._table_style.normal)
+                    self._elements.append(row)
             self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
         else:
             print("OBJECT DATA NOT FOUND")
 
-    def parse_questionnaire(self, courses, styles):
+    def parse_courses(self, courses, styles):
         if courses is not None:
             for course in courses:
-                # for course_data in course:
-                    if course.get("available"):
-                        if course.get("available") == "false":
+                self.parse_course_data(course, styles)
+                print(course.tag, end="")
+                self._course_manager.make_row(
+                    self._elements, course, "description",
+                    self._table_style.heading, "     ", styles["Heading2"])
+
+
+                for sub_task_group in course:
+                    if sub_task_group.get("available"):
+                        if sub_task_group.get("available") == "false":
                             continue
-                    print(course.tag, end="")
+                    print("\n   " + sub_task_group.tag, end="")
                     self._course_manager.make_row(
-                        self._elements, course, "Bezeichnung",
-                        self._table_style.heading, "     ", styles["Heading2"])
+                        self._elements, sub_task_group, "description",
+                        self._table_style.sub_heading, "          ",
+                        styles["Heading4"])
 
-                    for sub_task_group in course:
-                        if sub_task_group.get("available"):
-                            if sub_task_group.get("available") == "false":
+                    for sub_task in sub_task_group:
+                        if sub_task.get("available"):
+                            if sub_task.get("available") == "false":
                                 continue
-                        print("\n   " + sub_task_group.tag, end="")
-                        self._course_manager.make_row(
-                            self._elements, sub_task_group, "description",
-                            self._table_style.sub_heading, "          ",
-                            styles["Heading4"])
-
-                        for sub_task in sub_task_group:
-                            if sub_task.get("available"):
-                                if sub_task.get("available") == "false":
+                        for task in sub_task:
+                            if task.get("available"):
+                                if task.get("available") == "false":
                                     continue
-                            for task in sub_task:
-                                if task.get("available"):
-                                    if task.get("available") == "false":
-                                        continue
-                                print("\n     " + task.tag, end="")
-                                self._course_manager.make_row(
-                                    self._elements, task, "description",
-                                    self._table_style.normal, "            ",
-                                    styles["Heading6"])
+                            print("\n     " + task.tag, end="")
+                            self._course_manager.make_row(
+                                self._elements, task, "description",
+                                self._table_style.normal, "            ",
+                                styles["Heading6"])
 
-                                self._course_manager.pick_course(
-                                    task.get("class"), task.get("type"), task)
+                            self._course_manager.pick_course(
+                                task.get("class"), task.get("type"), task)
 
-                                row = [self._course_manager.run()]
+                            row = [self._course_manager.run()]
 
-                                for element in row:
-                                    self._elements.append(element)
+                            for element in row:
+                                self._elements.append(element)
         else:
             print("NO TASK GROUP FOUND")

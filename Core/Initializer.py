@@ -28,7 +28,7 @@ class Initializer:
         pdf = SimpleDocTemplate(output_t, pagesize=landscape(A5))
         doc = parse(input_t)
 
-        courses = doc.findall("kurs")
+        courses = doc.findall('kurs')
 
         parser.parse_xml_data(self.__data, courses)
 
