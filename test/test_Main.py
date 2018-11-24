@@ -19,6 +19,6 @@ def test_init_main():
                     raise AssertionError()
 
 
-def test_input(self):
+def test_input():
     with pytest.raises(Exception):
         Main.main()
