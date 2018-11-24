@@ -3,20 +3,23 @@ from reportlab.platypus import Paragraph
 from PdfVisualisation.Creator import Creator
 
 
-class CourseBuilder:
+class TableBuilder:
     def __init__(self, properties):
         self._creator = Creator()
         self._settings = open(properties).read().split("\n")
         self._course = None
         self._prop = properties
 
-    def pick_course(self, path, name, course):
-        module = __import__(path, fromlist=[name])
-        class_ = getattr(module, name)(course, self._prop)
-        self._course = class_
+    def create_subtables(self):
+        """
+        Create subtables for all different kinds of events.
 
-    def run(self):
-        return self._course.make_course()
+        TODO implement the parsing of properties/_settings and creation of
+        tables for every heading.no_x
+        """
+
+        self.make_row(event, "heading.no1",
+            self._table_style.heading, "     ", styles["Heading1"])
 
     def read_settings(self, description):
         """
@@ -47,6 +50,5 @@ class CourseBuilder:
             if check:
                 desc = [[Paragraph(check, styles)]]
                 print(to_logs + group.get(attrib) + "  =  " + desc[0][0].text)
-
                 row = self._creator.create_table(desc, 8.0, table_style)
                 elements.append(row)

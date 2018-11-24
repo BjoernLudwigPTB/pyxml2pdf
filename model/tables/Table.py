@@ -2,13 +2,13 @@ from reportlab.lib.pagesizes import mm
 from reportlab.platypus import Paragraph
 
 from PdfVisualisation.Creator import Creator
-from model.courses.CourseBuilder import CourseBuilder
+from model.tables.TableBuilder import TableBuilder
 
 
-class Course:
+class Table:
     def __init__(self, properties, type_task):
         self._creator = Creator()
-        self._task_manager = CourseBuilder(properties)
+        self._task_manager = TableBuilder(properties)
 
         self._desc_courses = [[]]
         self._active_objects = []
@@ -16,13 +16,6 @@ class Course:
         self._course_dict = {}
         self._attributes_dict = {}
         self._type_course_dict = type_task
-
-    def add_attribute(self, task):
-        self._course_dict.update({task.tag: task.text})
-        if task.get("available"):
-            self._attributes_dict.update({task.tag: task.get("available")})
-        else:
-            self._attributes_dict.update({task.tag: "true"})
 
     def make_tag(self, key, styles):
         if self._type_course_dict[key] == "settings":
