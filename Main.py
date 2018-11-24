@@ -12,7 +12,7 @@ def main():
 
 
 def validate():
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 3:
         raise Exception("Not enough arguments")
     if ".xml" not in sys.argv[1]:
         raise Exception("No XML file detected")
