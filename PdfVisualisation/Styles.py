@@ -2,6 +2,7 @@ class Styles:
 
     align_center = ('ALIGN', (0, 0), (-1, -1), 'CENTER')
     valign_middle = ('VALIGN', (0, 0), (-1, -1), 'MIDDLE')
+    valign_top = ('VALIGN', (0, 0), (-1, -1), 'TOP')
     align_left = ('ALIGN', (0, 0), (-1, -1), 'LEFT')
 
     @staticmethod
