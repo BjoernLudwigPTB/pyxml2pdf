@@ -33,6 +33,31 @@ class PDFBuilder:
             italic='NewsGothBT_Italic',
             boldItalic='NewsGothBT_BoldItalic')
 
+    @staticmethod
+    def _get_course_data(course_data, course_data_tags):
+        """
+        Forms a string of the descriptive texts for all desired course tags
+        by concatenating them seperated by ' + '.
+
+        :param defusedXML Element course_data: the course data from where the
+            texts shall be extracted
+        :param list(str) course_data_tags: list of all tags for which the
+            descriptive texts is wanted
+        :return str: the texts of all tags under the current course
+        """
+        course_data_string = ""
+        for tag in course_data_tags:
+            data_string = course_data.findtext(tag)
+            if data_string:
+                if course_data_string:
+                    course_data_string += " - " + data_string
+                else:
+                    course_data_string = data_string
+        return course_data_string
+
+    def _parse_prerequisites(self):
+        pass
+
     def parse_xml_data(self, object_data, courses):
         # Get styles for all headings, texts, etc. from sample
         styles = getSampleStyleSheet()
@@ -65,7 +90,6 @@ class PDFBuilder:
             title_style.fontName = 'NewsGothBT_Bold'
             self._elements.append(Paragraph(
                 self._course_manager.read_settings(title), title_style))
-            self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
         else:
             print("TITLE NOT FOUND")
 
@@ -75,18 +99,30 @@ class PDFBuilder:
                 Bezeichnung='Bezeichnung', Kurstermin='Termin',
                 Beschreibung='Beschreibung', Kurskosten='Kosten', Ort1='Ort',
                 Kursleiter='Leitung', Kursart='Art', Zielgruppe='Zielgruppe')
-            row = []
-            for item in course_data:
-                if item.tag in heading:
-                    if item.text:
-                        text = item.text
-                    else:
-                        text = ""
-                    row.append(Paragraph(text, styles["Normal"]))
-            final_row = self._creator.create_table_fixed(
-                [row], [20 * mm, 16 * mm, 50 * mm, 13 * mm, 20 * mm, 20 * mm,
-                        8 * mm, 20 * mm], self._table_style.normal)
-            self._elements.append(final_row)
+            columns = [
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Kursart']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['TerminDatumVon1', 'TerminDatumBis1']),
+                    styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Ort1']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Kursleiter']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Bezeichnung', 'Bezeichnung2',
+                                  'Beschreibung']), styles[
+                    "Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Zielgruppe']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Kurskosten']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Bemerkungen']), styles["Normal"])]
+            row = self._creator.create_table_fixed(
+                [columns], [8*mm, 18*mm, 20*mm, 18*mm, 40*mm, 21*mm,
+                            27*mm, 26*mm], self._table_style.normal)
+            self._elements.append(row)
         else:
             print("OBJECT DATA NOT FOUND")
 

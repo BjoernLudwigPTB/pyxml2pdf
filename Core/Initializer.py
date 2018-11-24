@@ -27,7 +27,8 @@ class Initializer:
         parser = PDFBuilder(self.__data, properties_t)
         pdf = SimpleDocTemplate(output_t, pagesize=landscape(A5))
         doc = parse(input_t)
-
+        pdf.topMargin = 10.0
+        pdf.bottomMargin = 10.0
         courses = doc.findall('kurs')
 
         parser.parse_xml_data(self.__data, courses)
