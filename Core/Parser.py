@@ -71,10 +71,10 @@ class PDFBuilder:
 
     def parse_course_data(self, course_data, styles):
         if course_data is not None:
-            heading = ['Bezeichnung', 'Kurstermin', 'Beschreibung',
-                       'Kurskosten', 'Ort1', 'Kursleiter', 'Kursart',
-                       'Zielgruppe']
-            i = 1
+            heading = dict(
+                Bezeichnung='Bezeichnung', Kurstermin='Termin',
+                Beschreibung='Beschreibung', Kurskosten='Kosten', Ort1='Ort',
+                Kursleiter='Leitung', Kursart='Art', Zielgruppe='Zielgruppe')
             row = []
             for item in course_data:
                 if item.tag in heading:
@@ -83,9 +83,9 @@ class PDFBuilder:
                     else:
                         text = ""
                     row.append(Paragraph(text, styles["Normal"]))
-            final_row = self._creator.create_table_fixed([row],
-                [20 * mm, 16 * mm, 50 * mm, 13 * mm, 20 * mm, 20 * mm,
-                 8 * mm, 20 * mm], self._table_style.normal)
+            final_row = self._creator.create_table_fixed(
+                [row], [20 * mm, 16 * mm, 50 * mm, 13 * mm, 20 * mm, 20 * mm,
+                        8 * mm, 20 * mm], self._table_style.normal)
             self._elements.append(final_row)
         else:
             print("OBJECT DATA NOT FOUND")
