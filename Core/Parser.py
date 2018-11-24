@@ -111,10 +111,6 @@ class PDFBuilder:
 
     def parse_course_data(self, course_data, styles):
         if course_data is not None:
-            heading = dict(
-                Bezeichnung='Bezeichnung', Kurstermin='Termin',
-                Beschreibung='Beschreibung', Kurskosten='Kosten', Ort1='Ort',
-                Kursleiter='Leitung', Kursart='Art', Zielgruppe='Zielgruppe')
             columns = [
                 Paragraph(PDFBuilder._get_course_data(
                     course_data, ['Kursart']), styles["Normal"]),
@@ -151,7 +147,7 @@ class PDFBuilder:
         if courses is not None:
             for course in courses:
                 self.parse_course_data(course, styles)
-                print(course.findtext('Bezeichnung'), end="")
+
                 self._course_manager.make_row(
                     self._elements, course, "description",
                     self._table_style.heading, "     ", styles["Heading2"])

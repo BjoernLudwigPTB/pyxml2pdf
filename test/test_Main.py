@@ -9,7 +9,6 @@ def test_all():
 
 
 def test_init_main():
-    import Main
     import mock
     with mock.patch.object(Main, "main", return_value=42):
         with mock.patch.object(Main, "__name__", "__main__"):
@@ -20,8 +19,6 @@ def test_init_main():
                     raise AssertionError()
 
 
-class TestMain:
-
-    def test_input(self):
-        with pytest.raises(Exception):
-            Main.main()
+def test_input(self):
+    with pytest.raises(Exception):
+        Main.main()
