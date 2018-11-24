@@ -22,20 +22,30 @@ class PDFBuilder:
     def _set_font_family():
         registerFont(TTFont('NewsGothBT',
                             'PdfVisualisation/NewsGothicBT-Roman.ttf'))
-        registerFont(TTFont('NewsGothBT_Bd',
+        registerFont(TTFont('NewsGothBT_Bold',
                             'PdfVisualisation/NewsGothicBT-Bold.ttf'))
         registerFont(TTFont('NewsGothBT_Italic',
                             'PdfVisualisation/NewsGothicBT-Italic.ttf'))
         registerFont(TTFont('NewsGothBT_BoldItalic',
                             'PdfVisualisation/NewsGothicBT-BoldItalic.ttf'))
         registerFontFamily(
-            'NewsGothBT', normal='NewsGothBT', bold='NewsGothBT_Bd',
+            'NewsGothBT', normal='NewsGothBT', bold='NewsGothBT_Bold',
             italic='NewsGothBT_Italic',
             boldItalic='NewsGothBT_BoldItalic')
 
     def parse_xml_data(self, object_data, courses):
         # Get styles for all headings, texts, etc. from sample
         styles = getSampleStyleSheet()
+        styles["Normal"].fontSize = 7
+        styles["Normal"].fontName = 'NewsGothBT'
+        styles["Italic"].fontSize = 7
+        styles["Italic"].fontName = 'NewsGothBT_Italic'
+        styles["Title"].fontSize = 14
+        styles["Title"].fontName = 'NewsGothBT_Bold'
+        styles["Heading1"].fontSize = 12
+        styles["Heading1"].fontName = 'NewsGothBT_Bold'
+        styles["Heading2"].fontSize = 7
+        styles["Heading2"].fontName = 'NewsGothBT_Bold'
         self.parse_title('title.no1', styles)
         self.parse_courses(courses, styles)
 
@@ -52,7 +62,7 @@ class PDFBuilder:
         if title is not None:
             title_style = styles["Heading1"]
             title_style.alignment = 1
-            title_style.fontName = 'NewsGothBT'
+            title_style.fontName = 'NewsGothBT_Bold'
             self._elements.append(Paragraph(
                 self._course_manager.read_settings(title), title_style))
             self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
@@ -61,12 +71,6 @@ class PDFBuilder:
 
     def parse_course_data(self, course_data, styles):
         if course_data is not None:
-            course_style = styles["Normal"]
-            # Adapt font to specification
-            course_style.fontName = 'NewsGothBT'
-            course_style.bulletFontName = 'NewsGothBT'
-            # Adapt fontsize to specification
-            course_style.fontSize = 7
             heading = ['Bezeichnung', 'Kurstermin', 'Beschreibung',
                        'Kurskosten', 'Ort1', 'Kursleiter', 'Kursart',
                        'Zielgruppe']
@@ -78,7 +82,7 @@ class PDFBuilder:
                         text = item.text
                     else:
                         text = ""
-                    row.append(Paragraph(text, course_style))
+                    row.append(Paragraph(text, styles["Normal"]))
             final_row = self._creator.create_table_fixed([row],
                 [20 * mm, 16 * mm, 50 * mm, 13 * mm, 20 * mm, 20 * mm,
                  8 * mm, 20 * mm], self._table_style.normal)
