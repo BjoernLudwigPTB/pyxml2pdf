@@ -19,19 +19,19 @@ class PDFBuilder:
         PDFBuilder.set_font_family()
 
     @staticmethod
-    def set_font_family():
-        registerFont(TTFont('News-Goth-BT',
-                            'PdfVisualisation/NewsGothicBT.ttf'))
-        registerFont(TTFont('News-Goth-BT_Bd',
+    def _set_font_family():
+        registerFont(TTFont('NewsGothBT',
+                            'PdfVisualisation/NewsGothicBT-Roman.ttf'))
+        registerFont(TTFont('NewsGothBT_Bd',
                             'PdfVisualisation/NewsGothicBT-Bold.ttf'))
-        registerFont(TTFont('News-Goth-BT_Italic',
+        registerFont(TTFont('NewsGothBT_Italic',
                             'PdfVisualisation/NewsGothicBT-Italic.ttf'))
-        registerFont(TTFont('News-Goth-BT_BoldItalic',
-                            'PdfVisualisation/NewsGothicBT_BoldItalic.ttf'))
+        registerFont(TTFont('NewsGothBT_BoldItalic',
+                            'PdfVisualisation/NewsGothicBT-BoldItalic.ttf'))
         registerFontFamily(
-            'News-Goth-BT', normal='News-Goth-BT', bold='News-Goth-BT_Bd',
-            italic='NewsGothicBT_Italic.ttf',
-            boldItalic='NewsGothicBT_BoldItalic.ttf')
+            'NewsGothBT', normal='NewsGothBT', bold='NewsGothBT_Bd',
+            italic='NewsGothBT_Italic',
+            boldItalic='NewsGothBT_BoldItalic')
 
     def parse_xml_data(self, object_data, courses):
         # Get styles for all headings, texts, etc. from sample
@@ -52,7 +52,7 @@ class PDFBuilder:
         if title is not None:
             title_style = styles["Heading1"]
             title_style.alignment = 1
-            title_style.fontName = 'News-Goth-BT'
+            title_style.fontName = 'NewsGothBT'
             self._elements.append(Paragraph(
                 self._course_manager.read_settings(title), title_style))
             self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
@@ -63,8 +63,8 @@ class PDFBuilder:
         if course_data is not None:
             course_style = styles["Normal"]
             # Adapt font to specification
-            course_style.fontName = 'News-Goth-BT'
-            course_style.bulletFontName = 'News-Goth-BT'
+            course_style.fontName = 'NewsGothBT'
+            course_style.bulletFontName = 'NewsGothBT'
             # Adapt fontsize to specification
             course_style.fontSize = 7
             heading = ['Bezeichnung', 'Kurstermin', 'Beschreibung',
