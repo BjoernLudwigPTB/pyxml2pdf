@@ -1,4 +1,4 @@
-from reportlab.lib.pagesizes import inch
+from reportlab.lib.pagesizes import mm
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -12,13 +12,15 @@ from model.courses.CourseBuilder import CourseBuilder
 class PDFBuilder:
     def __init__(self, elements, properties):
         self._elements = elements
-        self._table_style = TableStyle()
         self._creator = Creator()
         self._course_manager = CourseBuilder(properties)
+        self._table_style = TableStyle(self._course_manager.read_settings(
+            'table_width'))
         pdfmetrics.registerFont(TTFont(
-            'News-Goth-BT', 'PdfVisualisation/news gothic bt.ttf'))
+            'News-Goth-BT', 'PdfVisualisation/news_gothic_bt.ttf'))
 
     def parse_xml_data(self, object_data, courses):
+        # Get styles for all headings, texts, etc. from sample
         styles = getSampleStyleSheet()
         self.parse_title('title.no1', styles)
         self.parse_courses(courses, styles)
@@ -45,16 +47,26 @@ class PDFBuilder:
     def parse_course_data(self, course_data, styles):
         if course_data is not None:
             course_style = styles["Normal"]
+            # Adapt font to specification
             course_style.fontName = "News-Goth-BT"
-
+            # Adapt fontsize to specification
+            course_style.fontSize = 7
+            heading = ['Bezeichnung', 'Kurstermin', 'Beschreibung',
+                       'Kurskosten', 'Ort1', 'Kursleiter', 'Kursart',
+                       'Zielgruppe']
+            i = 1
+            row = []
             for item in course_data:
-                if item.text:
-                    row = self._creator.create_table_fixed(
-                        [[Paragraph(item.tag, course_style),
-                          Paragraph(item.text, course_style)]],
-                        [3.0 * inch, 5.0 * inch], self._table_style.normal)
-                    self._elements.append(row)
-            self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
+                if item.tag in heading:
+                    if item.text:
+                        text = item.text
+                    else:
+                        text = ""
+                    row.append(Paragraph(text, course_style))
+            final_row = self._creator.create_table_fixed([row],
+                [20 * mm, 16 * mm, 50 * mm, 13 * mm, 20 * mm, 20 * mm,
+                 8 * mm, 20 * mm], self._table_style.normal)
+            self._elements.append(final_row)
         else:
             print("OBJECT DATA NOT FOUND")
 

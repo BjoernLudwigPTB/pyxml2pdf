@@ -17,8 +17,7 @@ def convert():
     dl = Downloader(url)
     dl.download(xml_path)
     init = Initializer()
-    init.build(
-        input_path, output_path, properties_path)
+    init.build(input_path, output_path, properties_path)
     print("\n"
           "-------------------------------DONE-------------------------------")
 

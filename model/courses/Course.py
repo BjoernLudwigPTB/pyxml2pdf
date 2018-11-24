@@ -1,4 +1,4 @@
-from reportlab.lib.pagesizes import inch
+from reportlab.lib.pagesizes import mm
 from reportlab.platypus import Paragraph
 
 from PdfVisualisation.Creator import Creator
@@ -53,4 +53,4 @@ class Course:
             [item for sublist in self._active_objects for item in sublist]
 
         for i in range(self._active_objects.__len__()):
-            self._active_objects[i] = self._active_objects[i] * inch
+            self._active_objects[i] = self._active_objects[i] * mm

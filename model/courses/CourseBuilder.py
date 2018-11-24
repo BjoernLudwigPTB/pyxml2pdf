@@ -10,9 +10,9 @@ class CourseBuilder:
         self._course = None
         self._prop = properties
 
-    def pick_course(self, path, name, task):
+    def pick_course(self, path, name, course):
         module = __import__(path, fromlist=[name])
-        class_ = getattr(module, name)(task, self._prop)
+        class_ = getattr(module, name)(course, self._prop)
         self._course = class_
 
     def run(self):
@@ -20,7 +20,7 @@ class CourseBuilder:
 
     def read_settings(self, description):
         """
-        Find the desired entry from the properties file by its descritption.
+        Find the desired entry from the properties file by its description.
 
         :param str description: this is the string for which to look in the
         contents
