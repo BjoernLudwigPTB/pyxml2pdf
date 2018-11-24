@@ -4,7 +4,7 @@ from PdfVisualisation.Styles import Styles
 
 
 class TableStyle:
-    def __init__(self):
+    def __init__(self, table_width):
         self.heading = [
             Styles.align_left, Styles.valign_middle,
             Styles.background(colors.lightgrey), Styles.box(colors.black),
@@ -17,6 +17,8 @@ class TableStyle:
         self.normal = [
             Styles.align_left, Styles.valign_middle, Styles.box(colors.black),
             Styles.inner_grid(colors.black)]
+
+        self._table_width = table_width
 
     def modify_heading(self, new_style):
         self.heading = new_style

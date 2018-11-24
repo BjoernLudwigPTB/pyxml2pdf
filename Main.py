@@ -3,8 +3,16 @@ import sys
 from Core.Initializer import Initializer
 
 
-def validation():
-    if len(sys.argv) < 4:
+def main():
+    validate()
+    initial = Initializer()
+    initial.build(sys.argv[1], sys.argv[2], sys.argv[3])
+    print("\n"
+          "-------------------------------DONE-------------------------------")
+
+
+def validate():
+    if len(sys.argv) < 3:
         raise Exception("Not enough arguments")
     if ".xml" not in sys.argv[1]:
         raise Exception("No XML file detected")
@@ -14,9 +22,9 @@ def validation():
         raise Exception("Properties file must have .properties extension")
 
 
-if __name__ == "__main__":
-    validation()
-    init = Initializer()
-    init.build(sys.argv[1], sys.argv[2], sys.argv[3])
-    print("\n"
-          "-------------------------------DONE-------------------------------")
+def init():
+    if __name__ == "__main__":
+        sys.exit(main())
+
+
+init()

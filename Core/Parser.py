@@ -1,6 +1,6 @@
-from reportlab.lib.pagesizes import inch
+from reportlab.lib.pagesizes import mm
 from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph
 
@@ -12,49 +12,134 @@ from model.courses.CourseBuilder import CourseBuilder
 class PDFBuilder:
     def __init__(self, elements, properties):
         self._elements = elements
-        self._table_style = TableStyle()
         self._creator = Creator()
         self._course_manager = CourseBuilder(properties)
-        pdfmetrics.registerFont(TTFont(
-            'News-Goth-BT', 'PdfVisualisation/news gothic bt.ttf'))
+        self._table_style = TableStyle(self._course_manager.read_settings(
+            'table_width'))
+        PDFBuilder._set_font_family()
+
+    @staticmethod
+    def _set_font_family():
+        registerFont(TTFont('NewsGothBT',
+                            'PdfVisualisation/NewsGothicBT-Roman.ttf'))
+        registerFont(TTFont('NewsGothBT_Bold',
+                            'PdfVisualisation/NewsGothicBT-Bold.ttf'))
+        registerFont(TTFont('NewsGothBT_Italic',
+                            'PdfVisualisation/NewsGothicBT-Italic.ttf'))
+        registerFont(TTFont('NewsGothBT_BoldItalic',
+                            'PdfVisualisation/NewsGothicBT-BoldItalic.ttf'))
+        registerFontFamily(
+            'NewsGothBT', normal='NewsGothBT', bold='NewsGothBT_Bold',
+            italic='NewsGothBT_Italic',
+            boldItalic='NewsGothBT_BoldItalic')
+
+    @staticmethod
+    def _get_course_data(course_data, course_data_tags):
+        """
+        Forms a string of the descriptive texts for all desired course tags
+        by concatenating them seperated by ' + '.
+
+        :param xml.etree.ElementTree.Element course_data: the course data
+            from where the texts shall be extracted
+        :param list(str) course_data_tags: list of all tags for which the
+            descriptive texts is wanted
+        :return str: the texts of all tags under the current course
+        """
+        course_data_string = ""
+        for tag in course_data_tags:
+            data_string = course_data.findtext(tag)
+            if data_string:
+                if course_data_string:
+                    course_data_string += " - " + data_string
+                else:
+                    course_data_string = data_string
+        return course_data_string
+
+    @staticmethod
+    def _parse_prerequisites(personal, material, financial, offers):
+        """
+        Determine all prerequisites and assemble a string accordingly.
+
+        :param str material: material prerequisite xml text
+        :param str personal: personal prerequisite xml text
+        :param str financial: financial prerequisite xml text
+        :param str offers: xml text of what is included in the price
+        :return str: the text to insert in prerequisite column
+        the current course
+        """
+        if personal:
+            personal_string = 'a) ' + personal + '<br/>'
+        else:
+            personal_string = 'a) keine <br/>'
+
+        if material:
+            material_string = 'b) ' + material + '<br/>'
+        else:
+            material_string = 'b) keine <br/>'
+
+        if financial:
+            financial_string = 'c) ' + financial + ' € (' + offers + ')'
+        else:
+            financial_string = 'c) keine'
+        return personal_string + material_string + financial_string
+
+    @staticmethod
+    def _parse_date(self, date):
+        """
+        Determine the correct date for printing.
+
+        :param str date: xml tag for relevant date.
+        :return str: the text to insert in date column of the current course
+        """
+        if date:
+            date_string = date
+        return date_string
 
     def parse_xml_data(self, object_data, courses):
+        # Get styles for all headings, texts, etc. from sample
         styles = getSampleStyleSheet()
-        self.parse_title('title.no1', styles)
+        styles["Normal"].fontSize = 7
+        styles["Normal"].leading = styles["Normal"].fontSize * 1.2
+        styles["Normal"].fontName = 'NewsGothBT'
+        styles["Italic"].fontSize = styles["Normal"].fontSize
+        styles["Italic"].leading = styles["Italic"].fontSize * 1.2
+        styles["Italic"].fontName = 'NewsGothBT_Italic'
+        styles["Heading1"].fontSize = styles["Normal"].fontSize
+        styles["Heading1"].leading = styles["Heading1"].fontSize * 1.2
+        styles["Heading1"].fontName = 'NewsGothBT_Bold'
         self.parse_courses(courses, styles)
-
-    def parse_title(self, title, styles):
-        """
-        Determine the desired title for the table and create a first
-        paragraph for it in the pdf.
-
-        Parameters
-        ----------
-        :param str title: the title of the table
-        :param reportlab.lib.styles.StyleSheet1 styles: all styles in the pdf
-        """
-        if title is not None:
-            title_style = styles["Heading1"]
-            title_style.alignment = 1
-            self._elements.append(Paragraph(
-                self._course_manager.read_settings(title), title_style))
-            self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
-        else:
-            print("TITLE NOT FOUND")
 
     def parse_course_data(self, course_data, styles):
         if course_data is not None:
-            course_style = styles["Normal"]
-            course_style.fontName = "News-Goth-BT"
-
-            for item in course_data:
-                if item.text:
-                    row = self._creator.create_table_fixed(
-                        [[Paragraph(item.tag, course_style),
-                          Paragraph(item.text, course_style)]],
-                        [3.0 * inch, 5.0 * inch], self._table_style.normal)
-                    self._elements.append(row)
-            self._elements.append(Paragraph("<br/><br/>", styles["Normal"]))
+            columns = [
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Kursart']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['TerminDatumVon1', 'TerminDatumBis1']),
+                    styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Ort1']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Kursleiter']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Bezeichnung', 'Bezeichnung2',
+                                  'Beschreibung']), styles[
+                    "Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Zielgruppe']), styles["Normal"]),
+                Paragraph(PDFBuilder._parse_prerequisites(
+                    PDFBuilder._get_course_data(
+                        course_data, ['Voraussetzung']),
+                    PDFBuilder._get_course_data(course_data, ['Ausrüstung']),
+                    PDFBuilder._get_course_data(course_data, ['Kurskosten']),
+                    PDFBuilder._get_course_data(course_data, ['Leistungen'])),
+                    styles["Normal"]),
+                Paragraph(PDFBuilder._get_course_data(
+                    course_data, ['Bemerkungen']), styles["Normal"])]
+            row = self._creator.create_table_fixed(
+                [columns], [8*mm, 18*mm, 20*mm, 18*mm, 40*mm, 21*mm,
+                            27*mm, 26*mm], self._table_style.normal)
+            self._elements.append(row)
         else:
             print("OBJECT DATA NOT FOUND")
 
@@ -62,7 +147,7 @@ class PDFBuilder:
         if courses is not None:
             for course in courses:
                 self.parse_course_data(course, styles)
-                print(course.tag, end="")
+
                 self._course_manager.make_row(
                     self._elements, course, "description",
                     self._table_style.heading, "     ", styles["Heading2"])
