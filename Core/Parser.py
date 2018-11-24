@@ -16,7 +16,7 @@ class PDFBuilder:
         self._course_manager = CourseBuilder(properties)
         self._table_style = TableStyle(self._course_manager.read_settings(
             'table_width'))
-        PDFBuilder.set_font_family()
+        PDFBuilder._set_font_family()
 
     @staticmethod
     def _set_font_family():
