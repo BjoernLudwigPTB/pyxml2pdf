@@ -5,6 +5,7 @@ from reportlab.lib.pagesizes import mm
 from reportlab.platypus import SimpleDocTemplate
 
 from Core.Parser import PDFBuilder
+from Core.Sorter import Sorter
 
 
 class Initializer:
@@ -32,10 +33,9 @@ class Initializer:
         pdf.leftMargin = 0.0
         pdf.rightMargin = 0.0
         courses = doc.findall('kurs')
-        # sorter = Sorter(doc, courses)
-        # sorted_xml = sorter.sort_parsed_xml('TerminDatumVon1')
-        # print(sorted_xml)
+        sorter = Sorter(doc, courses)
+        sorted_courses = sorter.sort_parsed_xml('TerminDatumVon1')
 
-        parser.parse_xml_data(self.__data, courses)
+        parser.parse_xml_data(self.__data, sorted_courses)
 
         pdf.build(self.__data)

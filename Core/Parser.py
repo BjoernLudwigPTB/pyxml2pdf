@@ -60,10 +60,10 @@ class PDFBuilder:
         """
         Determine all prerequisites and assemble a string accordingly.
 
-        :param str material: material prerequisite xml tag
-        :param str personal: personal prerequisite xml tag
-        :param str financial: financial prerequisite xml tag
-        :param str offers: xml tag of what is included in the price
+        :param str material: material prerequisite xml text
+        :param str personal: personal prerequisite xml text
+        :param str financial: financial prerequisite xml text
+        :param str offers: xml text of what is included in the price
         :return str: the text to insert in prerequisite column
         the current course
         """
@@ -83,14 +83,29 @@ class PDFBuilder:
             financial_string = 'c) keine'
         return personal_string + material_string + financial_string
 
+    @staticmethod
+    def _parse_date(self, date):
+        """
+        Determine the correct date for printing.
+
+        :param str date: xml tag for relevant date.
+        :return str: the text to insert in date column of the current course
+        """
+        if date:
+            date_string = date
+        return date_string
+
     def parse_xml_data(self, object_data, courses):
         # Get styles for all headings, texts, etc. from sample
         styles = getSampleStyleSheet()
         styles["Normal"].fontSize = 7
+        styles["Normal"].leading = styles["Normal"].fontSize * 1.2
         styles["Normal"].fontName = 'NewsGothBT'
-        styles["Italic"].fontSize = 7
+        styles["Italic"].fontSize = styles["Normal"].fontSize
+        styles["Italic"].leading = styles["Italic"].fontSize * 1.2
         styles["Italic"].fontName = 'NewsGothBT_Italic'
-        styles["Heading1"].fontSize = 7
+        styles["Heading1"].fontSize = styles["Normal"].fontSize
+        styles["Heading1"].leading = styles["Heading1"].fontSize * 1.2
         styles["Heading1"].fontName = 'NewsGothBT_Bold'
         self.parse_courses(courses, styles)
 
