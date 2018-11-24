@@ -36,6 +36,6 @@ class Initializer:
         sorter = Sorter(doc, courses)
         sorted_courses = sorter.sort_parsed_xml('TerminDatumVon1')
 
-        parser.parse_xml_data(self.__data, sorted_courses)
+        parser.parse_xml_data(sorted_courses)
 
         pdf.build(self.__data)
