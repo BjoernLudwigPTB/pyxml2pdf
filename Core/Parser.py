@@ -90,32 +90,9 @@ class PDFBuilder:
         styles["Normal"].fontName = 'NewsGothBT'
         styles["Italic"].fontSize = 7
         styles["Italic"].fontName = 'NewsGothBT_Italic'
-        styles["Title"].fontSize = 14
-        styles["Title"].fontName = 'NewsGothBT_Bold'
-        styles["Heading1"].fontSize = 12
+        styles["Heading1"].fontSize = 7
         styles["Heading1"].fontName = 'NewsGothBT_Bold'
-        styles["Heading2"].fontSize = 7
-        styles["Heading2"].fontName = 'NewsGothBT_Bold'
-        self.parse_title('title.no1', styles)
         self.parse_courses(courses, styles)
-
-    def parse_title(self, title, styles):
-        """
-        Determine the desired title for the table and create a first
-        paragraph for it in the pdf.
-
-        Parameters
-        ----------
-        :param str title: the title of the table
-        :param reportlab.lib.styles.StyleSheet1 styles: all styles in the pdf
-        """
-        if title is not None:
-            title_style = styles["Heading1"]
-            title_style.alignment = 1
-            self._elements.append(Paragraph(
-                self._course_manager.read_settings(title), title_style))
-        else:
-            print("TITLE NOT FOUND")
 
     def parse_course_data(self, course_data, styles):
         if course_data is not None:

@@ -1,7 +1,7 @@
 from typing import List, Any
 
 from defusedxml.ElementTree import parse
-from reportlab.lib.pagesizes import landscape, A5
+from reportlab.lib.pagesizes import mm
 from reportlab.platypus import SimpleDocTemplate
 
 from Core.Parser import PDFBuilder
@@ -25,11 +25,16 @@ class Initializer:
         """
 
         parser = PDFBuilder(self.__data, properties_t)
-        pdf = SimpleDocTemplate(output_t, pagesize=landscape(A5))
+        pdf = SimpleDocTemplate(output_t, pagesize=(178 * mm, 134 * mm))
         doc = parse(input_t)
-        pdf.topMargin = 10.0
-        pdf.bottomMargin = 10.0
+        pdf.topMargin = 0.0
+        pdf.bottomMargin = 0.0
+        pdf.leftMargin = 0.0
+        pdf.rightMargin = 0.0
         courses = doc.findall('kurs')
+        # sorter = Sorter(doc, courses)
+        # sorted_xml = sorter.sort_parsed_xml('TerminDatumVon1')
+        # print(sorted_xml)
 
         parser.parse_xml_data(self.__data, courses)
 
