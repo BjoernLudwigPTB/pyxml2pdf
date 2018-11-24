@@ -1,4 +1,3 @@
-from reportlab.lib.pagesizes import mm
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
@@ -13,9 +12,42 @@ class PDFBuilder:
     def __init__(self, elements, properties):
         self._elements = elements
         self._creator = Creator()
-        self._table_manager = TableBuilder(properties)
         self._table_style = TableStyle()
         PDFBuilder._set_font_family()
+        self._styles = self._style()
+        self._table_manager = TableBuilder(properties, self._styles)
+
+    @staticmethod
+    def _style():
+        """
+        Do all the customization of styling regarding margins, fonts,
+        fontsizes, etc..
+
+        TODO make dependent on properties entries
+
+        :return reportlab.lib.styles.StyleSheet: the created StyleSheet
+        """
+        # Get custom_styles for all headings, texts, etc. from sample
+        custom_styles = getSampleStyleSheet()
+        custom_styles.get("Normal").fontSize = 7
+        custom_styles.get("Normal").leading = custom_styles[
+                                                  "Normal"].fontSize * 1.2
+        custom_styles.get("Normal").fontName = 'NewsGothBT'
+        custom_styles.get("Italic").fontSize = custom_styles[
+            "Normal"].fontSize
+        custom_styles.get("Italic").leading = custom_styles[
+                                                  "Italic"].fontSize * 1.2
+        custom_styles.get("Italic").fontName = 'NewsGothBT_Italic'
+        custom_styles.get("Heading1").fontSize = 12
+        custom_styles.get("Heading1").leading = custom_styles[
+                                                    "Heading1"].fontSize * 1.2
+        custom_styles.get("Heading1").fontName = 'NewsGothBT_Bold'
+        custom_styles.get("Heading2").fontSize = custom_styles[
+            "Normal"].fontSize
+        custom_styles.get("Heading2").leading = custom_styles[
+                                                    "Heading2"].fontSize * 1.2
+        custom_styles.get("Heading2").fontName = 'NewsGothBT_Bold'
+        return custom_styles
 
     @staticmethod
     def _set_font_family():
@@ -39,8 +71,8 @@ class PDFBuilder:
     @staticmethod
     def _get_event_data(event_data, event_data_tags):
         """
-        Forms a string of the descriptive texts for all desired event tags
-        by concatenating them seperated by ' + '. This is especially useful,
+        Form a string of the descriptive texts for all desired event tags
+        by concatenating them with a separator. This is especially necessary,
         since `reportlab.platypus.Paragraph` cannot handle `None`s as texts.
 
         :param xml.etree.ElementTree.Element event_data: the event from where
@@ -104,31 +136,27 @@ class PDFBuilder:
         return date_string
 
     def parse_xml_data(self, events):
-        # Get styles for all headings, texts, etc. from sample
-        styles = getSampleStyleSheet()
-        styles.get("Normal").fontSize = 7
-        styles.get("Normal").leading = styles["Normal"].fontSize * 1.2
-        styles.get("Normal").fontName = 'NewsGothBT'
-        styles.get("Italic").fontSize = styles["Normal"].fontSize
-        styles.get("Italic").leading = styles["Italic"].fontSize * 1.2
-        styles.get("Italic").fontName = 'NewsGothBT_Italic'
-        styles.get("Heading1").fontSize = styles["Normal"].fontSize
-        styles.get("Heading1").leading = styles["Heading1"].fontSize * 1.2
-        styles.get("Heading1").fontName = 'NewsGothBT_Bold'
-        self.parse_events(events, styles)
+        """
 
-    def parse_event_data(self, event_data, styles):
+        :param list(defusedxml.ElementTree.Element) events:
+        """
+        if events is not None:
+            for event in events:
+                self._elements.append(self.parse_event_data(event))
+        else:
+            print("No events list found.")
+
+    def parse_event_data(self, event_data):
         """
         Extract interesting information from event and append them to print
         out data in `_elements`.
 
-        :param xml.etree.ElementTree.Element event_data: the texts shall be
-            extracted
-        :param reportlab.lib.styles.StyleSheet styles: a
-        :return reportlab.platypus.Table: a nicely formatted row of a table to
-            insert in print out `_elements`
+        :param xml.etree.ElementTree.Element event_data: the event from
+            which the texts shall be extracted into a nicely formatted row of a
+            table to insert in print out `_elements`
         """
         if event_data is not None:
+            styles = self._styles
             columns = [
                 Paragraph(PDFBuilder._get_event_data(
                     event_data, ['Kursart']), styles["Normal"]),
@@ -154,16 +182,8 @@ class PDFBuilder:
                 Paragraph(PDFBuilder._get_event_data(
                     event_data, ['Bemerkungen']), styles["Normal"])]
             event = self._creator.create_table_fixed(
-                [columns], [8*mm, 18*mm, 20*mm, 18*mm, 40*mm, 21*mm,
-                            27*mm, 26*mm], self._table_style.normal)
-            self._elements.append(event)
+                [columns], self._table_style.columm_widths,
+                self._table_style.normal)
             return event
         else:
             print("No events found.")
-
-    def parse_events(self, events, styles):
-        if events is not None:
-            for event in events:
-                self.parse_event_data(event, styles)
-        else:
-            print("No events list found.")

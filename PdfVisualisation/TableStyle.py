@@ -1,4 +1,5 @@
 from reportlab.lib import colors
+from reportlab.lib.pagesizes import mm
 
 from PdfVisualisation.Styles import Styles
 
@@ -18,11 +19,7 @@ class TableStyle:
             Styles.align_left, Styles.valign_middle, Styles.box(colors.black),
             Styles.inner_grid(colors.black)]
 
-    def modify_heading(self, new_style):
-        self.heading = new_style
+        self.columm_widths = [8 * mm, 18 * mm, 20 * mm, 18 * mm, 40 * mm,
+                              21 * mm, 27 * mm, 26 * mm]
 
-    def modify_sub_heading(self, new_style):
-        self.sub_heading = new_style
-
-    def modify_normal_style(self, new_style):
-        self.normal = new_style
+        self.table_width = 178 * mm
