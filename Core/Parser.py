@@ -39,8 +39,8 @@ class PDFBuilder:
         Forms a string of the descriptive texts for all desired course tags
         by concatenating them seperated by ' + '.
 
-        :param defusedXML Element course_data: the course data from where the
-            texts shall be extracted
+        :param xml.etree.ElementTree.Element course_data: the course data
+            from where the texts shall be extracted
         :param list(str) course_data_tags: list of all tags for which the
             descriptive texts is wanted
         :return str: the texts of all tags under the current course
@@ -55,8 +55,33 @@ class PDFBuilder:
                     course_data_string = data_string
         return course_data_string
 
-    def _parse_prerequisites(self):
-        pass
+    @staticmethod
+    def _parse_prerequisites(personal, material, financial, offers):
+        """
+        Determine all prerequisites and assemble a string accordingly.
+
+        :param str material: material prerequisite xml tag
+        :param str personal: personal prerequisite xml tag
+        :param str financial: financial prerequisite xml tag
+        :param str offers: xml tag of what is included in the price
+        :return str: the text to insert in prerequisite column
+        the current course
+        """
+        if personal:
+            personal_string = 'a) ' + personal + '<br/>'
+        else:
+            personal_string = 'a) keine <br/>'
+
+        if material:
+            material_string = 'b) ' + material + '<br/>'
+        else:
+            material_string = 'b) keine <br/>'
+
+        if financial:
+            financial_string = 'c) ' + financial + ' € (' + offers + ')'
+        else:
+            financial_string = 'c) keine'
+        return personal_string + material_string + financial_string
 
     def parse_xml_data(self, object_data, courses):
         # Get styles for all headings, texts, etc. from sample
@@ -87,7 +112,6 @@ class PDFBuilder:
         if title is not None:
             title_style = styles["Heading1"]
             title_style.alignment = 1
-            title_style.fontName = 'NewsGothBT_Bold'
             self._elements.append(Paragraph(
                 self._course_manager.read_settings(title), title_style))
         else:
@@ -115,8 +139,13 @@ class PDFBuilder:
                     "Normal"]),
                 Paragraph(PDFBuilder._get_course_data(
                     course_data, ['Zielgruppe']), styles["Normal"]),
-                Paragraph(PDFBuilder._get_course_data(
-                    course_data, ['Kurskosten']), styles["Normal"]),
+                Paragraph(PDFBuilder._parse_prerequisites(
+                    PDFBuilder._get_course_data(
+                        course_data, ['Voraussetzung']),
+                    PDFBuilder._get_course_data(course_data, ['Ausrüstung']),
+                    PDFBuilder._get_course_data(course_data, ['Kurskosten']),
+                    PDFBuilder._get_course_data(course_data, ['Leistungen'])),
+                    styles["Normal"]),
                 Paragraph(PDFBuilder._get_course_data(
                     course_data, ['Bemerkungen']), styles["Normal"])]
             row = self._creator.create_table_fixed(
@@ -130,7 +159,7 @@ class PDFBuilder:
         if courses is not None:
             for course in courses:
                 self.parse_course_data(course, styles)
-                print(course.tag, end="")
+                print(course.findtext('Bezeichnung'), end="")
                 self._course_manager.make_row(
                     self._elements, course, "description",
                     self._table_style.heading, "     ", styles["Heading2"])
