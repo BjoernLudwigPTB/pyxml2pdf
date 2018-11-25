@@ -38,3 +38,19 @@ class EventTable():
             containing the relevant event data
         """
         return self._elements
+
+    def get_activities(self):
+        """
+        Return the activities associated with the event table.
+
+        :return list[str]: a list of all activities
+        """
+        return self._activities
+
+    def get_locations(self):
+        """
+        Return the locations on which the events of this table take place.
+
+        :return list[str]: a list of all locations
+        """
+        return self._locations

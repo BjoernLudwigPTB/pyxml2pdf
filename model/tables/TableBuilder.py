@@ -1,5 +1,7 @@
+from reportlab.lib import colors
 from reportlab.platypus import Paragraph
 
+from PdfVisualisation.Styles import Styles
 from PdfVisualisation.TableStyle import TableStyle
 from model.tables.Creator import Creator
 from model.tables.EventTable import EventTable
@@ -36,8 +38,8 @@ class TableBuilder:
                 'Mittelgebirge'], [
                 'Klettern', 'Bouldern']], [
             'Ausbildung, Wandern und Klettern in Berlin', [
-                ' in Berlin'], [
-                'Ausbildung', 'Wandern', 'Klettern']], [
+                'in Berlin'], [
+                'Grundlagenkurs', 'Wandern', 'Klettern']], [
             'Mountainbiken', [
                 'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
                 'Mountainbiken']], [
@@ -80,11 +82,13 @@ class TableBuilder:
         headers = [self._creator.create_table_fixed([[Paragraph(
             main_header, self._styles['Heading1'])]],
             self._table_styles.table_width,
-            self._table_styles.heading)]
+            next(self._table_styles.heading_iterator, Styles.background(
+                colors.crimson)))]
         headings = ['Art', 'Datum', 'Ort', 'Leitung', 'Beschreibung',
                     'Zielgruppe',
-                    'Voraussetzungen', 'Bemerkungen']
+                    'Voraussetzungen', 'mehr Infos unter']
         columns = []
+
         for heading in headings:
             columns.append(Paragraph(heading, self._styles['Heading2']))
         headers.append(self._creator.create_table_fixed(
@@ -99,5 +103,11 @@ class TableBuilder:
                 aggregated_subtables.append(element)
         return aggregated_subtables
 
-    def distribute_events(self, event):
-        pass
+    def distribute_events(self, event, categories):
+        set_of_cats = set(categories)
+        for subtable in self._subtables:
+            _locations = subtable.get_locations()
+            _activities = subtable.get_activities()
+            if set_of_cats.intersection(_activities):
+                if set_of_cats.intersection(_locations):
+                    subtable.add_event(event)

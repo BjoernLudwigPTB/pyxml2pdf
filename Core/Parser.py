@@ -34,7 +34,7 @@ class PDFBuilder:
         """
         # Get custom_styles for all headings, texts, etc. from sample
         custom_styles = getSampleStyleSheet()
-        custom_styles.get("Normal").fontSize = 7
+        custom_styles.get("Normal").fontSize = 6.5
         custom_styles.get("Normal").leading = custom_styles[
                                                   "Normal"].fontSize * 1.2
         custom_styles.get("Normal").fontName = 'NewsGothBT'
@@ -44,11 +44,13 @@ class PDFBuilder:
                                                   "Italic"].fontSize * 1.2
         custom_styles.get("Italic").fontName = 'NewsGothBT_Italic'
         custom_styles.get("Heading1").fontSize = 12
+        custom_styles.get("Heading1").alignment = 1
         custom_styles.get("Heading1").leading = custom_styles[
                                                     "Heading1"].fontSize * 1.2
         custom_styles.get("Heading1").fontName = 'NewsGothBT_Bold'
         custom_styles.get("Heading2").fontSize = custom_styles[
             "Normal"].fontSize
+        custom_styles.get("Heading2").alignment = 1
         custom_styles.get("Heading2").leading = custom_styles[
                                                     "Heading2"].fontSize * 1.2
         custom_styles.get("Heading2").fontName = 'NewsGothBT_Bold'
@@ -83,7 +85,7 @@ class PDFBuilder:
         :param xml.etree.ElementTree.Element event_data: the event from where
             the texts shall be extracted
         :param List[str] event_data_tags: list of all tags for which the
-            descriptive texts is wanted
+            descriptive texts is wanted, even if it is just one
         :return str: the texts of all tags under the current event
         """
         event_data_string = ""
@@ -134,11 +136,29 @@ class PDFBuilder:
         :param str date: xml tag for relevant date.
         :return str: the text to insert in date column of the current event
         """
-        if date:
-            date_string = date
+        if '2099' in date:
+            date_string = 'auf Anfrage'
+        elif date:
+            date_string = date.replace('00:00', '').replace(
+                '2019', '').replace('2018', '')
         else:
-            date_string = ""
+            date_string = ''
         return date_string
+
+    @staticmethod
+    def _parse_url(url):
+        """
+        Determine the correct URL for printing. Either use the trainer*ess
+        or the AlpinClub URL.
+
+        :param str url: xml text for relevant URL.
+        :return str: the text to insert in URL column of the current event
+        """
+        if url:
+            url_string = url
+        else:
+            url_string = 'https://alpinclub-berlin.de/kv/Kursdaten.xml'
+        return url_string
 
     def collect_xml_data(self, events):
         """
@@ -153,8 +173,11 @@ class PDFBuilder:
         """
         if events is not None:
             for event in events:
-                self._elements.append(self.collect_event_data(event))
-                self._table_manager.distribute_events(event)
+                categories = PDFBuilder.get_event_categories(
+                    event, PDFBuilder._get_event_data(event, ['Kategorie']))
+                # self._elements.append(self.collect_event_data(event))
+                self._table_manager.distribute_events(
+                    self.collect_event_data(event), categories)
             subtable_elements = self._table_manager.collect_subtables()
             for subtable_element in subtable_elements:
                 self._elements.append(subtable_element)
@@ -175,11 +198,11 @@ class PDFBuilder:
         """
         if event_data is not None:
             styles = self._styles
-            columns = [
+            columns_to_print = [
                 Paragraph(PDFBuilder._get_event_data(
                     event_data, ['Kursart']), styles["Normal"]),
-                Paragraph(PDFBuilder._get_event_data(
-                    event_data, ['TerminDatumVon1', 'TerminDatumBis1']),
+                Paragraph(PDFBuilder._parse_date(self._get_event_data(
+                    event_data, ['TerminDatumVon1', 'TerminDatumBis1'])),
                     styles["Normal"]),
                 Paragraph(PDFBuilder._get_event_data(
                     event_data, ['Ort1']), styles["Normal"]),
@@ -197,10 +220,10 @@ class PDFBuilder:
                     PDFBuilder._get_event_data(event_data, ['Kurskosten']),
                     PDFBuilder._get_event_data(event_data, ['Leistungen'])),
                     styles["Normal"]),
-                Paragraph(PDFBuilder._get_event_data(
-                    event_data, ['Bemerkungen']), styles["Normal"])]
+                Paragraph(PDFBuilder._parse_url(self._get_event_data(
+                    event_data, ['TrainerURL'])), styles["Normal"])]
             event = self._creator.create_table_fixed(
-                [columns], self._table_styles.column_widths,
+                [columns_to_print], self._table_styles.column_widths,
                 self._table_styles.normal)
             return event
         else:
@@ -214,3 +237,17 @@ class PDFBuilder:
             containing the relevant event data
         """
         return self._elements
+
+    @staticmethod
+    def get_event_categories(event, category_text):
+        """
+        Construct a list of categories from the string gathered out of the xml.
+
+        :param defusedxml.ElementTree.Element event: event for which the
+            categories are needed
+        :param category_text: the text from the xml file containing the
+            activities covered by the event
+        :return List[str]: the list of the categories
+        """
+        categories = PDFBuilder._get_event_data(event, ['Kategorie'])
+        return categories.split(', ')
