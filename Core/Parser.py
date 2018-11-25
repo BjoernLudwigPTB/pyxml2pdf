@@ -1,25 +1,65 @@
-from reportlab.lib.pagesizes import mm
+from typing import List
+
+import reportlab
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph
 
-from PdfVisualisation.Creator import Creator
 from PdfVisualisation.TableStyle import TableStyle
-from model.courses.CourseBuilder import CourseBuilder
+from model.tables.Creator import Creator
+from model.tables.TableBuilder import TableBuilder
 
 
 class PDFBuilder:
+    _elements: List[reportlab.platypus.Table]
+
     def __init__(self, elements, properties):
         self._elements = elements
         self._creator = Creator()
-        self._course_manager = CourseBuilder(properties)
-        self._table_style = TableStyle(self._course_manager.read_settings(
-            'table_width'))
+        self._table_styles = TableStyle()
         PDFBuilder._set_font_family()
+        self._styles = self._style()
+        self._table_manager = TableBuilder(properties, self._styles)
+
+    @staticmethod
+    def _style():
+        """
+        Do all the customization of styling regarding margins, fonts,
+        fontsizes, etc..
+
+        TODO make dependent on properties entries
+
+        :return reportlab.lib.styles.StyleSheet: the created StyleSheet
+        """
+        # Get custom_styles for all headings, texts, etc. from sample
+        custom_styles = getSampleStyleSheet()
+        custom_styles.get("Normal").fontSize = 7
+        custom_styles.get("Normal").leading = custom_styles[
+                                                  "Normal"].fontSize * 1.2
+        custom_styles.get("Normal").fontName = 'NewsGothBT'
+        custom_styles.get("Italic").fontSize = custom_styles[
+            "Normal"].fontSize
+        custom_styles.get("Italic").leading = custom_styles[
+                                                  "Italic"].fontSize * 1.2
+        custom_styles.get("Italic").fontName = 'NewsGothBT_Italic'
+        custom_styles.get("Heading1").fontSize = 12
+        custom_styles.get("Heading1").leading = custom_styles[
+                                                    "Heading1"].fontSize * 1.2
+        custom_styles.get("Heading1").fontName = 'NewsGothBT_Bold'
+        custom_styles.get("Heading2").fontSize = custom_styles[
+            "Normal"].fontSize
+        custom_styles.get("Heading2").leading = custom_styles[
+                                                    "Heading2"].fontSize * 1.2
+        custom_styles.get("Heading2").fontName = 'NewsGothBT_Bold'
+        return custom_styles
 
     @staticmethod
     def _set_font_family():
+        """
+        Register the desired font with `reportlab` to make sure that
+        `<i></i>` and `<b></b>` work well.
+        """
         registerFont(TTFont('NewsGothBT',
                             'PdfVisualisation/NewsGothicBT-Roman.ttf'))
         registerFont(TTFont('NewsGothBT_Bold',
@@ -34,26 +74,27 @@ class PDFBuilder:
             boldItalic='NewsGothBT_BoldItalic')
 
     @staticmethod
-    def _get_course_data(course_data, course_data_tags):
+    def _get_event_data(event_data, event_data_tags):
         """
-        Forms a string of the descriptive texts for all desired course tags
-        by concatenating them seperated by ' + '.
+        Form a string of the descriptive texts for all desired event tags
+        by concatenating them with a separator. This is especially necessary,
+        since `reportlab.platypus.Paragraph` cannot handle `None`s as texts.
 
-        :param xml.etree.ElementTree.Element course_data: the course data
-            from where the texts shall be extracted
-        :param list(str) course_data_tags: list of all tags for which the
+        :param xml.etree.ElementTree.Element event_data: the event from where
+            the texts shall be extracted
+        :param List[str] event_data_tags: list of all tags for which the
             descriptive texts is wanted
-        :return str: the texts of all tags under the current course
+        :return str: the texts of all tags under the current event
         """
-        course_data_string = ""
-        for tag in course_data_tags:
-            data_string = course_data.findtext(tag)
+        event_data_string = ""
+        for tag in event_data_tags:
+            data_string = event_data.findtext(tag)
             if data_string:
-                if course_data_string:
-                    course_data_string += " - " + data_string
+                if event_data_string:
+                    event_data_string += " - " + data_string
                 else:
-                    course_data_string = data_string
-        return course_data_string
+                    event_data_string = data_string
+        return event_data_string
 
     @staticmethod
     def _parse_prerequisites(personal, material, financial, offers):
@@ -65,7 +106,7 @@ class PDFBuilder:
         :param str financial: financial prerequisite xml text
         :param str offers: xml text of what is included in the price
         :return str: the text to insert in prerequisite column
-        the current course
+        the current event
         """
         if personal:
             personal_string = 'a) ' + personal + '<br/>'
@@ -84,104 +125,92 @@ class PDFBuilder:
         return personal_string + material_string + financial_string
 
     @staticmethod
-    def _parse_date(self, date):
+    def _parse_date(date):
         """
         Determine the correct date for printing.
 
+        TODO implement filtering of emtpy dates and '00:00'
+
         :param str date: xml tag for relevant date.
-        :return str: the text to insert in date column of the current course
+        :return str: the text to insert in date column of the current event
         """
         if date:
             date_string = date
+        else:
+            date_string = ""
         return date_string
 
-    def parse_xml_data(self, object_data, courses):
-        # Get styles for all headings, texts, etc. from sample
-        styles = getSampleStyleSheet()
-        styles["Normal"].fontSize = 7
-        styles["Normal"].leading = styles["Normal"].fontSize * 1.2
-        styles["Normal"].fontName = 'NewsGothBT'
-        styles["Italic"].fontSize = styles["Normal"].fontSize
-        styles["Italic"].leading = styles["Italic"].fontSize * 1.2
-        styles["Italic"].fontName = 'NewsGothBT_Italic'
-        styles["Heading1"].fontSize = styles["Normal"].fontSize
-        styles["Heading1"].leading = styles["Heading1"].fontSize * 1.2
-        styles["Heading1"].fontName = 'NewsGothBT_Bold'
-        self.parse_courses(courses, styles)
+    def collect_xml_data(self, events):
+        """
+        Traverse the parsed xml data and gather collected event data. Pass
+        event data to table_manager and get collected data back.
 
-    def parse_course_data(self, course_data, styles):
-        if course_data is not None:
+        :param List[defusedxml.ElementTree.Element] events: a list of the
+            events from which the texts shall be extracted into a nicely
+            formatted row of a table to insert in print out `_elements`
+        :return List[reportlab.platypus.Table]: a list of all table rows
+            containing the relevant event data
+        """
+        if events is not None:
+            for event in events:
+                self._elements.append(self.collect_event_data(event))
+                self._table_manager.distribute_events(event)
+            subtable_elements = self._table_manager.collect_subtables()
+            for subtable_element in subtable_elements:
+                self._elements.append(subtable_element)
+            return self.get_elements()
+        else:
+            print("No events list found.")
+
+    def collect_event_data(self, event_data):
+        """
+        Extract interesting information from event and append them to print
+        out data in `_elements`.
+
+        :param xml.etree.ElementTree.Element event_data: the event from
+            which the texts shall be extracted into a nicely formatted row of a
+            table to insert in print out `_elements`
+        :return reportlab.platypus.Table: single row table containing all
+            relevant event data
+        """
+        if event_data is not None:
+            styles = self._styles
             columns = [
-                Paragraph(PDFBuilder._get_course_data(
-                    course_data, ['Kursart']), styles["Normal"]),
-                Paragraph(PDFBuilder._get_course_data(
-                    course_data, ['TerminDatumVon1', 'TerminDatumBis1']),
+                Paragraph(PDFBuilder._get_event_data(
+                    event_data, ['Kursart']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_event_data(
+                    event_data, ['TerminDatumVon1', 'TerminDatumBis1']),
                     styles["Normal"]),
-                Paragraph(PDFBuilder._get_course_data(
-                    course_data, ['Ort1']), styles["Normal"]),
-                Paragraph(PDFBuilder._get_course_data(
-                    course_data, ['Kursleiter']), styles["Normal"]),
-                Paragraph(PDFBuilder._get_course_data(
-                    course_data, ['Bezeichnung', 'Bezeichnung2',
-                                  'Beschreibung']), styles[
-                    "Normal"]),
-                Paragraph(PDFBuilder._get_course_data(
-                    course_data, ['Zielgruppe']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_event_data(
+                    event_data, ['Ort1']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_event_data(
+                    event_data, ['Kursleiter']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_event_data(
+                    event_data, ['Bezeichnung', 'Bezeichnung2',
+                                 'Beschreibung']), styles["Normal"]),
+                Paragraph(PDFBuilder._get_event_data(
+                    event_data, ['Zielgruppe']), styles["Normal"]),
                 Paragraph(PDFBuilder._parse_prerequisites(
-                    PDFBuilder._get_course_data(
-                        course_data, ['Voraussetzung']),
-                    PDFBuilder._get_course_data(course_data, ['Ausrüstung']),
-                    PDFBuilder._get_course_data(course_data, ['Kurskosten']),
-                    PDFBuilder._get_course_data(course_data, ['Leistungen'])),
+                    PDFBuilder._get_event_data(
+                        event_data, ['Voraussetzung']),
+                    PDFBuilder._get_event_data(event_data, ['Ausrüstung']),
+                    PDFBuilder._get_event_data(event_data, ['Kurskosten']),
+                    PDFBuilder._get_event_data(event_data, ['Leistungen'])),
                     styles["Normal"]),
-                Paragraph(PDFBuilder._get_course_data(
-                    course_data, ['Bemerkungen']), styles["Normal"])]
-            row = self._creator.create_table_fixed(
-                [columns], [8*mm, 18*mm, 20*mm, 18*mm, 40*mm, 21*mm,
-                            27*mm, 26*mm], self._table_style.normal)
-            self._elements.append(row)
+                Paragraph(PDFBuilder._get_event_data(
+                    event_data, ['Bemerkungen']), styles["Normal"])]
+            event = self._creator.create_table_fixed(
+                [columns], self._table_styles.column_widths,
+                self._table_styles.normal)
+            return event
         else:
-            print("OBJECT DATA NOT FOUND")
+            print("No events found.")
 
-    def parse_courses(self, courses, styles):
-        if courses is not None:
-            for course in courses:
-                self.parse_course_data(course, styles)
+    def get_elements(self):
+        """
+        Return the collected event table.
 
-                self._course_manager.make_row(
-                    self._elements, course, "description",
-                    self._table_style.heading, "     ", styles["Heading2"])
-
-                for sub_task_group in course:
-                    if sub_task_group.get("available"):
-                        if sub_task_group.get("available") == "false":
-                            continue
-                    print("\n   " + sub_task_group.tag, end="")
-                    self._course_manager.make_row(
-                        self._elements, sub_task_group, "description",
-                        self._table_style.sub_heading, "          ",
-                        styles["Heading4"])
-
-                    for sub_task in sub_task_group:
-                        if sub_task.get("available"):
-                            if sub_task.get("available") == "false":
-                                continue
-                        for task in sub_task:
-                            if task.get("available"):
-                                if task.get("available") == "false":
-                                    continue
-                            print("\n     " + task.tag, end="")
-                            self._course_manager.make_row(
-                                self._elements, task, "description",
-                                self._table_style.normal, "            ",
-                                styles["Heading6"])
-
-                            self._course_manager.pick_course(
-                                task.get("class"), task.get("type"), task)
-
-                            row = [self._course_manager.run()]
-
-                            for element in row:
-                                self._elements.append(element)
-        else:
-            print("NO TASK GROUP FOUND")
+        :return List[reportlab.platypus.Table]: a list of all table rows
+            containing the relevant event data
+        """
+        return self._elements
