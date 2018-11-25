@@ -1,7 +1,5 @@
-from reportlab.lib import colors
 from reportlab.platypus import Paragraph
 
-from PdfVisualisation.Styles import Styles
 from PdfVisualisation.TableStyle import TableStyle
 from model.tables.Creator import Creator
 from model.tables.EventTable import EventTable
@@ -82,8 +80,7 @@ class TableBuilder:
         headers = [self._creator.create_table_fixed([[Paragraph(
             main_header, self._styles['Heading1'])]],
             self._table_styles.table_width,
-            next(self._table_styles.heading_iterator, Styles.background(
-                colors.crimson)))]
+            self._table_styles.heading)]
         headings = ['Art', 'Datum', 'Ort', 'Leitung', 'Beschreibung',
                     'Zielgruppe',
                     'Voraussetzungen', 'mehr Infos unter']
