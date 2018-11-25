@@ -38,3 +38,11 @@ class EventTable():
             containing the relevant event data
         """
         return self._elements
+
+    def get_activities(self):
+        """
+        Return the activities associated with the event table.
+
+        :return list[str]: a list of all activities
+        """
+        return self._activities

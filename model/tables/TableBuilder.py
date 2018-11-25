@@ -99,5 +99,11 @@ class TableBuilder:
                 aggregated_subtables.append(element)
         return aggregated_subtables
 
-    def distribute_events(self, event):
-        pass
+    def distribute_events(self, event, categories):
+        settings = self._settings
+
+        set_of_cats = set(categories)
+        for subtable in self._subtables:
+            if set_of_cats.intersection(subtable.get_activities()):
+                subtable.add_event(event)
+                break

@@ -83,7 +83,7 @@ class PDFBuilder:
         :param xml.etree.ElementTree.Element event_data: the event from where
             the texts shall be extracted
         :param List[str] event_data_tags: list of all tags for which the
-            descriptive texts is wanted
+            descriptive texts is wanted, even if it is just one
         :return str: the texts of all tags under the current event
         """
         event_data_string = ""
@@ -153,8 +153,10 @@ class PDFBuilder:
         """
         if events is not None:
             for event in events:
-                self._elements.append(self.collect_event_data(event))
-                self._table_manager.distribute_events(event)
+                categories = PDFBuilder.get_event_categories(
+                    event, PDFBuilder._get_event_data(event, ['Kategorie']))
+                self._table_manager.distribute_events(
+                    self.collect_event_data(event), categories)
             subtable_elements = self._table_manager.collect_subtables()
             for subtable_element in subtable_elements:
                 self._elements.append(subtable_element)
@@ -175,7 +177,7 @@ class PDFBuilder:
         """
         if event_data is not None:
             styles = self._styles
-            columns = [
+            columns_to_print = [
                 Paragraph(PDFBuilder._get_event_data(
                     event_data, ['Kursart']), styles["Normal"]),
                 Paragraph(PDFBuilder._get_event_data(
@@ -200,7 +202,7 @@ class PDFBuilder:
                 Paragraph(PDFBuilder._get_event_data(
                     event_data, ['Bemerkungen']), styles["Normal"])]
             event = self._creator.create_table_fixed(
-                [columns], self._table_styles.column_widths,
+                [columns_to_print], self._table_styles.column_widths,
                 self._table_styles.normal)
             return event
         else:
@@ -214,3 +216,17 @@ class PDFBuilder:
             containing the relevant event data
         """
         return self._elements
+
+    @staticmethod
+    def get_event_categories(event, category_text):
+        """
+        Construct a list of categories from the string gathered out of the xml.
+
+        :param defusedxml.ElementTree.Element event: event for which the
+            categories are needed
+        :param category_text: the text from the xml file containing the
+            activities covered by the event
+        :return List[str]: the list of the categories
+        """
+        categories = PDFBuilder._get_event_data(event, ['Kategorie'])
+        return categories.split(', ')
