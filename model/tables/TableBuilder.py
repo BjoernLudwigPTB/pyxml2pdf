@@ -1,7 +1,7 @@
 from reportlab.platypus import Paragraph
 
-from PdfVisualisation.Creator import Creator
 from PdfVisualisation.TableStyle import TableStyle
+from model.tables.Creator import Creator
 from model.tables.EventTable import EventTable
 
 
@@ -13,20 +13,21 @@ class TableBuilder:
         self._settings = self._parse_properties()
         self._table_styles = TableStyle()
         self._course = None
-        self.create_subtables()
+        self._subtables = self.create_subtables()
 
-    def _parse_properties(self):
+    @staticmethod
+    def _parse_properties():
         """
         Extract all configuration information from properties file and set
         up a dict containing all this information. Later at least it will
         extract it... TODO extract actual information with something like
         settings = open(properties).read().split("\n")
         settings_dict = dict()
-
-        :return list(list(str)): the dict with all configuration data out of
+        properties = self._prop
+        :return List(List(str)): the list with all configuration data out of
             properties file
         """
-        properties = self._prop
+
         return [[
             'Wandern im Hoch - und Mittelgebirge', [
                 'Hochgebirge', 'Mittelgebirge'], [
@@ -40,9 +41,6 @@ class TableBuilder:
             'Mountainbiken', [
                 'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
                 'Mountainbiken']], [
-            'Wandern im Hoch- und Mittelgebirge', [
-                'Hochgebirge', 'Mittelgebirge'], [
-                'Wandern']], [
             'Bergsteigen, Hochtouren und Klettern im Hochgebirge', [
                 'Hochgebirge'], [
                 'Bergsteigen', 'Hochtouren', 'Klettern']], [
@@ -56,46 +54,50 @@ class TableBuilder:
     def create_subtables(self):
         """
         Create subtables for all different kinds of events.
+
+        :return list[EventTable]: contains a list with all event tables to be
+            able to brows through them
         """
 
+        event_tables = []
         for heading in self._settings:
             event_table = EventTable(heading[0], heading[1], heading[2])
-            self.make_headers(heading[0])
-
-    def read_settings(self, description):
-        """
-        Find the desired entry from the properties file by its description.
-
-        :param str description: this is the string for which to look in the
-        contents
-        :return str: this is the interpreted string
-        """
-        if not description:
-            return description
-        for elem in self._settings:
-            if description in elem:
-                desc = elem.split("=")
-                print("\n--------------------------------")
-                print("FOUND!   " + desc.__str__())
-                print("--------------------------------\n")
-                return desc[1]
-
-        print("\n--------------------------------")
-        print("NOT FOUND!")
-        print("--------------------------------\n")
-        return description
+            headers = self.make_headers(heading[0])
+            for header in headers:
+                event_table.add_event(header)
+            event_tables.append(event_table)
+        return event_tables
 
     def make_headers(self, main_header):
-        headers = [self._creator.create_table([[Paragraph(
+        """
+        Create the beginning of a subtable with the main and the subheaders.
+
+        :param str main_header: the name of the main table section to attach
+            the headers to
+        :return List[reportlab.platypus.Table]: two line table with all headers
+            needed
+        """
+        headers = [self._creator.create_table_fixed([[Paragraph(
             main_header, self._styles['Heading1'])]],
             self._table_styles.table_width,
             self._table_styles.heading)]
-        headings = ['Art', 'Ort', 'Leitung', 'Beschreibung', 'Zielgruppe',
+        headings = ['Art', 'Datum', 'Ort', 'Leitung', 'Beschreibung',
+                    'Zielgruppe',
                     'Voraussetzungen', 'Bemerkungen']
         columns = []
         for heading in headings:
             columns.append(Paragraph(heading, self._styles['Heading2']))
         headers.append(self._creator.create_table_fixed(
-            headings, self._table_styles.columm_widths,
+            [columns], self._table_styles.column_widths,
             self._table_styles.sub_heading))
         return headers
+
+    def collect_subtables(self):
+        aggregated_subtables = []
+        for table in self._subtables:
+            for element in table.get_elements():
+                aggregated_subtables.append(element)
+        return aggregated_subtables
+
+    def distribute_events(self, event):
+        pass

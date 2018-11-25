@@ -1,18 +1,23 @@
+from typing import List
+
+import reportlab
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph
 
-from PdfVisualisation.Creator import Creator
 from PdfVisualisation.TableStyle import TableStyle
+from model.tables.Creator import Creator
 from model.tables.TableBuilder import TableBuilder
 
 
 class PDFBuilder:
+    _elements: List[reportlab.platypus.Table]
+
     def __init__(self, elements, properties):
         self._elements = elements
         self._creator = Creator()
-        self._table_style = TableStyle()
+        self._table_styles = TableStyle()
         PDFBuilder._set_font_family()
         self._styles = self._style()
         self._table_manager = TableBuilder(properties, self._styles)
@@ -77,7 +82,7 @@ class PDFBuilder:
 
         :param xml.etree.ElementTree.Element event_data: the event from where
             the texts shall be extracted
-        :param list(str) event_data_tags: list of all tags for which the
+        :param List[str] event_data_tags: list of all tags for which the
             descriptive texts is wanted
         :return str: the texts of all tags under the current event
         """
@@ -135,18 +140,29 @@ class PDFBuilder:
             date_string = ""
         return date_string
 
-    def parse_xml_data(self, events):
+    def collect_xml_data(self, events):
         """
+        Traverse the parsed xml data and gather collected event data. Pass
+        event data to table_manager and get collected data back.
 
-        :param list(defusedxml.ElementTree.Element) events:
+        :param List[defusedxml.ElementTree.Element] events: a list of the
+            events from which the texts shall be extracted into a nicely
+            formatted row of a table to insert in print out `_elements`
+        :return List[reportlab.platypus.Table]: a list of all table rows
+            containing the relevant event data
         """
         if events is not None:
             for event in events:
-                self._elements.append(self.parse_event_data(event))
+                self._elements.append(self.collect_event_data(event))
+                self._table_manager.distribute_events(event)
+            subtable_elements = self._table_manager.collect_subtables()
+            for subtable_element in subtable_elements:
+                self._elements.append(subtable_element)
+            return self.get_elements()
         else:
             print("No events list found.")
 
-    def parse_event_data(self, event_data):
+    def collect_event_data(self, event_data):
         """
         Extract interesting information from event and append them to print
         out data in `_elements`.
@@ -154,6 +170,8 @@ class PDFBuilder:
         :param xml.etree.ElementTree.Element event_data: the event from
             which the texts shall be extracted into a nicely formatted row of a
             table to insert in print out `_elements`
+        :return reportlab.platypus.Table: single row table containing all
+            relevant event data
         """
         if event_data is not None:
             styles = self._styles
@@ -182,8 +200,17 @@ class PDFBuilder:
                 Paragraph(PDFBuilder._get_event_data(
                     event_data, ['Bemerkungen']), styles["Normal"])]
             event = self._creator.create_table_fixed(
-                [columns], self._table_style.columm_widths,
-                self._table_style.normal)
+                [columns], self._table_styles.column_widths,
+                self._table_styles.normal)
             return event
         else:
             print("No events found.")
+
+    def get_elements(self):
+        """
+        Return the collected event table.
+
+        :return List[reportlab.platypus.Table]: a list of all table rows
+            containing the relevant event data
+        """
+        return self._elements

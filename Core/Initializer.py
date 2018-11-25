@@ -1,5 +1,6 @@
-from typing import List, Any
+from typing import List
 
+import reportlab
 from defusedxml.ElementTree import parse
 from reportlab.lib.pagesizes import mm
 from reportlab.platypus import SimpleDocTemplate
@@ -9,7 +10,8 @@ from Core.Sorter import Sorter
 
 
 class Initializer:
-    __data: List[Any]
+
+    __data: List[reportlab.platypus.Table]
 
     def __init__(self):
         self.__data = []
@@ -36,6 +38,6 @@ class Initializer:
         sorter = Sorter(doc, courses)
         sorted_courses = sorter.sort_parsed_xml('TerminDatumVon1')
 
-        parser.parse_xml_data(sorted_courses)
+        parser.collect_xml_data(sorted_courses)
 
         pdf.build(self.__data)

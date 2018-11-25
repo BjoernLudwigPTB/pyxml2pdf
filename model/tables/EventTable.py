@@ -21,10 +21,20 @@ class EventTable():
         self._locations = locations
         self._activities = activities
 
-    def add_event(self):
+    def add_event(self, event):
         """
         Adds a single event to the table later to be displayed as part of the
         table.
-        TODO implement
+
+        :param List[reportlab.platypus.Table] event:
         """
-        pass
+        self._elements.append(event)
+
+    def get_elements(self):
+        """
+        Return the collected event table.
+
+        :return list[reportlab.platypus.Table]: a list of all table rows
+            containing the relevant event data
+        """
+        return self._elements
