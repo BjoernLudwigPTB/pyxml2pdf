@@ -28,28 +28,30 @@ class TableBuilder:
             properties file
         """
 
-        return [[
-            'Wandern im Hoch - und Mittelgebirge', [
-                'Hochgebirge', 'Mittelgebirge'], [
-                'Wandern']], [
-            'Klettern und Bouldern im Mittelgebirge', [
+        klettern = ['Klettern und Bouldern im Mittelgebirge', [
                 'Mittelgebirge'], [
-                'Klettern', 'Bouldern']], [
-            'Ausbildung, Wandern und Klettern in Berlin', [
+                'Klettern', 'Bouldern']]
+        wandern = ['Wandern im Hoch - und Mittelgebirge', [
+                'Hochgebirge', 'Mittelgebirge'], [
+                'Wandern']]
+        mountainbiken = ['Mountainbiken', [
+                'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
+                'Mountainbiken']]
+        ausbildung = ['Ausbildung, Wandern und Klettern in Berlin', [
                 'in Berlin'], [
-                'Grundlagenkurs', 'Wandern', 'Klettern']], [
-            'Mountainbiken', [
+                'Grundlagenkurs', 'Wandern', 'Klettern']]
+        bergsteigen = ['Bergsteigen, Hochtouren und Klettern im Hochgebirge', [
+            'Hochgebirge'], [
+            'Bergsteigen', 'Hochtouren', 'Klettern']]
+        familie = ['Veranstaltungen für Familien', [
                 'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
-                'Mountainbiken']], [
-            'Bergsteigen, Hochtouren und Klettern im Hochgebirge', [
-                'Hochgebirge'], [
-                'Bergsteigen', 'Hochtouren', 'Klettern']], [
-            'Veranstaltungen für Familien', [
+                'Familie']]
+        jugend = ['Jugendgruppen und -events', [
                 'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
-                'Familie']], [
-            'Jugendgruppen und -events', [
-                'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
-                'Jugend']]]
+                'Jugend']]
+
+        return [ausbildung, klettern, jugend, mountainbiken, familie,
+                bergsteigen, wandern]
 
     def create_subtables(self):
         """
