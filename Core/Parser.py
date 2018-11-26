@@ -216,7 +216,7 @@ class PDFBuilder:
                 Paragraph(PDFBuilder._parse_prerequisites(
                     PDFBuilder._get_event_data(
                         event_data, ['Voraussetzung']),
-                    PDFBuilder._get_event_data(event_data, ['Ausrüstung']),
+                    PDFBuilder._get_event_data(event_data, ['Ausruestung']),
                     PDFBuilder._get_event_data(event_data, ['Kurskosten']),
                     PDFBuilder._get_event_data(event_data, ['Leistungen'])),
                     styles["Normal"]),
