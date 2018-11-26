@@ -28,28 +28,30 @@ class TableBuilder:
             properties file
         """
 
-        return [[
-            'Wandern im Hoch - und Mittelgebirge', [
-                'Hochgebirge', 'Mittelgebirge'], [
-                'Wandern']], [
-            'Klettern und Bouldern im Mittelgebirge', [
+        klettern = ['Klettern und Bouldern im Mittelgebirge', [
                 'Mittelgebirge'], [
-                'Klettern', 'Bouldern']], [
-            'Ausbildung, Wandern und Klettern in Berlin', [
+                'Klettern', 'Bouldern']]
+        wandern = ['Wandern im Hoch - und Mittelgebirge', [
+                'Hochgebirge', 'Mittelgebirge'], [
+                'Wandern']]
+        mountainbiken = ['Mountainbiken', [
+                'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
+                'Mountainbiken']]
+        ausbildung = ['Ausbildung, Wandern und Klettern in Berlin', [
                 'in Berlin'], [
-                'Grundlagenkurs', 'Wandern', 'Klettern']], [
-            'Mountainbiken', [
+                'Grundlagenkurs', 'Wandern', 'Klettern']]
+        bergsteigen = ['Bergsteigen, Hochtouren und Klettern im Hochgebirge', [
+            'Hochgebirge'], [
+            'Bergsteigen', 'Hochtouren', 'Klettern']]
+        familie = ['Veranstaltungen für Familien', [
                 'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
-                'Mountainbiken']], [
-            'Bergsteigen, Hochtouren und Klettern im Hochgebirge', [
-                'Hochgebirge'], [
-                'Bergsteigen', 'Hochtouren', 'Klettern']], [
-            'Veranstaltungen für Familien', [
-                'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
-                'Familie']], [
-            'Jugendgruppen und -events', [
-                'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
-                'Jugend']]]
+                'Familie']]
+        jugend = ['Jugendgruppen und -events', [
+                'in Berlin', 'Hochgebirge', 'Mittelgebirge', 'Jugend'], [
+                'Jugend']]
+
+        return [familie, ausbildung, wandern, mountainbiken, bergsteigen,
+                jugend, klettern]
 
     def create_subtables(self):
         """
@@ -83,13 +85,14 @@ class TableBuilder:
             self._table_styles.heading)]
         headings = ['Art', 'Datum', 'Ort', 'Leitung', 'Beschreibung',
                     'Zielgruppe',
-                    'Voraussetzungen', 'mehr Infos unter']
+                    'Voraussetzungen<br/>a) persönliche, b) '
+                    'materielle, c) finanzielle']
         columns = []
 
         for heading in headings:
             columns.append(Paragraph(heading, self._styles['Heading2']))
         headers.append(self._creator.create_table_fixed(
-            [columns], self._table_styles.column_widths,
+            [columns], self._table_styles.get_column_widths(),
             self._table_styles.sub_heading))
         return headers
 

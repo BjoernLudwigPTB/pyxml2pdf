@@ -131,8 +131,6 @@ class PDFBuilder:
         """
         Determine the correct date for printing.
 
-        TODO implement filtering of emtpy dates and '00:00'
-
         :param str date: xml tag for relevant date.
         :return str: the text to insert in date column of the current event
         """
@@ -140,25 +138,37 @@ class PDFBuilder:
             date_string = 'auf Anfrage'
         elif date:
             date_string = date.replace('00:00', '').replace(
-                '2019', '').replace('2018', '')
+                '2019', '19').replace('2018', '18')
         else:
             date_string = ''
         return date_string
 
     @staticmethod
-    def _parse_url(url):
+    def _parse_description(name, name2, description, url):
         """
-        Determine the correct URL for printing. Either use the trainer*ess
-        or the AlpinClub URL.
+        Concatenate the description and the url if provided.
 
-        :param str url: xml text for relevant URL.
-        :return str: the text to insert in URL column of the current event
+        :param str name: the short name for the event
+        :param str name: the short name number two for the event
+        :param str description: the descriptive text
+        :param str url: the trainer's homepage url
+        :return str: the full description including url if provided
         """
-        if url:
-            url_string = url
+        if name:
+            full_description = '<b>' + name + '</b>'
         else:
-            url_string = 'https://alpinclub-berlin.de/kv/Kursdaten.xml'
-        return url_string
+            full_description = ''
+
+        if name2:
+            full_description += ' - ' + name2
+
+        if description:
+            full_description += ' - ' + description
+
+        if url:
+            full_description += ' Mehr Infos unter: ' + url + '.'
+
+        return full_description
 
     def collect_xml_data(self, events):
         """
@@ -208,22 +218,22 @@ class PDFBuilder:
                     event_data, ['Ort1']), styles["Normal"]),
                 Paragraph(PDFBuilder._get_event_data(
                     event_data, ['Kursleiter']), styles["Normal"]),
-                Paragraph(PDFBuilder._get_event_data(
-                    event_data, ['Bezeichnung', 'Bezeichnung2',
-                                 'Beschreibung']), styles["Normal"]),
+                Paragraph(PDFBuilder._parse_description(PDFBuilder._get_event_data(
+                    event_data, ['Bezeichnung']), PDFBuilder._get_event_data(
+                    event_data, ['Bezeichnung2']), PDFBuilder._get_event_data(
+                    event_data, ['Beschreibung']), PDFBuilder._get_event_data(
+                    event_data, ['TrainerURL'])), styles["Normal"]),
                 Paragraph(PDFBuilder._get_event_data(
                     event_data, ['Zielgruppe']), styles["Normal"]),
                 Paragraph(PDFBuilder._parse_prerequisites(
                     PDFBuilder._get_event_data(
                         event_data, ['Voraussetzung']),
-                    PDFBuilder._get_event_data(event_data, ['Ausrüstung']),
+                    PDFBuilder._get_event_data(event_data, ['Ausruestung']),
                     PDFBuilder._get_event_data(event_data, ['Kurskosten']),
                     PDFBuilder._get_event_data(event_data, ['Leistungen'])),
-                    styles["Normal"]),
-                Paragraph(PDFBuilder._parse_url(self._get_event_data(
-                    event_data, ['TrainerURL'])), styles["Normal"])]
+                    styles["Normal"])]
             event = self._creator.create_table_fixed(
-                [columns_to_print], self._table_styles.column_widths,
+                [columns_to_print], self._table_styles.get_column_widths(),
                 self._table_styles.normal)
             return event
         else:
