@@ -47,11 +47,11 @@ class TableBuilder:
                 'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
                 'Familie']]
         jugend = ['Jugendgruppen und -events', [
-                'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
+                'in Berlin', 'Hochgebirge', 'Mittelgebirge', 'Jugend'], [
                 'Jugend']]
 
-        return [ausbildung, klettern, jugend, mountainbiken, familie,
-                bergsteigen, wandern]
+        return [familie, ausbildung, wandern, mountainbiken, bergsteigen,
+                jugend, klettern]
 
     def create_subtables(self):
         """
@@ -85,8 +85,8 @@ class TableBuilder:
             self._table_styles.heading)]
         headings = ['Art', 'Datum', 'Ort', 'Leitung', 'Beschreibung',
                     'Zielgruppe',
-                    'Voraussetzungen<br/>a) persönliche<br/>b) '
-                    'materielle<br/>c) finanzielle']
+                    'Voraussetzungen<br/>a) persönliche, b) '
+                    'materielle, c) finanzielle']
         columns = []
 
         for heading in headings:

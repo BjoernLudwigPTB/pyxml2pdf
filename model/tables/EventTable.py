@@ -1,4 +1,4 @@
-class EventTable():
+class EventTable:
 
     def __init__(self, name, locations, activities):
         """
