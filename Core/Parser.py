@@ -140,7 +140,7 @@ class PDFBuilder:
             date_string = 'auf Anfrage'
         elif date:
             date_string = date.replace('00:00', '').replace(
-                '2019', '').replace('2018', '')
+                '2019', '19').replace('2018', '18')
         else:
             date_string = ''
         return date_string

@@ -83,7 +83,8 @@ class TableBuilder:
             self._table_styles.heading)]
         headings = ['Art', 'Datum', 'Ort', 'Leitung', 'Beschreibung',
                     'Zielgruppe',
-                    'Voraussetzungen']
+                    'Voraussetzungen<br/>a) persönliche<br/>b) '
+                    'materielle<br/>c) finanzielle']
         columns = []
 
         for heading in headings:

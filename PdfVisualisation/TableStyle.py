@@ -19,23 +19,19 @@ class TableStyle:
 
         self.sub_heading = [
             Styles.align_left, Styles.valign_middle, Styles.box(colors.black),
-            Styles.inner_grid(colors.black)]
+            Styles.inner_grid(colors.black), Styles.leftpadding_reduce,
+            Styles.rightpadding_reduce]
 
         self.normal = [
             Styles.align_left, Styles.valign_middle, Styles.box(colors.black),
-            Styles.inner_grid(colors.black)]
-
-        # [8 * mm, 13 * mm, 19 * mm, 18 * mm, 50 * mm, 20 * mm, 30 * mm,
-        # 20 * mm]
+            Styles.inner_grid(colors.black), Styles.leftpadding_reduce,
+            Styles.rightpadding_reduce]
 
         self.table_width = 178 * mm
 
-    def _calculate_description_width(self):
-        pass
-
     def get_column_widths(self):
-        column_widths = [8 * mm, 13 * mm, 19 * mm, 18 * mm, 1 * mm,
-                         18 * mm, 48 * mm]
+        column_widths = [8 * mm, 13 * mm, 19 * mm, 15 * mm, 1 * mm,
+                         18 * mm, 47 * mm]
         column_widths[4] = self.table_width - sum(
             column_widths[0:4]) - sum(column_widths[5:7])
         return column_widths
