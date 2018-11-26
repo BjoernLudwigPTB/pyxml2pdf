@@ -89,7 +89,7 @@ class TableBuilder:
         for heading in headings:
             columns.append(Paragraph(heading, self._styles['Heading2']))
         headers.append(self._creator.create_table_fixed(
-            [columns], self._table_styles.column_widths,
+            [columns], self._table_styles.get_column_widths(),
             self._table_styles.sub_heading))
         return headers
 

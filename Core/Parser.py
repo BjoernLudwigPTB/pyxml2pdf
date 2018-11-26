@@ -219,11 +219,9 @@ class PDFBuilder:
                     PDFBuilder._get_event_data(event_data, ['Ausruestung']),
                     PDFBuilder._get_event_data(event_data, ['Kurskosten']),
                     PDFBuilder._get_event_data(event_data, ['Leistungen'])),
-                    styles["Normal"]),
-                Paragraph(PDFBuilder._parse_url(self._get_event_data(
-                    event_data, ['TrainerURL'])), styles["Normal"])]
+                    styles["Normal"])]
             event = self._creator.create_table_fixed(
-                [columns_to_print], self._table_styles.column_widths,
+                [columns_to_print], self._table_styles.get_column_widths(),
                 self._table_styles.normal)
             return event
         else:
