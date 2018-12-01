@@ -1,10 +1,9 @@
 from typing import List
 
-import reportlab
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import Paragraph
+from reportlab.platypus import KeepTogether, Flowable, Paragraph
 
 from PdfVisualisation.TableStyle import TableStyle
 from model.tables.Creator import Creator
@@ -12,7 +11,7 @@ from model.tables.TableBuilder import TableBuilder
 
 
 class PDFBuilder:
-    _elements: List[reportlab.platypus.Table]
+    _elements: List[Flowable]
 
     def __init__(self, elements, properties):
         self._elements = elements
@@ -190,7 +189,7 @@ class PDFBuilder:
                     self.collect_event_data(event), categories)
             subtable_elements = self._table_manager.collect_subtables()
             for subtable_element in subtable_elements:
-                self._elements.append(subtable_element)
+                self._elements.append(KeepTogether(subtable_element))
             return self.get_elements()
         else:
             print("No events list found.")
