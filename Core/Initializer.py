@@ -28,12 +28,10 @@ class Initializer:
         """
 
         parser = PDFBuilder(self.__data, properties_t)
-        pdf = SimpleDocTemplate(output_t, pagesize=(179 * mm, 134 * mm))
+        pdf = SimpleDocTemplate(output_t, pagesize=(179 * mm, 134 * mm),
+                                topMargin=0.0, bottomMargin=0.0,
+                                leftMargin=0.0, rightMargin=0.0)
         doc = parse(input_t)
-        pdf.topMargin = 0.0
-        pdf.bottomMargin = 0.0
-        pdf.leftMargin = 0.0
-        pdf.rightMargin = 0.0
         courses = doc.findall('kurs')
         sorter = Sorter(doc, courses)
         sorted_courses = sorter.sort_parsed_xml('TerminDatumVon1')
