@@ -5,3 +5,4 @@ pytest-cov
 reportlab
 requests
 mock
+PyPDF2
