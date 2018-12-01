@@ -28,7 +28,7 @@ class Initializer:
         """
 
         parser = PDFBuilder(self.__data, properties_t)
-        pdf = SimpleDocTemplate(output_t, pagesize=(178 * mm, 134 * mm))
+        pdf = SimpleDocTemplate(output_t, pagesize=(179 * mm, 134 * mm))
         doc = parse(input_t)
         pdf.topMargin = 0.0
         pdf.bottomMargin = 0.0
