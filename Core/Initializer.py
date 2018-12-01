@@ -42,4 +42,5 @@ class Initializer:
         pdf.build(self.__data)
 
         processed_pdf = PostProcessor(output_t)
+        processed_pdf.rotate(processed_pdf.get_path())
         processed_pdf.split()
