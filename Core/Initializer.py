@@ -6,6 +6,7 @@ from reportlab.lib.pagesizes import mm
 from reportlab.platypus import SimpleDocTemplate
 
 from Core.Parser import PDFBuilder
+from Core.PostProcessor import PostProcessor
 from Core.Sorter import Sorter
 
 
@@ -39,3 +40,6 @@ class Initializer:
         parser.collect_xml_data(sorted_courses)
 
         pdf.build(self.__data)
+
+        processed_pdf = PostProcessor(output_t)
+        processed_pdf.split()
