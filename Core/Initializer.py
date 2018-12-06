@@ -29,7 +29,7 @@ class Initializer:
         """
 
         parser = PDFBuilder(self.__data, properties_t)
-        pdf = SimpleDocTemplate(output_t, pagesize=(179 * mm, 134 * mm),
+        pdf = SimpleDocTemplate(output_t, pagesize=(178 * mm, 134 * mm),
                                 topMargin=0.0, bottomMargin=0.0,
                                 leftMargin=0.0, rightMargin=0.0)
         doc = parse(input_t)
@@ -41,6 +41,5 @@ class Initializer:
 
         pdf.build(self.__data)
 
-        processed_pdf = PostProcessor(output_t)
-        processed_pdf.rotate(processed_pdf.get_path())
-        processed_pdf.split()
+        pdf_postprocessor = PostProcessor(output_t)
+        pdf_postprocessor.finalize_print_preparation()
