@@ -35,7 +35,7 @@ class TableBuilder:
                 'Hochgebirge', 'Mittelgebirge'], [
                 'Wandern']]
         mountainbiken = ['Mountainbiken', [
-                'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
+                'Mountainbiken'], [
                 'Mountainbiken']]
         ausbildung = ['Ausbildung, Wandern und Klettern in Berlin', [
                 'in Berlin'], [
@@ -44,10 +44,10 @@ class TableBuilder:
             'Hochgebirge'], [
             'Bergsteigen', 'Hochtouren', 'Klettern']]
         familie = ['Veranstaltungen für Familien', [
-                'in Berlin', 'Hochgebirge', 'Mittelgebirge'], [
+                'Familie'], [
                 'Familie']]
         jugend = ['Jugendgruppen und -events', [
-                'in Berlin', 'Hochgebirge', 'Mittelgebirge', 'Jugend'], [
+                'Jugend'], [
                 'Jugend']]
 
         return [familie, ausbildung, wandern, mountainbiken, bergsteigen,
