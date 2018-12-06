@@ -27,11 +27,11 @@ class TableStyle:
             Styles.inner_grid(colors.black), Styles.leftpadding_reduce,
             Styles.rightpadding_reduce]
 
-        self.table_width = 178 * mm
+        self.table_width = 177.8 * mm
 
     def get_column_widths(self):
         column_widths = [8 * mm, 13 * mm, 19 * mm, 15 * mm, 1 * mm,
-                         18 * mm, 47 * mm]
+                         18 * mm, 46.8 * mm]
         column_widths[4] = self.table_width - sum(
             column_widths[0:4]) - sum(column_widths[5:7])
         return column_widths
