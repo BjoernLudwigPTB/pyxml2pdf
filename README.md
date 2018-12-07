@@ -3,6 +3,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/BjoernLudwigPTB/XMLToPDFConverter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/BjoernLudwigPTB/XMLToPDFConverter/?branch=master)
 [![CircleCI](https://circleci.com/gh/BjoernLudwigPTB/XMLToPDFConverter.svg?style=shield)](https://circleci.com/gh/BjoernLudwigPTB/XMLToPDFConverter)
 [![Maintainability](https://api.codeclimate.com/v1/badges/462d32995c5cc87af346/maintainability)](https://codeclimate.com/github/BjoernLudwigPTB/XMLToPDFConverter/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/462d32995c5cc87af346/test_coverage)](https://codeclimate.com/github/BjoernLudwigPTB/XMLToPDFConverter/test_coverage)
+[![codecov](https://codecov.io/gh/BjoernLudwigPTB/XMLToPDFConverter/branch/master/graph/badge.svg)](https://codecov.io/gh/BjoernLudwigPTB/XMLToPDFConverter)
+
 
 Convert XML template to PDF table.
