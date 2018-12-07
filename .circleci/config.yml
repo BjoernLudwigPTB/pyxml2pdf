@@ -42,11 +42,11 @@ jobs:
         key: v1-dependencies-{{ checksum "requirements.txt" }}
 
     - run:
-        name: Install Codacy reporter
+        name: Install Codacy and Codecov reporter
         command: |
           python3 -m venv venv
           . venv/bin/activate
-          pip install codacy-coverage
+          pip install codacy-coverage codecov
 
     # Set up Code Climate by downloading test reporter as a static binary
     - run:
@@ -59,7 +59,8 @@ jobs:
     # 1. Notify Code Climate of a pending test report using `before-build`
     # 2. Upload test report to Code Climate using `after-build`
     # 3. Upload test report to Codacy using `python-codacy-coverage`
-    # 4. Produce normal report to show in CircleCI 'test-reports'
+    # 4. Upload test report to Codecov using `codecov`
+    # 5. Produce normal report to show in CircleCI 'test-reports'
     - run:
         name: Produce coverage report
         command: |
@@ -71,6 +72,7 @@ jobs:
           ./cc-test-reporter after-build --coverage-input-type coverage.py \
               --exit-code $?
           python-codacy-coverage -r coverage.xml
+          codecov
           mv coverage.xml ./test_results/pytest/
           coverage report -m --omit=venv/* > test_results/pytest/coverage.log
 
