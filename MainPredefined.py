@@ -4,7 +4,7 @@ from Core.Initializer import Initializer
 
 def convert():
     input_folder = 'input/'
-    domain = 'https://alpinclub-berlin.de/kv/'
+    domain = 'https://www.alpinclub-berlin.de/kv/'
     xml_filename = 'kursdaten.xml'
     xml_path = input_folder + xml_filename
     url = domain + xml_filename

@@ -6,7 +6,7 @@ from Core.Initializer import Initializer
 @pytest.fixture
 def download():
     from Core.Downloader import Downloader
-    dl = Downloader('https://alpinclub-berlin.de/kv/kursdaten.xml')
+    dl = Downloader('https://www.alpinclub-berlin.de/kv/kursdaten.xml')
     dl.download('input/kursdaten.xml')
 
 
