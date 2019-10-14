@@ -4,7 +4,6 @@ from PyPDF2.pdf import PdfFileReader, PdfFileWriter
 
 
 class PostProcessor:
-
     def __init__(self, path):
         """
         This creates an instance of a PostProcessor for a resulting table to
@@ -33,11 +32,10 @@ class PostProcessor:
             page = pdf.getPage(page_number)
             page.rotateCounterClockwise(90)
             pdf_writer.addPage(page)
-            output_filename = '%s_seite_%02d.pdf' % (
-                self._name, page_number + 1)
+            output_filename = "%s_seite_%02d.pdf" % (self._name, page_number + 1)
 
-            pdf_out = open(os.path.join(self._directory, output_filename), 'wb')
+            pdf_out = open(os.path.join(self._directory, output_filename), "wb")
             pdf_writer.write(pdf_out)
             pdf_out.close()
 
-        print('Create ', pdf.getNumPages(), ' single paged PDFs.')
+        print("Create ", pdf.getNumPages(), " single paged PDFs.")

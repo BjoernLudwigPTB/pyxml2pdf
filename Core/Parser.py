@@ -34,25 +34,19 @@ class PDFBuilder:
         # Get custom_styles for all headings, texts, etc. from sample
         custom_styles = getSampleStyleSheet()
         custom_styles.get("Normal").fontSize = 6.5
-        custom_styles.get("Normal").leading = custom_styles[
-                                                  "Normal"].fontSize * 1.2
-        custom_styles.get("Normal").fontName = 'NewsGothBT'
-        custom_styles.get("Italic").fontSize = custom_styles[
-            "Normal"].fontSize
-        custom_styles.get("Italic").leading = custom_styles[
-                                                  "Italic"].fontSize * 1.2
-        custom_styles.get("Italic").fontName = 'NewsGothBT_Italic'
+        custom_styles.get("Normal").leading = custom_styles["Normal"].fontSize * 1.2
+        custom_styles.get("Normal").fontName = "NewsGothBT"
+        custom_styles.get("Italic").fontSize = custom_styles["Normal"].fontSize
+        custom_styles.get("Italic").leading = custom_styles["Italic"].fontSize * 1.2
+        custom_styles.get("Italic").fontName = "NewsGothBT_Italic"
         custom_styles.get("Heading1").fontSize = 12
         custom_styles.get("Heading1").alignment = 1
-        custom_styles.get("Heading1").leading = custom_styles[
-                                                    "Heading1"].fontSize * 1.2
-        custom_styles.get("Heading1").fontName = 'NewsGothBT_Bold'
-        custom_styles.get("Heading2").fontSize = custom_styles[
-            "Normal"].fontSize
+        custom_styles.get("Heading1").leading = custom_styles["Heading1"].fontSize * 1.2
+        custom_styles.get("Heading1").fontName = "NewsGothBT_Bold"
+        custom_styles.get("Heading2").fontSize = custom_styles["Normal"].fontSize
         custom_styles.get("Heading2").alignment = 1
-        custom_styles.get("Heading2").leading = custom_styles[
-                                                    "Heading2"].fontSize * 1.2
-        custom_styles.get("Heading2").fontName = 'NewsGothBT_Bold'
+        custom_styles.get("Heading2").leading = custom_styles["Heading2"].fontSize * 1.2
+        custom_styles.get("Heading2").fontName = "NewsGothBT_Bold"
         return custom_styles
 
     @staticmethod
@@ -61,18 +55,25 @@ class PDFBuilder:
         Register the desired font with `reportlab` to make sure that
         `<i></i>` and `<b></b>` work well.
         """
-        registerFont(TTFont('NewsGothBT',
-                            'PdfVisualisation/NewsGothicBT-Roman.ttf'))
-        registerFont(TTFont('NewsGothBT_Bold',
-                            'PdfVisualisation/NewsGothicBT-Bold.ttf'))
-        registerFont(TTFont('NewsGothBT_Italic',
-                            'PdfVisualisation/NewsGothicBT-Italic.ttf'))
-        registerFont(TTFont('NewsGothBT_BoldItalic',
-                            'PdfVisualisation/NewsGothicBT-BoldItalic.ttf'))
+        registerFont(TTFont("NewsGothBT", "PdfVisualisation/NewsGothicBT-Roman.ttf"))
+        registerFont(
+            TTFont("NewsGothBT_Bold", "PdfVisualisation/NewsGothicBT-Bold.ttf")
+        )
+        registerFont(
+            TTFont("NewsGothBT_Italic", "PdfVisualisation/NewsGothicBT-Italic.ttf")
+        )
+        registerFont(
+            TTFont(
+                "NewsGothBT_BoldItalic", "PdfVisualisation/NewsGothicBT-BoldItalic.ttf"
+            )
+        )
         registerFontFamily(
-            'NewsGothBT', normal='NewsGothBT', bold='NewsGothBT_Bold',
-            italic='NewsGothBT_Italic',
-            boldItalic='NewsGothBT_BoldItalic')
+            "NewsGothBT",
+            normal="NewsGothBT",
+            bold="NewsGothBT_Bold",
+            italic="NewsGothBT_Italic",
+            boldItalic="NewsGothBT_BoldItalic",
+        )
 
     @staticmethod
     def _get_event_data(event_data, event_data_tags):
@@ -110,19 +111,19 @@ class PDFBuilder:
         the current event
         """
         if personal:
-            personal_string = 'a) ' + personal + '<br/>'
+            personal_string = "a) " + personal + "<br/>"
         else:
-            personal_string = 'a) keine <br/>'
+            personal_string = "a) keine <br/>"
 
         if material:
-            material_string = 'b) ' + material + '<br/>'
+            material_string = "b) " + material + "<br/>"
         else:
-            material_string = 'b) keine <br/>'
+            material_string = "b) keine <br/>"
 
         if financial:
-            financial_string = 'c) ' + financial + ' € (' + offers + ')'
+            financial_string = "c) " + financial + " € (" + offers + ")"
         else:
-            financial_string = 'c) keine'
+            financial_string = "c) keine"
         return personal_string + material_string + financial_string
 
     @staticmethod
@@ -133,13 +134,14 @@ class PDFBuilder:
         :param str date: xml tag for relevant date.
         :return str: the text to insert in date column of the current event
         """
-        if '2099' in date:
-            date_string = 'auf Anfrage'
+        if "2099" in date:
+            date_string = "auf Anfrage"
         elif date:
-            date_string = date.replace('00:00', '').replace(
-                '2019', '19').replace('2018', '18')
+            date_string = (
+                date.replace("00:00", "").replace("2019", "19").replace("2018", "18")
+            )
         else:
-            date_string = ''
+            date_string = ""
         return date_string
 
     @staticmethod
@@ -154,18 +156,18 @@ class PDFBuilder:
         :return str: the full description including url if provided
         """
         if name:
-            full_description = '<b>' + name + '</b>'
+            full_description = "<b>" + name + "</b>"
         else:
-            full_description = ''
+            full_description = ""
 
         if name2:
-            full_description += ' - ' + name2
+            full_description += " - " + name2
 
         if description:
-            full_description += ' - ' + description
+            full_description += " - " + description
 
         if url:
-            full_description += ' Mehr Infos unter: ' + url + '.'
+            full_description += " Mehr Infos unter: " + url + "."
 
         return full_description
 
@@ -182,11 +184,11 @@ class PDFBuilder:
         """
         if events is not None:
             for event in events:
-                categories = PDFBuilder.get_event_categories(
-                    event, PDFBuilder._get_event_data(event, ['Kategorie']))
+                categories = PDFBuilder.get_event_categories(event)
                 # self._elements.append(self.collect_event_data(event))
                 self._table_manager.distribute_events(
-                    self.collect_event_data(event), categories)
+                    self.collect_event_data(event), categories
+                )
             subtable_elements = self._table_manager.collect_subtables()
             for subtable_element in subtable_elements:
                 self._elements.append(KeepTogether(subtable_element))
@@ -208,32 +210,53 @@ class PDFBuilder:
         if event_data is not None:
             styles = self._styles
             columns_to_print = [
-                Paragraph(PDFBuilder._get_event_data(
-                    event_data, ['Kursart']), styles["Normal"]),
-                Paragraph(PDFBuilder._parse_date(self._get_event_data(
-                    event_data, ['TerminDatumVon1', 'TerminDatumBis1'])),
-                    styles["Normal"]),
-                Paragraph(PDFBuilder._get_event_data(
-                    event_data, ['Ort1']), styles["Normal"]),
-                Paragraph(PDFBuilder._get_event_data(
-                    event_data, ['Kursleiter']), styles["Normal"]),
-                Paragraph(PDFBuilder._parse_description(PDFBuilder._get_event_data(
-                    event_data, ['Bezeichnung']), PDFBuilder._get_event_data(
-                    event_data, ['Bezeichnung2']), PDFBuilder._get_event_data(
-                    event_data, ['Beschreibung']), PDFBuilder._get_event_data(
-                    event_data, ['TrainerURL'])), styles["Normal"]),
-                Paragraph(PDFBuilder._get_event_data(
-                    event_data, ['Zielgruppe']), styles["Normal"]),
-                Paragraph(PDFBuilder._parse_prerequisites(
-                    PDFBuilder._get_event_data(
-                        event_data, ['Voraussetzung']),
-                    PDFBuilder._get_event_data(event_data, ['Ausruestung']),
-                    PDFBuilder._get_event_data(event_data, ['Kurskosten']),
-                    PDFBuilder._get_event_data(event_data, ['Leistungen'])),
-                    styles["Normal"])]
+                Paragraph(
+                    PDFBuilder._get_event_data(event_data, ["Kursart"]),
+                    styles["Normal"],
+                ),
+                Paragraph(
+                    PDFBuilder._parse_date(
+                        self._get_event_data(
+                            event_data, ["TerminDatumVon1", "TerminDatumBis1"]
+                        )
+                    ),
+                    styles["Normal"],
+                ),
+                Paragraph(
+                    PDFBuilder._get_event_data(event_data, ["Ort1"]), styles["Normal"]
+                ),
+                Paragraph(
+                    PDFBuilder._get_event_data(event_data, ["Kursleiter"]),
+                    styles["Normal"],
+                ),
+                Paragraph(
+                    PDFBuilder._parse_description(
+                        PDFBuilder._get_event_data(event_data, ["Bezeichnung"]),
+                        PDFBuilder._get_event_data(event_data, ["Bezeichnung2"]),
+                        PDFBuilder._get_event_data(event_data, ["Beschreibung"]),
+                        PDFBuilder._get_event_data(event_data, ["TrainerURL"]),
+                    ),
+                    styles["Normal"],
+                ),
+                Paragraph(
+                    PDFBuilder._get_event_data(event_data, ["Zielgruppe"]),
+                    styles["Normal"],
+                ),
+                Paragraph(
+                    PDFBuilder._parse_prerequisites(
+                        PDFBuilder._get_event_data(event_data, ["Voraussetzung"]),
+                        PDFBuilder._get_event_data(event_data, ["Ausruestung"]),
+                        PDFBuilder._get_event_data(event_data, ["Kurskosten"]),
+                        PDFBuilder._get_event_data(event_data, ["Leistungen"]),
+                    ),
+                    styles["Normal"],
+                ),
+            ]
             event = self._creator.create_table_fixed(
-                [columns_to_print], self._table_styles.get_column_widths(),
-                self._table_styles.normal)
+                [columns_to_print],
+                self._table_styles.get_column_widths(),
+                self._table_styles.normal,
+            )
             return event
         else:
             print("No events found.")
@@ -248,15 +271,13 @@ class PDFBuilder:
         return self._elements
 
     @staticmethod
-    def get_event_categories(event, category_text):
+    def get_event_categories(event):
         """
         Construct a list of categories from the string gathered out of the xml.
 
         :param defusedxml.ElementTree.Element event: event for which the
             categories are needed
-        :param category_text: the text from the xml file containing the
-            activities covered by the event
         :return List[str]: the list of the categories
         """
-        categories = PDFBuilder._get_event_data(event, ['Kategorie'])
-        return categories.split(', ')
+        categories = PDFBuilder._get_event_data(event, ["Kategorie"])
+        return categories.split(", ")

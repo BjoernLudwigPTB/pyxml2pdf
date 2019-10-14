@@ -25,7 +25,7 @@ jobs:
     # Download and cache dependencies.
     - restore_cache:
         keys:
-        - v1-dependencies-{{ checksum "requirements.txt" }}
+        - v1-dependencies-{{ checksum "dev-requirements.txt" }}
         # Fallback to using the latest cache if no exact match is found.
         - v1-dependencies-
 
@@ -34,12 +34,12 @@ jobs:
         command: |
           python3 -m venv venv
           . venv/bin/activate
-          pip install -r requirements.txt
+          pip install -r dev-requirements.txt
 
     - save_cache:
         paths:
         - ./venv
-        key: v1-dependencies-{{ checksum "requirements.txt" }}
+        key: v1-dependencies-{{ checksum "dev-requirements.txt" }}
 
     - run:
         name: Install Codacy and Codecov reporter
@@ -56,11 +56,9 @@ jobs:
           chmod +x ./cc-test-reporter
 
     # Run coverage! We use pytest's test-runner (https://pytest.org)
-    # 1. Notify Code Climate of a pending test report using `before-build`
-    # 2. Upload test report to Code Climate using `after-build`
-    # 3. Upload test report to Codacy using `python-codacy-coverage`
-    # 4. Upload test report to Codecov using `codecov`
-    # 5. Produce normal report to show in CircleCI 'test-reports'
+    # 1. Upload test report to Codacy using `python-codacy-coverage`
+    # 2. Upload test report to Codecov using `codecov`
+    # 3. Produce normal report to show in CircleCI 'test-reports'
     - run:
         name: Produce coverage report
         command: |
@@ -75,6 +73,7 @@ jobs:
           codecov
           mv coverage.xml ./test_results/pytest/
           coverage report -m --omit=venv/* > test_results/pytest/coverage.log
+          mv ./output/ ./test_results/
 
     # Store test results.
     - store_artifacts:
