@@ -28,30 +28,39 @@ class TableBuilder:
             properties file
         """
 
-        klettern = ['Klettern und Bouldern im Mittelgebirge', [
-                'Mittelgebirge'], [
-                'Klettern', 'Bouldern']]
-        wandern = ['Wandern im Hoch - und Mittelgebirge', [
-                'Hochgebirge', 'Mittelgebirge'], [
-                'Wandern']]
-        mountainbiken = ['Mountainbiken', [
-                'Mountainbiken'], [
-                'Mountainbiken']]
-        ausbildung = ['Ausbildung, Wandern und Klettern in Berlin', [
-                'in Berlin'], [
-                'Grundlagenkurs', 'Wandern', 'Klettern']]
-        bergsteigen = ['Bergsteigen, Hochtouren und Klettern im Hochgebirge', [
-            'Hochgebirge'], [
-            'Bergsteigen', 'Hochtouren', 'Klettern']]
-        familie = ['Veranstaltungen für Familien', [
-                'Familie'], [
-                'Familie']]
-        jugend = ['Jugendgruppen und -events', [
-                'Jugend'], [
-                'Jugend']]
+        klettern = [
+            "Klettern und Bouldern im Mittelgebirge",
+            ["Mittelgebirge"],
+            ["Klettern", "Bouldern"],
+        ]
+        wandern = [
+            "Wandern im Hoch - und Mittelgebirge",
+            ["Hochgebirge", "Mittelgebirge"],
+            ["Wandern"],
+        ]
+        mountainbiken = ["Mountainbiken", ["Mountainbiken"], ["Mountainbiken"]]
+        ausbildung = [
+            "Ausbildung, Wandern und Klettern in Berlin",
+            ["in Berlin"],
+            ["Grundlagenkurs", "Wandern", "Klettern"],
+        ]
+        bergsteigen = [
+            "Bergsteigen, Hochtouren und Klettern im Hochgebirge",
+            ["Hochgebirge"],
+            ["Bergsteigen", "Hochtouren", "Klettern"],
+        ]
+        familie = ["Veranstaltungen für Familien", ["Familie"], ["Familie"]]
+        jugend = ["Jugendgruppen und -events", ["Jugend"], ["Jugend"]]
 
-        return [familie, ausbildung, wandern, mountainbiken, bergsteigen,
-                jugend, klettern]
+        return [
+            familie,
+            ausbildung,
+            wandern,
+            mountainbiken,
+            bergsteigen,
+            jugend,
+            klettern,
+        ]
 
     def create_subtables(self):
         """
@@ -79,21 +88,33 @@ class TableBuilder:
         :return List[reportlab.platypus.Table]: two line table with all headers
             needed
         """
-        headers = [self._creator.create_table_fixed([[Paragraph(
-            main_header, self._styles['Heading1'])]],
-            self._table_styles.table_width,
-            self._table_styles.heading)]
-        headings = ['Art', 'Datum', 'Ort', 'Leitung', 'Beschreibung',
-                    'Zielgruppe',
-                    'Voraussetzungen<br/>a) persönliche | b) '
-                    'materielle | c) finanzielle']
+        headers = [
+            self._creator.create_table_fixed(
+                [[Paragraph(main_header, self._styles["Heading1"])]],
+                self._table_styles.table_width,
+                self._table_styles.heading,
+            )
+        ]
+        headings = [
+            "Art",
+            "Datum",
+            "Ort",
+            "Leitung",
+            "Beschreibung",
+            "Zielgruppe",
+            "Voraussetzungen<br/>a) persönliche | b) " "materielle | c) finanzielle",
+        ]
         columns = []
 
         for heading in headings:
-            columns.append(Paragraph(heading, self._styles['Heading2']))
-        headers.append(self._creator.create_table_fixed(
-            [columns], self._table_styles.get_column_widths(),
-            self._table_styles.sub_heading))
+            columns.append(Paragraph(heading, self._styles["Heading2"]))
+        headers.append(
+            self._creator.create_table_fixed(
+                [columns],
+                self._table_styles.get_column_widths(),
+                self._table_styles.sub_heading,
+            )
+        )
         return headers
 
     def collect_subtables(self):

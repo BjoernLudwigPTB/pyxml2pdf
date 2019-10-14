@@ -1,5 +1,4 @@
 class EventTable:
-
     def __init__(self, name, locations, activities):
         """
         Contains all events which cover the mentioned activities at the
