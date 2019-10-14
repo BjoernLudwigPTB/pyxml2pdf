@@ -6,5 +6,5 @@ def test_downloader_init():
 
 
 def test_downloader_download():
-    dl = Downloader('https://www.alpinclub-berlin.de/kv/kursdaten.xml')
-    dl.download('input/kursdaten.xml')
+    downloader = Downloader('https://www.alpinclub-berlin.de/kv/kursdaten.xml')
+    downloader.download('input/kursdaten.xml')
