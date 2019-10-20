@@ -6,4 +6,17 @@
 [![codecov](https://codecov.io/gh/BjoernLudwigPTB/XMLToPDFConverter/branch/master/graph/badge.svg)](https://codecov.io/gh/BjoernLudwigPTB/XMLToPDFConverter)
 
 
-Convert XML template to PDF table.
+Convert XML template to PDF table. Since the forking this project has generalized
+quite a bit on the generation of a multipage PDF file containing a table with defined
+columns. Since we work on this project every end of the year, we will provide an
+extensive bit of documentation by the end of November 2019.
+
+## Getting started 
+As a starting point you could take a look at the execution of `MainPredefiend.py`
+which will download a publicly available XML-file into the folder *input* and process
+it as desired to produce the output files (one file containing all generated pages
+ and additionally one file per page) and place them in the subfolder *output*.
+ 
+ ## Get in touch
+ In case you have any questions on this project do not hesitate to get in touch with
+ [us](https://github.com/BjoernLudwigPTB/XMLToPDFConverter/graphs/contributors).
