@@ -7,7 +7,7 @@ from PdfVisualisation.Styles import Styles
 class TableStyle:
     def __init__(self):
         """
-        schöne Farben sind:
+        beautiful colors are:
             *   aliceblue (nicht mit azure)
             *   azure (nicht mit aliceblue)
             *   honeydew
