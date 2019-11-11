@@ -41,8 +41,7 @@ class TableStyle:
 
         self.table_width = 177.8 * mm
 
-    def get_column_widths(self):
-        column_widths = [
+        self._column_widths = [
             7.2 * mm,
             14.2 * mm,
             18.7 * mm,
@@ -51,7 +50,11 @@ class TableStyle:
             18 * mm,
             47 * mm,
         ]
-        column_widths[4] = (
-            self.table_width - sum(column_widths[0:4]) - sum(column_widths[5:7])
+        self._column_widths[4] = (
+            self.table_width
+            - sum(self._column_widths[0:4])
+            - sum(self._column_widths[5:7])
         )
-        return column_widths
+
+    def get_column_widths(self):
+        return self._column_widths
