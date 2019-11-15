@@ -43,9 +43,9 @@ class TableStyle:
 
         self._column_widths = [
             7.2 * mm,
-            14.2 * mm,
+            11.5 * mm,
             18.7 * mm,
-            13.9 * mm,
+            14.5 * mm,
             1 * mm,
             18 * mm,
             47 * mm,
