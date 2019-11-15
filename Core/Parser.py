@@ -10,14 +10,16 @@ from model.tables.Creator import Creator
 from model.tables.TableBuilder import TableBuilder
 
 
-class PDFBuilder:
+class Parser:
+    """XML parser to extract all interesting information"""
+
     _elements: List[Flowable]
 
     def __init__(self, elements, properties):
         self._elements = elements
         self._creator = Creator()
         self._table_styles = TableStyle()
-        PDFBuilder._set_font_family()
+        Parser._set_font_family()
         self._styles = self._style()
         self._table_manager = TableBuilder(properties, self._styles)
 
@@ -76,21 +78,21 @@ class PDFBuilder:
         )
 
     @staticmethod
-    def _get_event_data(event_data, event_data_tags):
+    def _get_event_data(event, event_tags):
         """
         Form a string of the descriptive texts for all desired event tags
         by concatenating them with a separator. This is especially necessary,
         since `reportlab.platypus.Paragraph` cannot handle `None`s as texts.
 
-        :param xml.etree.ElementTree.Element event_data: the event from where
+        :param xml.etree.ElementTree.Element event: the event from where
             the texts shall be extracted
-        :param List[str] event_data_tags: list of all tags for which the
+        :param List[str] event_tags: list of all tags for which the
             descriptive texts is wanted, even if it is just one
         :return str: the texts of all tags under the current event
         """
         event_data_string = ""
-        for tag in event_data_tags:
-            data_string = event_data.findtext(tag)
+        for tag in event_tags:
+            data_string = event.findtext(tag)
             if data_string:
                 if event_data_string:
                     event_data_string += " - " + data_string
@@ -184,70 +186,62 @@ class PDFBuilder:
         """
         if events is not None:
             for event in events:
-                categories = PDFBuilder.get_event_categories(event)
-                # self._elements.append(self.collect_event_data(event))
-                self._table_manager.distribute_events(
+                categories = self.get_event_categories(event)
+                self._table_manager.distribute_event(
                     self.collect_event_data(event), categories
                 )
             subtable_elements = self._table_manager.collect_subtables()
             for subtable_element in subtable_elements:
                 self._elements.append(KeepTogether(subtable_element))
-            return self.get_elements()
+            return self._elements
         else:
             print("No events list found.")
 
-    def collect_event_data(self, event_data):
+    def collect_event_data(self, event):
         """
         Extract interesting information from event and append them to print
         out data in `_elements`.
 
-        :param xml.etree.ElementTree.Element event_data: the event from
+        :param xml.etree.ElementTree.Element event: the event from
             which the texts shall be extracted into a nicely formatted row of a
             table to insert in print out `_elements`
         :return reportlab.platypus.Table: single row table containing all
             relevant event data
         """
-        if event_data is not None:
+        if event is not None:
             styles = self._styles
             columns_to_print = [
+                Paragraph(Parser._get_event_data(event, ["Kursart"]), styles["Normal"]),
                 Paragraph(
-                    PDFBuilder._get_event_data(event_data, ["Kursart"]),
-                    styles["Normal"],
-                ),
-                Paragraph(
-                    PDFBuilder._parse_date(
+                    Parser._parse_date(
                         self._get_event_data(
-                            event_data, ["TerminDatumVon1", "TerminDatumBis1"]
+                            event, ["TerminDatumVon1", "TerminDatumBis1"]
                         )
                     ),
                     styles["Normal"],
                 ),
+                Paragraph(Parser._get_event_data(event, ["Ort1"]), styles["Normal"]),
                 Paragraph(
-                    PDFBuilder._get_event_data(event_data, ["Ort1"]), styles["Normal"]
+                    Parser._get_event_data(event, ["Kursleiter"]), styles["Normal"]
                 ),
                 Paragraph(
-                    PDFBuilder._get_event_data(event_data, ["Kursleiter"]),
-                    styles["Normal"],
-                ),
-                Paragraph(
-                    PDFBuilder._parse_description(
-                        PDFBuilder._get_event_data(event_data, ["Bezeichnung"]),
-                        PDFBuilder._get_event_data(event_data, ["Bezeichnung2"]),
-                        PDFBuilder._get_event_data(event_data, ["Beschreibung"]),
-                        PDFBuilder._get_event_data(event_data, ["TrainerURL"]),
+                    Parser._parse_description(
+                        Parser._get_event_data(event, ["Bezeichnung"]),
+                        Parser._get_event_data(event, ["Bezeichnung2"]),
+                        Parser._get_event_data(event, ["Beschreibung"]),
+                        Parser._get_event_data(event, ["TrainerURL"]),
                     ),
                     styles["Normal"],
                 ),
                 Paragraph(
-                    PDFBuilder._get_event_data(event_data, ["Zielgruppe"]),
-                    styles["Normal"],
+                    Parser._get_event_data(event, ["Zielgruppe"]), styles["Normal"]
                 ),
                 Paragraph(
-                    PDFBuilder._parse_prerequisites(
-                        PDFBuilder._get_event_data(event_data, ["Voraussetzung"]),
-                        PDFBuilder._get_event_data(event_data, ["Ausruestung"]),
-                        PDFBuilder._get_event_data(event_data, ["Kurskosten"]),
-                        PDFBuilder._get_event_data(event_data, ["Leistungen"]),
+                    Parser._parse_prerequisites(
+                        Parser._get_event_data(event, ["Voraussetzung"]),
+                        Parser._get_event_data(event, ["Ausruestung"]),
+                        Parser._get_event_data(event, ["Kurskosten"]),
+                        Parser._get_event_data(event, ["Leistungen"]),
                     ),
                     styles["Normal"],
                 ),
@@ -261,15 +255,6 @@ class PDFBuilder:
         else:
             print("No events found.")
 
-    def get_elements(self):
-        """
-        Return the collected event table.
-
-        :return List[reportlab.platypus.Table]: a list of all table rows
-            containing the relevant event data
-        """
-        return self._elements
-
     @staticmethod
     def get_event_categories(event):
         """
@@ -279,5 +264,5 @@ class PDFBuilder:
             categories are needed
         :return List[str]: the list of the categories
         """
-        categories = PDFBuilder._get_event_data(event, ["Kategorie"])
+        categories = Parser._get_event_data(event, ["Kategorie"])
         return categories.split(", ")

@@ -5,7 +5,7 @@ from defusedxml.ElementTree import parse
 from reportlab.lib.pagesizes import mm
 from reportlab.platypus import SimpleDocTemplate
 
-from Core.Parser import PDFBuilder
+from Core.Parser import Parser
 from Core.PostProcessor import PostProcessor
 from Core.Sorter import Sorter
 
@@ -17,27 +17,27 @@ class Initializer:
     def __init__(self):
         self.__data = []
 
-    def build(self, input_t, output_t, properties_t):
+    def build(self, input_path, output_path, properties_path):
         """
         Coordinate the construction of the pdf result.
 
         Parameters
         ----------
-        :param str input_t: path to input xml-file
-        :param str output_t: path to pdf file containing result
-        :param str properties_t: path to text file containing properties
+        :param str input_path: path to input xml-file
+        :param str output_path: path to pdf file containing result
+        :param str properties_path: path to text file containing properties
         """
 
-        parser = PDFBuilder(self.__data, properties_t)
+        parser = Parser(self.__data, properties_path)
         pdf = SimpleDocTemplate(
-            output_t,
+            output_path,
             pagesize=(178 * mm, 134 * mm),
             topMargin=0.0,
             bottomMargin=0.0,
             leftMargin=0.0,
             rightMargin=0.0,
         )
-        doc = parse(input_t)
+        doc = parse(input_path)
         courses = doc.findall("kurs")
         sorter = Sorter(doc, courses)
         sorted_courses = sorter.sort_parsed_xml("TerminDatumVon1")
@@ -46,5 +46,5 @@ class Initializer:
 
         pdf.build(self.__data)
 
-        pdf_postprocessor = PostProcessor(output_t)
+        pdf_postprocessor = PostProcessor(output_path)
         pdf_postprocessor.finalize_print_preparation()
