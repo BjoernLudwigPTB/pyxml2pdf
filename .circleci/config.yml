@@ -15,12 +15,13 @@ jobs:
     # Checkout code.
     - checkout
 
-    # Create test-result folder.
+    # Create test-result folder and the default output folder.
     - run:
         name: Create test result folder
         command: |
           mkdir test-results
           mkdir test-results/pytest
+          mkdir output
 
     # Download and cache dependencies.
     - restore_cache:
