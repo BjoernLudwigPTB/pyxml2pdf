@@ -45,9 +45,9 @@ class TableBuilder:
             ["Grundlagenkurs", "Wandern", "Klettern"],
         ]
         bergsteigen = [
-            "Bergsteigen, Hochtouren und Klettern im Hochgebirge",
+            "Ski, Bergsteigen, Hochtouren und Klettern im Hochgebirge",
             ["Hochgebirge"],
-            ["Bergsteigen", "Hochtouren", "Klettern"],
+            ["Bergsteigen", "Hochtouren", "Höhle", "Klettern", "Klettersteig", "Ski"],
         ]
         familie = ["Veranstaltungen für Familien", ["Familie"], ["Familie"]]
         jugend = ["Jugendgruppen und -events", ["Jugend"], ["Jugend"]]
