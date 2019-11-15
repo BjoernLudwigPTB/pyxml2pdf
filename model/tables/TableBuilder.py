@@ -10,7 +10,7 @@ class TableBuilder:
         self._styles = styles
         self._creator = Creator()
         self._prop = properties
-        self._settings = self._parse_properties()
+        self._subtable_names_and_categs = self._parse_properties()
         self._table_styles = TableStyle()
         self._course = None
         self._subtables = self.create_subtables()
@@ -71,7 +71,7 @@ class TableBuilder:
         """
 
         event_tables = []
-        for heading in self._settings:
+        for heading in self._subtable_names_and_categs:
             event_table = EventTable(heading[0], heading[1], heading[2])
             headers = self.make_headers(heading[0])
             for header in headers:
