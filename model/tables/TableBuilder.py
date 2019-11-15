@@ -1,3 +1,5 @@
+from typing import List
+
 from reportlab.platypus import Paragraph
 
 from PdfVisualisation.TableStyle import TableStyle
@@ -124,7 +126,14 @@ class TableBuilder:
                 aggregated_subtables.append(element)
         return aggregated_subtables
 
-    def distribute_events(self, event, categories):
+    def distribute_event(self, event, categories):
+        """
+        Distribute an event to the subtables according to the related categories.
+
+        :param defusedxml.ElementTree.Element event: event which is to be distributed
+        :param List[str] categories: the categories list of the specified event
+        """
+        distribution_failed = True
         set_of_cats = set(categories)
         for subtable in self._subtables:
             _locations = subtable.get_locations()
@@ -132,3 +141,10 @@ class TableBuilder:
             if set_of_cats.intersection(_activities):
                 if set_of_cats.intersection(_locations):
                     subtable.add_event(event)
+                    distribution_failed = False
+        if distribution_failed:
+            raise RuntimeWarning(
+                "The following event would not be printed, because it does not match "
+                "any tables criteria: ",
+                event,
+            )
