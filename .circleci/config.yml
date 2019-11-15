@@ -47,7 +47,7 @@ jobs:
         name: Install Codacy and Codecov reporter
         command: |
           python3 -m venv venv
-          . venv/bin/activate
+          source venv/bin/activate
           pip install codacy-coverage codecov
 
     # Set up Code Climate by downloading test reporter as a static binary
@@ -64,9 +64,9 @@ jobs:
     - run:
         name: Produce coverage report
         command: |
-          . venv/bin/activate
+          source venv/bin/activate
           ./cc-test-reporter before-build
-          python -m pytest -v --cov=. test/ \
+          pytest -v --cov=. \
            --junitxml=test_results/pytest/pytest.xml
           coverage xml --omit=venv/*
           ./cc-test-reporter after-build --coverage-input-type coverage.py \
