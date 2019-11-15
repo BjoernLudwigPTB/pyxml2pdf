@@ -21,7 +21,7 @@ jobs:
         command: |
           mkdir test-results
           mkdir test-results/pytest
-          mkdir output
+          mkdir -p output
 
     # Download and cache dependencies.
     - restore_cache:
