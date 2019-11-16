@@ -23,8 +23,8 @@ class TableBuilder:
         """
         Extract all configuration information from properties file and set
         up a dict containing all this information. Later at least it will
-        extract it... TODO extract actual information with something like
-        settings = open(properties).read().split("\n")
+        extract it.
+
         settings_dict = dict()
         properties = self._prop
         :return List(List(str)): the list with all configuration data out of
