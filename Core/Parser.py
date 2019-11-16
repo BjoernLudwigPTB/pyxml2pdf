@@ -3,7 +3,9 @@ from typing import List
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.platypus import KeepTogether, Flowable, Paragraph
+from reportlab.platypus import Paragraph
+from reportlab.platypus.flowables import KeepTogether
+from reportlab.platypus.tables import Table
 
 from PdfVisualisation.TableStyle import TableStyle
 from model.tables.Creator import Creator
@@ -11,11 +13,16 @@ from model.tables.TableBuilder import TableBuilder
 
 
 class Parser:
-    """XML parser to extract all interesting information"""
 
-    _elements: List[Flowable]
+    _elements: List[KeepTogether]
 
     def __init__(self, elements, properties):
+        """
+        XML parser to extract all interesting information from xml-data.
+
+        :param str properties: path to the properties file
+        :param List[KeepTogether] elements: optional elements to populate the Parser
+        """
         self._elements = elements
         self._creator = Creator()
         self._table_styles = TableStyle()
@@ -29,9 +36,8 @@ class Parser:
         Do all the customization of styling regarding margins, fonts,
         fontsizes, etc..
 
-        TODO make dependent on properties entries
-
-        :return reportlab.lib.styles.StyleSheet: the created StyleSheet
+        :returns: the created StyleSheet
+        :rtype: reportlab.lib.styles.StyleSheet1
         """
         # Get custom_styles for all headings, texts, etc. from sample
         custom_styles = getSampleStyleSheet()
@@ -82,14 +88,16 @@ class Parser:
         """
         Form a string of the texts for all desired event tags by concatenating them
         with a separator. This is especially necessary,
-        since `reportlab.platypus.Paragraph` cannot handle `None`s as texts.
+        since :py:mod:`reportlab.platypus.Paragraph` cannot handle `None`s as texts.
 
-        :param defusedxml.ElementTree.Element event: the event from where
+
+        :param xml.etree.ElementTree.Element event: the event from where
             the texts shall be extracted
         :param List[str] event_tags: list of all tags for which the
             descriptive texts is wanted, even if it is just one
         :param str separator: the separator in between the concatenated texts
-        :return str: concatenated, separated texts of all tags for the current event
+        :returns: concatenated, separated texts of all tags for the current event
+        :rtype: str
         """
         event_data_string = ""
         for tag in event_tags:
@@ -110,8 +118,9 @@ class Parser:
         :param str personal: personal prerequisite xml text
         :param str financial: financial prerequisite xml text
         :param str offers: xml text of what is included in the price
-        :return str: the text to insert in prerequisite column
+        :returns: the text to insert in prerequisite column
         the current event
+        :rtype: str
         """
         if personal:
             personal_string = "a) " + personal + "<br/>"
@@ -135,7 +144,8 @@ class Parser:
         Determine the correct date for printing.
 
         :param str date: xml tag for relevant date.
-        :return str: the text to insert in date column of the current event
+        :returns: the text to insert in date column of the current event
+        :rtype: str
         """
         if "2099" in date:
             date_string = "auf Anfrage"
@@ -156,10 +166,11 @@ class Parser:
         Concatenate the description and the url if provided.
 
         :param str name: the short name for the event
-        :param str name: the short name number two for the event
+        :param str name2: the short name number two for the event
         :param str description: the descriptive text
         :param str url: the trainer's homepage url
-        :return str: the full description including url if provided
+        :returns: the full description including url if provided
+        :rtype: str
         """
         if name:
             full_description = "<b>" + name + "</b>"
@@ -182,11 +193,11 @@ class Parser:
         Traverse the parsed xml data and gather collected event data. Pass
         event data to table_manager and get collected data back.
 
-        :param List[defusedxml.ElementTree.Element] events: a list of the
+        :param List[xml.etree.ElementTree.Element] events: a list of the
             events from which the texts shall be extracted into a nicely
             formatted row of a table to insert in print out `_elements`
-        :return List[reportlab.platypus.Table]: a list of all table rows
-            containing the relevant event data
+        :returns: all table rows containing the relevant event data
+        :rtype: List[KeepTogether]
         """
         if events is not None:
             for event in events:
@@ -206,11 +217,11 @@ class Parser:
         Extract interesting information from event and append them to print
         out data in `_elements`.
 
-        :param xml.etree.ElementTree.Element event: the event from
-            which the texts shall be extracted into a nicely formatted row of a
-            table to insert in print out `_elements`
-        :return reportlab.platypus.Table: single row table containing all
-            relevant event data
+        :param xml.etree.ElementTree.Element event: the event from which the texts shall
+            be extracted into a nicely formatted row of a table to insert in print out
+            `_elements`
+        :returns: single row table containing all relevant event data
+        :rtype: Table
         """
         if event is not None:
             styles = self._styles
@@ -264,9 +275,10 @@ class Parser:
         """
         Construct a list of categories from the string gathered out of the xml.
 
-        :param defusedxml.ElementTree.Element event: event for which the
-            categories are needed
-        :return List[str]: the list of the categories
+        :param xml.etree.ElementTree.Element event: event for which the categories are
+            needed
+        :returns: the list of the categories
+        :rtype: List[str]
         """
         categories = Parser._get_event_data(event, ["Kategorie"])
         return categories.split(", ")
