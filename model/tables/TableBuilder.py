@@ -25,10 +25,8 @@ class TableBuilder:
         up a dict containing all this information. Later at least it will
         extract it.
 
-        settings_dict = dict()
-        properties = self._prop
-        :return List(List(str)): the list with all configuration data out of
-            properties file
+        :returns: the list with all configuration data out of properties file
+        :rtype: List[List[Union[str, List[str]]]]
         """
 
         klettern = [
