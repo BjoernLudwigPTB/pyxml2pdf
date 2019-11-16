@@ -84,7 +84,7 @@ class Parser:
         with a separator. This is especially necessary,
         since `reportlab.platypus.Paragraph` cannot handle `None`s as texts.
 
-        :param xml.etree.ElementTree.Element event: the event from where
+        :param defusedxml.ElementTree.Element event: the event from where
             the texts shall be extracted
         :param List[str] event_tags: list of all tags for which the
             descriptive texts is wanted, even if it is just one

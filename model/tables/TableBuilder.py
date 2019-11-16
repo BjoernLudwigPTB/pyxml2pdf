@@ -127,11 +127,12 @@ class TableBuilder:
                 aggregated_subtables.append(element)
         return aggregated_subtables
 
-    def distribute_event(self, event, categories):
+    def distribute_event(self, event_as_tablerow, categories):
         """
         Distribute an event to the subtables according to the related categories.
 
-        :param defusedxml.ElementTree.Element event: event which is to be distributed
+        :param reportlab.platypus.Table event_as_tablerow: event which is to be
+            distributed
         :param List[str] categories: the categories list of the specified event
         """
         distribution_failed = True
@@ -141,11 +142,15 @@ class TableBuilder:
             _activities = subtable.get_activities()
             if set_of_cats.intersection(_activities):
                 if set_of_cats.intersection(_locations):
-                    subtable.add_event(event)
+                    subtable.add_event(event_as_tablerow)
                     distribution_failed = False
         if distribution_failed:
             warnings.warn(
-                "The following event would not be printed, because it does not "
-                "match any tables criteria: " + event,
+                event_as_tablerow.__getattribute__("_cellvalues")[0][3].text
+                + "'s event on "
+                + event_as_tablerow.__getattribute__("_cellvalues")[0][1].text
+                + " would not be printed, because it does not contain a valid "
+                "combination of locations and activities. Either add a valid location "
+                "or add a valid activity or both.",
                 RuntimeWarning,
             )
