@@ -1,5 +1,7 @@
 from typing import List
 
+import warnings
+
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
@@ -16,7 +18,7 @@ class Parser:
 
     _elements: List[KeepTogether]
 
-    def __init__(self, elements, properties):
+    def __init__(self, properties, elements=[]):
         """
         XML parser to extract all interesting information from xml-data.
 
@@ -210,7 +212,7 @@ class Parser:
                 self._elements.append(KeepTogether(subtable_element))
             return self._elements
         else:
-            print("No events list found.")
+            warnings.warn("There were no items to print.", RuntimeWarning)
 
     def collect_event_data(self, event):
         """
@@ -268,7 +270,7 @@ class Parser:
             )
             return event
         else:
-            print("No events found.")
+            warnings.warn("No events found.", RuntimeWarning)
 
     @staticmethod
     def get_event_categories(event):
