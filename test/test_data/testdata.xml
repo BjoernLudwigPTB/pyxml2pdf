@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<?xml-stylesheet type="text/xsl" href="kursliste.xsl"?>
+<kursexport>
+<date>2019-11-11T11:56:29.396336</date>
+<kurs>
+    <counter>1</counter>
+    <Kursnummer>B1902507</Kursnummer>
+    <Bezeichnung>Spandauer Forst + Tegeler See</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>Ausdauernde Wanderung</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Wandern, in Berlin</Kategorie>
+    <Leistungen>Organisation, Wanderleitung</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>Dezember 2019</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Beschreibung>Wir begleiten die Kuhlake und fahren später - etwa zur Halbzeit der Tour - mit der Fähre nach Tegelort. In Wassernähe geht es zu Fuß weiter bis zum Ziel.  Gegen Ende jeder Wanderung kehren wir gemütlich ein. </Beschreibung>
+    <Voraussetzung>Ausdauer für eine mehrstündige Wanderung im flachen Gelände. Für Menschen mit Freude am Naturerlebnis, an der Bewegung und am geselligen Miteinander.  Wenn Du also gerne gemütlich in Gemeinschaft wanderst, ohne dass Dir gleich die Puste ausgeht, kannst Du mit uns Kontakt aufnehmen!</Voraussetzung>
+    <Ausruestung></Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise></Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>Ausdauernde Wanderung</Kursziel>
+    <Treffpunkt>Bushaltestelle Johannesstift Spandau Rückfahrt: ab Alt-Tegel</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <Memo12></Memo12>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>30.07.2019</Anlagedatum>
+    <Aenderungsdatum>10.10.2019</Aenderungsdatum>
+    <Kurskosten>3,00</Kurskosten>
+    <GeplanteTN>20</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>20</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Berlins grüner Nordwesten</Ort1>
+    <Termin1ISO>2019-12-01T10:00:00Z</Termin1ISO>
+    <TerminDatumVon1>01.12.2019 10:00</TerminDatumVon1>
+    <TerminDatumBis1>01.12.2019 17:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+    <Anmeldeschluss>25.11.2019</Anmeldeschluss>
+    <Kursleiter>Thilo Kunze</Kursleiter>
+    <Kursart>G</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Menschen mit Freude an Naturerlebnis und Bewegung</Zielgruppe>
+</kurs>
+<kurs>
+    <counter>2</counter>
+    <Kursnummer>G19010</Kursnummer>
+    <Bezeichnung>Vorstieg: Klettern und Sichern</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>3 Tage je 3 Std</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, in Berlin</Kategorie>
+    <Leistungen>Kurs excl. Halleneintritte</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>November 2019</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Beschreibung>Ausrüstungskunde. Sicher Vorstieg sichern, Gefahren erkennen und vermeiden. Zwischensicherungen einhängen. Übungen zum Stürzen und Halten.  Prüfung zum DAV-Indoorkletterschein Vorstieg inklusive</Beschreibung>
+    <Voraussetzung>ACB-MitgliederInnen, die bereits sicher Toprope sichern, im 5. Grad UIAA klettern und sich stabil an der Wand halten können.</Voraussetzung>
+    <Ausruestung>Ausrüstung kann geliehen werden</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>DAV-Kletterschein Vorstieg</Kursziel>
+    <Treffpunkt>Hüttenweg 43, Berlin-Zehlendorf</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <Memo12></Memo12>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>11.11.2019</Anlagedatum>
+    <Aenderungsdatum>11.11.2019</Aenderungsdatum>
+    <Kurskosten>36,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>4</GebuchteTN>
+    <FreiePlaetze>2</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Hüttenweg</Ort1>
+    <Termin1ISO>2019-11-17T12:00:00Z</Termin1ISO>
+    <TerminDatumVon1>17.11.2019 12:00</TerminDatumVon1>
+    <TerminDatumBis1>17.11.2019 15:00</TerminDatumBis1>
+    <Ort2>Kletterhalle nach Absprache</Ort2>
+    <TerminDatumVon2>23.11.2019 11:00</TerminDatumVon2>
+    <TerminDatumBis2>23.11.2019 14:00</TerminDatumBis2>
+    <Ort3>Kletterhalle nach Absprache</Ort3>
+    <TerminDatumVon3>24.11.2019 11:00</TerminDatumVon3>
+    <TerminDatumBis3>24.11.2019 14:00</TerminDatumBis3>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursleiter>ACB Kursverwaltung</Kursleiter>
+    <Kursart>A</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Anfänger mit Toprope-Erfahrung</Zielgruppe>
+</kurs>
+<kurs>
+    <counter>3</counter>
+    <Kursnummer>G99000</Kursnummer>
+    <Bezeichnung>Schnupperklettern und -bouldern</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>1 Tag 3 Std</Bezeichnung2>
+    <Bezeichnung3>Klettern macht Spaß!</Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, Bouldern, in Berlin</Kategorie>
+    <Leistungen>Betreuung, Material, Eintritte. Rabatt: Familien/Mitglieder</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa monatlich auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Beschreibung>Kennenlernen der Sportarten Klettern (im Toprope) und Bouldern sowie des Vereins. Ihr werdet von erfahrenen Trainern gesichert und erhaltet Informationen zur Kletterausbildung.   Nichtmitglieder 25,00, Mitglieder 15,00, ein Kind je Erwachsener 2,00.</Beschreibung>
+    <Voraussetzung>Nichtmitglieder und Mitglieder  ohne Klettererfahrung ab 6 Jahren.   Kinder nur in Begleitung der Eltern (Aufsichtspflicht).</Voraussetzung>
+    <Ausruestung>Ausrüstung ist inklusive. Mitbringen: Hallenschuhe mit dünner fester Sohle (keine Joggingschuhe mit weicher Gummiwulst), lange bequeme Hose, Haargummi bei langen Haaren, Imbiss + Wasserflasche </Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>Kennenlernen der Sportart</Kursziel>
+    <Treffpunkt>Hüttenweg 43, Berlin-Zehlendorf</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <Memo12></Memo12>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>05.11.2018</Anlagedatum>
+    <Aenderungsdatum>11.11.2018</Aenderungsdatum>
+    <Kurskosten>25,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Hüttenweg</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursleiter>ACB Kursverwaltung</Kursleiter>
+    <Kursart>E</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Nichtmitglieder und Mitglieder (Anfänger)</Zielgruppe>
+</kurs>
+<kurs>
+    <counter>4</counter>
+    <Kursnummer>G99001</Kursnummer>
+    <Bezeichnung>Toprope: Klettern und Sichern</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>3 Tage je 3 Std</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, in Berlin</Kategorie>
+    <Leistungen>Kurs excl. Halleneintritte</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa monatlich auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Beschreibung>klettertechnische Grundfertigkeiten, Material, Knoten, Anseilen, Partnercheck, Partnersicherung, Gefahren erkennen und vermeiden, erste Fallübung am Seil  Prüfung zum DAV-Indoorkletterschein Toprope inklusive</Beschreibung>
+    <Voraussetzung>ACB-MitgliederInnen ab 10 Jahren ohne Klettererfahrung oder mit Boulderkenntnissen.  Jüngere Kinder können mit den Eltern oder Geschwistern mitklettern (nur Halleneintritt).</Voraussetzung>
+    <Ausruestung>Ausrüstung kann geliehen werden</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>DAV-Kletterschein Toprope</Kursziel>
+    <Treffpunkt>Hüttenweg 43, Berlin-Zehlendorf</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <Memo12></Memo12>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>11.11.2018</Aenderungsdatum>
+    <Kurskosten>36,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Hüttenweg</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursleiter>ACB Kursverwaltung</Kursleiter>
+    <Kursart>A/E</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Anfänger</Zielgruppe>
+</kurs>
+<kurs>
+    <counter>5</counter>
+    <Kursnummer>G99002</Kursnummer>
+    <Bezeichnung>Vorstieg: Klettern und Sichern</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>3 Tage je 3 Std</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, in Berlin</Kategorie>
+    <Leistungen>Kurs excl. Halleneintritte</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa quartalsweise auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Beschreibung>Ausrüstungskunde. Sicher Vorstieg sichern, Gefahren erkennen und vermeiden. Zwischensicherungen einhängen. Übungen zum Stürzen und Halten.  Prüfung zum DAV-Indoorkletterschein Vorstieg inklusive</Beschreibung>
+    <Voraussetzung>ACB-MitgliederInnen ab 12 Jahren, die bereits sicher Toprope sichern, im 5. Grad UIAA klettern und sich stabil an der Wand halten können.</Voraussetzung>
+    <Ausruestung>Ausrüstung kann geliehen werden</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>DAV-Kletterschein Vorstieg</Kursziel>
+    <Treffpunkt>Hüttenweg 43, Berlin-Zehlendorf</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <Memo12></Memo12>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>05.11.2018</Aenderungsdatum>
+    <Kurskosten>36,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Hüttenweg</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursleiter>ACB Kursverwaltung</Kursleiter>
+    <Kursart>A</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Anfänger mit Toprope-Erfahrung</Zielgruppe>
+</kurs>
+<kurs>
+    <counter>6</counter>
+    <Kursnummer>G99003</Kursnummer>
+    <Bezeichnung>Technische Vorbereitung Felsklettern</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>2 Tage je 3,5 Std</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, in Berlin</Kategorie>
+    <Leistungen>Kurs excl. Halleneintritte</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa quartalsweise auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Beschreibung>HMS, Abseilen mit Acht und Tuber, Umbau / Fädeln am großen und kleinen Ring, einfacher Stand, Sichern von oben/ Nachholen, Besonderheiten Vorstieg Fels.  Vorbereitung zum DAV-Outdoorkletterschein</Beschreibung>
+    <Voraussetzung>ACB-MitgliederInnen mit Vorstiegserfahrung (Fortgeschrittene), ggf. weitere Familienmitglieder mit Topropeerfahrung.   Sichern und Klettern im 5. Grad UIAA</Voraussetzung>
+    <Ausruestung>Ausrüstung kann geliehen werden</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>Vorbereitung zum DAV-Kletterschein Outdoor</Kursziel>
+    <Treffpunkt>Hüttenweg 43, Berlin-Zehlendorf</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <Memo12></Memo12>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>19.11.2018</Aenderungsdatum>
+    <Kurskosten>36,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Außenanlage nach Absprache</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursleiter>ACB Kursverwaltung</Kursleiter>
+    <Kursart>A</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Fortgeschrittene mit Vorstiegserfahrung</Zielgruppe>
+</kurs>
+<kurs>
+    <counter>7</counter>
+    <Kursnummer>G99004</Kursnummer>
+    <Bezeichnung>Sicherungs- und Sturztraining Vorstieg</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>1 Termin zu 3 Std</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, in Berlin</Kategorie>
+    <Leistungen>Kurs excl. Halleneintritte</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa quartalsweise auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Beschreibung>Sicherungstraining zum DAV-Indoorkletterschein Vorstieg: Sturztraining, Weiches Sichern, Umgang mit Halbautomaten, Hintergründe und Praxistraining zu verschiedenen Geräten.</Beschreibung>
+    <Voraussetzung>ACB-MitgliederInnen mit Vorstiegserfahrung  Sicherungskenntnisse Vorstieg, Klettern im 5. Grad UIAA</Voraussetzung>
+    <Ausruestung>Ausrüstung kann geliehen werden</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>Sicherungsfertigkeiten erweitern</Kursziel>
+    <Treffpunkt>nach Vereinbarung</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <Memo12></Memo12>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>10.07.2019</Aenderungsdatum>
+    <Kurskosten>15,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Kletterhalle nach Absprache</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursleiter>ACB Kursverwaltung</Kursleiter>
+    <Kursart>A</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Fortgeschrittene mit Vorstiegs-Erfahrung</Zielgruppe>
+</kurs>
+<kurs>
+    <counter>8</counter>
+    <Kursnummer>G99011</Kursnummer>
+    <Bezeichnung>Bouldern: Grundlagenkurs</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>3 Termine je 1,5 Std</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Bouldern, in Berlin</Kategorie>
+    <Leistungen>Kurs kostenlos excl. Halleneintritte</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa monatlich auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Beschreibung></Beschreibung>
+    <Voraussetzung>Boulderinteressenten ohne Bouldererfahurung</Voraussetzung>
+    <Ausruestung>Kletterschuhe (können in der Halle gemietet werden)</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>Erste Bouldertechniken erlernen</Kursziel>
+    <Treffpunkt>Südbloc</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <Memo12></Memo12>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>11.11.2018</Aenderungsdatum>
+    <Kurskosten>0,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Südbloc Boulderhalle</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursleiter>Jens Breidenstein</Kursleiter>
+    <Kursart>A/E</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Anfänger</Zielgruppe>
+</kurs>
+<kurs>
+    <counter>9</counter>
+    <Kursnummer>G99020</Kursnummer>
+    <Bezeichnung>Orientierung: Karte, Kompass Höhenmesser.</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>2 Termine zu je 4 Stunden</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Wandern, in Berlin</Kategorie>
+    <Leistungen>Kurs</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa quartalsweise auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Beschreibung>zweiteiliger Grundlagenkurs Orientierung mit Karte, Kompass und Höhenmesser, Tag 1 Theoretische Grundlagen mit praktischer Kartenarbeit, Tag 2 Praxisteil im Gelände.   Ziel ist das Beherrschen von Grundlagen der Kartenkunde und der Orientierung im Gelände, Sicherer Umgang mit dem Kompass und dem Höhenmesser.</Beschreibung>
+    <Voraussetzung>keine</Voraussetzung>
+    <Ausruestung>wenn möglich Spiegelkompass mit Deklinationskorrektur und DAV-Planzeiger, Schreibstift, Schreibblock, Bleistift, Radiergummi, Lupe, Stechzirkel, Schreibbrett, eure persönliche Verpflegung, wetterfeste Kleidung und ggf. einen Regenschirm für den zweiten Tag </Ausruestung>
+    <Besprechung>Informationen bei Lars unter 0176 30424413 oder unter wanderseite@gmail.com</Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo>1. Teil Theoretische Grundlagen in der ACB-Geschäftsstelle, Spielhagenstr. 4 in 10585 Berlin. Ggf. bitte klingeln 2. Teil Praxis in der Natur am Sonntag (genauer Ort wird am ersten Termin bekanntgegeben, höchstwahrscheinlich nahe S-Bhf. Heerstr. oder S-Bhf. Grunewald) </Stuetzpunktinfo>
+    <Kursziel>Orientierung vom Flachland bis zum alpinen Gelände</Kursziel>
+    <Treffpunkt>1. Tag Geschäftsstelle, Spielhagenstr. 4</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <Memo12></Memo12>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>05.11.2018</Aenderungsdatum>
+    <Kurskosten>15,00</Kurskosten>
+    <GeplanteTN>8</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>8</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Spielhagenstraße</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursleiter>Lars Reichenberg</Kursleiter>
+    <Kursart>A/E</Kursart>
+    <TrainerURL>https://wanderseite.blog/</TrainerURL>
+    <Zielgruppe>Anfänger</Zielgruppe>
+</kurs>
+</kursexport>
