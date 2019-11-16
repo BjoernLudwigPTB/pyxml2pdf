@@ -7,3 +7,6 @@ __pycache__/
 # Artifacts
 *.pdf
 *.xml
+
+# the properties
+*.properties
