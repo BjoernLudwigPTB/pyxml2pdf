@@ -78,24 +78,25 @@ class Parser:
         )
 
     @staticmethod
-    def _get_event_data(event, event_tags):
+    def _get_event_data(event, event_tags, separator=" - "):
         """
-        Form a string of the descriptive texts for all desired event tags
-        by concatenating them with a separator. This is especially necessary,
+        Form a string of the texts for all desired event tags by concatenating them
+        with a separator. This is especially necessary,
         since `reportlab.platypus.Paragraph` cannot handle `None`s as texts.
 
         :param xml.etree.ElementTree.Element event: the event from where
             the texts shall be extracted
         :param List[str] event_tags: list of all tags for which the
             descriptive texts is wanted, even if it is just one
-        :return str: the texts of all tags under the current event
+        :param str separator: the separator in between the concatenated texts
+        :return str: concatenated, separated texts of all tags for the current event
         """
         event_data_string = ""
         for tag in event_tags:
             data_string = event.findtext(tag)
             if data_string:
                 if event_data_string:
-                    event_data_string += " - " + data_string
+                    event_data_string += separator + data_string
                 else:
                     event_data_string = data_string
         return event_data_string
