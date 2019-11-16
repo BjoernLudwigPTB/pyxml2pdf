@@ -62,19 +62,19 @@ jobs:
     # 2. Upload test report to Codecov using `codecov`
     # 3. Produce normal report to show in CircleCI 'test-reports'
     - run:
-        name: Produce coverage report
+        name: Test and create coverage report
         command: |
           source venv/bin/activate
           ./cc-test-reporter before-build
-          pytest -p no:warnings -v --cov=. \
+          pytest -v --cov=. \
            --junitxml=test_results/pytest/pytest.xml
-          coverage xml --omit=venv/*
+          coverage xml
           ./cc-test-reporter after-build --coverage-input-type coverage.py \
               --exit-code $?
           python-codacy-coverage -r coverage.xml
           codecov
           mv coverage.xml ./test_results/pytest/
-          coverage report -m --omit=venv/* > test_results/pytest/coverage.log
+          coverage report -m > test_results/pytest/coverage.log
           mv ./output/ ./test_results/
 
     # Store test results.
