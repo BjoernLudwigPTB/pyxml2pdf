@@ -1,9 +1,9 @@
 from typing import List
 
-import reportlab
 from defusedxml.ElementTree import parse
 from reportlab.lib.pagesizes import mm
 from reportlab.platypus import SimpleDocTemplate
+from reportlab.platypus.flowables import KeepTogether
 
 from Core.Parser import Parser
 from Core.PostProcessor import PostProcessor
@@ -12,7 +12,7 @@ from Core.Sorter import Sorter
 
 class Initializer:
 
-    __data: List[reportlab.platypus.Table]
+    __data: List[KeepTogether]
 
     def __init__(self):
         self.__data = []
