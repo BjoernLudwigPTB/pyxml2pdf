@@ -14,8 +14,7 @@ def convert():
     output_folder = "output/"
     output_filename = "kursdaten-draft2020.pdf"
     output_path = output_folder + output_filename
-    downloader = Downloader(url)
-    downloader.download(xml_path)
+    Downloader(url, xml_path)
     Initializer(input_path, output_path, properties_path)
     print("\n-------------------------------DONE-------------------------------")
 

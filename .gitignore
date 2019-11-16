@@ -10,3 +10,6 @@ __pycache__/
 
 # the properties
 *.properties
+
+# the download test result
+test_download
