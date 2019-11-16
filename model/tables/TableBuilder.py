@@ -145,10 +145,7 @@ class TableBuilder:
                     distribution_failed = False
         if distribution_failed:
             warnings.warn(
-                [
-                    "The following event would not be printed, because it does not "
-                    "match any tables criteria: ",
-                    event,
-                ],
+                "The following event would not be printed, because it does not "
+                "match any tables criteria: " + event,
                 RuntimeWarning,
             )
