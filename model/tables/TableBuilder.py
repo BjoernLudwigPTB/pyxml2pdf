@@ -1,3 +1,4 @@
+import warnings
 from typing import List
 
 from reportlab.platypus import Paragraph
@@ -143,8 +144,11 @@ class TableBuilder:
                     subtable.add_event(event)
                     distribution_failed = False
         if distribution_failed:
-            raise RuntimeWarning(
-                "The following event would not be printed, because it does not match "
-                "any tables criteria: ",
-                event,
+            warnings.warn(
+                [
+                    "The following event would not be printed, because it does not "
+                    "match any tables criteria: ",
+                    event,
+                ],
+                RuntimeWarning,
             )
