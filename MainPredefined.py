@@ -16,8 +16,7 @@ def convert():
     output_path = output_folder + output_filename
     downloader = Downloader(url)
     downloader.download(xml_path)
-    init = Initializer()
-    init.build(input_path, output_path, properties_path)
+    Initializer(input_path, output_path, properties_path)
     print("\n-------------------------------DONE-------------------------------")
 
 

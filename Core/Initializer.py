@@ -14,10 +14,7 @@ class Initializer:
 
     __data: List[KeepTogether]
 
-    def __init__(self):
-        self.__data = []
-
-    def build(self, input_path, output_path, properties_path):
+    def __init__(self, input_path, output_path, properties_path):
         """
         Coordinate the construction of the pdf result.
 
@@ -27,8 +24,8 @@ class Initializer:
         :param str output_path: path to pdf file containing result
         :param str properties_path: path to text file containing properties
         """
-
-        parser = Parser(self.__data, properties_path)
+        self.__data = []
+        parser = Parser(properties_path, self.__data)
         pdf = SimpleDocTemplate(
             output_path,
             pagesize=(178 * mm, 134 * mm),
