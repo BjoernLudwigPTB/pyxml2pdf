@@ -1,6 +1,7 @@
 import os
+from io import BufferedWriter
 
-from PyPDF2.pdf import PdfFileReader, PdfFileWriter
+from PyPDF2.pdf import PdfFileReader, PdfFileWriter, PageObject
 
 
 class PostProcessor:
@@ -11,9 +12,9 @@ class PostProcessor:
 
         :param str path:  path to the pdf file which shall be processed
         """
-        self._path = path
-        self._directory = os.path.dirname(path)
-        self._name = os.path.splitext(os.path.basename(path))[0]
+        self._path: str = path
+        self._directory: str = os.path.dirname(path)
+        self._name: str = os.path.splitext(os.path.basename(path))[0]
 
     def finalize_print_preparation(self):
         """
@@ -26,15 +27,17 @@ class PostProcessor:
         -python/'
         """
 
-        pdf = PdfFileReader(self._path)
+        pdf: PdfFileReader = PdfFileReader(self._path)
         for page_number in range(pdf.getNumPages()):
-            pdf_writer = PdfFileWriter()
-            page = pdf.getPage(page_number)
+            pdf_writer: PdfFileWriter = PdfFileWriter()
+            page: PageObject = pdf.getPage(page_number)
             page.rotateCounterClockwise(90)
             pdf_writer.addPage(page)
-            output_filename = "%s_seite_%02d.pdf" % (self._name, page_number + 1)
+            output_filename: str = "%s_seite_%02d.pdf" % (self._name, page_number + 1)
 
-            pdf_out = open(os.path.join(self._directory, output_filename), "wb")
+            pdf_out: BufferedWriter = open(
+                os.path.join(self._directory, output_filename), "wb"
+            )
             pdf_writer.write(pdf_out)
             pdf_out.close()
 
