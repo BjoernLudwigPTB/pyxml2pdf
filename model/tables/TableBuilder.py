@@ -15,7 +15,6 @@ class TableBuilder:
         self._prop = properties
         self._subtable_names_and_categs = self._parse_properties()
         self._table_styles = TableStyle()
-        self._course = None
         self._subtables = self.create_subtables()
 
     @staticmethod
