@@ -69,31 +69,38 @@ class TableBuilder:
         :return list[EventTable]: a list of all subtables
         """
 
-        event_tables = []
-        for heading in self._subtable_names_and_categs:
-            event_table = EventTable(heading[0], heading[1], heading[2])
-            headers = self.make_headers(heading[0])
+        subtables = []
+        for subtables_props in self._subtable_names_and_categs:
+            subtable = EventTable(
+                subtables_props[0], subtables_props[1], subtables_props[2]
+            )
+            headers = self.make_header(subtables_props[0])
             for header in headers:
-                event_table.add_event(header)
-            event_tables.append(event_table)
-        return event_tables
+                subtable.add_event(header)
+            subtables.append(subtable)
+        return subtables
 
-    def make_headers(self, main_header):
-        """
-        Create the beginning of a subtable with the main and the subheaders.
+    def make_header(self, title):
+        """ Build the first two rows of a subtable
 
-        :param str main_header: the name of the main table section to attach
-            the headers to
-        :return List[reportlab.platypus.Table]: two line table with all headers
-            needed
+        Build the first two rows of a subtable with its title and column headings taken
+        from the properties file.
+
+        :param str title: the title of the subtable
+        :returns: two line table with title and headings
+        :rtype: List[reportlab.platypus.Table]
         """
-        headers = [
-            self._creator.create_table_fixed(
-                [[Paragraph(main_header, self._styles["Heading1"])]],
+        # Create first row spanning the full width and title as content.
+        title_row = [
+            self._creator.create_fixedwidth_table(
+                [[Paragraph(title, self._styles["Heading1"])]],
                 self._table_styles.table_width,
                 self._table_styles.heading,
             )
         ]
+
+        # These are the column headings that should be populated from the
+        # properties-file.
         headings = [
             "Art",
             "Datum",
@@ -103,18 +110,21 @@ class TableBuilder:
             "Zielgruppe",
             "Voraussetzungen<br/>a) persönliche | b) " "materielle | c) finanzielle",
         ]
-        columns = []
 
+        # Create row containing one column per heading.
+        columns = []
         for heading in headings:
             columns.append(Paragraph(heading, self._styles["Heading2"]))
-        headers.append(
+
+        # Concatenate both rows.
+        title_row.append(
             self._creator.create_fixedwidth_table(
                 [columns],
                 self._table_styles.get_column_widths(),
                 self._table_styles.sub_heading,
             )
         )
-        return headers
+        return title_row
 
     def collect_subtables(self):
         aggregated_subtables = []
