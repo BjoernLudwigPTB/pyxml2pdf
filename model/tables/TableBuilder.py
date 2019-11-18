@@ -64,10 +64,9 @@ class TableBuilder:
 
     def create_subtables(self):
         """
-        Create subtables for all different kinds of events.
+        Create subtables for all different kinds of items.
 
-        :return list[EventTable]: contains a list with all event tables to be
-            able to brows through them
+        :return list[EventTable]: a list of all subtables
         """
 
         event_tables = []
