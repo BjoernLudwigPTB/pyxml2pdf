@@ -34,16 +34,18 @@ class Parser:
 
     @staticmethod
     def _style():
-        """
+        """ Set the resulting tables' styling
+
         Do all the customization of styling regarding margins, fonts,
         fontsizes, etc..
 
-        :returns: the created StyleSheet
+        :returns: the created StyleSheet object
         :rtype: reportlab.lib.styles.StyleSheet1
         """
         # Get custom_styles for all headings, texts, etc. from sample
         custom_styles = getSampleStyleSheet()
-        custom_styles.get("Normal").fontSize = 6.5
+        # Overwrite the sample styles according to our needs. TODO this should be provided in the properties file
+        custom_styles.get("Normal").fontSize = 7
         custom_styles.get("Normal").leading = custom_styles["Normal"].fontSize * 1.2
         custom_styles.get("Normal").fontName = "NewsGothBT"
         custom_styles.get("Italic").fontSize = custom_styles["Normal"].fontSize
@@ -64,6 +66,8 @@ class Parser:
         """
         Register the desired font with `reportlab` to make sure that
         `<i></i>` and `<b></b>` work well.
+
+        TODO this is much to hard coded and needs some serious refactoring
         """
         registerFont(TTFont("NewsGothBT", "PdfVisualisation/NewsGothicBT-Roman.ttf"))
         registerFont(
@@ -86,24 +90,24 @@ class Parser:
         )
 
     @staticmethod
-    def _get_event_data(event, event_tags, separator=" - "):
-        """
-        Form a string of the texts for all desired event tags by concatenating them
-        with a separator. This is especially necessary,
-        since :py:mod:`reportlab.platypus.Paragraph` cannot handle `None`s as texts.
+    def _concatenate_tags_content(item, item_tags, separator=" - "):
+        """ Form one string from the content of a list of an items XML tags content
 
+        Form a string of the content for all desired item tags by concatenating them
+        together with a separator. This is especially necessary, since
+        :py:mod:`reportlab.platypus.Paragraph` cannot handle `None`s as texts.
 
-        :param xml.etree.ElementTree.Element event: the event from where
+        :param xml.etree.ElementTree.Element item: the item from where
             the texts shall be extracted
-        :param List[str] event_tags: list of all tags for which the
+        :param List[str] item_tags: list of all tags for which the
             descriptive texts is wanted, even if it is just one
         :param str separator: the separator in between the concatenated texts
         :returns: concatenated, separated texts of all tags for the current event
         :rtype: str
         """
         event_data_string = ""
-        for tag in event_tags:
-            data_string = event.findtext(tag)
+        for tag in item_tags:
+            data_string = item.findtext(tag)
             if data_string:
                 if event_data_string:
                     event_data_string += separator + data_string
@@ -228,37 +232,44 @@ class Parser:
         if event is not None:
             styles = self._styles
             columns_to_print = [
-                Paragraph(Parser._get_event_data(event, ["Kursart"]), styles["Normal"]),
+                Paragraph(
+                    Parser._concatenate_tags_content(event, ["Kursart"]),
+                    styles["Normal"],
+                ),
                 Paragraph(
                     Parser._parse_date(
-                        self._get_event_data(
+                        self._concatenate_tags_content(
                             event, ["TerminDatumVon1", "TerminDatumBis1"]
                         )
                     ),
                     styles["Normal"],
                 ),
-                Paragraph(Parser._get_event_data(event, ["Ort1"]), styles["Normal"]),
                 Paragraph(
-                    Parser._get_event_data(event, ["Kursleiter"]), styles["Normal"]
+                    Parser._concatenate_tags_content(event, ["Ort1"]), styles["Normal"]
+                ),
+                Paragraph(
+                    Parser._concatenate_tags_content(event, ["Kursleiter"]),
+                    styles["Normal"],
                 ),
                 Paragraph(
                     Parser._parse_description(
-                        Parser._get_event_data(event, ["Bezeichnung"]),
-                        Parser._get_event_data(event, ["Bezeichnung2"]),
-                        Parser._get_event_data(event, ["Beschreibung"]),
-                        Parser._get_event_data(event, ["TrainerURL"]),
+                        Parser._concatenate_tags_content(event, ["Bezeichnung"]),
+                        Parser._concatenate_tags_content(event, ["Bezeichnung2"]),
+                        Parser._concatenate_tags_content(event, ["Beschreibung"]),
+                        Parser._concatenate_tags_content(event, ["TrainerURL"]),
                     ),
                     styles["Normal"],
                 ),
                 Paragraph(
-                    Parser._get_event_data(event, ["Zielgruppe"]), styles["Normal"]
+                    Parser._concatenate_tags_content(event, ["Zielgruppe"]),
+                    styles["Normal"],
                 ),
                 Paragraph(
                     Parser._parse_prerequisites(
-                        Parser._get_event_data(event, ["Voraussetzung"]),
-                        Parser._get_event_data(event, ["Ausruestung"]),
-                        Parser._get_event_data(event, ["Kurskosten"]),
-                        Parser._get_event_data(event, ["Leistungen"]),
+                        Parser._concatenate_tags_content(event, ["Voraussetzung"]),
+                        Parser._concatenate_tags_content(event, ["Ausruestung"]),
+                        Parser._concatenate_tags_content(event, ["Kurskosten"]),
+                        Parser._concatenate_tags_content(event, ["Leistungen"]),
                     ),
                     styles["Normal"],
                 ),
@@ -282,5 +293,5 @@ class Parser:
         :returns: the list of the categories
         :rtype: List[str]
         """
-        categories = Parser._get_event_data(event, ["Kategorie"])
+        categories = Parser._concatenate_tags_content(event, ["Kategorie"])
         return categories.split(", ")
