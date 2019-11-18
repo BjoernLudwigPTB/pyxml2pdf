@@ -263,7 +263,7 @@ class Parser:
                     styles["Normal"],
                 ),
             ]
-            event = self._creator.create_table_fixed(
+            event = self._creator.create_fixedwidth_table(
                 [columns_to_print],
                 self._table_styles.get_column_widths(),
                 self._table_styles.normal,
