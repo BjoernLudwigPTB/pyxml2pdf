@@ -1,13 +1,11 @@
-from typing import List
-
 import warnings
-
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import Paragraph
 from reportlab.platypus.flowables import KeepTogether
 from reportlab.platypus.tables import Table
+from typing import List
 
 from PdfVisualisation.TableStyle import TableStyle
 from model.tables.Creator import Creator
