@@ -91,19 +91,20 @@ class Parser:
 
     @staticmethod
     def _concatenate_tags_content(item, item_tags, separator=" - "):
-        """ Form one string from the content of a list of an items XML tags content
+        """ Form one string from the content of a list of an item's XML tags
 
         Form a string of the content for all desired item tags by concatenating them
         together with a separator. This is especially necessary, since
-        :py:mod:`reportlab.platypus.Paragraph` cannot handle `None`s as texts.
+        :py:mod:`reportlab.platypus.Paragraph` cannot handle `None`s as texts but
+        handles as well the concatenation of XML tags' content, if `item_tags` has more
+        than one element.
 
         :param xml.etree.ElementTree.Element item: the item from where
             the texts shall be extracted
         :param List[str] item_tags: list of all tags for which the
             descriptive texts is wanted, even if it is just one
         :param str separator: the separator in between the concatenated texts
-        :returns: concatenated, separated texts of all tags for the current event
-        :rtype: str
+        :returns str: concatenated, separated texts of all tags for the current event
         """
         event_data_string = ""
         for tag in item_tags:
