@@ -1,5 +1,6 @@
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import mm
+from reportlab.lib.styles import getSampleStyleSheet
 
 from PdfVisualisation.Styles import Styles
 
@@ -55,6 +56,33 @@ class TableStyle:
             - sum(self._column_widths[0:4])
             - sum(self._column_widths[5:7])
         )
+
+        # Set the resulting tables' styling with all the customization of
+        # margins, fonts, fontsizes, etc...
+
+        # Get custom_styles for all headings, texts, etc. from sample
+        custom_styles = getSampleStyleSheet()
+        # Overwrite the sample styles according to our needs. TODO this should be provided in the properties file
+        custom_styles.get("Normal").fontSize = 7
+        custom_styles.get("Normal").leading = custom_styles[
+                                                  "Normal"].fontSize * 1.2
+        custom_styles.get("Normal").fontName = "NewsGothBT"
+        custom_styles.get("Italic").fontSize = custom_styles["Normal"].fontSize
+        custom_styles.get("Italic").leading = custom_styles[
+                                                  "Italic"].fontSize * 1.2
+        custom_styles.get("Italic").fontName = "NewsGothBT_Italic"
+        custom_styles.get("Heading1").fontSize = 12
+        custom_styles.get("Heading1").alignment = 1
+        custom_styles.get("Heading1").leading = custom_styles[
+                                                    "Heading1"].fontSize * 1.2
+        custom_styles.get("Heading1").fontName = "NewsGothBT_Bold"
+        custom_styles.get("Heading2").fontSize = custom_styles[
+            "Normal"].fontSize
+        custom_styles.get("Heading2").alignment = 1
+        custom_styles.get("Heading2").leading = custom_styles[
+                                                    "Heading2"].fontSize * 1.2
+        custom_styles.get("Heading2").fontName = "NewsGothBT_Bold"
+        self._custom_styles = custom_styles
 
     def get_column_widths(self):
         return self._column_widths
