@@ -1,6 +1,6 @@
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import mm
-from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.styles import getSampleStyleSheet, StyleSheet1
 
 from PdfVisualisation.Styles import Styles
 
@@ -85,4 +85,12 @@ class TableStyle:
         self._custom_styles = custom_styles
 
     def get_column_widths(self):
+
         return self._column_widths
+
+    def get_custom_styles(self):
+        """Return the custom stylesheet for the tables
+
+        :returns reportlab.lib.styles.StyleSheet1: the custom stylesheet
+        """
+        return self._custom_styles
