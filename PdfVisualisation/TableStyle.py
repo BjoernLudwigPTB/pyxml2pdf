@@ -85,7 +85,10 @@ class TableStyle:
         self._custom_styles = custom_styles
 
     def get_column_widths(self):
+        """Return the column widths for the tables
 
+        :returns: the list of column widths
+        """
         return self._column_widths
 
     def get_custom_styles(self):
