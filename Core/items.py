@@ -107,7 +107,7 @@ class Item(Element):
         self._item = self._creator.create_fixedwidth_table(
             [columns_to_print], self._column_widths, self._normal_style
         )
-        return 1
+        return self._item
 
     @staticmethod
     def _parse_date(date):

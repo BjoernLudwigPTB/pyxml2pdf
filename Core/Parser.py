@@ -69,7 +69,7 @@ class Parser:
                 item = Item(event)
                 categories = item.get_categories()
                 self._table_manager.distribute_event(
-                    item.collect_item_content, categories
+                    item.collect_item_content(), categories
                 )
             subtable_elements = self._table_manager.collect_subtables()
             for subtable_element in subtable_elements:
