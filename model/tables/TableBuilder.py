@@ -9,12 +9,12 @@ from model.tables.EventTable import EventTable
 
 
 class TableBuilder:
-    def __init__(self, properties, styles):
-        self._styles = styles
+    def __init__(self, properties):
         self._creator = Creator()
         self._prop = properties
         self._subtable_names_and_categs = self._parse_properties()
         self._table_styles = TableStyle()
+        self._styles = TableStyle.get_custom_styles()
         self._subtables = self.create_subtables()
 
     @staticmethod
@@ -135,11 +135,11 @@ class TableBuilder:
 
     def distribute_event(self, event_as_tablerow, categories):
         """
-        Distribute an event to the subtables according to the related categories.
+        Distribute an item to the subtables according to the related categories.
 
-        :param reportlab.platypus.Table event_as_tablerow: event which is to be
+        :param reportlab.platypus.Table event_as_tablerow: item which is to be
             distributed
-        :param List[str] categories: the categories list of the specified event
+        :param List[str] categories: the categories list of the specified item
         """
         distribution_failed = True
         set_of_cats = set(categories)
@@ -153,7 +153,7 @@ class TableBuilder:
         if distribution_failed:
             warnings.warn(
                 event_as_tablerow.__getattribute__("_cellvalues")[0][3].text
-                + "'s event on "
+                + "'s item on "
                 + event_as_tablerow.__getattribute__("_cellvalues")[0][1].text
                 + " would not be printed, because it does not contain a valid "
                 "combination of locations and activities. Either add a valid location "
