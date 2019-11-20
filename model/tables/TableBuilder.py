@@ -14,7 +14,7 @@ class TableBuilder:
         self._prop = properties
         self._subtable_names_and_categs = self._parse_properties()
         self._table_styles = TableStyle()
-        self._styles = TableStyle.get_custom_styles()
+        self._styles = self._table_styles.get_custom_styles()
         self._subtables = self.create_subtables()
 
     @staticmethod

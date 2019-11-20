@@ -17,8 +17,8 @@ class Item(Element):
     def __init__(self, element):
         self._element = element
         self._creator = Creator()
-        self._styles = TableStyle.get_custom_styles()
         table_style = TableStyle()
+        self._styles = table_style.get_custom_styles()
         self._column_widths = table_style.get_column_widths()
         self._normal_style = table_style.normal
         self._init_categories()
