@@ -9,12 +9,12 @@ from model.tables.EventTable import EventTable
 
 
 class TableBuilder:
-    def __init__(self, properties, styles):
-        self._styles = styles
+    def __init__(self, properties):
         self._creator = Creator()
         self._prop = properties
         self._subtable_names_and_categs = self._parse_properties()
         self._table_styles = TableStyle()
+        self._styles = TableStyle.get_custom_styles()
         self._subtables = self.create_subtables()
 
     @staticmethod
