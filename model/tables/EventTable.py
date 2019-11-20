@@ -5,7 +5,7 @@ class EventTable:
     def __init__(self, name, locations, activities):
         """
         Contains all events which cover the mentioned activities at the
-        mentioned locations. Every event listed covers at least one of the
+        mentioned locations. Every item listed covers at least one of the
         listed activities at one of the listed locations.
 
         :param str name: name of the table describing where and what is done in
@@ -23,7 +23,7 @@ class EventTable:
 
     def add_event(self, event):
         """
-        Adds a single event to the table later to be displayed as part of the
+        Adds a single item to the table later to be displayed as part of the
         table.
 
         :param List[reportlab.platypus.Table] event:
@@ -32,16 +32,16 @@ class EventTable:
 
     def get_elements(self):
         """
-        Return the collected event table.
+        Return the collected item table.
 
         :return list[reportlab.platypus.Table]: a list of all table rows
-            containing the relevant event data
+            containing the relevant item data
         """
         return self._elements
 
     def get_activities(self):
         """
-        Return the activities associated with the event table.
+        Return the activities associated with the item table.
 
         :return list[str]: a list of all activities
         """
