@@ -5,7 +5,7 @@ from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus.flowables import KeepTogether
 
-from Core.items import Item
+from Core.events import Event
 from model.tables.Creator import Creator
 from model.tables.TableBuilder import TableBuilder
 
@@ -59,14 +59,14 @@ class Parser:
         Traverse the parsed xml data and gather collected item data. Pass
         item data to table_manager and get collected data back.
 
-        :param List[Item] events: a list of the items from which the texts shall be
+        :param List[Event] events: a list of the items from which the texts shall be
             extracted into a nicely formatted row of a table to insert into result.
         :returns: list of all table rows containing the relevant item data
         :rtype: List[KeepTogether]
         """
         if events is not None:
             for event in events:
-                item = Item(event)
+                item = Event(event)
                 categories = item.get_categories()
                 self._table_manager.distribute_event(
                     item.collect_item_content(), categories
