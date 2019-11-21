@@ -17,8 +17,7 @@ def test_init_main():
             with mock.patch.object(Main.sys, "exit") as mock_exit:
                 Main.init()
 
-                if mock_exit.call_args[0][0] != 42:
-                    raise AssertionError()
+                assert mock_exit.call_args[0][0] == 42
 
 
 def test_input():
