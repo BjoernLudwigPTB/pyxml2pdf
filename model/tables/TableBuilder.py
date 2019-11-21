@@ -3,6 +3,7 @@ from typing import List
 
 from reportlab.platypus import Paragraph
 
+from Core.events import Event
 from PdfVisualisation.TableStyle import TableStyle
 from model.tables.Creator import Creator
 from model.tables.EventTable import EventTable
@@ -132,26 +133,27 @@ class TableBuilder:
                 aggregated_subtables.append(element)
         return aggregated_subtables
 
-    def distribute_event(self, event_as_tablerow, categories):
+    def distribute_event(self, event):
         """Distribute an event to the subtables according to the related categories
 
-        :param reportlab.platypus.Table event_as_tablerow: event to distribute
-        :param List[str] categories: the event's list of categories
+        :param Event event: event to distribute
         """
+
         distribution_failed = True
-        set_of_cats = set(categories)
+        set_of_cats = set(event.get_categories())
+        content = event.collect_event_content()
         for subtable in self._subtables:
             _locations = subtable.get_locations()
             _activities = subtable.get_activities()
             if set_of_cats.intersection(_activities):
                 if set_of_cats.intersection(_locations):
-                    subtable.append(event_as_tablerow)
+                    subtable.append(content)
                     distribution_failed = False
         if distribution_failed:
             warnings.warn(
-                event_as_tablerow.__getattribute__("_cellvalues")[0][3].text
+                content.__getattribute__("_cellvalues")[0][3].text
                 + "'s event on "
-                + event_as_tablerow.__getattribute__("_cellvalues")[0][1].text
+                + content.__getattribute__("_cellvalues")[0][1].text
                 + " would not be printed, because it does not contain a valid "
                 "combination of locations and activities. Either add a valid location "
                 "or add a valid activity or both.",
