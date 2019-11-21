@@ -56,21 +56,20 @@ class Parser:
 
     def collect_xml_data(self, events):
         """
-        Traverse the parsed xml data and gather collected item data. Pass
-        item data to table_manager and get collected data back.
+        Traverse the parsed xml data and gather collected event data. Pass
+        event data to table_manager and get collected data back.
 
         :param List[Event] events: a list of the items from which the texts shall be
             extracted into a nicely formatted row of a table to insert into result.
-        :returns: list of all table rows containing the relevant item data
+        :returns: list of all table rows containing the relevant event data
         :rtype: List[KeepTogether]
         """
+        items = []
         if events is not None:
             for event in events:
-                item = Event(event)
-                categories = item.get_categories()
-                self._table_manager.distribute_event(
-                    item.collect_item_content(), categories
-                )
+                event = Event(event)
+                categories = event.get_categories()
+                self._table_manager.distribute_event(event)
             subtable_elements = self._table_manager.collect_subtables()
             for subtable_element in subtable_elements:
                 self._elements.append(KeepTogether(subtable_element))
