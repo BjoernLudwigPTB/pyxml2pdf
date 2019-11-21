@@ -21,7 +21,7 @@ class Event(Element):
         representation and the attributes and methods to manipulate all according to
         the final tables needs.
 
-        :param xml.etree.ElementTree.Element element: the element on which *item*
+        :param xml.etree.ElementTree.Element element: the element on which *event*
             should be based
         """
         self._element = element
@@ -44,35 +44,35 @@ class Event(Element):
         return 1
 
     def _concatenate_tags_content(self, event_subelements, separator=" - "):
-        """ Form one string from the content of a list of an item's XML tags
+        """Form one string from the texts of a subset of an event's children tags
 
-        Form a string of the content for all desired item tags by concatenating them
-        together with a separator. This is especially necessary, since
-        :py:mod:`reportlab.platypus.Paragraph` cannot handle `None`s as texts but
-        handles as well the concatenation of XML tags' content, if `item_tags` has more
+        Form a string of the content for all desired event children tags by
+        concatenating them together with a separator. This is especially necessary,
+        since :py:mod:`reportlab.platypus.Paragraph` cannot handle `None`s as texts but
+        handles as well the concatenation of XML tags' content, if `event_tags` has more
         than one element.
 
         :param List[str] event_subelements: list of all tags for which the
             descriptive texts is wanted, even if it is just one
         :param str separator: the separator in between the concatenated texts
-        :returns str: concatenated, separated texts of all tags for the current item
+        :returns str: concatenated, separated texts of all tags for the current event
         """
-        item_data_string: str = ""
+        children_text = ""  # type: str
         for tag in event_subelements:
-            data_string: str = self._element.findtext(tag)
-            if data_string:
-                if item_data_string:
-                    item_data_string += separator + data_string
+            child_text: str = self._element.findtext(tag)
+            if child_text:
+                if children_text:
+                    children_text += separator + child_text
                 else:
-                    item_data_string = data_string
-        return item_data_string
+                    children_text = child_text
+        return children_text
 
-    def collect_item_content(self):
+    def collect_event_content(self):
         """
-        Extract interesting information from item and append them to result of a
+        Extract interesting information from event and append them to result of a
         nicely formatted row of a table.
 
-        :returns Table: single row table containing all relevant item data
+        :returns Table: single row table containing all relevant event data
         """
         columns_to_print = [
             Paragraph(self._concatenate_tags_content(["Kursart"]), self._style),
@@ -117,8 +117,7 @@ class Event(Element):
         Determine the correct date for printing.
 
         :param str date: xml tag for relevant date.
-        :returns: the text to insert in date column of the current item
-        :rtype: str
+        :returns str: the text to insert in date column of the current event
         """
         if "2099" in date:
             date_string = "auf Anfrage"
@@ -143,7 +142,7 @@ class Event(Element):
         :param str financial: financial prerequisite xml text
         :param str offers: xml text of what is included in the price
         :returns str: the text to insert in prerequisite column
-        the current item
+            the current event
         """
         if personal:
             personal_string = "a) " + personal + "<br/>"
@@ -165,8 +164,8 @@ class Event(Element):
         """
         Concatenate the description and the url if provided.
 
-        :param str name: the short name for the item
-        :param str name2: the short name number two for the item
+        :param str name: the short name for the event
+        :param str name2: the short name number two for the event
         :param str description: the descriptive text
         :param str url: the trainer's homepage url
         :returns str: the full description including url if provided
@@ -190,8 +189,8 @@ class Event(Element):
         return full_description
 
     def get_categories(self):
-        """Return the item's categories.
+        """Return the event's categories
 
-        :return List[str]: a list of the item's categories
+        :return List[str]: a list of the event's categories
         """
         return self._categories
