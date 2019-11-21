@@ -27,7 +27,7 @@ class Event(Element):
         self._element = element
         self._creator = Creator()
         table_style = TableStyle()
-        self._styles = table_style.get_custom_styles()
+        self._style = table_style.get_custom_styles()["Normal"]
         self._column_widths = table_style.get_column_widths()
         self._normal_style = table_style.normal
         self._init_categories()
@@ -75,21 +75,17 @@ class Event(Element):
         :returns Table: single row table containing all relevant item data
         """
         columns_to_print = [
-            Paragraph(
-                self._concatenate_tags_content(["Kursart"]), self._styles["Normal"]
-            ),
+            Paragraph(self._concatenate_tags_content(["Kursart"]), self._style),
             Paragraph(
                 self._parse_date(
                     self._concatenate_tags_content(
                         ["TerminDatumVon1", "TerminDatumBis1"]
                     )
                 ),
-                self._styles["Normal"],
+                self._style,
             ),
-            Paragraph(self._concatenate_tags_content(["Ort1"]), self._styles["Normal"]),
-            Paragraph(
-                self._concatenate_tags_content(["Kursleiter"]), self._styles["Normal"]
-            ),
+            Paragraph(self._concatenate_tags_content(["Ort1"]), self._style),
+            Paragraph(self._concatenate_tags_content(["Kursleiter"]), self._style),
             Paragraph(
                 self._init_description(
                     self._concatenate_tags_content(["Bezeichnung"]),
@@ -97,11 +93,9 @@ class Event(Element):
                     self._concatenate_tags_content(["Beschreibung"]),
                     self._concatenate_tags_content(["TrainerURL"]),
                 ),
-                self._styles["Normal"],
+                self._style,
             ),
-            Paragraph(
-                self._concatenate_tags_content(["Zielgruppe"]), self._styles["Normal"]
-            ),
+            Paragraph(self._concatenate_tags_content(["Zielgruppe"]), self._style),
             Paragraph(
                 self._parse_prerequisites(
                     self._concatenate_tags_content(["Voraussetzung"]),
@@ -109,13 +103,13 @@ class Event(Element):
                     self._concatenate_tags_content(["Kurskosten"]),
                     self._concatenate_tags_content(["Leistungen"]),
                 ),
-                self._styles["Normal"],
+                self._style,
             ),
         ]
-        self._item = self._creator.create_fixedwidth_table(
+        self._tablerow = self._creator.create_fixedwidth_table(
             [columns_to_print], self._column_widths, self._normal_style
         )
-        return self._item
+        return self._tablerow
 
     @staticmethod
     def _parse_date(date):
