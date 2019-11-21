@@ -35,8 +35,7 @@ class Initializer:
             rightMargin=0.0,
         )
         doc = parse(input_path)
-        courses = doc.findall("kurs")
-        sorter = Sorter(doc, courses)
+        sorter = Sorter(doc.findall("kurs"))
         sorted_courses = sorter.sort_parsed_xml("TerminDatumVon1")
 
         parser.collect_xml_data(sorted_courses)
