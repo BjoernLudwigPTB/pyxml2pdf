@@ -1,13 +1,11 @@
 from xml.etree.ElementTree import Element
 
-import pytest
-
-from Core.items import Item
+from Core.events import Event
 
 
 def test_item_init():
-    Item(Element("test"))
+    Event(Element("test"))
 
 
 def test_collect_event_data_empty_call():
-    parser = Item(Element("test"))
+    parser = Event(Element("test"))

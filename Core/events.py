@@ -1,20 +1,29 @@
 from typing import List
 from xml.etree.ElementTree import Element
 
-from reportlab.platypus import Table
 from reportlab.platypus import Paragraph
+from reportlab.platypus import Table
 
 from PdfVisualisation.TableStyle import TableStyle
 from model.tables.Creator import Creator
 
 
-class Item(Element):
+class Event(Element):
 
     _categories: List[str]
-    _item: Table
+    _tablerow: Table
     _element: Element
 
     def __init__(self, element):
+        """*Event* is a wrapper class for :py:mod:`xml.etree.ElementTree.Element`
+
+        :py:mod:`xml.etree.ElementTree.Element` is augmented with the table row
+        representation and the attributes and methods to manipulate all according to
+        the final tables needs.
+
+        :param xml.etree.ElementTree.Element element: the element on which *item*
+            should be based
+        """
         self._element = element
         self._creator = Creator()
         table_style = TableStyle()
@@ -28,14 +37,13 @@ class Item(Element):
         Initialize the list of categories from the content of the "Kategorie" tag
         gathered from the xml.
 
-        :returns: `True` if the categories were successfully extracted
-        :rtype: int
+        :returns int: `True` if the categories were successfully extracted
         """
         categories: str = self._concatenate_tags_content(["Kategorie"])
         self._categories = categories.split(", ")
         return 1
 
-    def _concatenate_tags_content(self, item_tags, separator=" - "):
+    def _concatenate_tags_content(self, event_subelements, separator=" - "):
         """ Form one string from the content of a list of an item's XML tags
 
         Form a string of the content for all desired item tags by concatenating them
@@ -44,13 +52,13 @@ class Item(Element):
         handles as well the concatenation of XML tags' content, if `item_tags` has more
         than one element.
 
-        :param List[str] item_tags: list of all tags for which the
+        :param List[str] event_subelements: list of all tags for which the
             descriptive texts is wanted, even if it is just one
         :param str separator: the separator in between the concatenated texts
         :returns str: concatenated, separated texts of all tags for the current item
         """
         item_data_string: str = ""
-        for tag in item_tags:
+        for tag in event_subelements:
             data_string: str = self._element.findtext(tag)
             if data_string:
                 if item_data_string:
@@ -61,7 +69,7 @@ class Item(Element):
 
     def collect_item_content(self):
         """
-        Extract interesting information from item and append them to result of a a
+        Extract interesting information from item and append them to result of a
         nicely formatted row of a table.
 
         :returns Table: single row table containing all relevant item data
