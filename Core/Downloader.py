@@ -37,4 +37,8 @@ class Downloader:
         file.close()
 
     def extract_filename_from_url(self):
+        """Extract from a url the last element, i.e. the filename
+
+        :returns str: the filename in the url
+        """
         return self._url.split("/")[-1]
