@@ -63,8 +63,7 @@ class TableBuilder:
         ]
 
     def create_subtables(self):
-        """
-        Create subtables for all different kinds of items.
+        """Create subtables for all different kinds of events
 
         :return list[EventTable]: a list of all subtables
         """
@@ -76,7 +75,7 @@ class TableBuilder:
             )
             headers = self.make_header(subtables_props[0])
             for header in headers:
-                subtable.add_event(header)
+                subtable.append(header)
             subtables.append(subtable)
         return subtables
 
@@ -134,12 +133,10 @@ class TableBuilder:
         return aggregated_subtables
 
     def distribute_event(self, event_as_tablerow, categories):
-        """
-        Distribute an item to the subtables according to the related categories.
+        """Distribute an event to the subtables according to the related categories
 
-        :param reportlab.platypus.Table event_as_tablerow: item which is to be
-            distributed
-        :param List[str] categories: the categories list of the specified item
+        :param reportlab.platypus.Table event_as_tablerow: event to distribute
+        :param List[str] categories: the event's list of categories
         """
         distribution_failed = True
         set_of_cats = set(categories)
@@ -148,12 +145,12 @@ class TableBuilder:
             _activities = subtable.get_activities()
             if set_of_cats.intersection(_activities):
                 if set_of_cats.intersection(_locations):
-                    subtable.add_event(event_as_tablerow)
+                    subtable.append(event_as_tablerow)
                     distribution_failed = False
         if distribution_failed:
             warnings.warn(
                 event_as_tablerow.__getattribute__("_cellvalues")[0][3].text
-                + "'s item on "
+                + "'s event on "
                 + event_as_tablerow.__getattribute__("_cellvalues")[0][1].text
                 + " would not be printed, because it does not contain a valid "
                 "combination of locations and activities. Either add a valid location "
