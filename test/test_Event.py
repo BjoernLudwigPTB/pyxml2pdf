@@ -1,8 +1,11 @@
 from xml.etree.ElementTree import Element
+from reportlab.platypus.tables import Table
 
 import pytest
 
 from Core.events import Event
+
+from typing import Callable
 
 
 @pytest.fixture()
@@ -18,11 +21,19 @@ def setup_test_element() -> Element:
     return Element(test_tag, test_attrib)
 
 
+@pytest.fixture()
+def setup_subtable_name() -> str:
+    return "Meine Testsubtabelle"
+
+
 def test_event_init(setup_test_element):
-    """Test initialization of :py:mod:`Event` and check for all expected attributes"""
+    """Test initialization of :py:mod:`Event` and check for all expected members"""
     test_event = Event(setup_test_element)
     assert test_event._categories
     assert test_event._full_row
+    assert isinstance(test_event._init_reduced_row, Callable)
+    assert isinstance(test_event.get_full_row, Callable)
+    assert isinstance(test_event.get_categories, Callable)
 
 
 def test_event_parent(setup_test_element):
@@ -43,7 +54,21 @@ def test_event_attrib(setup_test_element):
     assert test_event.attrib == setup_test_element.attrib
 
 
+def test_event_call_get_full_row(setup_test_element):
+    """Test if get_full_row's return type matches expectations"""
+    test_event = Event(setup_test_element)
+    assert isinstance(test_event.get_full_row(), Table)
+
+
+def test_event_init_reduced_call(setup_test_element, setup_subtable_name):
+    """Test if reduced row is created after full row is requested"""
+    test_event = Event(setup_test_element)
+    test_event._init_reduced_row(setup_subtable_name)
+    assert test_event._reduced_row
+
+
 def test_event_reduced_creation(setup_test_element):
     """Test if reduced row is created after full row is requested"""
     test_event = Event(setup_test_element)
-    assert test_event.attrib == setup_test_element.attrib
+
+    # assert test_event._reduced_row

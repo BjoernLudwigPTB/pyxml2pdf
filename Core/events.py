@@ -1,4 +1,4 @@
-from typing import List, Union, ByteString
+from typing import List
 from xml.etree.ElementTree import Element
 
 from reportlab.platypus import Paragraph
@@ -23,6 +23,7 @@ class Event(Element):
 
     _categories: List[str]
     _full_row: Table
+    _reduced_row: Table
 
     def __init__(self, element):
         super().__init__(element.tag, element.attrib)
@@ -46,7 +47,16 @@ class Event(Element):
         return 1
 
     def _init_reduced_row(self, subtable_title):
-        pass
+        """Initializes the reduced version of the event
+
+        Create a table row in proper format but just containing a brief description
+        of the event and a reference to the fully described event at another place,
+        namely the subtable with the given title.
+
+        :param str subtable_title: the title of the subtable to refer to
+        """
+
+        self._reduced_row = Table([subtable_title])
 
     def _concatenate_tags_content(self, event_subelements, separator=" - "):
         """Form one string from the texts of a subset of an event's children tags
