@@ -15,8 +15,7 @@ class Initializer:
     __data: List[KeepTogether]
 
     def __init__(self, input_path, output_path, properties_path):
-        """
-        Coordinate the construction of the pdf result.
+        """Coordinate the construction of the pdf result
 
         Parameters
         ----------
