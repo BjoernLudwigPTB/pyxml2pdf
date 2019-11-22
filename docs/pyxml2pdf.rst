@@ -27,5 +27,12 @@ Initializer
 Event
 -----
 
+module
+------
+.. automodule:: Core.events
+    :members:
+
+class
+-----
 .. autoclass:: Core.events.Event
    :members:
