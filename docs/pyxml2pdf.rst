@@ -7,8 +7,16 @@ pyxml2pdf
 Downloader
 ----------
 
-.. autoclass:: Core.Downloader
+module
+------
+.. automodule:: Core.Downloader
     :members:
+
+class
+-----
+.. autoclass:: Core.Downloader.Downloader
+    :members:
+
 
 Initializer
 -----------
