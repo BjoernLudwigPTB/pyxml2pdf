@@ -14,12 +14,6 @@ class Downloader:
     _output_filename: str
 
     def __init__(self, url, output_filename):
-        """Download a file and store the result
-
-        :param url: the full download link
-        :param output_filename: the local path where and under what name to store
-            the downloaded file
-        """
         self._url = url
         self._output_filename = output_filename
         open(output_filename, "wb").write(
