@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# agentMET4FOF documentation build configuration file, created from PyDynamic
-# draft on Fri Jul 12 10:31:35 2019.
+# pyxml2pdf documentation build configuration file
+# draft on Fri Nov 21 22:31:35 2019.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -208,7 +208,7 @@ html_static_path = []
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "pyxml3pdfdoc"
+htmlhelp_basename = "pyxml2pdfdoc"
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -227,13 +227,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (
-        master_doc,
-        "agentMET4FOF.tex",
-        "agentMET4FOF Documentation",
-        "Bang Xiang Yong",
-        "manual",
-    )
+    (master_doc, "pyxml2pdf.tex", "pyxml2pdf Documentation", "Björn Ludwig", "manual")
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
