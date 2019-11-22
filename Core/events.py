@@ -9,17 +9,20 @@ from model.tables.Creator import Creator
 
 
 class Event(Element):
+    """*Event* is a wrapper class for :py:mod:`xml.etree.ElementTree.Element`
+
+        :py:mod:`xml.etree.ElementTree.Element` is augmented with the table row
+        representation and the attributes and methods to manipulate everything
+        according to the final tables needs. An :py:mod:`Core.events.Event` can only
+        be initialized with an object of type
+        :py:mod:`xml.etree.ElementTree.Element`.
+    """
 
     _categories: List[str]
     _full_row: Table
 
     def __init__(self, element):
         """*Event* is a wrapper class for :py:mod:`xml.etree.ElementTree.Element`
-
-        :py:mod:`xml.etree.ElementTree.Element` is augmented with the table row
-        representation and the attributes and methods to manipulate everything
-        according to the final tables needs. An :py:mod:`Core.events.Event` can only
-        be initialized with an object of type :py:mod:`xml.etree.ElementTree.Element`.
 
         :param xml.etree.ElementTree.Element element: the element on which *event*
             should be based
