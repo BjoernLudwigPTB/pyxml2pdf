@@ -9,3 +9,12 @@ pyxml2pdf
 
 .. automodule:: Core.Initializer
     :members:
+
+.. autoclass:: Core.events
+   :members:
+
+.. autoclass:: XMLToPDFConverter.Core.events
+   :members:
+
+.. automodule:: XMLToPDFConverter.Core.events
+   :members:
