@@ -18,4 +18,12 @@ Contents:
 .. toctree::
     :maxdepth: 1
 
+    index.rst
     pyxml2pdf.rst
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
