@@ -18,7 +18,6 @@ Contents:
 .. toctree::
     :maxdepth: 1
 
-    index.rst
     pyxml2pdf.rst
 
 Indices and tables
