@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union, ByteString
 from xml.etree.ElementTree import Element
 
 from reportlab.platypus import Paragraph
@@ -11,26 +11,27 @@ from model.tables.Creator import Creator
 class Event(Element):
 
     _categories: List[str]
-    _tablerow: Table
-    _element: Element
+    _full_row: Table
 
     def __init__(self, element):
         """*Event* is a wrapper class for :py:mod:`xml.etree.ElementTree.Element`
 
         :py:mod:`xml.etree.ElementTree.Element` is augmented with the table row
-        representation and the attributes and methods to manipulate all according to
-        the final tables needs.
+        representation and the attributes and methods to manipulate everything
+        according to the final tables needs. An :py:mod:`Core.events.Event` can only
+        be initialized with an object of type :py:mod:`xml.etree.ElementTree.Element`.
 
         :param xml.etree.ElementTree.Element element: the element on which *event*
             should be based
         """
-        self._element = element
+        super().__init__(element.tag, element.attrib)
         self._creator = Creator()
         table_style = TableStyle()
         self._style = table_style.get_custom_styles()["Normal"]
         self._column_widths = table_style.get_column_widths()
         self._normal_style = table_style.normal
         self._init_categories()
+        self._init_full_row()
 
     def _init_categories(self):
         """
@@ -42,6 +43,9 @@ class Event(Element):
         categories: str = self._concatenate_tags_content(["Kategorie"])
         self._categories = categories.split(", ")
         return 1
+
+    def _init_reduced_row(self, subtable_title):
+        pass
 
     def _concatenate_tags_content(self, event_subelements, separator=" - "):
         """Form one string from the texts of a subset of an event's children tags
@@ -59,7 +63,7 @@ class Event(Element):
         """
         children_text = ""  # type: str
         for tag in event_subelements:
-            child_text: str = self._element.findtext(tag)
+            child_text: str = self.findtext(tag)
             if child_text:
                 if children_text:
                     children_text += separator + child_text
@@ -67,12 +71,11 @@ class Event(Element):
                     children_text = child_text
         return children_text
 
-    def collect_event_content(self):
-        """
-        Extract interesting information from event and append them to result of a
-        nicely formatted row of a table.
+    def _init_full_row(self):
+        """Initialize the single table row containing all information of the event
 
-        :returns Table: single row table containing all relevant event data
+        Extract interesting information from events children tags and connect them
+        into a nicely formatted row of a table.
         """
         columns_to_print = [
             Paragraph(self._concatenate_tags_content(["Kursart"]), self._style),
@@ -106,10 +109,9 @@ class Event(Element):
                 self._style,
             ),
         ]
-        self._tablerow = self._creator.create_fixedwidth_table(
+        self._full_row = self._creator.create_fixedwidth_table(
             [columns_to_print], self._column_widths, self._normal_style
         )
-        return self._tablerow
 
     @staticmethod
     def _parse_date(date):
@@ -194,3 +196,10 @@ class Event(Element):
         :return List[str]: a list of the event's categories
         """
         return self._categories
+
+    def get_full_row(self):
+        """Return a table row with all the event's information
+
+        :return Table: a table row with all the event's information
+        """
+        return self._full_row

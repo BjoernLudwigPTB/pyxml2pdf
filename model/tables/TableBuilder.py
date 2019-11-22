@@ -141,7 +141,7 @@ class TableBuilder:
 
         distribution_failed = True
         set_of_cats = set(event.get_categories())
-        content = event.collect_event_content()
+        content = event.get_full_row()
         for subtable in self._subtables:
             _locations = subtable.get_locations()
             _activities = subtable.get_activities()
