@@ -1,6 +1,8 @@
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import mm
 from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
+from reportlab.pdfbase.ttfonts import TTFont
 
 from PdfVisualisation.Styles import Styles
 
@@ -78,6 +80,37 @@ class TableStyle:
         custom_styles.get("Heading2").leading = custom_styles["Heading2"].fontSize * 1.2
         custom_styles.get("Heading2").fontName = "NewsGothBT_Bold"
         self._custom_styles = custom_styles
+
+        # Register font with reportlab.
+        self._init_font_family()
+
+    @staticmethod
+    def _init_font_family():
+        """Register the desired font with `reportlab`
+
+        This ensures that `<i></i>` and `<b></b>` as cell content work well.
+
+        TODO this is much to hard coded and needs some serious refactoring
+        """
+        registerFont(TTFont("NewsGothBT", "PdfVisualisation/NewsGothicBT-Roman.ttf"))
+        registerFont(
+            TTFont("NewsGothBT_Bold", "PdfVisualisation/NewsGothicBT-Bold.ttf")
+        )
+        registerFont(
+            TTFont("NewsGothBT_Italic", "PdfVisualisation/NewsGothicBT-Italic.ttf")
+        )
+        registerFont(
+            TTFont(
+                "NewsGothBT_BoldItalic", "PdfVisualisation/NewsGothicBT-BoldItalic.ttf"
+            )
+        )
+        registerFontFamily(
+            "NewsGothBT",
+            normal="NewsGothBT",
+            bold="NewsGothBT_Bold",
+            italic="NewsGothBT_Italic",
+            boldItalic="NewsGothBT_BoldItalic",
+        )
 
     def get_column_widths(self):
         """Return the column widths for the tables
