@@ -194,13 +194,13 @@ class Event(Element):
     def get_categories(self):
         """Return the event's categories
 
-        :return List[str]: a list of the event's categories
+        :returns List[str]: a list of the event's categories
         """
         return self._categories
 
     def get_full_row(self):
         """Return a table row with all the event's information
 
-        :return Table: a table row with all the event's information
+        :returns Table: a table row with all the event's information
         """
         return self._full_row
