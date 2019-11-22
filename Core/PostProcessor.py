@@ -5,16 +5,21 @@ from PyPDF2.pdf import PdfFileReader, PdfFileWriter, PageObject
 
 
 class PostProcessor:
-    def __init__(self, path):
-        """
-        This creates an instance of a PostProcessor for a resulting table to
-        automate splitting and rotating.
+    """
+    This creates an instance of a PostProcessor for a resulting table to
+    automate splitting and rotating.
 
-        :param str path:  path to the pdf file which shall be processed
-        """
-        self._path: str = path
-        self._directory: str = os.path.dirname(path)
-        self._name: str = os.path.splitext(os.path.basename(path))[0]
+    :param str path:  path to the pdf file which shall be processed
+    """
+
+    _path: str
+    _directory: str
+    _name: str
+
+    def __init__(self, path):
+        self._path = path
+        self._directory = os.path.dirname(path)
+        self._name = os.path.splitext(os.path.basename(path))[0]
 
     def finalize_print_preparation(self):
         """

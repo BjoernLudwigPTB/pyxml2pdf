@@ -26,5 +26,11 @@ Event
 Parser
 ------
 
-.. automodule:: Core.events
+.. automodule:: Core.Parser
+    :members:
+
+PostProcessor
+-------------
+
+.. automodule:: Core.PostProcessor
     :members:
