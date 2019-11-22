@@ -18,4 +18,5 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
-   index.rst
+    index.rst
+    pyxml2pdf.rst
