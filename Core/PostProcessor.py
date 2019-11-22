@@ -22,14 +22,12 @@ class PostProcessor:
         self._name = os.path.splitext(os.path.basename(path))[0]
 
     def finalize_print_preparation(self):
-        """
-        Take the resulting multi page PDF and split into single pages while
-        rotating it.
+        """Take the resulting multi page PDF and split into rotated single pages
 
-        Taken from 'https://www.blog.pythonlibrary.org/2018/04/11/splitting
-        -and-merging-pdfs-with-python/' in combination with
-        'https://www.johndcook.com/blog/2015/05/01/rotating-pdf-pages-with
-        -python/'
+        Taken from `pythonlibrary.org
+        <https://www.blog.pythonlibrary.org/2018/04/11/splitting-and-merging-pdfs
+        -with-python/>`_ in combination with `johndcook.com
+        <https://www.johndcook.com/blog/2015/05/01/rotating-pdf-pages-with-python/>`_
         """
 
         pdf: PdfFileReader = PdfFileReader(self._path)
@@ -40,9 +38,7 @@ class PostProcessor:
             pdf_writer.addPage(page)
             output_filename: str = "%s_seite_%02d.pdf" % (self._name, page_number + 1)
 
-            pdf_out: BufferedWriter = open(
-                os.path.join(self._directory, output_filename), "wb"
-            )
+            pdf_out = open(os.path.join(self._directory, output_filename), "wb")
             pdf_writer.write(pdf_out)
             pdf_out.close()
 
