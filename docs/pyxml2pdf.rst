@@ -34,3 +34,9 @@ PostProcessor
 
 .. automodule:: Core.PostProcessor
     :members:
+
+Sorter
+------
+
+.. automodule:: Core.Sorter
+    :members:
