@@ -1,12 +1,23 @@
 pyxml2pdf
 =========
 
-.. automodule:: Core.Downloader
+.. automodule:: Core
     :members:
 
+Downloader
+----------
 
-.. automodule:: Core.Initializer
+.. autoclass:: Core.Downloader
     :members:
+
+Initializer
+-----------
+
+.. autoclass:: Core.Initializer
+    :members:
+
+Event
+-----
 
 .. autoclass:: Core.events.Event
    :members:
