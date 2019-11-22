@@ -20,7 +20,7 @@ class Downloader:
             requests.get(url, allow_redirects=False).content
         )
 
-        local_filename = self.extract_filename_from_url()
+        local_filename = self._extract_filename()
         response = requests.get(url, stream=True)
 
         # Compute parameters for download and corresponding progress bar.
@@ -35,7 +35,7 @@ class Downloader:
                 file.write(chunk)
         file.close()
 
-    def extract_filename_from_url(self):
+    def _extract_filename(self):
         """Extract from a url the last element, i.e. the filename
 
         :returns str: the filename in the url
