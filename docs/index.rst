@@ -16,7 +16,7 @@ XMLToPDFConverter>`_.
 Contents:
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
 
     pyxml2pdf.rst
 
