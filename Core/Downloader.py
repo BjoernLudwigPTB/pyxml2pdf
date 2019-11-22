@@ -3,6 +3,12 @@ from clint.textui import progress
 
 
 class Downloader:
+    """Download a file and store the result
+
+    :param str url: the full download link
+    :param str output_filename: the local path where and under what name to store
+        the downloaded file
+    """
 
     _url: str
     _output_filename: str
@@ -10,8 +16,8 @@ class Downloader:
     def __init__(self, url, output_filename):
         """Download a file and store the result
 
-        :param str url: the full download link
-        :param str output_filename: the local path where and under what name to store
+        :param url: the full download link
+        :param output_filename: the local path where and under what name to store
             the downloaded file
         """
         self._url = url
