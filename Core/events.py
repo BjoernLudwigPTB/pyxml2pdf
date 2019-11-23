@@ -107,7 +107,7 @@ class Event(Element):
             version with a reference to the subtable containing the  full version is
             created.
 
-            .. note: This is ensured by a decorator, which is why the function
+            .. note:: This is ensured by a decorator, which is why the function
                 signature on ReadTheDocs is displayed incorrectly. The parameter and
                 return value are as follows...
 
@@ -264,7 +264,7 @@ class Event(Element):
         version with a reference to the subtable containing the  full version is
         created.
 
-        .. note: This is ensured by a decorator, which is why the function
+        .. note:: This is ensured by a decorator, which is why the function
             signature on ReadTheDocs is displayed incorrectly. The parameter and
             return value are as follows...
 
