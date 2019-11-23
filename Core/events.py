@@ -70,7 +70,7 @@ class Event(Element):
         .. warning:: Do not call this function directly since it is automatically
         called right after :meth:`get_full_row` is invoked.
         """
-        columns_to_print = [
+        table_columns = [
             Paragraph(self._type, self._style),
             Paragraph(self._date, self._style),
             Paragraph(self._region, self._style),
@@ -83,7 +83,7 @@ class Event(Element):
             ),
         ]
         self._reduced_row = self._table_builder.create_fixedwidth_table(
-            [columns_to_print],
+            [table_columns],
             self._table_style.column_widths[:4]
             + [sum(self._table_style.column_widths[4:])],
         )
@@ -151,7 +151,7 @@ class Event(Element):
         Extract interesting information from events children tags and connect them
         into a nicely formatted row of a table.
         """
-        columns_to_print = [
+        table_columns = [
             Paragraph(self._type, self._style),
             Paragraph(self._date, self._style),
             Paragraph(self._region, self._style),
@@ -175,7 +175,7 @@ class Event(Element):
                 self._style,
             ),
         ]
-        self._full_row = self._table_builder.create_fixedwidth_table([columns_to_print])
+        self._full_row = self._table_builder.create_fixedwidth_table([table_columns])
 
     def _init_date(self):
         """Create a properly formatted string containing the date of the event"""
@@ -301,15 +301,6 @@ class Event(Element):
         return self._categories
 
     @property
-    def reduced_row(self):
-        """Return a table row with a reference to where to find the full information
-
-        :returns: a table row with some of the event's information
-        :rtype: Table
-        """
-        return self._reduced_row
-
-    @property
     def responsible(self):
         """Return the name of the person being responsible for the event
 
@@ -335,8 +326,15 @@ class Event(Element):
 
         :param str subtable_title: the title of the subtable in which the row will
             be integrated
-        :returns: date
-        :rtype: str
+        :returns: a table row representation of the event
+        :rtype: Table
         """
-
-        return self._full_row
+        # We check if the reduced row was produced before, which means in turn,
+        # that :meth:`table_row` was called at least once before. Otherwise we call
+        # :meth:`get_full_row` which automatically triggers the creation of the
+        # reduced row for later uses.
+        try:
+            self._reduced_row
+        except AttributeError:
+            return self.get_full_row(subtable_title)
+        return self._reduced_row

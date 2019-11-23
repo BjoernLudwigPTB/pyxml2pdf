@@ -76,7 +76,7 @@ def test_event_call_get_full_row(test_event, subtable_title):
 def test_event_init_reduced_call(test_event, subtable_title):
     """Reduced row should just be created when init is called on it"""
     with pytest.raises(AttributeError):
-        assert test_event.reduced_row
+        assert test_event._reduced_row
     test_event._init_reduced_row(subtable_title)
     assert test_event._reduced_row
 
@@ -84,29 +84,29 @@ def test_event_init_reduced_call(test_event, subtable_title):
 def test_event_get_reduced_row(test_event, subtable_title):
     """Reduced row should be created as just one table row with five columns"""
     test_event._init_reduced_row(subtable_title)
-    assert test_event.reduced_row._nrows == 1
-    assert test_event.reduced_row._ncols == 5
+    assert test_event._reduced_row._nrows == 1
+    assert test_event._reduced_row._ncols == 5
 
 
 def test_event_reduced_rows_column_widths(test_event, subtable_title, table_style):
     """Reduced row should be created with column widths according to full row"""
     test_event._init_reduced_row(subtable_title)
-    assert test_event.reduced_row._colWidths[:4] == table_style.column_widths[:4]
-    assert test_event.reduced_row._colWidths[-1] == sum(table_style.column_widths[4:])
+    assert test_event._reduced_row._colWidths[:4] == table_style.column_widths[:4]
+    assert test_event._reduced_row._colWidths[-1] == sum(table_style.column_widths[4:])
 
 
 def test_event_reduced_creation(test_event, subtable_title):
     """Reduced row should be created after full row is requested"""
     with pytest.raises(AttributeError):
-        assert test_event.reduced_row
+        assert test_event._reduced_row
     assert test_event.get_full_row(subtable_title)
-    assert test_event.reduced_row
+    assert test_event._reduced_row
 
 
 def test_event_compare_reduced_row(test_event, subtable_title):
     """Reduced row should contain the same as full up to column 4 but not afterwards"""
     full_row = test_event.get_full_row(subtable_title)
-    reduced_row = test_event.reduced_row
+    reduced_row = test_event._reduced_row
     assert str(full_row._cellvalues[0][:4]) == str(reduced_row._cellvalues[0][:4])
     assert str(full_row._cellvalues[0][:5]) != str(reduced_row._cellvalues[0][:5])
 
@@ -116,7 +116,7 @@ def test_event_content_reduced_row(test_event, subtable_title):
     test_event._init_reduced_row(subtable_title)
     test_string = "<b><i>" + subtable_title + "</i></b>."
     assert (
-        test_event.reduced_row._cellvalues[0][-1].text[-len(test_string) :]
+        test_event._reduced_row._cellvalues[0][-1].text[-len(test_string) :]
         == test_string
     )
 
@@ -124,6 +124,6 @@ def test_event_content_reduced_row(test_event, subtable_title):
 def test_event_get_row(test_event, subtable_title):
     """Before call to table row no reduced table row should be available"""
     with pytest.raises(AttributeError):
-        assert test_event.reduced_row
+        assert test_event._reduced_row
     assert test_event.table_row(subtable_title)
-    assert test_event.reduced_row
+    assert test_event._reduced_row
