@@ -49,8 +49,6 @@ class Event(Element):
         # Initialize needed objects especially for table creation.
         table_style = TableStyle()
         self._style = table_style.custom_styles["Normal"]
-        self._column_widths = table_style.column_widths
-        self._normal_style = table_style.normal
         # Initialize definitely needed instance variables.
         self._init_categories()
         self._type = self._concatenate_tags_content(["Kursart"])
