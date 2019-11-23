@@ -8,14 +8,16 @@ from PdfVisualisation.Styles import Styles
 
 
 class TableStyle:
+    """ Create a collection of styling information about the table to create
+
+    Beautiful colors are:
+        *   aliceblue (nicht mit azure)
+        *   azure (nicht mit aliceblue)
+        *   honeydew
+        * ...
+    """
+
     def __init__(self):
-        """
-        beautiful colors are:
-            *   aliceblue (nicht mit azure)
-            *   azure (nicht mit aliceblue)
-            *   honeydew
-            * ...
-        """
         self.heading = [
             Styles.valign_middle,
             Styles.background(colors.honeydew),
@@ -64,7 +66,8 @@ class TableStyle:
 
         # Get custom_styles for all headings, texts, etc. from sample
         custom_styles = getSampleStyleSheet()
-        # Overwrite the sample styles according to our needs. TODO this should be provided in the properties file
+        # Overwrite the sample styles according to our needs.
+        # TODO this should be provided in the properties file
         custom_styles.get("Normal").fontSize = 6.5
         custom_styles.get("Normal").leading = custom_styles["Normal"].fontSize * 1.2
         custom_styles.get("Normal").fontName = "NewsGothBT"
