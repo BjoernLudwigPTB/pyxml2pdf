@@ -1,3 +1,10 @@
+"""This module provides a wrapper class :py:class:`Core.Event` to deal with the
+events extracted from the xml input.
+"""
+
+__all__ = ["Event"]
+
+
 import warnings
 from typing import List
 from xml.etree.ElementTree import Element
@@ -68,14 +75,14 @@ class Event(Element):
         """
         self._reduced_row = Table([subtable_title])
 
-    def create_reduced_after_full(f):
+    def create_reduced_after_full(func):
         """Decorator to execute :meth:`_init_reduced_row` with :meth:`get_full_row`
 
         :returns Table: the return value of :meth:`get_full_row`
         """
 
         def execute_get_full_and_init_reduced_row(self, *args, **kwargs):
-            return_table = f(self, *args, **kwargs)
+            return_table = func(self, *args, **kwargs)
             self._init_reduced_row(args[0])
             return return_table
 
@@ -146,7 +153,8 @@ class Event(Element):
         extracted_date = self._concatenate_tags_content(
             ["TerminDatumVon1", "TerminDatumBis1"]
         )
-        # Replace any extracted_date of a form like 31.12.2099 with a string to tell anytime.
+        # Replace any extracted_date of a form like 31.12.2099 with a string to tell
+        # anytime.
         if "2099" in extracted_date:
             new_date = "auf Anfrage"
         elif extracted_date:
