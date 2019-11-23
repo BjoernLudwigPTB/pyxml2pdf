@@ -128,8 +128,8 @@ class TableBuilder:
 
     def collect_subtables(self):
         aggregated_subtables = []
-        for table in self._subtables:
-            for element in table.get_elements():
+        for subtable in self._subtables:
+            for element in subtable.events:
                 aggregated_subtables.append(element)
         return aggregated_subtables
 
@@ -141,15 +141,15 @@ class TableBuilder:
 
         distribution_failed = True
         set_of_cats = set(event.get_categories())
-        content = event.get_full_row()
         for subtable in self._subtables:
-            _locations = subtable.get_locations()
-            _activities = subtable.get_activities()
+            _locations = subtable.locations
+            _activities = subtable.activities
             if set_of_cats.intersection(_activities):
                 if set_of_cats.intersection(_locations):
-                    subtable.append(content)
+                    subtable.append(event.get_full_row(subtable.title))
                     distribution_failed = False
         if distribution_failed:
+            content = event.get_full_row()
             warnings.warn(
                 content.__getattribute__("_cellvalues")[0][3].text
                 + "'s event on "
