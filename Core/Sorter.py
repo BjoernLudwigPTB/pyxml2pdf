@@ -6,7 +6,7 @@ class Sorter:
     by the texts of one of their tags containing a string representation of a date.
 
     :param List[xml.etree.ElementTree.Element] courses: events that where extracted
-    from an xml source
+        from an xml source
     """
 
     def __init__(self, courses):
