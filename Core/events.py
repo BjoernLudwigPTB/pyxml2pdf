@@ -96,7 +96,8 @@ class Event(Element):
     def create_reduced_after_full(func):
         """Decorator to execute :meth:`_init_reduced_row` with :meth:`get_full_row`
 
-        :returns Table: the return value of :meth:`get_full_row`
+        :returns: the return value of :meth:`get_full_row`
+        :rtype: Table
         """
 
         def execute_get_full_and_init_reduced_row(self, *args, **kwargs):
@@ -136,7 +137,8 @@ class Event(Element):
         :param List[str] event_subelements: list of all tags for which the
             descriptive texts is wanted, even if it is just one
         :param str separator: the separator in between the concatenated texts
-        :returns str: concatenated, separated texts of all tags for the current event
+        :returns: concatenated, separated texts of all tags for the current event
+        :rtype: str
         """
         children_text = ""
         for tag in event_subelements:
@@ -213,8 +215,9 @@ class Event(Element):
         :param str personal: personal prerequisite xml text
         :param str financial: financial prerequisite xml text
         :param str offers: xml text of what is included in the price
-        :returns str: the text to insert in prerequisite column
+        :returns: the text to insert in prerequisite column
             the current event
+        :rtype: str
         """
         if personal:
             personal_string = "a) " + personal + "<br/>"
@@ -244,7 +247,8 @@ class Event(Element):
         :param str name2: the short name number two for the event
         :param str description: the descriptive text
         :param str link: a link to more details like the trainer url or the subtable
-        :returns str: the full description including url if provided
+        :returns: the full description including url if provided
+        :rtype: str
         """
         full_description = (
             "<b>" + self._concatenate_tags_content(["Bezeichnung"]) + "</b>"
@@ -296,7 +300,8 @@ class Event(Element):
     def categories(self):
         """Return the event's categories
 
-        :returns List[str]: a list of the event's categories
+        :returns: a list of the event's categories
+        :rtype: List[str]
         """
         return self._categories
 
@@ -304,7 +309,8 @@ class Event(Element):
     def reduced_row(self):
         """Return a table row with a reference to where to find the full information
 
-        :returns Table: a table row with some of the event's information
+        :returns: a table row with some of the event's information
+        :rtype: Table
         """
         return self._reduced_row
 
@@ -312,7 +318,8 @@ class Event(Element):
     def responsible(self):
         """Return the name of the person being responsible for the event
 
-        :returns str: first and last name
+        :returns: first and last name
+        :rtype: str
         """
         return self._responsible
 
@@ -320,7 +327,8 @@ class Event(Element):
     def date(self):
         """Return the date of the event
 
-        :returns str: date
+        :returns: date
+        :rtype: str
         """
         return self._date
 
@@ -332,7 +340,8 @@ class Event(Element):
 
         :param str subtable_title: the title of the subtable in which the row will
             be integrated
-        :returns str: date
+        :returns: date
+        :rtype: str
         """
 
         return self._full_row

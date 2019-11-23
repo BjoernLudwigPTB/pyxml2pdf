@@ -165,7 +165,8 @@ class TableBuilder:
             list representing the columns wrapped by a list representing the lines
         :param Union[float, List[float]] widths: the column widths
         :param List[Tuple[Union[str, Tuple[int]]]] style: desired table's style
-        :returns Table: table containing specified cells in fixed width, styled columns
+        :returns: table containing specified cells in fixed width, styled columns
+        :rtype: Table
         """
         if widths is None:
             widths = self._table_style.column_widths

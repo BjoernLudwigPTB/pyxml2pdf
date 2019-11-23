@@ -29,8 +29,9 @@ class Parser:
 
         :param List[Event] events: a list of the items from which the texts shall be
             extracted into a nicely formatted table
-        :returns List[KeepTogether]: list of all table rows containing the relevant
+        :returns: list of all table rows containing the relevant
             event data
+        :rtype: List[KeepTogether]
         """
         if events:
             for event in events:

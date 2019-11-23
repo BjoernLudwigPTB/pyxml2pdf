@@ -133,7 +133,8 @@ class TableStyle:
     def column_widths(self):
         """Return the column widths for the tables
 
-        :returns List[float]: the list of column widths
+        :returns: the list of column widths
+        :rtype: List[float]
         """
         return self._column_widths
 
@@ -141,6 +142,7 @@ class TableStyle:
     def custom_styles(self):
         """Return the custom stylesheet for the tables
 
-        :returns reportlab.lib.styles.StyleSheet1: the custom stylesheet
+        :returns: the custom stylesheet
+        :rtype: reportlab.lib.styles.StyleSheet1
         """
         return self._custom_styles
