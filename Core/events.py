@@ -69,12 +69,12 @@ class Event(Element):
         :returns Table: the return value of :meth:`get_full_row`
         """
 
-        def decorate(self, *args, **kwargs):
-            ret = f(self, *args, **kwargs)
+        def execute_get_full_and_init_reduced_row(self, *args, **kwargs):
+            return_table = f(self, *args, **kwargs)
             self._init_reduced_row(args[0])
-            return ret
+            return return_table
 
-        return decorate
+        return execute_get_full_and_init_reduced_row
 
     def _concatenate_tags_content(self, event_subelements, separator=" - "):
         """Form one string from the texts of a subset of an event's children tags
