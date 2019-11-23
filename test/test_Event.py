@@ -46,7 +46,6 @@ def test_event_init(test_event):
     assert test_event._full_row
     assert isinstance(test_event._init_reduced_row, Callable)
     assert isinstance(test_event.get_full_row, Callable)
-    assert isinstance(test_event.get_categories, Callable)
 
 
 def test_event_parent(test_event):

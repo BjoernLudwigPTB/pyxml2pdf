@@ -214,7 +214,8 @@ class Event(Element):
 
         return full_description
 
-    def get_categories(self):
+    @property
+    def categories(self):
         """Return the event's categories
 
         :returns List[str]: a list of the event's categories

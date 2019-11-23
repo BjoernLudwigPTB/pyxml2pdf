@@ -140,7 +140,7 @@ class TableBuilder:
         """
 
         distribution_failed = True
-        set_of_cats = set(event.get_categories())
+        set_of_cats = set(event.categories)
         for subtable in self._subtables:
             _locations = subtable.locations
             _activities = subtable.activities
