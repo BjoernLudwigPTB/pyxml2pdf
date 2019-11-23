@@ -299,3 +299,16 @@ class Event(Element):
         :returns str: date
         """
         return self._date
+
+    def table_row(self, subtable_title):
+        """Return the table row representation of the event
+
+        This is the API of Event for getting the table row representation of the
+        event. It makes sure, that on the first call to
+
+        :param str subtable_title: the title of the subtable in which the row will
+            be integrated
+        :returns str: date
+        """
+
+        return self._full_row

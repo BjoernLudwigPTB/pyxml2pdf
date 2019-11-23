@@ -119,3 +119,11 @@ def test_event_content_reduced_row(test_event, subtable_title):
         test_event.reduced_row._cellvalues[0][-1].text[-len(test_string) :]
         == test_string
     )
+
+
+def test_event_get_row(test_event, subtable_title):
+    """Before call to table row no reduced table row should be available"""
+    with pytest.raises(AttributeError):
+        assert test_event.reduced_row
+    assert test_event.table_row(subtable_title)
+    assert test_event.reduced_row
