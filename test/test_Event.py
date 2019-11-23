@@ -1,14 +1,14 @@
+from typing import Callable
 from xml.etree.ElementTree import Element
-from reportlab.platypus.tables import Table
 
 import pytest
+from reportlab.platypus.tables import Table
 
 from Core.events import Event
+from PdfVisualisation.TableStyle import TableStyle
 
-from typing import Callable
 
-
-@pytest.fixture()
+@pytest.fixture
 def test_element() -> Element:
     """Create a test element
 
@@ -22,8 +22,8 @@ def test_element() -> Element:
     return test_element
 
 
-@pytest.fixture()
-def setup_subtable_title() -> str:
+@pytest.fixture
+def subtable_title() -> str:
     """Create a title for a test subtable
 
     :returns: a test subtable's title
@@ -31,13 +31,18 @@ def setup_subtable_title() -> str:
     return "Test subtable title"
 
 
-@pytest.fixture()
+@pytest.fixture
 def test_event(test_element) -> Event:
     """Create a test event related to the test_element
 
     :returns: an event matching the test_element
     """
     return Event(test_element)
+
+
+@pytest.fixture
+def table_style() -> TableStyle:
+    return TableStyle()
 
 
 def test_event_init(test_event):
@@ -63,25 +68,54 @@ def test_event_attrib(test_element, test_event):
     assert test_event.attrib == test_element.attrib
 
 
-def test_event_call_get_full_row(test_event, setup_subtable_title):
-    """Test if get_full_row's return type matches expectations"""
-    assert isinstance(test_event.get_full_row(setup_subtable_title), Table)
+def test_event_call_get_full_row(test_event, subtable_title):
+    """get_full_row's return type should be of instance table"""
+    assert isinstance(test_event.get_full_row(subtable_title), Table)
 
 
-def test_event_init_reduced_call(test_event, setup_subtable_title):
-    """Test if reduced row is created when init is called on it"""
-    test_event._init_reduced_row(setup_subtable_title)
+def test_event_init_reduced_call(test_event, subtable_title):
+    """Reduced row should just be created when init is called on it"""
+    with pytest.raises(AttributeError):
+        assert test_event.reduced_row
+    test_event._init_reduced_row(subtable_title)
     assert test_event._reduced_row
 
 
-def test_event_get_reduced_row(test_event, setup_subtable_title):
-    """Test if reduced row is created as just one table row with five columns"""
-    test_event._init_reduced_row(setup_subtable_title)
+def test_event_get_reduced_row(test_event, subtable_title):
+    """Reduced row should be created as just one table row with five columns"""
+    test_event._init_reduced_row(subtable_title)
     assert test_event.reduced_row._nrows == 1
     assert test_event.reduced_row._ncols == 5
 
 
-def test_event_reduced_creation(test_event, setup_subtable_title):
-    """Test if reduced row is created after full row is requested"""
-    test_event.get_full_row(setup_subtable_title)
+def test_event_reduced_rows_column_widths(test_event, subtable_title, table_style):
+    """Reduced row should be created with column widths according to full row"""
+    test_event._init_reduced_row(subtable_title)
+    assert test_event.reduced_row._colWidths[:4] == table_style.column_widths[:4]
+    assert test_event.reduced_row._colWidths[-1] == sum(table_style.column_widths[4:])
+
+
+def test_event_reduced_creation(test_event, subtable_title):
+    """Reduced row should be created after full row is requested"""
+    with pytest.raises(AttributeError):
+        assert test_event.reduced_row
+    assert test_event.get_full_row(subtable_title)
     assert test_event.reduced_row
+
+
+def test_event_compare_reduced_row(test_event, subtable_title):
+    """Reduced row should contain the same as full up to column 4 but not afterwards"""
+    full_row = test_event.get_full_row(subtable_title)
+    reduced_row = test_event.reduced_row
+    assert str(full_row._cellvalues[0][:4]) == str(reduced_row._cellvalues[0][:4])
+    assert str(full_row._cellvalues[0][:5]) != str(reduced_row._cellvalues[0][:5])
+
+
+def test_event_content_reduced_row(test_event, subtable_title):
+    """Reduced row should end with subtable title followed by a period"""
+    test_event._init_reduced_row(subtable_title)
+    test_string = "<b><i>" + subtable_title + "</i></b>."
+    assert (
+        test_event.reduced_row._cellvalues[0][-1].text[-len(test_string) :]
+        == test_string
+    )

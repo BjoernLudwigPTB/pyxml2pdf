@@ -77,27 +77,16 @@ class Event(Element):
             Paragraph(self._region, self._style),
             Paragraph(self._responsible, self._style),
             Paragraph(
-                self._init_description(
-                    self._concatenate_tags_content(["Bezeichnung"]),
-                    self._concatenate_tags_content(["Bezeichnung2"]),
-                    self._concatenate_tags_content(["Beschreibung"]),
-                    self._concatenate_tags_content(["TrainerURL"]),
-                ),
-                self._style,
-            ),
-            Paragraph(self._concatenate_tags_content(["Zielgruppe"]), self._style),
-            Paragraph(
-                self._parse_prerequisites(
-                    self._concatenate_tags_content(["Voraussetzung"]),
-                    self._concatenate_tags_content(["Ausruestung"]),
-                    self._concatenate_tags_content(["Kurskosten"]),
-                    self._concatenate_tags_content(["Leistungen"]),
+                self._build_description(
+                    self._concatenate_tags_content(["Bezeichnung"]), link=subtable_title
                 ),
                 self._style,
             ),
         ]
         self._reduced_row = self._table_builder.create_fixedwidth_table(
-            [columns_to_print]
+            [columns_to_print],
+            self._table_style.column_widths[:4]
+            + [sum(self._table_style.column_widths[4:])],
         )
 
     def create_reduced_after_full(func):
@@ -127,7 +116,7 @@ class Event(Element):
         :param str separator: the separator in between the concatenated texts
         :returns str: concatenated, separated texts of all tags for the current event
         """
-        children_text = ""  # type: str
+        children_text = ""
         for tag in event_subelements:
             child_text: str = self.findtext(tag)
             if child_text:
@@ -149,8 +138,7 @@ class Event(Element):
             Paragraph(self._region, self._style),
             Paragraph(self._responsible, self._style),
             Paragraph(
-                self._init_description(
-                    self._concatenate_tags_content(["Bezeichnung"]),
+                self._build_description(
                     self._concatenate_tags_content(["Bezeichnung2"]),
                     self._concatenate_tags_content(["Beschreibung"]),
                     self._concatenate_tags_content(["TrainerURL"]),
@@ -222,31 +210,29 @@ class Event(Element):
             financial_string = "c) keine"
         return personal_string + material_string + financial_string
 
-    def _init_description(self, name, name2, description, url):
-        """
-        Concatenate the description and the url if provided.
+    def _build_description(self, name2="", description="", link=""):
+        """Build the description for the event
 
-        :param str name: the short name for the event
+        This covers all cases with empty texts in some of the according children tags
+        and the full as well as the reduced version with just the reference to the
+        subtable where the full version can be found. Since the title of the event is
+        mandatory, it is not received as parameter but directly retrieved from the
+        xml data.
+
         :param str name2: the short name number two for the event
         :param str description: the descriptive text
-        :param str url: the trainer's homepage url
+        :param str link: a link to more details like the trainer url or the subtable
         :returns str: the full description including url if provided
         """
-        if name:
-            full_description = "<b>" + name + "</b>"
-        else:
-            full_description = ""
-
+        full_description = (
+            "<b>" + self._concatenate_tags_content(["Bezeichnung"]) + "</b>"
+        )
         if name2:
             full_description += " - " + name2
-
         if description:
             full_description += " - " + description
-
-        if url:
-            full_description += " Mehr Infos unter: " + url + "."
-
-        self._full_description = full_description
+        if link:
+            full_description += " Mehr Infos unter <b><i>" + link + "</i></b>."
 
         return full_description
 
