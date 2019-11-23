@@ -96,6 +96,10 @@ class Event(Element):
         """
 
         def execute_get_full_and_init_reduced_row(self, *args, **kwargs):
+            """This just realizes the calls of the two involved functions
+
+            :returns Table: the return value of :meth:`get_full_row`
+            """
             return_table = func(self, *args, **kwargs)
             self._init_reduced_row(args[0])
             return return_table
