@@ -1,3 +1,6 @@
+import os
+from pathlib import Path
+
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import mm
 from reportlab.lib.styles import getSampleStyleSheet
@@ -95,16 +98,27 @@ class TableStyle:
 
         TODO this is much to hard coded and needs some serious refactoring
         """
-        registerFont(TTFont("NewsGothBT", "PdfVisualisation/NewsGothicBT-Roman.ttf"))
+        # Sadly we did not manage to properly configure readthedocs to load the
+        # fonts on import from the paths everybody else uses, so we need to
+        # manipulate them.
+        path_to_fonts = "PdfVisualisation/"
+        if not os.path.exists(path_to_fonts):
+            path_to_fonts = "../" + path_to_fonts
+
+        # Finally lead and register fonts with reportlab.
         registerFont(
-            TTFont("NewsGothBT_Bold", "PdfVisualisation/NewsGothicBT-Bold.ttf")
+            TTFont("NewsGothBT", Path(path_to_fonts + "NewsGothicBT-Roman.ttf"))
         )
         registerFont(
-            TTFont("NewsGothBT_Italic", "PdfVisualisation/NewsGothicBT-Italic.ttf")
+            TTFont("NewsGothBT_Bold", Path(path_to_fonts + "NewsGothicBT-Bold.ttf"))
+        )
+        registerFont(
+            TTFont("NewsGothBT_Italic", Path(path_to_fonts + "NewsGothicBT-Italic.ttf"))
         )
         registerFont(
             TTFont(
-                "NewsGothBT_BoldItalic", "PdfVisualisation/NewsGothicBT-BoldItalic.ttf"
+                "NewsGothBT_BoldItalic",
+                Path(path_to_fonts + "NewsGothicBT-BoldItalic.ttf"),
             )
         )
         registerFontFamily(
