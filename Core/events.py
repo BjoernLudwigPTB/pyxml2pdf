@@ -1,3 +1,4 @@
+import warnings
 from typing import List
 from xml.etree.ElementTree import Element
 
@@ -244,7 +245,7 @@ class Event(Element):
             try:
                 self._subtable_title
             except AttributeError:
-                raise RuntimeError(
+                warnings.warn(
                     "No title for a reference to the full event was given by any "
                     "previous call. Thus it needs to be given this time."
                 )
