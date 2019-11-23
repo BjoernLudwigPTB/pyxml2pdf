@@ -37,7 +37,12 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
     "sphinx.ext.todo",
+    "sphinx.ext.intersphinx",
 ]
+
+# Add setting to link to Python builtins according to
+# https://www.sphinx-doc.org/en/master/usage/quickstart.html#intersphinx
+intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
