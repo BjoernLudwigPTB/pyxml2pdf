@@ -100,12 +100,16 @@ class Event(Element):
         """
 
         def execute_get_full_and_init_reduced_row(self, *args, **kwargs):
-            """Exchange a table row with all the event's information with a
+            """Exchange a table row with all the event's information against a
             subtable's title
 
             This ensures, that after handing over the full information, the reduced
             version with a reference to the subtable containing the  full version is
             created.
+
+            .. note: This is ensured by a decorator, which is why the function
+                signature on ReadTheDocs is displayed incorrectly. The parameter and
+                return value are as follows...
 
             :param str subtable_title: the title of the subtable in which the row will
                 be integrated
@@ -253,11 +257,16 @@ class Event(Element):
 
     @create_reduced_after_full
     def get_full_row(self, subtable_title=None):
-        """Exchange a table row with all the event's information with a subtable's title
+        """Exchange a table row with all the event's information against a
+        subtable's title
 
         This ensures, that after handing over the full information, the reduced
         version with a reference to the subtable containing the  full version is
         created.
+
+        .. note: This is ensured by a decorator, which is why the function
+            signature on ReadTheDocs is displayed incorrectly. The parameter and
+            return value are as follows...
 
         :param str subtable_title: the title of the subtable in which the row will
             be integrated
