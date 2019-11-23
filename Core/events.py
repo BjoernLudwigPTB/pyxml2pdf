@@ -47,7 +47,6 @@ class Event(Element):
         super().__init__(element.tag, element.attrib)
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
-        table_builder = TableBuilder
         table_style = TableStyle()
         self._style = table_style.custom_styles["Normal"]
         self._column_widths = table_style.column_widths
