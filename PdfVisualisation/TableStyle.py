@@ -86,7 +86,7 @@ class TableStyle:
 
     @staticmethod
     def _init_font_family():
-        """Register the desired font with `reportlab`
+        """Register the desired font with :py:mod:`reportlab`
 
         This ensures that `<i></i>` and `<b></b>` as cell content work well.
 
@@ -112,14 +112,16 @@ class TableStyle:
             boldItalic="NewsGothBT_BoldItalic",
         )
 
-    def get_column_widths(self):
+    @property
+    def column_widths(self):
         """Return the column widths for the tables
 
-        :returns: the list of column widths
+        :returns List[float]: the list of column widths
         """
         return self._column_widths
 
-    def get_custom_styles(self):
+    @property
+    def custom_styles(self):
         """Return the custom stylesheet for the tables
 
         :returns reportlab.lib.styles.StyleSheet1: the custom stylesheet
