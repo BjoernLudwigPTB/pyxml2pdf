@@ -17,7 +17,7 @@ def test_initializer():
     input_path = input_folder + xml_filename
     properties_filename = "testdata_prop.properties"
     properties_path = input_folder + properties_filename
-    output_folder = "test/test_data/"
+    output_folder = input_folder
     output_filename = "testdata.pdf"
     output_path = output_folder + output_filename
     Initializer(input_path, output_path, properties_path)

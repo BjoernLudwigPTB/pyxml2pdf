@@ -24,6 +24,7 @@ class Event(Element):
     _categories: List[str]
     _full_row: Table
     _reduced_row: Table
+    _subtable_title: str
 
     def __init__(self, element):
         # Call Element constructor and extend ourselves by extending all children
@@ -60,8 +61,15 @@ class Event(Element):
 
         :param str subtable_title: title of the subtable which contains the full event
         """
-
         self._reduced_row = Table([subtable_title])
+
+    def create_reduced_after_full(f):
+        def decorate(*args, **kwargs):
+            ret = f(*args, **kwargs)
+            args[0]._init_reduced_row(args[1])
+            return ret
+
+        return decorate
 
     def _concatenate_tags_content(self, event_subelements, separator=" - "):
         """Form one string from the texts of a subset of an event's children tags
@@ -213,11 +221,27 @@ class Event(Element):
         """
         return self._categories
 
-    def get_full_row(self):
-        """Return a table row with all the event's information
+    @create_reduced_after_full
+    def get_full_row(self, subtable_title=None):
+        """Exchange a table row with all the event's information with a subtable's title
 
+        This ensures, that after handing over the full information, the reduced
+        version with a reference to the subtable containing the  full version is
+        created.
         :returns Table: a table row with all the event's information
         """
+        # If subtable_title is provided, we assume the event has been written to this
+        # according subtable, so we store, that the event can be found there.
+        if subtable_title:
+            self._subtable_title = subtable_title
+        else:
+            try:
+                self._subtable_title
+            except AttributeError:
+                raise RuntimeError(
+                    "No title for a reference to the full event was given by any "
+                    "previous call. Thus it needs to be given this time."
+                )
         return self._full_row
 
     def get_reduced_row(self):

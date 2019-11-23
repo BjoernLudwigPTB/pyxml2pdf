@@ -64,9 +64,9 @@ def test_event_attrib(test_element, test_event):
     assert test_event.attrib == test_element.attrib
 
 
-def test_event_call_get_full_row(test_event):
+def test_event_call_get_full_row(test_event, setup_subtable_title):
     """Test if get_full_row's return type matches expectations"""
-    assert isinstance(test_event.get_full_row(), Table)
+    assert isinstance(test_event.get_full_row(setup_subtable_title), Table)
 
 
 def test_event_init_reduced_call(test_event, setup_subtable_title):
@@ -81,7 +81,7 @@ def test_event_get_reduced_row(test_event, setup_subtable_title):
     test_event.get_reduced_row()
 
 
-def test_event_reduced_creation(test_event):
+def test_event_reduced_creation(test_event, setup_subtable_title):
     """Test if reduced row is created after full row is requested"""
-    test_event.get_full_row()
-    # test_event.get_reduced_row()
+    test_event.get_full_row(setup_subtable_title)
+    test_event.get_reduced_row()
