@@ -1,56 +1,35 @@
 from typing import List
 
+from reportlab.platypus import Table
+
 
 class EventTable:
-    def __init__(self, name, locations, activities):
-        """
-        Contains all events which cover the mentioned activities at the
-        mentioned locations. Every event listed covers at least one of the
-        listed activities at one of the listed locations.
+    """An EventTable contains a subset of the xml inputs
 
-        :param str name: name of the table describing where and what is done in
-            the included events
-        :param List[str] locations: list of locations where the listed activities take
-            place
-        :param List[str] activities: list of activities covered by the listed
-            events
-        """
-        self._elements = []
-        self._styles = []
-        self._name = name
-        self._locations = locations
-        self._activities = activities
+    Contains all events which cover the mentioned activities at the
+    mentioned locations. Every event listed covers at least one of the
+    listed activities at one of the listed locations.
 
-    def add_event(self, event):
-        """
-        Adds a single event to the table later to be displayed as part of the
-        table.
+    :param str title: name of the table describing where and what is done in
+        the included events
+    :param List[str] locations: list of locations where the activities take place
+    :param List[str] activities: list of activities covered by the listed events
+    """
 
-        :param List[reportlab.platypus.Table] event:
-        """
-        self._elements.append(event)
+    title: str
+    locations: List[str]
+    activities: List[str]
+    events: List[Table]
 
-    def get_elements(self):
-        """
-        Return the collected event table.
+    def __init__(self, title, locations, activities):
+        self.events = []
+        self.title = title
+        self.locations = locations
+        self.activities = activities
 
-        :return list[reportlab.platypus.Table]: a list of all table rows
-            containing the relevant event data
-        """
-        return self._elements
+    def append(self, event):
+        """Append an event to the end of the table
 
-    def get_activities(self):
+        :param reportlab.platypus.Table event:
         """
-        Return the activities associated with the event table.
-
-        :return list[str]: a list of all activities
-        """
-        return self._activities
-
-    def get_locations(self):
-        """
-        Return the locations on which the events of this table take place.
-
-        :return list[str]: a list of all locations
-        """
-        return self._locations
+        self.events.append(event)

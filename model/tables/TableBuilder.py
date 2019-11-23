@@ -1,20 +1,17 @@
 import warnings
 from typing import List
 
-from reportlab.platypus import Paragraph
+from reportlab.platypus import Paragraph, Table
 
 from PdfVisualisation.TableStyle import TableStyle
-from model.tables.Creator import Creator
 from model.tables.EventTable import EventTable
 
 
 class TableBuilder:
-    def __init__(self, properties, styles):
-        self._styles = styles
-        self._creator = Creator()
-        self._prop = properties
+    def __init__(self):
         self._subtable_names_and_categs = self._parse_properties()
-        self._table_styles = TableStyle()
+        self._table_style = TableStyle()
+        self._styles = self._table_style.custom_styles
         self._subtables = self.create_subtables()
 
     @staticmethod
@@ -63,8 +60,7 @@ class TableBuilder:
         ]
 
     def create_subtables(self):
-        """
-        Create subtables for all different kinds of items.
+        """Create subtables for all different kinds of events
 
         :return list[EventTable]: a list of all subtables
         """
@@ -76,7 +72,7 @@ class TableBuilder:
             )
             headers = self.make_header(subtables_props[0])
             for header in headers:
-                subtable.add_event(header)
+                subtable.append(header)
             subtables.append(subtable)
         return subtables
 
@@ -92,10 +88,10 @@ class TableBuilder:
         """
         # Create first row spanning the full width and title as content.
         title_row = [
-            self._creator.create_fixedwidth_table(
+            self.create_fixedwidth_table(
                 [[Paragraph(title, self._styles["Heading1"])]],
-                self._table_styles.table_width,
-                self._table_styles.heading,
+                self._table_style.table_width,
+                self._table_style.heading,
             )
         ]
 
@@ -118,45 +114,65 @@ class TableBuilder:
 
         # Concatenate both rows.
         title_row.append(
-            self._creator.create_fixedwidth_table(
+            self.create_fixedwidth_table(
                 [columns],
-                self._table_styles.get_column_widths(),
-                self._table_styles.sub_heading,
+                self._table_style.column_widths,
+                self._table_style.sub_heading,
             )
         )
         return title_row
 
     def collect_subtables(self):
         aggregated_subtables = []
-        for table in self._subtables:
-            for element in table.get_elements():
+        for subtable in self._subtables:
+            for element in subtable.events:
                 aggregated_subtables.append(element)
         return aggregated_subtables
 
-    def distribute_event(self, event_as_tablerow, categories):
-        """
-        Distribute an event to the subtables according to the related categories.
+    def distribute_event(self, event):
+        """Distribute an event to the subtables according to the related categories
 
-        :param reportlab.platypus.Table event_as_tablerow: event which is to be
-            distributed
-        :param List[str] categories: the categories list of the specified event
+        :param Core.events.Event event: event to distribute
         """
+
         distribution_failed = True
-        set_of_cats = set(categories)
+        set_of_cats = set(event.categories)
         for subtable in self._subtables:
-            _locations = subtable.get_locations()
-            _activities = subtable.get_activities()
+            _locations = subtable.locations
+            _activities = subtable.activities
             if set_of_cats.intersection(_activities):
                 if set_of_cats.intersection(_locations):
-                    subtable.add_event(event_as_tablerow)
+                    subtable.append(event.get_full_row(subtable.title))
                     distribution_failed = False
         if distribution_failed:
             warnings.warn(
-                event_as_tablerow.__getattribute__("_cellvalues")[0][3].text
+                event.responsible
                 + "'s event on "
-                + event_as_tablerow.__getattribute__("_cellvalues")[0][1].text
-                + " would not be printed, because it does not contain a valid "
-                "combination of locations and activities. Either add a valid location "
-                "or add a valid activity or both.",
+                + event.date
+                + " would not be printed, because it does not contain a valid"
+                " combination of locations and activities. Either add a valid location"
+                " or add a valid activity or both.",
                 RuntimeWarning,
             )
+
+    def create_fixedwidth_table(self, cells, widths=None, style=None):
+        """Create a table with specified column widths
+
+        Create a table from specified cells with fixed column widths and a specific
+        style.
+
+        :param List[List[reportlab.platypus.Flowable]] cells: cells wrapped by a
+            list representing the columns wrapped by a list representing the lines
+        :param Union[float, List[float]] widths: the column widths
+        :param List[Tuple[Union[str, Tuple[int]]]] style: desired table's style
+        :returns: table containing specified cells in fixed width, styled columns
+        :rtype: Table
+        """
+        if widths is None:
+            widths = self._table_style.column_widths
+        if style is None:
+            style = self._table_style.normal
+        table = Table(cells, colWidths=widths)
+        table.setStyle(style)
+
+        return table

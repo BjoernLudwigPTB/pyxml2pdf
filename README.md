@@ -4,17 +4,19 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/462d32995c5cc87af346/maintainability)](https://codeclimate.com/github/BjoernLudwigPTB/XMLToPDFConverter/maintainability)
 [![codecov](https://codecov.io/gh/BjoernLudwigPTB/XMLToPDFConverter/branch/master/graph/badge.svg)](https://codecov.io/gh/BjoernLudwigPTB/XMLToPDFConverter)
 
-
-Convert XML template to PDF table. Since the forking this project has generalized
-quite a bit on the generation of a multipage PDF file containing a table with defined
-columns. Since we work on this project every end of the year, we will provide an
-extensive bit of documentation by the end of November 2019.
+Convert XML input to PDF table. Since we forked the
+[upstream](https://github.com/kuras120/XMLToPDFConverter) this project has generalized
+quite a bit on the generation of a multipage PDF file containing a table with
+subtables each containing a subset of the xml tags based on the texts of some of
+their children tags. Since we work on this project every end of the year, we will
+provide an extensive bit of documentation by the end of November 2019.
 
 ## Getting started 
-As a starting point you could take a look at the execution of `MainPredefiend.py`
-which will download a publicly available XML-file into the folder *input* and process
-it as desired to produce the output files (one file containing all generated pages
- and additionally one file per page) and place them in the subfolder *output*.
+As a starting point you could take a look at the execution of
+[MainPredefined.py](MainPredefined.py) which will download a publicly available XML
+file into the folder *input* and process it as desired to produce the output files
+(one file containing all generated pages in landscape and additionally one file per
+page rotated into portrait) and place them in the subfolder *output*.
  
  ## Get in touch
  In case you have any questions on this project do not hesitate to get in touch with
