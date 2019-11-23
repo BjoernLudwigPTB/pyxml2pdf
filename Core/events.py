@@ -26,6 +26,8 @@ class Event(Element):
     _full_row: Table
     _reduced_row: Table
     _subtable_title: str
+    _date: str
+    _responsible: str
 
     def __init__(self, element):
         # Call Element constructor and extend ourselves by extending all children
@@ -40,6 +42,8 @@ class Event(Element):
         self._normal_style = table_style.normal
         # Initialize definitely needed instance variables.
         self._init_categories()
+        self._init_date()
+        self._responsible = self._concatenate_tags_content(["Kursleiter"])
         self._init_full_row()
 
     def _init_categories(self):
@@ -109,16 +113,9 @@ class Event(Element):
         """
         columns_to_print = [
             Paragraph(self._concatenate_tags_content(["Kursart"]), self._style),
-            Paragraph(
-                self._parse_date(
-                    self._concatenate_tags_content(
-                        ["TerminDatumVon1", "TerminDatumBis1"]
-                    )
-                ),
-                self._style,
-            ),
+            Paragraph(self._date, self._style),
             Paragraph(self._concatenate_tags_content(["Ort1"]), self._style),
-            Paragraph(self._concatenate_tags_content(["Kursleiter"]), self._style),
+            Paragraph(self._responsible, self._style),
             Paragraph(
                 self._init_description(
                     self._concatenate_tags_content(["Bezeichnung"]),
@@ -143,26 +140,28 @@ class Event(Element):
             [columns_to_print], self._column_widths, self._normal_style
         )
 
-    @staticmethod
-    def _parse_date(date):
-        """
-        Determine the correct date for printing.
-
-        :param str date: xml tag for relevant date.
-        :returns str: the text to insert in date column of the current event
-        """
-        if "2099" in date:
-            date_string = "auf Anfrage"
-        elif date:
-            date_string = (
-                date.replace("00:00", "")
+    def _init_date(self):
+        """Create a properly formatted string containing the date of the event"""
+        # Extract data from xml children tags' texts
+        extracted_date = self._concatenate_tags_content(
+            ["TerminDatumVon1", "TerminDatumBis1"]
+        )
+        # Replace any extracted_date of a form like 31.12.2099 with a string to tell anytime.
+        if "2099" in extracted_date:
+            new_date = "auf Anfrage"
+        elif extracted_date:
+            # Remove placeholders for missing time specifications and the first two
+            # digits of the year specification.
+            new_date = (
+                extracted_date.replace("00:00", "")
                 .replace("2020", "20")
                 .replace("2019", "19")
                 .replace("2018", "18")
             )
         else:
-            date_string = ""
-        return date_string
+            # All other dates stay uninterpreted and will be dropped.
+            new_date = ""
+        self._date = new_date
 
     @staticmethod
     def _parse_prerequisites(personal, material, financial, offers):
@@ -251,9 +250,26 @@ class Event(Element):
                 )
         return self._full_row
 
-    def get_reduced_row(self):
+    @property
+    def reduced_row(self):
         """Return a table row with a reference to where to find the full information
 
         :returns Table: a table row with some of the event's information
         """
         return self._reduced_row
+
+    @property
+    def responsible(self):
+        """Return the name of the person being responsible for the event
+
+        :returns str: first and last name
+        """
+        return self._responsible
+
+    @property
+    def date(self):
+        """Return the date of the event
+
+        :returns str: date
+        """
+        return self._date

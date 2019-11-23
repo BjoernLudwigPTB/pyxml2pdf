@@ -149,13 +149,12 @@ class TableBuilder:
                     subtable.append(event.get_full_row(subtable.title))
                     distribution_failed = False
         if distribution_failed:
-            content = event.get_full_row()
             warnings.warn(
-                content.__getattribute__("_cellvalues")[0][3].text
+                event.responsible
                 + "'s event on "
-                + content.__getattribute__("_cellvalues")[0][1].text
-                + " would not be printed, because it does not contain a valid "
-                "combination of locations and activities. Either add a valid location "
-                "or add a valid activity or both.",
+                + event.date
+                + " would not be printed, because it does not contain a valid"
+                " combination of locations and activities. Either add a valid location"
+                " or add a valid activity or both.",
                 RuntimeWarning,
             )

@@ -77,10 +77,10 @@ def test_event_init_reduced_call(test_event, setup_subtable_title):
 def test_event_get_reduced_row(test_event, setup_subtable_title):
     """Test if reduced row is created as just one table row"""
     test_event._init_reduced_row(setup_subtable_title)
-    test_event.get_reduced_row()
+    assert test_event.reduced_row
 
 
 def test_event_reduced_creation(test_event, setup_subtable_title):
     """Test if reduced row is created after full row is requested"""
     test_event.get_full_row(setup_subtable_title)
-    test_event.get_reduced_row()
+    assert test_event.reduced_row
