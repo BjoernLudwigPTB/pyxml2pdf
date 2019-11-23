@@ -26,12 +26,17 @@ class Event(Element):
     _reduced_row: Table
 
     def __init__(self, element):
+        # Call Element constructor and extend ourselves by extending all children
+        # tags to create an underlying copy of element.
         super().__init__(element.tag, element.attrib)
+        self.extend(list(element))
+        # Initialize needed objects especially for table creation.
         self._creator = Creator()
         table_style = TableStyle()
         self._style = table_style.get_custom_styles()["Normal"]
         self._column_widths = table_style.get_column_widths()
         self._normal_style = table_style.normal
+        # Initialize definitely needed instance variables.
         self._init_categories()
         self._init_full_row()
 
@@ -53,7 +58,7 @@ class Event(Element):
         of the event and a reference to the fully described event at another place,
         namely the subtable with the given title.
 
-        :param str subtable_title: the title of the subtable to refer to
+        :param str subtable_title: title of the subtable which contains the full event
         """
 
         self._reduced_row = Table([subtable_title])
