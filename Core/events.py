@@ -1,6 +1,4 @@
-"""This module provides a wrapper class :py:class:`Core.Event` to deal with the
-events extracted from the xml input.
-"""
+"""Module to provide a wrapper :py:class:`Core.events.Event` for xml extracted data"""
 from model.tables.TableBuilder import TableBuilder
 
 __all__ = ["Event"]
@@ -17,16 +15,14 @@ from PdfVisualisation.TableStyle import TableStyle
 
 
 class Event(Element):
-    """*Event* is a wrapper class for :py:mod:`xml.etree.ElementTree.Element`
+    """A wrapper class for :py:class:`xml.etree.ElementTree.Element`
 
-    :py:mod:`xml.etree.ElementTree.Element` is augmented with the table row
+    :py:class:`xml.etree.ElementTree.Element` is augmented with the table row
     representation and the attributes and methods to manipulate everything
-    according to the final tables needs. An :py:mod:`Core.events.Event` can only
-    be initialized with an object of type
-    :py:mod:`xml.etree.ElementTree.Element`.
+    according to the final tables needs. A :py:class:`Core.events.Event` can only
+    be initialized with an object of type :py:class:`xml.etree.ElementTree.Element`.
 
-    :param xml.etree.ElementTree.Element element: the element on which *event*
-        should be based
+    :param xml.etree.ElementTree.Element element: the element to build the instance from
     """
 
     _table_builder = TableBuilder()
