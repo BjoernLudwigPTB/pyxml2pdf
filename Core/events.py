@@ -52,7 +52,7 @@ class Event(Element):
         Create a table row in proper format but just containing a brief description
         of the event and a reference to the fully described event at another place,
         namely the subtable with the given title.
-        # TODO continue writing that automatic creation
+
         :param str subtable_title: the title of the subtable to refer to
         """
 

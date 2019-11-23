@@ -23,8 +23,8 @@ def test_element() -> Element:
 
 
 @pytest.fixture()
-def setup_subtable_name() -> str:
-    return "Meine Testsubtabelle"
+def setup_subtable_title() -> str:
+    return "Test subtable title"
 
 
 def test_event_init(test_element):
@@ -61,10 +61,10 @@ def test_event_call_get_full_row(test_element):
     assert isinstance(test_event.get_full_row(), Table)
 
 
-def test_event_init_reduced_call(test_element, setup_subtable_name):
+def test_event_init_reduced_call(test_element, setup_subtable_title):
     """Test if reduced row is created after full row is requested"""
     test_event = Event(test_element)
-    test_event._init_reduced_row(setup_subtable_name)
+    test_event._init_reduced_row(setup_subtable_title)
     assert test_event._reduced_row
 
 
