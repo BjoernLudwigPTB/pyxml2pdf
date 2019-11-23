@@ -100,9 +100,16 @@ class Event(Element):
         """
 
         def execute_get_full_and_init_reduced_row(self, *args, **kwargs):
-            """This just realizes the calls of the two involved functions
+            """Exchange a table row with all the event's information with a
+            subtable's title
 
-            :returns Table: the return value of :meth:`get_full_row`
+            This ensures, that after handing over the full information, the reduced
+            version with a reference to the subtable containing the  full version is
+            created.
+
+            :param str subtable_title: the title of the subtable in which the row will
+                be integrated
+            :returns Table: a table row with all the event's information
             """
             return_table = func(self, *args, **kwargs)
             self._init_reduced_row(args[0])
@@ -252,6 +259,8 @@ class Event(Element):
         version with a reference to the subtable containing the  full version is
         created.
 
+        :param str subtable_title: the title of the subtable in which the row will
+            be integrated
         :returns Table: a table row with all the event's information
         """
         # If subtable_title is provided, we assume the event has been written to this
