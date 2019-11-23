@@ -64,9 +64,14 @@ class Event(Element):
         self._reduced_row = Table([subtable_title])
 
     def create_reduced_after_full(f):
-        def decorate(*args, **kwargs):
-            ret = f(*args, **kwargs)
-            args[0]._init_reduced_row(args[1])
+        """Decorator to execute :meth:`_init_reduced_row` with :meth:`get_full_row`
+
+        :returns Table: the return value of :meth:`get_full_row`
+        """
+
+        def decorate(self, *args, **kwargs):
+            ret = f(self, *args, **kwargs)
+            self._init_reduced_row(args[0])
             return ret
 
         return decorate
