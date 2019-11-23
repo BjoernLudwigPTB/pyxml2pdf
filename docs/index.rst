@@ -1,5 +1,5 @@
 pyxml2pdf - Creating PDF tables from XML
-==============================================
+========================================
 
 Convert XML input to PDF table. Since we forked the `upstream <https://github
 .com/kuras120/XMLToPDFConverter>`_ this project has generalized quite a bit on the
