@@ -68,8 +68,7 @@ class Event(Element):
         :param str subtable_title: title of the subtable which contains the full event
 
         .. warning:: Do not call this function directly since it is automatically
-        called by :meth:`execute_get_full_and_init_reduced_row` after
-        :meth:`get_full_row` is invoked.
+        called right after :meth:`get_full_row` is invoked.
         """
         columns_to_print = [
             Paragraph(self._type, self._style),
