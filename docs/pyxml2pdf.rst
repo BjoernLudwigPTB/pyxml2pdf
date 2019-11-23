@@ -1,16 +1,13 @@
 pyxml2pdf
 =========
 
-.. automodule:: Core
-    :members:
-    :private-members:
-
 Downloader
 ----------
 
 .. automodule:: Core.Downloader
     :members:
     :private-members:
+    :undoc-members:
 
 
 Initializer
@@ -19,6 +16,7 @@ Initializer
 .. automodule:: Core.Initializer
     :members:
     :private-members:
+    :undoc-members:
 
 Event
 -----
@@ -26,6 +24,7 @@ Event
 .. automodule:: Core.events
     :members:
     :private-members:
+    :undoc-members:
 
 Parser
 ------
@@ -33,6 +32,7 @@ Parser
 .. automodule:: Core.Parser
     :members:
     :private-members:
+    :undoc-members:
 
 PostProcessor
 -------------
@@ -40,6 +40,7 @@ PostProcessor
 .. automodule:: Core.PostProcessor
     :members:
     :private-members:
+    :undoc-members:
 
 Sorter
 ------
@@ -47,3 +48,5 @@ Sorter
 .. automodule:: Core.Sorter
     :members:
     :private-members:
+    :undoc-members:
+
