@@ -22,7 +22,7 @@ class Parser:
     _elements: List[KeepTogether]
     """The table rows which will be printed"""
     _table_manager: TableBuilder
-    """The `TableBuilder` to distribute the elements and style the tables"""
+    """The :py:mod:`TableBuilder` to distribute the elements and style the tables"""
 
     def __init__(self, properties, elements=[]):
         self._elements = elements
