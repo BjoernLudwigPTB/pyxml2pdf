@@ -1,4 +1,4 @@
-"""`Core.Parser` is the interface between xml input and table output"""
+""":py:mod:`Core.Parser` is the interface between xml input and table output"""
 
 __all__ = ["Parser"]
 
