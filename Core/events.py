@@ -214,3 +214,10 @@ class Event(Element):
         :returns Table: a table row with all the event's information
         """
         return self._full_row
+
+    def get_reduced_row(self):
+        """Return a table row with a reference to where to find the full information
+
+        :returns Table: a table row with some of the event's information
+        """
+        return self._reduced_row
