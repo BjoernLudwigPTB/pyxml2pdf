@@ -29,6 +29,8 @@ class Event(Element):
         should be based
     """
 
+    _table_builder = TableBuilder()
+
     _categories: List[str]
     _full_row: Table
     _reduced_row: Table
@@ -45,9 +47,10 @@ class Event(Element):
         super().__init__(element.tag, element.attrib)
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
+        table_builder = TableBuilder
         table_style = TableStyle()
-        self._style = table_style.get_custom_styles()["Normal"]
-        self._column_widths = table_style.get_column_widths()
+        self._style = table_style.custom_styles["Normal"]
+        self._column_widths = table_style.column_widths
         self._normal_style = table_style.normal
         # Initialize definitely needed instance variables.
         self._init_categories()
@@ -147,9 +150,7 @@ class Event(Element):
                 self._style,
             ),
         ]
-        self._full_row = TableBuilder.create_fixedwidth_table(
-            [columns_to_print], self._column_widths, self._normal_style
-        )
+        self._full_row = self._table_builder.create_fixedwidth_table([columns_to_print])
 
     def _init_date(self):
         """Create a properly formatted string containing the date of the event"""

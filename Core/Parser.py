@@ -11,7 +11,7 @@ class Parser:
     """XML parser to extract all interesting information from xml input
 
     :param str properties: path to the properties file
-    :param List[KeepTogether] elements: optional elements to populate the Parser
+    :param List[KeepTogether] elements: optional cells to populate the Parser
     """
 
     _elements: List[KeepTogether]
@@ -19,7 +19,7 @@ class Parser:
 
     def __init__(self, properties, elements=[]):
         self._elements = elements
-        self._table_manager = TableBuilder(properties)
+        self._table_manager = TableBuilder()
 
     def collect_xml_data(self, events):
         """Traverse the parsed xml data and gather collected event data
@@ -32,7 +32,7 @@ class Parser:
         :returns List[KeepTogether]: list of all table rows containing the relevant
             event data
         """
-        if events is not None:
+        if events:
             for event in events:
                 event = Event(event)
                 self._table_manager.distribute_event(event)
