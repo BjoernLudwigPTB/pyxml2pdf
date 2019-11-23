@@ -30,6 +30,7 @@ class Event(Element):
     """
 
     _table_builder = TableBuilder()
+    _table_style = TableStyle()
 
     _categories: List[str]
     _full_row: Table
@@ -47,8 +48,7 @@ class Event(Element):
         super().__init__(element.tag, element.attrib)
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
-        table_style = TableStyle()
-        self._style = table_style.custom_styles["Normal"]
+        self._style = self._table_style.custom_styles["Normal"]
         # Initialize definitely needed instance variables.
         self._init_categories()
         self._type = self._concatenate_tags_content(["Kursart"])
@@ -58,15 +58,9 @@ class Event(Element):
         self._init_full_row()
 
     def _init_categories(self):
-        """
-        Initialize the list of categories from the content of the "Kategorie" tag
-        gathered from the xml.
-
-        :returns int: `True` if the categories were successfully extracted
-        """
+        """Initialize the list of categories from the according xml tag's content"""
         categories: str = self._concatenate_tags_content(["Kategorie"])
         self._categories = categories.split(", ")
-        return 1
 
     def _init_reduced_row(self, subtable_title):
         """Initializes the reduced version of the event
@@ -77,7 +71,34 @@ class Event(Element):
 
         :param str subtable_title: title of the subtable which contains the full event
         """
-        self._reduced_row = Table([subtable_title])
+        columns_to_print = [
+            Paragraph(self._type, self._style),
+            Paragraph(self._date, self._style),
+            Paragraph(self._region, self._style),
+            Paragraph(self._responsible, self._style),
+            Paragraph(
+                self._init_description(
+                    self._concatenate_tags_content(["Bezeichnung"]),
+                    self._concatenate_tags_content(["Bezeichnung2"]),
+                    self._concatenate_tags_content(["Beschreibung"]),
+                    self._concatenate_tags_content(["TrainerURL"]),
+                ),
+                self._style,
+            ),
+            Paragraph(self._concatenate_tags_content(["Zielgruppe"]), self._style),
+            Paragraph(
+                self._parse_prerequisites(
+                    self._concatenate_tags_content(["Voraussetzung"]),
+                    self._concatenate_tags_content(["Ausruestung"]),
+                    self._concatenate_tags_content(["Kurskosten"]),
+                    self._concatenate_tags_content(["Leistungen"]),
+                ),
+                self._style,
+            ),
+        ]
+        self._reduced_row = self._table_builder.create_fixedwidth_table(
+            [columns_to_print]
+        )
 
     def create_reduced_after_full(func):
         """Decorator to execute :meth:`_init_reduced_row` with :meth:`get_full_row`
@@ -229,14 +250,6 @@ class Event(Element):
 
         return full_description
 
-    @property
-    def categories(self):
-        """Return the event's categories
-
-        :returns List[str]: a list of the event's categories
-        """
-        return self._categories
-
     @create_reduced_after_full
     def get_full_row(self, subtable_title=None):
         """Exchange a table row with all the event's information with a subtable's title
@@ -260,6 +273,14 @@ class Event(Element):
                     "previous call. Thus it needs to be given this time."
                 )
         return self._full_row
+
+    @property
+    def categories(self):
+        """Return the event's categories
+
+        :returns List[str]: a list of the event's categories
+        """
+        return self._categories
 
     @property
     def reduced_row(self):
