@@ -321,8 +321,9 @@ class Event(Element):
     def table_row(self, subtable_title):
         """Return the table row representation of the event
 
-        This is the API of Event for getting the table row representation of the
-        event. It makes sure, that on the first call to
+        This is the API of :py:class:`Core.events.Event` for getting the table row
+        representation of the event. It makes sure, that on the first call
+        :meth:`get_full_row` is invoked and otherwise :attr:`_reduced_row` is returned.
 
         :param str subtable_title: the title of the subtable in which the row will
             be integrated
