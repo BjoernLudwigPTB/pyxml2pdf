@@ -99,7 +99,7 @@ class Event(Element):
         :returns Table: the return value of :meth:`get_full_row`
         """
 
-        def execute_get_full_and_init_reduced_row(self, *args, **kwargs):
+        def execute_get_full_and_init_reduced_row(self, *args, **kwargs) -> Table:
             """Exchange a table row with all the event's information against a
             subtable's title
 
@@ -108,7 +108,9 @@ class Event(Element):
             created.
 
             .. note:: This is ensured by a decorator, which is why the function
-                signature on ReadTheDocs is displayed incorrectly. The parameter and
+                signature on `ReadTheDocs.org
+                <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#Core.events
+                .Event.get_full_row>`_ is displayed incorrectly. The parameter and
                 return value are as follows...
 
             :param str subtable_title: the title of the subtable in which the row will
@@ -256,7 +258,7 @@ class Event(Element):
         return full_description
 
     @create_reduced_after_full
-    def get_full_row(self, subtable_title=None):
+    def get_full_row(self, subtable_title=None) -> Table:
         """Exchange a table row with all the event's information against a
         subtable's title
 
@@ -265,7 +267,9 @@ class Event(Element):
         created.
 
         .. note:: This is ensured by a decorator, which is why the function
-            signature on ReadTheDocs is displayed incorrectly. The parameter and
+            signature on `ReadTheDocs.org
+            <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#Core.events
+            .Event.get_full_row>`_ is displayed incorrectly. The parameter and
             return value are as follows...
 
         :param str subtable_title: the title of the subtable in which the row will
