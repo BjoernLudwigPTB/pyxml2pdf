@@ -4,7 +4,6 @@ from typing import List
 from reportlab.platypus.flowables import KeepTogether
 
 from Core.events import Event
-from model.tables.Creator import Creator
 from model.tables.TableBuilder import TableBuilder
 
 
@@ -16,12 +15,10 @@ class Parser:
     """
 
     _elements: List[KeepTogether]
-    _creator: Creator
     _table_manager: TableBuilder
 
     def __init__(self, properties, elements=[]):
         self._elements = elements
-        self._creator = Creator()
         self._table_manager = TableBuilder(properties)
 
     def collect_xml_data(self, events):

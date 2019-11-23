@@ -1,6 +1,7 @@
 """This module provides a wrapper class :py:class:`Core.Event` to deal with the
 events extracted from the xml input.
 """
+from model.tables.TableBuilder import TableBuilder
 
 __all__ = ["Event"]
 
@@ -13,7 +14,6 @@ from reportlab.platypus import Paragraph
 from reportlab.platypus import Table
 
 from PdfVisualisation.TableStyle import TableStyle
-from model.tables.Creator import Creator
 
 
 class Event(Element):
@@ -33,8 +33,11 @@ class Event(Element):
     _full_row: Table
     _reduced_row: Table
     _subtable_title: str
+    _type: str
     _date: str
+    _region: str
     _responsible: str
+    _description: str
 
     def __init__(self, element):
         # Call Element constructor and extend ourselves by extending all children
@@ -42,14 +45,15 @@ class Event(Element):
         super().__init__(element.tag, element.attrib)
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
-        self._creator = Creator()
         table_style = TableStyle()
         self._style = table_style.get_custom_styles()["Normal"]
         self._column_widths = table_style.get_column_widths()
         self._normal_style = table_style.normal
         # Initialize definitely needed instance variables.
         self._init_categories()
+        self._type = self._concatenate_tags_content(["Kursart"])
         self._init_date()
+        self._region = self._concatenate_tags_content(["Ort1"])
         self._responsible = self._concatenate_tags_content(["Kursleiter"])
         self._init_full_row()
 
@@ -119,9 +123,9 @@ class Event(Element):
         into a nicely formatted row of a table.
         """
         columns_to_print = [
-            Paragraph(self._concatenate_tags_content(["Kursart"]), self._style),
+            Paragraph(self._type, self._style),
             Paragraph(self._date, self._style),
-            Paragraph(self._concatenate_tags_content(["Ort1"]), self._style),
+            Paragraph(self._region, self._style),
             Paragraph(self._responsible, self._style),
             Paragraph(
                 self._init_description(
@@ -143,7 +147,7 @@ class Event(Element):
                 self._style,
             ),
         ]
-        self._full_row = self._creator.create_fixedwidth_table(
+        self._full_row = TableBuilder.create_fixedwidth_table(
             [columns_to_print], self._column_widths, self._normal_style
         )
 
@@ -242,6 +246,7 @@ class Event(Element):
         This ensures, that after handing over the full information, the reduced
         version with a reference to the subtable containing the  full version is
         created.
+
         :returns Table: a table row with all the event's information
         """
         # If subtable_title is provided, we assume the event has been written to this

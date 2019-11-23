@@ -75,9 +75,10 @@ def test_event_init_reduced_call(test_event, setup_subtable_title):
 
 
 def test_event_get_reduced_row(test_event, setup_subtable_title):
-    """Test if reduced row is created as just one table row"""
+    """Test if reduced row is created as just one table row with four columns"""
     test_event._init_reduced_row(setup_subtable_title)
-    assert test_event.reduced_row
+    assert test_event.reduced_row._nrows == 1
+    assert test_event.reduced_row._ncols == 1
 
 
 def test_event_reduced_creation(test_event, setup_subtable_title):

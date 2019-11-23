@@ -1,17 +1,14 @@
 import warnings
 from typing import List
 
-from reportlab.platypus import Paragraph
+from reportlab.platypus import Paragraph, Table
 
-from Core.events import Event
 from PdfVisualisation.TableStyle import TableStyle
-from model.tables.Creator import Creator
 from model.tables.EventTable import EventTable
 
 
 class TableBuilder:
     def __init__(self, properties):
-        self._creator = Creator()
         self._prop = properties
         self._subtable_names_and_categs = self._parse_properties()
         self._table_styles = TableStyle()
@@ -92,7 +89,7 @@ class TableBuilder:
         """
         # Create first row spanning the full width and title as content.
         title_row = [
-            self._creator.create_fixedwidth_table(
+            TableBuilder.create_fixedwidth_table(
                 [[Paragraph(title, self._styles["Heading1"])]],
                 self._table_styles.table_width,
                 self._table_styles.heading,
@@ -118,7 +115,7 @@ class TableBuilder:
 
         # Concatenate both rows.
         title_row.append(
-            self._creator.create_fixedwidth_table(
+            TableBuilder.create_fixedwidth_table(
                 [columns],
                 self._table_styles.get_column_widths(),
                 self._table_styles.sub_heading,
@@ -136,7 +133,7 @@ class TableBuilder:
     def distribute_event(self, event):
         """Distribute an event to the subtables according to the related categories
 
-        :param Event event: event to distribute
+        :param Core.events.Event event: event to distribute
         """
 
         distribution_failed = True
@@ -158,3 +155,23 @@ class TableBuilder:
                 " or add a valid activity or both.",
                 RuntimeWarning,
             )
+
+    @staticmethod
+    def create_fixedwidth_table(elements, widths, style):
+        """Create a table with specified column widths
+
+        Create a table from specified elements with fixed column widths and a specific
+        style.
+
+        :param List[List[reportlab.platypus.Flowable]] elements: the cell values
+            wrapped by a List representing the columns wrapped by a list representing
+            the lines of the table
+        :param Union[float, List[float]] widths: the column widths
+        :param List[Tuple[Union[str, Tuple[int]]]] style: the style in which the table
+            shall appear
+        :returns Table: table containing all specified elements in fixed width columns
+        """
+        table = Table(elements, colWidths=widths)
+        table.setStyle(style)
+
+        return table
