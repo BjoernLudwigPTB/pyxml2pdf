@@ -168,7 +168,7 @@ class TableBuilder:
         :returns Table: table containing specified cells in fixed width, styled columns
         """
         if widths is None:
-            widths = self._table_style.custom_styles["Normal"]
+            widths = self._table_style.column_widths
         if style is None:
             style = self._table_style.normal
         table = Table(cells, colWidths=widths)
