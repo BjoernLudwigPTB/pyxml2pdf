@@ -99,7 +99,7 @@ class Event(Element):
         :returns Table: the return value of :meth:`get_full_row`
         """
 
-        def execute_get_full_and_init_reduced_row(self, *args, **kwargs) -> Table:
+        def execute_get_full_and_init_reduced_row(self, *args, **kwargs):
             """Exchange a table row with all the event's information against a
             subtable's title
 
@@ -115,7 +115,8 @@ class Event(Element):
 
             :param str subtable_title: the title of the subtable in which the row will
                 be integrated
-            :returns Table: a table row with all the event's information
+            :returns: a table row with all the event's information
+            :rtype: Table
             """
             return_table = func(self, *args, **kwargs)
             self._init_reduced_row(args[0])
@@ -258,7 +259,7 @@ class Event(Element):
         return full_description
 
     @create_reduced_after_full
-    def get_full_row(self, subtable_title=None) -> Table:
+    def get_full_row(self, subtable_title=None):
         """Exchange a table row with all the event's information against a
         subtable's title
 
@@ -274,7 +275,8 @@ class Event(Element):
 
         :param str subtable_title: the title of the subtable in which the row will
             be integrated
-        :returns Table: a table row with all the event's information
+        :returns: a table row with all the event's information
+        :rtype: Table
         """
         # If subtable_title is provided, we assume the event has been written to this
         # according subtable, so we store, that the event can be found there.
