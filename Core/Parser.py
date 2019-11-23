@@ -1,3 +1,7 @@
+"""`Core.Parser` is the interface between xml input and table output"""
+
+__all__ = ["Parser"]
+
 import warnings
 from typing import List
 
@@ -11,11 +15,14 @@ class Parser:
     """XML parser to extract all interesting information from xml input
 
     :param str properties: path to the properties file
-    :param List[KeepTogether] elements: optional cells to populate the Parser
+    :param List[KeepTogether] elements: optional cells
+        to populate the Parser
     """
 
     _elements: List[KeepTogether]
+    """The table rows which will be printed"""
     _table_manager: TableBuilder
+    """The `TableBuilder` to distribute the elements and style the tables"""
 
     def __init__(self, properties, elements=[]):
         self._elements = elements
