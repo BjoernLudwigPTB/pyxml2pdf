@@ -28,7 +28,7 @@ class TableBuilder:
         klettern = [
             "Klettern und Bouldern im Mittelgebirge",
             ["Mittelgebirge"],
-            ["Klettern", "Bouldern"],
+            ["Klettern", "Bouldern", "Höhle"],
         ]
         wandern = [
             "Wandern im Hoch - und Mittelgebirge",
