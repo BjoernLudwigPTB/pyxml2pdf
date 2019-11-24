@@ -77,7 +77,9 @@ class Event(Element):
             Paragraph(self._responsible, self._style),
             Paragraph(
                 self._build_description(
-                    self._concatenate_tags_content(["Bezeichnung"]), link=subtable_title
+                    self._concatenate_tags_content(["Bezeichnung2"]),
+                    self._concatenate_tags_content(["Beschreibung"]),
+                    link=subtable_title,
                 ),
                 self._style,
             ),
