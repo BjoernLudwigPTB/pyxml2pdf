@@ -142,7 +142,7 @@ class TableBuilder:
             _activities = subtable.activities
             if set_of_cats.intersection(_activities):
                 if set_of_cats.intersection(_locations):
-                    subtable.append(event.get_full_row(subtable.title))
+                    subtable.append(event.get_table_row(subtable.title))
                     distribution_failed = False
         if distribution_failed:
             warnings.warn(

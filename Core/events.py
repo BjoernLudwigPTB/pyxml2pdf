@@ -318,7 +318,7 @@ class Event(Element):
         """
         return self._date
 
-    def table_row(self, subtable_title):
+    def get_table_row(self, subtable_title):
         """Return the table row representation of the event
 
         This is the API of :py:class:`Core.events.Event` for getting the table row
@@ -331,7 +331,7 @@ class Event(Element):
         :rtype: Table
         """
         # We check if the reduced row was produced before, which means in turn,
-        # that :meth:`table_row` was called at least once before. Otherwise we call
+        # that :meth:`get_table_row` was called at least once before. Otherwise we call
         # :meth:`get_full_row` which automatically triggers the creation of the
         # reduced row for later uses.
         try:

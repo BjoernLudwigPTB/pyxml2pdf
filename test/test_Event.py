@@ -125,5 +125,5 @@ def test_event_get_row(test_event, subtable_title):
     """Before call to table row no reduced table row should be available"""
     with pytest.raises(AttributeError):
         assert test_event._reduced_row
-    assert test_event.table_row(subtable_title)
+    assert test_event.get_table_row(subtable_title)
     assert test_event._reduced_row
