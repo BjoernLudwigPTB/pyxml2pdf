@@ -40,6 +40,7 @@ class Downloader:
             if chunk:  # filter out keep-alive new chunks
                 file.write(chunk)
         file.close()
+        print("The file " + output_filename + " was successfully downloaded.")
 
     def _extract_filename(self):
         """Extract from a url the element after the last slash, i.e. the filename
