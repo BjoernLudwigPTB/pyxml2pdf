@@ -13,7 +13,7 @@
     <option name="ADD_SOURCE_ROOTS" value="false" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
     <option name="SCRIPT_NAME" value="Main.py" />
-    <option name="PARAMETERS" value="input/kursdaten-draft2020_v1.2.xml output/kursdaten-draft2020_v1.2.pdf input/kursdaten_prop.properties" />
+    <option name="PARAMETERS" value="input/kursdaten-draft2020_v1.31.xml output/kursdaten-draft2020_v1.31.pdf input/kursdaten_prop.properties" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />
