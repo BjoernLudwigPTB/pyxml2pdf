@@ -181,12 +181,21 @@ class Event(Element):
 
     def _init_date(self):
         """Create a properly formatted string containing the date of the event"""
-        # Extract data from xml children tags' texts
+        # Extract data from xml children tags' texts. Since the date can consist of
+        # three date ranges, we concatenate them separated with a line containing
+        # only an "und".
         extracted_date = self._concatenate_tags_content(
             ["TerminDatumVon1", "TerminDatumBis1"]
         )
-        # Replace any extracted_date of a form like 31.12.2099 with a string to tell
-        # anytime.
+        additional_dates = [
+            self._concatenate_tags_content(["TerminDatumVon2", "TerminDatumBis2"]),
+            self._concatenate_tags_content(["TerminDatumVon3", "TerminDatumBis3"]),
+        ]
+        for additional_date in additional_dates:
+            if additional_date:
+                extracted_date += "<br/>und<br/>" + additional_date
+
+        # Replace any extracted_date of a form similar to 31.12.2099 with "on request".
         if "2099" in extracted_date:
             new_date = "auf Anfrage"
         elif extracted_date:
