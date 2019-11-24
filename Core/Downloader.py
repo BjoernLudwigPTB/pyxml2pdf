@@ -5,6 +5,9 @@ from clint.textui import progress
 class Downloader:
     """Download a file and store the result
 
+    If no `output_filename` is specified, we extract the filename of the downloaded
+    file and store the result in the *input* subfolder of the root directory.
+
     :param str url: the full download link
     :param str output_filename: the local path where and under what name to store
         the downloaded file
@@ -13,21 +16,24 @@ class Downloader:
     _url: str
     _output_filename: str
 
-    def __init__(self, url, output_filename):
+    def __init__(self, url, output_filename=None):
         self._url = url
         self._output_filename = output_filename
-        open(output_filename, "wb").write(
-            requests.get(url, allow_redirects=False).content
-        )
 
-        local_filename = self._extract_filename()
+        # If no output file was given, set output filename to name of downloaded file.
+        if output_filename is None:
+            output_filename = self._extract_filename()
+
+        # Get the file nd follow redirects.
         response = requests.get(url, stream=True)
 
         # Compute parameters for download and corresponding progress bar.
         total_length = int(response.headers.get("content-length"))
         chunk_size = 512 * 1024
 
-        file = open(local_filename, "wb")
+        # Do the actual download by opening a file and then getting the download
+        # source in chunks to avoid memory overload.
+        file = open(output_filename, "wb")
         for chunk in progress.bar(
             response.iter_content(chunk_size), expected_size=(total_length / 1024) + 1
         ):
@@ -36,7 +42,7 @@ class Downloader:
         file.close()
 
     def _extract_filename(self):
-        """Extract from a url the last element, i.e. the filename
+        """Extract from a url the element after the last slash, i.e. the filename
 
         :returns: the filename in the url
         :rtype: str
