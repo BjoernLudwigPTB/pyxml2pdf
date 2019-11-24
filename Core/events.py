@@ -236,7 +236,9 @@ class Event(Element):
             material_string = "b) keine <br/>"
 
         if financial:
-            financial_string = "c) " + financial + " € (" + offers + ")"
+            financial_string = "c) " + financial + " €"
+            if offers:
+                financial_string += " (" + offers + ")"
         else:
             financial_string = "c) keine"
         return personal_string + material_string + financial_string
