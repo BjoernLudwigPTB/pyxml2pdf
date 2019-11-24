@@ -253,6 +253,8 @@ class Event(Element):
         if description:
             full_description += " - " + description
         if link:
+            if full_description[-1] != ".":
+                full_description += "."
             full_description += " Mehr Infos unter <b><i>" + link + "</i></b>."
 
         return full_description
