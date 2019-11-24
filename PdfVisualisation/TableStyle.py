@@ -49,13 +49,23 @@ class TableStyle:
 
         self.table_width = 177.8 * mm
 
+        # This specifies the column widths of the final result. The columns contain...
         self._column_widths = [
+            # ... the type of the event.
             7.2 * mm,
+            # ... the date and time of the event.
             11.5 * mm,
+            # ... the region of the event.
             18.7 * mm,
+            # ... the responsible person for the event.
             14.5 * mm,
-            1 * mm,
+            # ... the details regarding the content of the event. Note that this
+            # column width is calculated in the next step from the available total
+            # space and the sum of all other column widths.
+            0 * mm,
+            # ... the target audience the event.
             18 * mm,
+            # ... the personal, material and financial prerequisites for the event.
             47 * mm,
         ]
         self._column_widths[4] = (
