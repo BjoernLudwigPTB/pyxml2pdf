@@ -3,12 +3,14 @@ import pytest
 import Main
 
 
+@pytest.mark.online
 def test_all():
     import MainPredefined
 
     MainPredefined.convert()
 
 
+@pytest.mark.online
 def test_init_main():
     import mock
 
@@ -20,6 +22,7 @@ def test_init_main():
                 assert mock_exit.call_args[0][0] == 42
 
 
+@pytest.mark.online
 def test_input():
     with pytest.raises(Exception):
         Main.main()
