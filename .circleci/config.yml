@@ -30,6 +30,7 @@ jobs:
         # Fallback to using the latest cache if no exact match is found.
         - v1-dependencies-
 
+    # Install pyxml2pdf dependencies.
     - run:
         name: Install dependencies
         command: |
@@ -38,11 +39,7 @@ jobs:
           pip install -r requirements/requirements.txt
           pip install -r requirements/dev-requirements.txt
 
-    - save_cache:
-        paths:
-        - ./venv
-        key: v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-
+    # Install CI blocks dependencies.
     - run:
         name: Install Codacy and Codecov reporter
         command: |
@@ -50,7 +47,12 @@ jobs:
           source venv/bin/activate
           pip install codacy-coverage codecov
 
-    # Set up Code Climate by downloading test reporter as a static binary
+    - save_cache:
+        paths:
+        - ./venv
+        key: v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+
+    # Set up Code Climate by downloading test reporter as a static binary.
     - run:
         name: Set up Code Climate test-reporter
         command: |
