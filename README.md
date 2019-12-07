@@ -3,6 +3,7 @@
 [![CircleCI](https://circleci.com/gh/BjoernLudwigPTB/pyxml2pdf.svg?style=shield)](https://circleci.com/gh/BjoernLudwigPTB/pyxml2pdf)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fe9134d2e9449bd42175/maintainability)](https://codeclimate.com/github/BjoernLudwigPTB/pyxml2pdf/maintainability)
 [![codecov](https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf/branch/master/graph/badge.svg)](https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf)
+[![Documentation Status](https://readthedocs.org/projects/pyxml2pdf/badge/?version=latest)](https://pyxml2pdf.readthedocs.io/en/latest/?badge=latest)
 
 
 Convert XML input to PDF table. Since we forked the
