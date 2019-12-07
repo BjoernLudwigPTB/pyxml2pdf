@@ -13,10 +13,9 @@ pyxml2pdf>`_.
 
 *pyxml2pdf* is written in Python 3.
 
-Contents:
-
 .. toctree::
     :maxdepth: 2
+    :caption: Contents:
 
     pyxml2pdf.rst
 
