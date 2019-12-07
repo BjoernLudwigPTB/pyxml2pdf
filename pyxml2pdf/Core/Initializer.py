@@ -5,9 +5,9 @@ from reportlab.lib.pagesizes import mm
 from reportlab.platypus import SimpleDocTemplate
 from reportlab.platypus.flowables import KeepTogether
 
-from Core.Parser import Parser
-from Core.PostProcessor import PostProcessor
-from Core.Sorter import Sorter
+from pyxml2pdf.Core.Parser import Parser
+from pyxml2pdf.Core.PostProcessor import PostProcessor
+from pyxml2pdf.Core.Sorter import Sorter
 
 
 class Initializer:

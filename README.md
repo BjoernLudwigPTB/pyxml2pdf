@@ -14,7 +14,7 @@ provide an extensive bit of documentation by the end of November 2019.
 
 ## Getting started 
 As a starting point you could take a look at the execution of
-[MainPredefined.py](MainPredefined.py) which will download a publicly available XML
+[MainPredefined.py](pyxml2pdf/MainPredefined.py) which will download a publicly available XML
 file into the folder *input* and process it as desired to produce the output files
 (one file containing all generated pages in landscape and additionally one file per
 page rotated into portrait) and place them in the subfolder *output*.

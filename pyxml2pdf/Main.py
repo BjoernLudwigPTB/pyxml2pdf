@@ -1,6 +1,6 @@
 import sys
 
-from Core.Initializer import Initializer
+from pyxml2pdf.Core.Initializer import Initializer
 
 
 def main():

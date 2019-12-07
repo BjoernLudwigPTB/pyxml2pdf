@@ -1,5 +1,5 @@
 """Module to provide a wrapper :py:class:`Core.events.Event` for xml extracted data"""
-from model.tables.TableBuilder import TableBuilder
+from pyxml2pdf.model.tables.TableBuilder import TableBuilder
 
 __all__ = ["Event"]
 
@@ -11,7 +11,7 @@ from xml.etree.ElementTree import Element
 from reportlab.platypus import Paragraph
 from reportlab.platypus import Table
 
-from PdfVisualisation.TableStyle import TableStyle
+from pyxml2pdf.PdfVisualisation.TableStyle import TableStyle
 
 
 class Event(Element):

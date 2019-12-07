@@ -1,7 +1,6 @@
 import pytest
 
-from PdfVisualisation.TableStyle import TableStyle
-from model.tables.TableBuilder import TableBuilder
+from pyxml2pdf.model.tables.TableBuilder import TableBuilder
 
 
 @pytest.fixture

@@ -1,6 +1,6 @@
 import pytest
 
-from Core.Initializer import Initializer
+from pyxml2pdf.Core.Initializer import Initializer
 
 init_testcases = [None, "one_string", ("one_string", "two_strings")]
 

@@ -1,5 +1,4 @@
-import os
-from pathlib import Path
+from pathlib import PurePath
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import mm
@@ -7,7 +6,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
 
-from PdfVisualisation.Styles import Styles
+from pyxml2pdf.PdfVisualisation.Styles import Styles
 
 
 class TableStyle:
@@ -105,30 +104,26 @@ class TableStyle:
         """Register the desired font with :py:mod:`reportlab`
 
         This ensures that `<i></i>` and `<b></b>` as cell content work well.
-
-        TODO this is much to hard coded and needs some serious refactoring
         """
-        # Sadly we did not manage to properly configure readthedocs to load the
-        # fonts on import from the paths everybody else uses, so we need to
-        # manipulate them.
-        path_to_fonts = "PdfVisualisation/"
-        if not os.path.exists(path_to_fonts):
-            path_to_fonts = "../" + path_to_fonts
+        # Set root of fonts to the folder containing this file.
+        path_to_fonts = PurePath(__file__).parent
 
         # Finally lead and register fonts with reportlab.
         registerFont(
-            TTFont("NewsGothBT", Path(path_to_fonts + "NewsGothicBT-Roman.ttf"))
+            TTFont("NewsGothBT", path_to_fonts.joinpath("NewsGothicBT-Roman.ttf"))
         )
         registerFont(
-            TTFont("NewsGothBT_Bold", Path(path_to_fonts + "NewsGothicBT-Bold.ttf"))
+            TTFont("NewsGothBT_Bold", path_to_fonts.joinpath("NewsGothicBT-Bold.ttf"))
         )
         registerFont(
-            TTFont("NewsGothBT_Italic", Path(path_to_fonts + "NewsGothicBT-Italic.ttf"))
+            TTFont(
+                "NewsGothBT_Italic", path_to_fonts.joinpath("NewsGothicBT-Italic.ttf")
+            )
         )
         registerFont(
             TTFont(
                 "NewsGothBT_BoldItalic",
-                Path(path_to_fonts + "NewsGothicBT-BoldItalic.ttf"),
+                path_to_fonts.joinpath("NewsGothicBT-BoldItalic.ttf"),
             )
         )
         registerFontFamily(

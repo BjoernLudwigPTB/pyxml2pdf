@@ -1,11 +1,11 @@
 import pytest
 
-import Main
+from pyxml2pdf import Main
 
 
 @pytest.mark.online
 def test_all():
-    import MainPredefined
+    from pyxml2pdf import MainPredefined
 
     MainPredefined.convert()
 

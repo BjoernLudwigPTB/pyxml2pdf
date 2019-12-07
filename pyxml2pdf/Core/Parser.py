@@ -7,8 +7,8 @@ from typing import List
 
 from reportlab.platypus.flowables import KeepTogether
 
-from Core.events import Event
-from model.tables.TableBuilder import TableBuilder
+from pyxml2pdf.Core.events import Event
+from pyxml2pdf.model.tables.TableBuilder import TableBuilder
 
 
 class Parser:

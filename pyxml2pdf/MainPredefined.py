@@ -1,5 +1,5 @@
-from Core.Downloader import Downloader
-from Core.Initializer import Initializer
+from pyxml2pdf.Core.Downloader import Downloader
+from pyxml2pdf.Core.Initializer import Initializer
 
 
 def convert():

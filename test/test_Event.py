@@ -4,8 +4,8 @@ from xml.etree.ElementTree import Element
 import pytest
 from reportlab.platypus.tables import Table
 
-from Core.events import Event
-from PdfVisualisation.TableStyle import TableStyle
+from pyxml2pdf.Core.events import Event
+from pyxml2pdf.PdfVisualisation.TableStyle import TableStyle
 
 
 @pytest.fixture
