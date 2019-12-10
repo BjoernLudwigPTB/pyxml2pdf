@@ -1,5 +1,5 @@
-"""Module to provide a wrapper :py:class:`Core.events.Event` for xml extracted data"""
-from pyxml2pdf.model.tables.TableBuilder import TableBuilder
+"""Module to provide a wrapper :py:class:`core.events.Event` for xml extracted data"""
+from pyxml2pdf.model.tables.builder import TableBuilder
 
 __all__ = ["Event"]
 
@@ -11,7 +11,7 @@ from xml.etree.ElementTree import Element
 from reportlab.platypus import Paragraph
 from reportlab.platypus import Table
 
-from pyxml2pdf.PdfVisualisation.TableStyle import TableStyle
+from pyxml2pdf.styles.table_styles import TableStyle
 
 
 class Event(Element):
@@ -19,7 +19,7 @@ class Event(Element):
 
     :py:class:`xml.etree.ElementTree.Element` is augmented with the table row
     representation and the attributes and methods to manipulate everything
-    according to the final tables needs. A :py:class:`Core.events.Event` can only
+    according to the final tables needs. A :py:class:`core.events.Event` can only
     be initialized with an object of type :py:class:`xml.etree.ElementTree.Element`.
 
     :param xml.etree.ElementTree.Element element: the element to build the instance from
@@ -336,7 +336,7 @@ class Event(Element):
     def get_table_row(self, subtable_title):
         """Return the table row representation of the event
 
-        This is the API of :py:class:`Core.events.Event` for getting the table row
+        This is the API of :py:class:`core.events.Event` for getting the table row
         representation of the event. It makes sure, that on the first call
         :meth:`get_full_row` is invoked and otherwise :attr:`_reduced_row` is returned.
 

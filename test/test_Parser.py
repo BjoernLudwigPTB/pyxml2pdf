@@ -1,6 +1,6 @@
 import pytest
 
-from pyxml2pdf.Core.Parser import Parser
+from pyxml2pdf.core.parser import Parser
 
 
 def test_collect_xml_data_empty_call():

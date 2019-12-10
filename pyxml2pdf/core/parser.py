@@ -1,4 +1,4 @@
-""":py:mod:`Core.Parser` is the interface between xml input and table output"""
+""":py:mod:`core.Parser` is the interface between xml input and table output"""
 
 __all__ = ["Parser"]
 
@@ -7,8 +7,8 @@ from typing import List
 
 from reportlab.platypus.flowables import KeepTogether
 
-from pyxml2pdf.Core.events import Event
-from pyxml2pdf.model.tables.TableBuilder import TableBuilder
+from pyxml2pdf.core.events import Event
+from pyxml2pdf.model.tables.builder import TableBuilder
 
 
 class Parser:

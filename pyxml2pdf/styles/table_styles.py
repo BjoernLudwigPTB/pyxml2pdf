@@ -6,7 +6,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
 
-from pyxml2pdf.PdfVisualisation.Styles import Styles
+from .cell_formattings import CellFormattingCommands
 
 
 class TableStyle:
@@ -21,29 +21,29 @@ class TableStyle:
 
     def __init__(self):
         self.heading = [
-            Styles.valign_middle,
-            Styles.background(colors.honeydew),
-            Styles.box(colors.black),
-            Styles.inner_grid(colors.black),
-            Styles.align_center,
+            CellFormattingCommands.valign_middle,
+            CellFormattingCommands.background(colors.honeydew),
+            CellFormattingCommands.box(colors.black),
+            CellFormattingCommands.inner_grid(colors.black),
+            CellFormattingCommands.align_center,
         ]
 
         self.sub_heading = [
-            Styles.align_left,
-            Styles.valign_middle,
-            Styles.box(colors.black),
-            Styles.inner_grid(colors.black),
-            Styles.leftpadding_reduce,
-            Styles.rightpadding_reduce,
+            CellFormattingCommands.align_left,
+            CellFormattingCommands.valign_middle,
+            CellFormattingCommands.box(colors.black),
+            CellFormattingCommands.inner_grid(colors.black),
+            CellFormattingCommands.leftpadding_reduce,
+            CellFormattingCommands.rightpadding_reduce,
         ]
 
         self.normal = [
-            Styles.align_left,
-            Styles.valign_middle,
-            Styles.box(colors.black),
-            Styles.inner_grid(colors.black),
-            Styles.leftpadding_reduce,
-            Styles.rightpadding_reduce,
+            CellFormattingCommands.align_left,
+            CellFormattingCommands.valign_middle,
+            CellFormattingCommands.box(colors.black),
+            CellFormattingCommands.inner_grid(colors.black),
+            CellFormattingCommands.leftpadding_reduce,
+            CellFormattingCommands.rightpadding_reduce,
         ]
 
         self.table_width = 177.8 * mm
