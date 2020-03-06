@@ -223,14 +223,14 @@ class Event(Element):
         :rtype: str
         """
         if personal:
-            personal_string = "a) " + personal + "<br/>"
+            personal_string = "a) " + personal
         else:
-            personal_string = "a) keine <br/>"
+            personal_string = "a) keine"
 
         if material:
-            material_string = "b) " + material + "<br/>"
+            material_string = "b) " + material
         else:
-            material_string = "b) keine <br/>"
+            material_string = "b) keine"
 
         if financial:
             financial_string = "c) " + financial + " €"
@@ -238,7 +238,7 @@ class Event(Element):
                 financial_string += " (" + offers + ")"
         else:
             financial_string = "c) keine"
-        return personal_string + material_string + financial_string
+        return "<br/>".join([personal_string, material_string, financial_string])
 
     def _build_description(self, name2="", description="", link=""):
         """Build the description for the event
