@@ -137,15 +137,9 @@ class Event(Element):
         :returns: concatenated, separated texts of all tags for the current event
         :rtype: str
         """
-        children_text = ""
-        for tag in event_subelements:
-            child_text: str = self.findtext(tag)
-            if child_text:
-                if children_text:
-                    children_text += separator + child_text
-                else:
-                    children_text = child_text
-        return children_text
+        return separator.join(
+            [self.findtext(tag) for tag in event_subelements if self.findtext(tag)]
+        )
 
     def _init_full_row(self):
         """Initialize the single table row containing all information of the event

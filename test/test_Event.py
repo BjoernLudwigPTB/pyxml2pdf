@@ -127,3 +127,7 @@ def test_event_get_row(test_event, subtable_title):
         assert test_event._reduced_row
     assert test_event.get_table_row(subtable_title)
     assert test_event._reduced_row
+
+
+def test_concatenate_tags_content(test_event):
+    test_event._concatenate_tags_content(["test"])
