@@ -134,16 +134,14 @@ class TableBuilder:
 
         :param Core.events.Event event: event to distribute
         """
-
         distribution_failed = True
         set_of_cats = set(event.categories)
         for subtable in self._subtables:
-            _locations = subtable.locations
-            _activities = subtable.activities
-            if set_of_cats.intersection(_activities):
-                if set_of_cats.intersection(_locations):
-                    subtable.append(event.get_table_row(subtable.title))
-                    distribution_failed = False
+            if set_of_cats.intersection(
+                subtable.activities
+            ) and set_of_cats.intersection(subtable.locations):
+                subtable.append(event.get_table_row(subtable.title))
+                distribution_failed = False
         if distribution_failed:
             warnings.warn(
                 event.responsible
