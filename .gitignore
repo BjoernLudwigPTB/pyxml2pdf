@@ -13,3 +13,6 @@ __pycache__/
 
 # the download test result
 test_download
+
+# the hypothesis temps
+.hypothesis

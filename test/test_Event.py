@@ -1,7 +1,9 @@
-from typing import Callable
+from typing import Callable, Dict
 from xml.etree.ElementTree import Element
 
 import pytest
+from hypothesis import given
+from hypothesis.strategies import text
 from reportlab.platypus.tables import Table
 
 from pyxml2pdf.Core.events import Event
@@ -43,6 +45,16 @@ def test_event(test_element) -> Event:
 @pytest.fixture
 def table_style() -> TableStyle:
     return TableStyle()
+
+
+@pytest.fixture
+def prerequisites() -> Dict[str, str]:
+    return {
+        "personal": "walk really good",
+        "material": "shoes",
+        "financial": "100.000",
+        "offers": "nothing",
+    }
 
 
 def test_event_init(test_event):
@@ -131,3 +143,58 @@ def test_event_get_row(test_event, subtable_title):
 
 def test_concatenate_tags_content(test_event):
     test_event._concatenate_tags_content(["test"])
+
+
+def test_full_call_parse_prerequisites(prerequisites):
+    assert (
+        Event._parse_prerequisites(**prerequisites)
+        == "a) "
+        + prerequisites["personal"]
+        + "<br/>b) "
+        + prerequisites["material"]
+        + "<br/>c) "
+        + prerequisites["financial"]
+        + " € ("
+        + prerequisites["offers"]
+        + ")"
+    )
+
+
+def test_minimal_call_parse_prerequisites():
+    # Check full call.
+    assert (
+        Event._parse_prerequisites("", "", "", "")
+        == "a) keine<br/>b) keine<br/>c) 0,00 €"
+    )
+
+
+@given(text(min_size=1))
+def test_call_parse_prerequisites_with_personal(s):
+    assert (
+        Event._parse_prerequisites(s, "", "", "")
+        == "a) " + s + "<br/>b) keine<br/>c) 0,00 €"
+    )
+
+
+@given(text(min_size=1))
+def test_call_parse_prerequisites_with_material(s):
+    assert (
+        Event._parse_prerequisites("", s, "", "")
+        == "a) keine<br/>b) " + s + "<br/>c) 0,00 €"
+    )
+
+
+@given(text(min_size=1))
+def test_call_parse_prerequisites_with_financial(s):
+    assert (
+        Event._parse_prerequisites("", "", s, "")
+        == "a) keine<br/>b) keine<br/>c) " + s + " €"
+    )
+
+
+@given(text(min_size=1))
+def test_call_parse_prerequisites_with_offers(s):
+    assert (
+        Event._parse_prerequisites("", "", "", s)
+        == "a) keine<br/>b) keine<br/>c) 0,00 € (" + s + ")"
+    )
