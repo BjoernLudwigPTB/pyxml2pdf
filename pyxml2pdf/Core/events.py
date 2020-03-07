@@ -255,13 +255,11 @@ class Event(Element):
         :returns: the full description including url if provided
         :rtype: str
         """
-        full_description = (
+        long_description = (
             "<b>" + self._concatenate_tags_content(["Bezeichnung"]) + "</b>"
         )
-        if name2:
-            full_description += " - " + name2
-        if description:
-            full_description += " - " + description
+        texts = [long_description, name2, description]
+        full_description = " - ".join([text for text in texts if text])
         if link:
             if full_description[-1] != ".":
                 full_description += "."
