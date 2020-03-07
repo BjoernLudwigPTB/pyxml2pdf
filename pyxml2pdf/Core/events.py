@@ -22,19 +22,6 @@ class Event(Element):
     :param xml.etree.ElementTree.Element element: the element to build the instance from
     """
 
-    _table_builder: TableBuilder = TableBuilder()
-    _table_style: TableStyle = TableStyle()
-
-    _categories: List[str]
-    _full_row: Table
-    _reduced_row: Table
-    _subtable_title: str
-    _type: str
-    _date: str
-    _region: str
-    _responsible: str
-    _description: str
-
     class EventParagraph(Paragraph):
         """A wrapper class for :py:class:`reportlab.platypus.Paragraph`
 
@@ -48,6 +35,20 @@ class Event(Element):
         def __init__(self, text: str):
             super().__init__(text, self.style)
 
+    _table_builder: TableBuilder = TableBuilder()
+    _table_style: TableStyle = TableStyle()
+
+    _categories: List[str]
+    _full_row: Table
+    _reduced_row: Table
+    _subtable_title: str
+    _type: str
+    _date: str
+    _region: str
+    _responsible: str
+    _description: str
+    _reduced_columns: List[EventParagraph]
+
     def __init__(self, element):
         # Call Element constructor and extend ourselves by extending all children
         # tags to create an underlying copy of element.
@@ -55,14 +56,11 @@ class Event(Element):
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
         self.EventParagraph.style = self._table_style.custom_styles["Normal"]
-        self._style = self._table_style.custom_styles["Normal"]
         # Initialize definitely needed instance variables.
         self._init_categories()
-        self._type = self._concatenate_tags_content(["Kursart"])
-        self._init_date()
-        self._region = self._concatenate_tags_content(["Ort1"])
+        self._date = self._init_date()
         self._responsible = self._concatenate_tags_content(["Kursleiter"])
-        self._init_full_row()
+        self._reduced_columns = self._init_full_row()
 
     def _init_categories(self):
         """Initialize the list of categories from the according xml tag's content"""
@@ -81,21 +79,11 @@ class Event(Element):
         .. warning:: Do not call this function directly since it is automatically
         called right after :meth:`get_full_row` is invoked.
         """
-        table_columns = [
-            self.EventParagraph(self._type),
-            self.EventParagraph(self._date),
-            self.EventParagraph(self._region),
-            self.EventParagraph(self._responsible),
-            self.EventParagraph(
-                self._build_description(
-                    self._concatenate_tags_content(["Bezeichnung2"]),
-                    self._concatenate_tags_content(["Beschreibung"]),
-                    link=subtable_title,
-                )
-            ),
-        ]
+        self._reduced_columns.append(
+            self.EventParagraph(self._build_description(link=subtable_title))
+        )
         self._reduced_row = self._table_builder.create_fixedwidth_table(
-            [table_columns],
+            [self._reduced_columns],
             self._table_style.column_widths[:4]
             + [sum(self._table_style.column_widths[4:])],
         )
@@ -151,23 +139,21 @@ class Event(Element):
             [self.findtext(tag) for tag in event_subelements if self.findtext(tag)]
         )
 
-    def _init_full_row(self):
+    def _init_full_row(self) -> List[EventParagraph]:
         """Initialize the single table row containing all information of the event
 
         Extract interesting information from events children tags and connect them
         into a nicely formatted row of a table.
+
+        :return: the common starting columns of any table representation
         """
         table_columns = [
-            self.EventParagraph(self._type),
+            self.EventParagraph(self._concatenate_tags_content(["Kursart"])),
             self.EventParagraph(self._date),
-            self.EventParagraph(self._region),
+            self.EventParagraph(self._concatenate_tags_content(["Ort1"])),
             self.EventParagraph(self._responsible),
             self.EventParagraph(
-                self._build_description(
-                    self._concatenate_tags_content(["Bezeichnung2"]),
-                    self._concatenate_tags_content(["Beschreibung"]),
-                    self._concatenate_tags_content(["TrainerURL"]),
-                )
+                self._build_description(self._concatenate_tags_content(["TrainerURL"]))
             ),
             self.EventParagraph(self._concatenate_tags_content(["Zielgruppe"])),
             self.EventParagraph(
@@ -180,6 +166,7 @@ class Event(Element):
             ),
         ]
         self._full_row = self._table_builder.create_fixedwidth_table([table_columns])
+        return table_columns[:4]
 
     def _init_date(self):
         """Create a properly formatted string containing the date of the event"""
@@ -215,7 +202,7 @@ class Event(Element):
         else:
             # All other dates stay uninterpreted and will be dropped.
             new_date = ""
-        self._date = new_date
+        return new_date
 
     @staticmethod
     def _parse_prerequisites(personal, material, financial, offers):
@@ -248,17 +235,16 @@ class Event(Element):
             financial_string = "c) keine"
         return "<br/>".join([personal_string, material_string, financial_string])
 
-    def _build_description(self, name2="", description="", link=""):
+    def _build_description(self, link=""):
         """Build the description for the event
 
         This covers all cases with empty texts in some of the according children tags
         and the full as well as the reduced version with just the reference to the
         subtable where the full version can be found. Since the title of the event is
-        mandatory, it is not received as parameter but directly retrieved from the
+        mandatory, and the beginning of the description is always filled by the same
+        tags' texts those are not received as parameter but directly retrieved from the
         xml data.
 
-        :param str name2: the short name number two for the event
-        :param str description: the descriptive text
         :param str link: a link to more details like the trainer url or the subtable
         :returns: the full description including url if provided
         :rtype: str
@@ -266,7 +252,11 @@ class Event(Element):
         long_description = (
             "<b>" + self._concatenate_tags_content(["Bezeichnung"]) + "</b>"
         )
-        texts = [long_description, name2, description]
+        texts = [
+            long_description,
+            self._concatenate_tags_content(["Bezeichnung2"]),
+            self._concatenate_tags_content(["Beschreibung"]),
+        ]
         full_description = " - ".join([text for text in texts if text])
         if link:
             if full_description[-1] != ".":
