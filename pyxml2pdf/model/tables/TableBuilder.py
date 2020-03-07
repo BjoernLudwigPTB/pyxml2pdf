@@ -3,8 +3,8 @@ from typing import List
 
 from reportlab.platypus import Paragraph, Table
 
-from pyxml2pdf.PdfVisualisation.TableStyle import TableStyle
 from pyxml2pdf.model.tables.EventTable import EventTable
+from pyxml2pdf.PdfVisualisation.TableStyle import TableStyle
 
 
 class TableBuilder:
