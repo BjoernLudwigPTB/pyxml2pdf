@@ -22,8 +22,8 @@ class Event(Element):
     :param xml.etree.ElementTree.Element element: the element to build the instance from
     """
 
-    _table_builder = TableBuilder()
-    _table_style = TableStyle()
+    _table_builder: TableBuilder = TableBuilder()
+    _table_style: TableStyle = TableStyle()
 
     _categories: List[str]
     _full_row: Table
@@ -35,12 +35,26 @@ class Event(Element):
     _responsible: str
     _description: str
 
+    class EventParagraph(Paragraph):
+        """A wrapper class for :py:class:`reportlab.platypus.Paragraph`
+
+        :py:class:`reportlab.platypus.Paragraph` is solely used with one
+        certain style, which is handed over in the constructor.
+
+        :param xml.etree.ElementTree.Element element: the element to build the
+        instance from
+        """
+
+        def __init__(self, text: str):
+            super().__init__(text, self.style)
+
     def __init__(self, element):
         # Call Element constructor and extend ourselves by extending all children
         # tags to create an underlying copy of element.
         super().__init__(element.tag, element.attrib)
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
+        self.EventParagraph.style = self._table_style.custom_styles["Normal"]
         self._style = self._table_style.custom_styles["Normal"]
         # Initialize definitely needed instance variables.
         self._init_categories()
@@ -68,17 +82,16 @@ class Event(Element):
         called right after :meth:`get_full_row` is invoked.
         """
         table_columns = [
-            Paragraph(self._type, self._style),
-            Paragraph(self._date, self._style),
-            Paragraph(self._region, self._style),
-            Paragraph(self._responsible, self._style),
-            Paragraph(
+            self.EventParagraph(self._type),
+            self.EventParagraph(self._date),
+            self.EventParagraph(self._region),
+            self.EventParagraph(self._responsible),
+            self.EventParagraph(
                 self._build_description(
                     self._concatenate_tags_content(["Bezeichnung2"]),
                     self._concatenate_tags_content(["Beschreibung"]),
                     link=subtable_title,
-                ),
-                self._style,
+                )
             ),
         ]
         self._reduced_row = self._table_builder.create_fixedwidth_table(
@@ -145,27 +158,25 @@ class Event(Element):
         into a nicely formatted row of a table.
         """
         table_columns = [
-            Paragraph(self._type, self._style),
-            Paragraph(self._date, self._style),
-            Paragraph(self._region, self._style),
-            Paragraph(self._responsible, self._style),
-            Paragraph(
+            self.EventParagraph(self._type),
+            self.EventParagraph(self._date),
+            self.EventParagraph(self._region),
+            self.EventParagraph(self._responsible),
+            self.EventParagraph(
                 self._build_description(
                     self._concatenate_tags_content(["Bezeichnung2"]),
                     self._concatenate_tags_content(["Beschreibung"]),
                     self._concatenate_tags_content(["TrainerURL"]),
-                ),
-                self._style,
+                )
             ),
-            Paragraph(self._concatenate_tags_content(["Zielgruppe"]), self._style),
-            Paragraph(
+            self.EventParagraph(self._concatenate_tags_content(["Zielgruppe"])),
+            self.EventParagraph(
                 self._parse_prerequisites(
                     self._concatenate_tags_content(["Voraussetzung"]),
                     self._concatenate_tags_content(["Ausruestung"]),
                     self._concatenate_tags_content(["Kurskosten"]),
                     self._concatenate_tags_content(["Leistungen"]),
-                ),
-                self._style,
+                )
             ),
         ]
         self._full_row = self._table_builder.create_fixedwidth_table([table_columns])
