@@ -42,11 +42,8 @@ class Event(Element):
     _full_row: Table
     _reduced_row: Table
     _subtable_title: str
-    _type: str
     _date: str
-    _region: str
     _responsible: str
-    _description: str
     _reduced_columns: List[EventParagraph]
 
     def __init__(self, element):
@@ -338,7 +335,6 @@ class Event(Element):
         # :meth:`get_full_row` which automatically triggers the creation of the
         # reduced row for later uses.
         try:
-            self._reduced_row
+            return self._reduced_row
         except AttributeError:
             return self.get_full_row(subtable_title)
-        return self._reduced_row
