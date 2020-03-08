@@ -54,6 +54,8 @@ commands:
         name: Create virtual environment
         command: |
           python3 -m venv << parameters.pyenv >>
+          source << parameters.pyenv >>/bin/activate
+          pip install --upgrade pip
 
   # Reusable command to conduct actual testing.
   tox:
@@ -147,6 +149,9 @@ jobs:
           name: Install Codacy and Codecov reporter
           command: |
             source ${PYENV}/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements/requirements.txt
+            pip install -r requirements/dev-requirements.txt
             pip install pytest pytest-cov codacy-coverage codecov
 
       # Set up Code Climate by downloading test reporter as a static binary.
