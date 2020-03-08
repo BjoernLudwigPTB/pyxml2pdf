@@ -222,7 +222,7 @@ class Event(Element):
         if not financial:
             financial = "0,00"
         if offers:
-            offers = " (" + offers + ")"
+            offers = offers.join([" (", ")"])
 
         return "<br/>".join(
             ["a) " + personal, "b) " + material, "c) " + financial + " €" + offers]
@@ -242,19 +242,17 @@ class Event(Element):
         :returns: the full description including url if provided
         :rtype: str
         """
-        long_description = (
-            "<b>" + self._concatenate_tags_content(["Bezeichnung"]) + "</b>"
-        )
         texts = [
-            long_description,
+            self._concatenate_tags_content(["Bezeichnung"]).join(["<b>", "</b>"]),
             self._concatenate_tags_content(["Bezeichnung2"]),
             self._concatenate_tags_content(["Beschreibung"]),
         ]
-        full_description = " - ".join([text for text in texts if text])
+        full_description = " – ".join([text for text in texts if text])
         if link:
-            if full_description[-1] != ".":
-                full_description += "."
-            full_description += " Mehr Infos unter <b><i>" + link + "</i></b>."
+            joiner = "." if full_description[-1] != "." else ""
+            full_description = joiner.join(
+                [full_description, link.join([" Mehr Infos unter <b><i>", "</i></b>."])]
+            )
 
         return full_description
 
