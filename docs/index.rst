@@ -11,7 +11,7 @@ documentation by the end of November 2019.
 For the *pyxml2pdf* homepage go to `GitHub <https://github.com/BjoernLudwigPTB/
 pyxml2pdf>`_.
 
-*pyxml2pdf* is written in Python 3.
+*pyxml2pdf* is written in Python 3 and currently requires Python 3.6 or later.
 
 .. toctree::
     :maxdepth: 2
