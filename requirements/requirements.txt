@@ -7,11 +7,11 @@
 args==0.1.0               # via clint
 certifi==2019.9.11        # via requests
 chardet==3.0.4            # via requests
-clint==0.5.1
-defusedxml==0.6.0
+clint==0.5.1              # via -r requirements/requirements.in
+defusedxml==0.6.0         # via -r requirements/requirements.in
 idna==2.8                 # via requests
 pillow==6.2.0             # via reportlab
-pypdf2==1.26.0
-reportlab==3.5.28
-requests==2.22.0
+pypdf2==1.26.0            # via -r requirements/requirements.in
+reportlab==3.5.28         # via -r requirements/requirements.in
+requests==2.22.0          # via -r requirements/requirements.in
 urllib3==1.25.6           # via requests
