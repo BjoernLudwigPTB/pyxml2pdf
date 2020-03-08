@@ -1,12 +1,20 @@
-# Python CircleCI 2.0 configuration file
+# Python CircleCI 2.1 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
-version: 2
+version: 2.1
+
+executors:
+  tester:
+    docker:
+      - image: circleci/python:3.7
+  publisher:
+    docker:
+      - image: circleci/python:3.8
+
 jobs:
   build:
-    docker:
-    - image: circleci/python:3.7
+    executor: tester
 
     working_directory: ~/repo
 
