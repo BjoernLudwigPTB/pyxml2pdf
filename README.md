@@ -1,5 +1,7 @@
 # pyxml2pdf
 
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyxml2pdf)
+[![PyPI release number](https://badge.fury.io/py/pyxml2pdf.svg)](https://badge.fury.io/py/pyxml2pdf)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8cd591a0e814ed59f9e6f4a0ac5cf4c)](https://www.codacy.com/manual/blus_projects/pyxml2pdf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BjoernLudwigPTB/pyxml2pdf&amp;utm_campaign=Badge_Grade)
 [![CircleCI](https://circleci.com/gh/BjoernLudwigPTB/pyxml2pdf.svg?style=shield)](https://circleci.com/gh/BjoernLudwigPTB/pyxml2pdf)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fe9134d2e9449bd42175/maintainability)](https://codeclimate.com/github/BjoernLudwigPTB/pyxml2pdf/maintainability)
