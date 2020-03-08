@@ -5,76 +5,103 @@
 version: 2.1
 
 executors:
-  tester:
+  test:
+    parameters:
+      tag:
+        type: string
+        default: 3.7
+      pyenv:
+        type: string
+        default: py37
     docker:
-      - image: circleci/python:3.7
+      - image: circleci/python:<< parameters.tag >>
+    environment:
+      PYENV: << parameters.pyenv >>
   publisher:
     docker:
       - image: circleci/python:3.8
 
+commands:
+  install_deps:
+    description: "Install dependencies."
+    steps:
+
+      # Checkout code.
+      - checkout
+
+      # Create test-result folder and the default output folder.
+      - run:
+          name: Create test result folder
+          command: |
+            mkdir test-results
+            mkdir test-results/pytest
+            mkdir -p output
+
+      # Download and cache dependencies.
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+              {{ checksum "requirements/requirements.txt" }}
+            # Fallback to using the latest cache if no exact match is found.
+            - v1-dependencies-
+
+      # Install pyxml2pdf dependencies.
+      - run:
+          name: Install dependencies
+          command: |
+            python3 -m venv venv
+            source venv/bin/activate
+            pip install -r requirements/requirements.txt
+            pip install -r requirements/dev-requirements.txt
+
+      # Install CI blocks dependencies.
+      - run:
+          name: Install Codacy and Codecov reporter
+          command: |
+            python3 -m venv venv
+            source venv/bin/activate
+            pip install codacy-coverage codecov
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: >-
+            v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+              {{ checksum "requirements/requirements.txt" }}
+
 workflows:
   test_and_deploy:
     jobs:
-      - test
+#      - test34
+#      - test35
+#      - test36
+      - test37
+#      - test38
       - semantic-release:
           # Create 'release' job to create a release and publish it on GitHub.
           requires:
-              - test
+#              - test34
+#              - test35
+#              - test36
+              - test37
+#              - test38
           filters:
               branches:
                 # This assures the job only being triggered on branch master.
                 only: /master/
 
 jobs:
-  test:
-    executor: tester
+  test37:
+    executor:
+      name: test
+      tag: "3.7"
+      pyenv: "py37"
 
     working_directory: ~/repo
 
     steps:
 
-    # Checkout code.
-    - checkout
-
-    # Create test-result folder and the default output folder.
-    - run:
-        name: Create test result folder
-        command: |
-          mkdir test-results
-          mkdir test-results/pytest
-          mkdir -p output
-
-    # Download and cache dependencies.
-    - restore_cache:
-        keys:
-        - v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-            {{ checksum "requirements/requirements.txt" }}
-        # Fallback to using the latest cache if no exact match is found.
-        - v1-dependencies-
-
-    # Install pyxml2pdf dependencies.
-    - run:
-        name: Install dependencies
-        command: |
-          python3 -m venv venv
-          source venv/bin/activate
-          pip install -r requirements/requirements.txt
-          pip install -r requirements/dev-requirements.txt
-
-    # Install CI blocks dependencies.
-    - run:
-        name: Install Codacy and Codecov reporter
-        command: |
-          python3 -m venv venv
-          source venv/bin/activate
-          pip install codacy-coverage codecov
-
-    - save_cache:
-        paths:
-        - ./venv
-        key: >-
-          v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-            {{ checksum "requirements/requirements.txt" }}
+      - install_deps
 
     # Set up Code Climate by downloading test reporter as a static binary.
     - run:
