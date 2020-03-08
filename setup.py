@@ -32,7 +32,7 @@ setup(
     packages=find_packages(exclude=["test"]),
     documentation="pyxml2pdf.readthedocs.io",
     install_requires=["defusedxml", "reportlab", "requests", "pypdf2", "clint"],
-    python_requires=">=3",
+    python_requires=">=3.6",
     classifiers=[
         "Development Status :: 4 - Beta",
         "Topic :: Utilities",
