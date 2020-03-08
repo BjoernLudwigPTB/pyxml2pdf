@@ -1,5 +1,6 @@
 [run]
 omit =
+    setup.py
     # omit anything in a virtual environment
     .tox/*
     # omit test suite
