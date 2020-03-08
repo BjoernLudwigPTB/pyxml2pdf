@@ -197,7 +197,8 @@ jobs:
             coverage report -m > test_results/pytest/coverage.log
             mv ./output/ ./test_results/
 
-      - store_results
+      - store_results:
+          pyenv: ${PYENV}
 
   semantic-release:
     executor: publisher
