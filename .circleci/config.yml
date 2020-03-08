@@ -44,7 +44,7 @@ commands:
     # Download and cache dependencies.
     - restore_cache:
         keys:
-          - {{ .Environment.PYENV }}-dependencies
+          - {{ .Environment.CIRCLE_JOB }}-dependencies
               {{ checksum "requirements/dev-requirements.txt" }}
               {{ checksum "requirements/requirements.txt" }}
           # Fallback to using the latest cache if no exact match is found.
@@ -100,7 +100,7 @@ commands:
         paths:
           - .tox/<< parameters.pyenv >>
         key: >-
-          {{ .Environment.PYENV }}-dependencies
+          {{ .Environment.CIRCLE_JOB }}-dependencies
             {{ checksum "requirements/dev-requirements.txt" }}
             {{ checksum "requirements/requirements.txt" }}
 
