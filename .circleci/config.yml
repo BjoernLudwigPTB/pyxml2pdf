@@ -5,6 +5,8 @@
 version: 2.1
 
 executors:
+  # Define a parameterized executor which accepts two parameters to choose the python
+  # version which will be used for the docker image and the tox actions.
   test:
     working_directory: ~/repo
     parameters:
@@ -18,6 +20,7 @@ executors:
       - image: circleci/python:<< parameters.tag >>
     environment:
       PYENV: << parameters.pyenv >>
+  # Define the executor for the python semantic release.
   publisher:
     working_directory: ~/repo
     docker:
