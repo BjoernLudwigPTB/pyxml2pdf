@@ -29,8 +29,7 @@ class Event(Element):
         :py:class:`reportlab.platypus.Paragraph` is solely used with one
         certain style, which is handed over in the constructor.
 
-        :param xml.etree.ElementTree.Element element: the element to build the
-        instance from
+        :param str text: the text to write into row
         """
 
         def __init__(self, text: str):
