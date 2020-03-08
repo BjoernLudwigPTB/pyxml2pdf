@@ -184,6 +184,19 @@ jobs:
 
       - store_results
 
+  test38:
+    executor:
+      name: test
+      tag: "3.8"
+      pyenv: "py38"
+
+    steps:
+      - create_folders_and_venv:
+          pyenv: ${PYENV}
+      - tox:
+          pyenv: ${PYENV}
+      - store_results
+
   semantic-release:
     executor: publisher
 
