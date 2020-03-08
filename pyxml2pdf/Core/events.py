@@ -197,9 +197,6 @@ class Event(Element):
             new_date = re.sub(
                 "[0-9]{4}", _remove_century, extracted_dates.replace("00:00", "")
             )
-        else:
-            # All other dates stay uninterpreted and will be dropped.
-            new_date = ""
         return new_date
 
     @staticmethod
