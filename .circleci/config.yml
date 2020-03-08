@@ -41,13 +41,13 @@ commands:
           mkdir test-results/pytest
           mkdir -p output
 
-    # Download and cache dependencies.
-    - restore_cache:
-        keys:
-          - << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-            {{ checksum "requirements/requirements.txt" }}
-          # Fallback to using the latest cache if no exact match is found.
-          - << parameters.pyenv >>-dependencies-
+#    # Download and cache dependencies.
+#    - restore_cache:
+#        keys:
+#          - << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+#            {{ checksum "requirements/requirements.txt" }}
+#          # Fallback to using the latest cache if no exact match is found.
+#          - << parameters.pyenv >>-dependencies-
 
     # Create pyxml2pdf virtual environment.
     - run:
@@ -93,12 +93,12 @@ commands:
     - store_test_results:
         path: test_results
 
-    - save_cache:
-        paths:
-          - ./<< parameters.pyenv >>
-        key: >-
-          << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-            {{ checksum "requirements/requirements.txt" }}
+#    - save_cache:
+#        paths:
+#          - ./<< parameters.pyenv >>
+#        key: >-
+#          << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+#            {{ checksum "requirements/requirements.txt" }}
 
 workflows:
   test_and_deploy:
