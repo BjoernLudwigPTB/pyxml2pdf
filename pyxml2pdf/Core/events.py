@@ -191,7 +191,7 @@ class Event(Element):
         # Replace any extracted_dates of a form similar to 31.12.2099 with "on request".
         if "2099" in extracted_dates:
             new_date = "auf Anfrage"
-        elif extracted_dates:
+        else:
             # Remove placeholders for missing time specifications and the first two
             # digits of the year specification.
             new_date = re.sub(
