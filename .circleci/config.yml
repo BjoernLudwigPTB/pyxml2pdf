@@ -12,8 +12,21 @@ executors:
     docker:
       - image: circleci/python:3.8
 
+workflows:
+  test_and_deploy:
+    jobs:
+      - test
+      - semantic-release:
+          # Create 'release' job to create a release and publish it on GitHub.
+          requires:
+              - test
+          filters:
+              branches:
+                # This assures the job only being triggered on branch master.
+                only: /master/
+
 jobs:
-  build:
+  test:
     executor: tester
 
     working_directory: ~/repo
@@ -35,6 +48,7 @@ jobs:
     - restore_cache:
         keys:
         - v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+            {{ checksum "requirements/requirements.txt" }}
         # Fallback to using the latest cache if no exact match is found.
         - v1-dependencies-
 
@@ -43,7 +57,7 @@ jobs:
         name: Install dependencies
         command: |
           python3 -m venv venv
-          . venv/bin/activate
+          source venv/bin/activate
           pip install -r requirements/requirements.txt
           pip install -r requirements/dev-requirements.txt
 
@@ -58,7 +72,9 @@ jobs:
     - save_cache:
         paths:
         - ./venv
-        key: v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+        key: >-
+          v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+            {{ checksum "requirements/requirements.txt" }}
 
     # Set up Code Climate by downloading test reporter as a static binary.
     - run:
@@ -94,3 +110,42 @@ jobs:
 
     - store_test_results:
         path: test_results
+
+  semantic-release:
+    executor: publisher
+
+    working_directory: ~/repo
+
+    steps:
+      # Checkout code
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            # Specify the unique identifier for the cache.
+            - publisher-dependencies
+
+      # Install dependencies.
+      - run:
+          name: Install dependencies
+          command: |
+            python3 -m venv venv
+            source venv/bin/activate
+            pip install --upgrade pip
+            pip install python-semantic-release
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: >-
+            publisher-dependencies
+
+      # Publish it!
+      - run:
+          name: Run semantic-release publish
+          command: |
+            source venv/bin/activate
+            git config --global user.name "semantic-release (via CircleCI)"
+            git config --global user.email "bjoern.ludwig@ptb.de"
+            semantic-release publish
