@@ -28,15 +28,6 @@ class TableStyle:
             Styles.align_center,
         ]
 
-        self.sub_heading = [
-            Styles.align_left,
-            Styles.valign_middle,
-            Styles.box(colors.black),
-            Styles.inner_grid(colors.black),
-            Styles.leftpadding_reduce,
-            Styles.rightpadding_reduce,
-        ]
-
         self.normal = [
             Styles.align_left,
             Styles.valign_middle,
@@ -45,6 +36,8 @@ class TableStyle:
             Styles.leftpadding_reduce,
             Styles.rightpadding_reduce,
         ]
+
+        self.sub_heading = self.normal
 
         self.table_width = 177.8 * mm
 
