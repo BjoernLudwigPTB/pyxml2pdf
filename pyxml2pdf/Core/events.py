@@ -1,4 +1,5 @@
 """Module to provide a wrapper :py:class:`Core.events.Event` for xml extracted data"""
+import re
 import warnings
 from typing import List
 from xml.etree.ElementTree import Element
@@ -170,6 +171,11 @@ class Event(Element):
         # Extract data from xml children tags' texts. Since the date can consist of
         # three date ranges, we concatenate them separated with a line containing
         # only an "und".
+
+        def _remove_century(matchobj: re.Match) -> str:
+            """Remove the first two digits of the string representing the year"""
+            return matchobj.group(0)[2:]
+
         dates = [
             ["TerminDatumVon1", "TerminDatumBis1"],
             ["TerminDatumVon2", "TerminDatumBis2"],
@@ -189,12 +195,8 @@ class Event(Element):
         elif extracted_dates:
             # Remove placeholders for missing time specifications and the first two
             # digits of the year specification.
-            new_date = (
-                extracted_dates.replace("00:00", "")
-                .replace("2021", "21")
-                .replace("2020", "20")
-                .replace("2019", "19")
-                .replace("2018", "18")
+            new_date = re.sub(
+                "[0-9]{4}", _remove_century, extracted_dates.replace("00:00", "")
             )
         else:
             # All other dates stay uninterpreted and will be dropped.
