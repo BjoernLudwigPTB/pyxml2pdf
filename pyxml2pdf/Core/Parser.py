@@ -40,11 +40,14 @@ class Parser:
         """
         if events:
             for event in events:
-                event = Event(event)
-                self._table_manager.distribute_event(event)
+                self._table_manager.distribute_event(Event(event))
             subtable_elements = self._table_manager.collect_subtables()
-            for subtable_element in subtable_elements:
-                self._elements.append(KeepTogether(subtable_element))
+            self._elements.extend(
+                [
+                    KeepTogether(subtable_element)
+                    for subtable_element in subtable_elements
+                ]
+            )
             return self._elements
         else:
             warnings.warn("There were no items to print.", RuntimeWarning)
