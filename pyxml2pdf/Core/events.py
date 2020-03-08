@@ -1,7 +1,7 @@
 """Module to provide a wrapper :py:class:`Core.events.Event` for xml extracted data"""
 import re
 import warnings
-from typing import List
+from typing import List, Match
 from xml.etree.ElementTree import Element
 
 from reportlab.platypus import Paragraph, Table
@@ -171,7 +171,7 @@ class Event(Element):
         # three date ranges, we concatenate them separated with a line containing
         # only an "und".
 
-        def _remove_century(matchobj: re.Match) -> str:
+        def _remove_century(matchobj: Match) -> str:
             """Remove the first two digits of the string representing the year"""
             return matchobj.group(0)[2:]
 
