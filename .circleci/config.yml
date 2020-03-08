@@ -9,10 +9,10 @@ executors:
     parameters:
       tag:
         type: string
-        default: 3.7
+        default: "3.7"
       pyenv:
         type: string
-        default: py37
+        default: "py37"
     docker:
       - image: circleci/python:<< parameters.tag >>
     environment:
