@@ -147,7 +147,7 @@ jobs:
           name: Install Codacy and Codecov reporter
           command: |
             source ${PYENV}/bin/activate
-            pip install codacy-coverage codecov
+            pip install pytest pytest-cov codacy-coverage codecov
 
       # Set up Code Climate by downloading test reporter as a static binary.
       - run:
