@@ -13,8 +13,9 @@ Convert XML input to PDF table. Since we forked the
 [upstream](https://github.com/kuras120/XMLToPDFConverter) this project has generalized
 quite a bit on the generation of a multipage PDF file containing a table with
 subtables each containing a subset of the xml tags based on the texts of some of
-their children tags. Since we work on this project every end of the year, we will
-provide an extensive bit of documentation by the end of November 2019.
+their children tags. Since we work on this project mainly every end of the year, one
+ can expect major developments during november to january. The next big step will be
+  the deployment on [Heroku](https://www.heroku.com). 
 
 ## Getting started 
 As a starting point you could take a look at the execution of
