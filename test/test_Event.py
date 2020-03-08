@@ -1,9 +1,11 @@
+import re
+from datetime import date
 from typing import Callable, Dict
 from xml.etree.ElementTree import Element
 
 import pytest
 from hypothesis import given
-from hypothesis.strategies import text
+from hypothesis.strategies import dates, text
 from reportlab.platypus.tables import Table
 
 from pyxml2pdf.Core.events import Event
@@ -198,3 +200,10 @@ def test_call_parse_prerequisites_with_offers(s):
         Event._parse_prerequisites("", "", "", s)
         == "a) keine<br/>b) keine<br/>c) 0,00 € (" + s + ")"
     )
+
+
+@given(dates(min_value=date(1000, 1, 1)))
+def test_remove_country(test_event, dat):
+    assert re.sub(
+        "[0-9]{4,}", test_event._remove_century, dat.strftime("%d.%m.%Y")
+    ) == dat.strftime("%d.%m.%y")
