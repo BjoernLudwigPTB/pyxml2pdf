@@ -101,7 +101,7 @@ jobs:
 
     steps:
 
-      - install_deps
+    - install_deps
 
     # Set up Code Climate by downloading test reporter as a static binary.
     - run:
