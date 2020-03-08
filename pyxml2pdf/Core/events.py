@@ -1,7 +1,6 @@
 """Module to provide a wrapper :py:class:`Core.events.Event` for xml extracted data"""
 import re
-import warnings
-from typing import List
+from typing import List, Match
 from xml.etree.ElementTree import Element
 
 from reportlab.platypus import Paragraph, Table
@@ -41,7 +40,6 @@ class Event(Element):
     _categories: List[str]
     _full_row: Table
     _reduced_row: Table
-    _subtable_title: str
     _date: str
     _responsible: str
     _reduced_columns: List[EventParagraph]
@@ -165,15 +163,20 @@ class Event(Element):
         self._full_row = self._table_builder.create_fixedwidth_table([table_columns])
         return table_columns[:4]
 
+    @staticmethod
+    def _remove_century(matchobj: Match) -> str:
+        """Remove the first two digits of the string representing the year
+
+        :param matchobj: the result of :py:meth:`re.sub`
+        :return: the last two digits of the string representing the year
+        """
+        return matchobj.group(0)[2:]
+
     def _init_date(self):
         """Create a properly formatted string containing the date of the event"""
         # Extract data from xml children tags' texts. Since the date can consist of
         # three date ranges, we concatenate them separated with a line containing
         # only an "und".
-
-        def _remove_century(matchobj: re.Match) -> str:
-            """Remove the first two digits of the string representing the year"""
-            return matchobj.group(0)[2:]
 
         dates = [
             ["TerminDatumVon1", "TerminDatumBis1"],
@@ -191,15 +194,12 @@ class Event(Element):
         # Replace any extracted_dates of a form similar to 31.12.2099 with "on request".
         if "2099" in extracted_dates:
             new_date = "auf Anfrage"
-        elif extracted_dates:
+        else:
             # Remove placeholders for missing time specifications and the first two
             # digits of the year specification.
             new_date = re.sub(
-                "[0-9]{4}", _remove_century, extracted_dates.replace("00:00", "")
+                "[0-9]{4,}", self._remove_century, extracted_dates.replace("00:00", "")
             )
-        else:
-            # All other dates stay uninterpreted and will be dropped.
-            new_date = ""
         return new_date
 
     @staticmethod
@@ -222,10 +222,14 @@ class Event(Element):
         if not financial:
             financial = "0,00"
         if offers:
-            offers = " (" + offers + ")"
+            offers = offers.join([" (", ")"])
 
         return "<br/>".join(
-            ["a) " + personal, "b) " + material, "c) " + financial + " €" + offers]
+            [
+                "".join(["a) ", personal]),
+                "".join(["b) ", material]),
+                "".join(["c) ", financial, " €", offers]),
+            ]
         )
 
     def _build_description(self, link=""):
@@ -242,19 +246,17 @@ class Event(Element):
         :returns: the full description including url if provided
         :rtype: str
         """
-        long_description = (
-            "<b>" + self._concatenate_tags_content(["Bezeichnung"]) + "</b>"
-        )
         texts = [
-            long_description,
+            self._concatenate_tags_content(["Bezeichnung"]).join(["<b>", "</b>"]),
             self._concatenate_tags_content(["Bezeichnung2"]),
             self._concatenate_tags_content(["Beschreibung"]),
         ]
-        full_description = " - ".join([text for text in texts if text])
+        full_description = " – ".join([text for text in texts if text])
         if link:
-            if full_description[-1] != ".":
-                full_description += "."
-            full_description += " Mehr Infos unter <b><i>" + link + "</i></b>."
+            joiner = "." if full_description[-1] != "." else ""
+            full_description = joiner.join(
+                [full_description, link.join([" Mehr Infos unter <b><i>", "</i></b>."])]
+            )
 
         return full_description
 
@@ -278,18 +280,6 @@ class Event(Element):
         :returns: a table row with all the event's information
         :rtype: Table
         """
-        # If subtable_title is provided, we assume the event has been written to this
-        # according subtable, so we store, that the event can be found there.
-        if subtable_title:
-            self._subtable_title = subtable_title
-        else:
-            try:
-                self._subtable_title
-            except AttributeError:
-                warnings.warn(
-                    "No title for a reference to the full event was given by any "
-                    "previous call. Thus it needs to be given this time."
-                )
         return self._full_row
 
     @property
