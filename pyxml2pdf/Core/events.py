@@ -1,6 +1,5 @@
 """Module to provide a wrapper :py:class:`Core.events.Event` for xml extracted data"""
 import re
-import warnings
 from typing import List, Match
 from xml.etree.ElementTree import Element
 
@@ -41,7 +40,6 @@ class Event(Element):
     _categories: List[str]
     _full_row: Table
     _reduced_row: Table
-    _subtable_title: str
     _date: str
     _responsible: str
     _reduced_columns: List[EventParagraph]
@@ -282,18 +280,6 @@ class Event(Element):
         :returns: a table row with all the event's information
         :rtype: Table
         """
-        # If subtable_title is provided, we assume the event has been written to this
-        # according subtable, so we store, that the event can be found there.
-        if subtable_title:
-            self._subtable_title = subtable_title
-        else:
-            try:
-                self._subtable_title
-            except AttributeError:
-                warnings.warn(
-                    "No title for a reference to the full event was given by any "
-                    "previous call. Thus it needs to be given this time."
-                )
         return self._full_row
 
     @property
