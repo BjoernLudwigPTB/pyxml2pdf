@@ -41,13 +41,13 @@ commands:
           mkdir test-results/pytest
           mkdir -p output
 
-#    # Download and cache dependencies.
-#    - restore_cache:
-#        keys:
-#          - ${PYENV}-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-#            {{ checksum "requirements/requirements.txt" }}
-#          # Fallback to using the latest cache if no exact match is found.
-#          - ${PYENV}-dependencies-
+    # Download and cache dependencies.
+    - restore_cache:
+        keys:
+          - ${PYENV}-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+            {{ checksum "requirements/requirements.txt" }}
+          # Fallback to using the latest cache if no exact match is found.
+          - ${PYENV}-dependencies-
 
     # Create pyxml2pdf virtual environment.
     - run:
@@ -93,12 +93,12 @@ commands:
     - store_test_results:
         path: test_results
 
-#    - save_cache:
-#        paths:
-#          - ./<< parameters.pyenv >>
-#        key: >-
-#          << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-#            {{ checksum "requirements/requirements.txt" }}
+    - save_cache:
+        paths:
+          - ./<< parameters.pyenv >>
+        key: >-
+          << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+            {{ checksum "requirements/requirements.txt" }}
 
 workflows:
   test_and_deploy:
@@ -137,19 +137,6 @@ jobs:
       name: test
       tag: "3.7"
       pyenv: "py37"
-
-    steps:
-      - create_folders_and_venv:
-          pyenv: ${PYENV}
-      - tox:
-          pyenv: ${PYENV}
-      - store_results:
-          pyenv: ${PYENV}
-  test38:
-    executor:
-      name: test
-      tag: "3.8"
-      pyenv: "py38"
 
     steps:
       - create_folders_and_venv:
@@ -197,6 +184,20 @@ jobs:
             coverage report -m > test_results/pytest/coverage.log
             mv ./output/ ./test_results/
 
+      - store_results:
+          pyenv: ${PYENV}
+
+  test38:
+    executor:
+      name: test
+      tag: "3.8"
+      pyenv: "py38"
+
+    steps:
+      - create_folders_and_venv:
+          pyenv: ${PYENV}
+      - tox:
+          pyenv: ${PYENV}
       - store_results:
           pyenv: ${PYENV}
 
