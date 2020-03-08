@@ -6,6 +6,7 @@ version: 2.1
 
 executors:
   test:
+    working_directory: ~/repo
     parameters:
       tag:
         type: string
@@ -18,10 +19,57 @@ executors:
     environment:
       PYENV: << parameters.pyenv >>
   publisher:
+    working_directory: ~/repo
     docker:
       - image: circleci/python:3.8
 
 commands:
+  # Reusable command to prepare the environment for testing.
+  create_folders_and_venv:
+    description: "Prepare everything."
+    parameters:
+      pyenv:
+        type: string
+    steps:
+    # Checkout code.
+    - checkout
+    # Create test-result folder and the default output folder.
+    - run:
+        name: Create test result folder
+        command: |
+          mkdir test-results
+          mkdir test-results/pytest
+          mkdir -p output
+
+    # Create pyxml2pdf virtual environment.
+    - run:
+        name: Create virtual environment
+        command: |
+          python3 -m venv << parameters.pyenv >>
+
+  # Reusable command to conduct actual testing.
+  tox:
+    description: "Perform tox testing."
+    parameters:
+      pyenv:
+        type: string
+    steps:
+
+    # Install pyxml2pdf dependencies.
+    - run:
+        name: Install dependencies
+        command: |
+          python3 -m venv << parameters.pyenv >>
+          source << parameters.pyenv >>/bin/activate
+          pip install tox
+
+    # Perform tox testing.
+    - run:
+        name: Perform tox testing
+        command: |
+          tox -e << parameters.pyenv >>
+
+  # Reusable command to store the previously generated test results.
   store_results:
     description: "Store test results and artifacts."
     steps:
@@ -33,56 +81,6 @@ commands:
 
     - store_test_results:
         path: test_results
-
-  install_deps:
-    description: "Install dependencies."
-    parameters:
-      pyenv:
-        type: string
-    steps:
-
-      # Checkout code.
-      - checkout
-
-      # Create test-result folder and the default output folder.
-      - run:
-          name: Create test result folder
-          command: |
-            mkdir test-results
-            mkdir test-results/pytest
-            mkdir -p output
-
-      # Download and cache dependencies.
-      - restore_cache:
-          keys:
-            - << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-              {{ checksum "requirements/requirements.txt" }}
-            # Fallback to using the latest cache if no exact match is found.
-            - << parameters.pyenv >>-dependencies-
-
-      # Install pyxml2pdf dependencies.
-      - run:
-          name: Install dependencies
-          command: |
-            python3 -m venv << parameters.pyenv >>
-            source << parameters.pyenv >>/bin/activate
-            pip install -r requirements/requirements.txt
-            pip install -r requirements/dev-requirements.txt
-
-      # Install CI blocks dependencies.
-      - run:
-          name: Install Codacy and Codecov reporter
-          command: |
-            source << parameters.pyenv >>/bin/activate
-            pip install codacy-coverage codecov
-
-      - save_cache:
-          paths:
-            - ./<< parameters.pyenv >>
-          key: >-
-            << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-              {{ checksum "requirements/requirements.txt" }}
-
 workflows:
   test_and_deploy:
     jobs:
@@ -105,52 +103,90 @@ workflows:
                 only: /master/
 
 jobs:
+  test34:
+    executor:
+      name: test
+      tag: "3.4"
+      pyenv: "py34"
+
+    steps:
+      - create_folders_and_venv:
+          pyenv: ${PYENV}
+      - tox:
+          pyenv: ${PYENV}
+      - store_results
+
   test37:
     executor:
       name: test
       tag: "3.7"
       pyenv: "py37"
 
-    working_directory: ~/repo
-
     steps:
+      - create_folders_and_venv:
+          pyenv: ${PYENV}
 
-    - install_deps:
-        pyenv: ${PYENV}
+      # Download and cache dependencies.
+      - restore_cache:
+          keys:
+            - ${PYENV}-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+              {{ checksum "requirements/requirements.txt" }}
+            # Fallback to using the latest cache if no exact match is found.
+            - ${PYENV}-dependencies-
 
-    # Set up Code Climate by downloading test reporter as a static binary.
-    - run:
-        name: Set up Code Climate test-reporter
-        command: |
-          curl -L 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64' > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
+      # Install pyxml2pdf dependencies.
+      - run:
+          name: Install dependencies
+          command: |
+            source ${PYENV}/bin/activate
+            pip install -r requirements/requirements.txt
+            pip install -r requirements/dev-requirements.txt
 
-    # Run coverage! We use pytest's test-runner (https://pytest.org)
-    # 1. Upload test report to Codacy using `python-codacy-coverage`
-    # 2. Upload test report to Codecov using `codecov`
-    # 3. Produce normal report to show in CircleCI 'test-reports'
-    - run:
-        name: Test and create coverage report
-        command: |
-          source ${PYENV}/bin/activate
-          ./cc-test-reporter before-build
-          pytest -v --cov=. \
-           --junitxml=test_results/pytest/pytest.xml
-          coverage xml
-          ./cc-test-reporter after-build --coverage-input-type coverage.py \
-              --exit-code $?
-          python-codacy-coverage -r coverage.xml
-          codecov
-          mv coverage.xml ./test_results/pytest/
-          coverage report -m > test_results/pytest/coverage.log
-          mv ./output/ ./test_results/
+      # Install CI blocks dependencies.
+      - run:
+          name: Install Codacy and Codecov reporter
+          command: |
+            source ${PYENV}/bin/activate
+            pip install codacy-coverage codecov
 
-    - store_results
+      - save_cache:
+          paths:
+            - ./${PYENV}
+          key: >-
+            ${PYENV}-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+              {{ checksum "requirements/requirements.txt" }}
+
+      # Set up Code Climate by downloading test reporter as a static binary.
+      - run:
+          name: Set up Code Climate test-reporter
+          command: |
+            curl -L 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64' > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
+      # Run coverage! We use pytest's test-runner (https://pytest.org)
+      # 1. Upload test report to Codacy using `python-codacy-coverage`
+      # 2. Upload test report to Codecov using `codecov`
+      # 3. Produce normal report to show in CircleCI 'test-reports'
+      - run:
+          name: Test and create coverage report
+          command: |
+            source ${PYENV}/bin/activate
+            ./cc-test-reporter before-build
+            pytest -v --cov=. \
+             --junitxml=test_results/pytest/pytest.xml
+            coverage xml
+            ./cc-test-reporter after-build --coverage-input-type coverage.py \
+                --exit-code $?
+            python-codacy-coverage -r coverage.xml
+            codecov
+            mv coverage.xml ./test_results/pytest/
+            coverage report -m > test_results/pytest/coverage.log
+            mv ./output/ ./test_results/
+
+      - store_results
 
   semantic-release:
     executor: publisher
-
-    working_directory: ~/repo
 
     steps:
       # Checkout code
