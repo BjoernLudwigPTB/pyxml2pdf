@@ -108,9 +108,7 @@ class TableBuilder:
         ]
 
         # Create row containing one column per heading.
-        columns = []
-        for heading in headings:
-            columns.append(Paragraph(heading, self._styles["Heading2"]))
+        columns = [Paragraph(heading, self._styles["Heading2"]) for heading in headings]
 
         # Concatenate both rows.
         title_row.append(
@@ -122,12 +120,12 @@ class TableBuilder:
         )
         return title_row
 
-    def collect_subtables(self):
-        aggregated_subtables = []
-        for subtable in self._subtables:
-            for element in subtable.events:
-                aggregated_subtables.append(element)
-        return aggregated_subtables
+    def collect_subtables(self) -> List[Table]:
+        """Collect all subtables at once
+
+        :return: the subtables
+        """
+        return [element for subtable in self._subtables for element in subtable.events]
 
     def distribute_event(self, event):
         """Distribute an event to the subtables according to the related categories
