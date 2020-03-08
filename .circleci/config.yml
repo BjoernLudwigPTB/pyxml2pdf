@@ -41,13 +41,13 @@ commands:
           mkdir test-results/pytest
           mkdir -p output
 
-#    # Download and cache dependencies.
-#    - restore_cache:
-#        keys:
-#          - << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-#            {{ checksum "requirements/requirements.txt" }}
-#          # Fallback to using the latest cache if no exact match is found.
-#          - << parameters.pyenv >>-dependencies-
+    # Download and cache dependencies.
+    - restore_cache:
+        keys:
+          - << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+            {{ checksum "requirements/requirements.txt" }}
+          # Fallback to using the latest cache if no exact match is found.
+          - << parameters.pyenv >>-dependencies-
 
     # Create pyxml2pdf virtual environment.
     - run:
@@ -93,12 +93,12 @@ commands:
     - store_test_results:
         path: test_results
 
-#    - save_cache:
-#        paths:
-#          - ./<< parameters.pyenv >>
-#        key: >-
-#          << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-#            {{ checksum "requirements/requirements.txt" }}
+    - save_cache:
+        paths:
+          - .tox/<< parameters.pyenv >>
+        key: >-
+          << parameters.pyenv >>-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
+            {{ checksum "requirements/requirements.txt" }}
 
 workflows:
   test_and_deploy:
@@ -162,19 +162,7 @@ jobs:
           command: |
             source ${PYENV}/bin/activate
             ./cc-test-reporter before-build
-
-      # Perform actual testing.
-      - tox:
-          pyenv: ${PYENV}
-
-      # Run coverage! We use pytest's test-runner (https://pytest.org)
-      # 1. Upload test report to Codacy using `python-codacy-coverage`
-      # 2. Upload test report to Codecov using `codecov`
-      # 3. Produce normal report to show in CircleCI 'test-reports'
-      - run:
-          name: Test and create coverage report
-          command: |
-            source ${PYENV}/bin/activate
+            pytest -v --cov=. --junitxml=test_results/pytest/pytest.xml
             coverage xml
             ./cc-test-reporter after-build --coverage-input-type coverage.py \
                 --exit-code $?
