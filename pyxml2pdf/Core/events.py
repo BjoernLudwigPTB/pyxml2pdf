@@ -225,7 +225,11 @@ class Event(Element):
             offers = offers.join([" (", ")"])
 
         return "<br/>".join(
-            ["a) " + personal, "b) " + material, "c) " + financial + " €" + offers]
+            [
+                "".join(["a) ", personal]),
+                "".join(["b) ", material]),
+                "".join(["c) ", financial, " €", offers]),
+            ]
         )
 
     def _build_description(self, link=""):
