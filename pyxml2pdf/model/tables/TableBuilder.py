@@ -1,7 +1,7 @@
 import warnings
-from typing import List
+from typing import List, Optional, Tuple, Union
 
-from reportlab.platypus import Paragraph, Table
+from reportlab.platypus import Flowable, Paragraph, Table
 
 from pyxml2pdf.model.tables.EventTable import EventTable
 from pyxml2pdf.PdfVisualisation.TableStyle import TableStyle
@@ -151,18 +151,22 @@ class TableBuilder:
                 RuntimeWarning,
             )
 
-    def create_fixedwidth_table(self, cells, widths=None, style=None):
+    def create_fixedwidth_table(
+        self,
+        cells: List[List[Flowable]],
+        widths: Optional[Union[float, List[float]]] = None,
+        style: Optional[List[Tuple[Union[str, Tuple[int]]]]] = None,
+    ) -> Table:
         """Create a table with specified column widths
 
         Create a table from specified cells with fixed column widths and a specific
         style.
 
-        :param List[List[reportlab.platypus.Flowable]] cells: cells wrapped by a
-            list representing the columns wrapped by a list representing the lines
-        :param Union[float, List[float]] widths: the column widths
-        :param List[Tuple[Union[str, Tuple[int]]]] style: desired table's style
+        :param cells: cells wrapped by a list representing the columns wrapped by a
+            list representing the lines
+        :param widths: the column widths
+        :param style: desired table's style
         :returns: table containing specified cells in fixed width, styled columns
-        :rtype: Table
         """
         if widths is None:
             widths = self._table_style.column_widths
