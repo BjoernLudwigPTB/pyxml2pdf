@@ -28,7 +28,7 @@ page rotated into portrait) and place them in the subfolder *output*.
 The full developer reference with all public interfaces you can find on [ReadTheDocs
 ](https://pyxml2pdf.readthedocs.io/). User documentation might still take a while for
 us to generate, since it is only us working on the project and using it as far as we
-now.
+know.
  
  ## Get in touch
  
