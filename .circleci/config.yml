@@ -85,28 +85,28 @@ commands:
 workflows:
   test_and_deploy:
     jobs:
-      - test35
-#      - test36
+#      - test35
+      - test36
       - test37
-#      - test38
+      - test38
       - semantic-release:
           # Create 'release' job to create a release and publish it on GitHub.
           requires:
-              - test35
-#              - test36
+#              - test35
+              - test36
               - test37
-#              - test38
+              - test38
           filters:
               branches:
                 # This assures the job only being triggered on branch master.
                 only: /master/
 
 jobs:
-  test35:
+  test36:
     executor:
       name: test
-      tag: "3.5"
-      pyenv: "py35"
+      tag: "3.6"
+      pyenv: "py36"
 
     steps:
       - create_folders_and_venv:
