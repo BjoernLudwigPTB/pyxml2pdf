@@ -261,7 +261,7 @@ class Event(Element):
         return full_description
 
     @create_reduced_after_full
-    def get_full_row(self, subtable_title=None):
+    def get_full_row(self, subtable_title: str = None) -> Table:
         """Exchange a table row with all the event's information against a
         subtable's title
 
@@ -275,10 +275,9 @@ class Event(Element):
             .Event.get_full_row>`_ is displayed incorrectly. The parameter and
             return value are as follows...
 
-        :param str subtable_title: the title of the subtable in which the row will
+        :param subtable_title: the title of the subtable in which the row will
             be integrated
         :returns: a table row with all the event's information
-        :rtype: Table
         """
         return self._full_row
 
