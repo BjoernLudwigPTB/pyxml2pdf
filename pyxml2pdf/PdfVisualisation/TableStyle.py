@@ -99,7 +99,7 @@ class TableStyle:
         This ensures that `<i></i>` and `<b></b>` as cell content work well.
         """
         # Set root of fonts to the folder containing this file.
-        path_to_fonts = PurePath(__file__).parent
+        path_to_fonts = PurePath(__file__).parent.joinpath("fonts")
 
         # Finally lead and register fonts with reportlab.
         registerFont(
