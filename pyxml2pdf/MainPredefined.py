@@ -9,7 +9,7 @@ def convert():
     xml_path = input_folder + xml_filename
     url = domain + xml_filename
     input_path = input_folder + xml_filename
-    properties_filename = "kursdaten_prop.properties"
+    properties_filename = "kursdaten_properties.py"
     properties_path = input_folder + properties_filename
     output_folder = "output/"
     output_filename = "kursdaten.pdf"
