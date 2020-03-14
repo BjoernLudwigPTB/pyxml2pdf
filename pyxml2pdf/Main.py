@@ -11,11 +11,11 @@ def main():
 
 def validate():
     if len(sys.argv) < 2:
-        raise Exception("Not enough arguments")
+        raise RuntimeError("Not enough arguments")
     if ".xml" not in sys.argv[1]:
-        raise Exception("No XML file detected")
+        raise RuntimeError("No XML file detected")
     if ".pdf" not in sys.argv[2]:
-        raise Exception("File must have PDF extension")
+        raise RuntimeError("File must have PDF extension")
 
 
 def init():

@@ -1,3 +1,5 @@
+import subprocess
+
 import pytest
 
 from pyxml2pdf import Main
@@ -24,5 +26,22 @@ def test_init_main():
 
 @pytest.mark.online
 def test_input():
-    with pytest.raises(Exception):
+    with pytest.raises(RuntimeError):
         Main.main()
+
+
+def test_main_call():
+    with pytest.raises(subprocess.CalledProcessError):
+        subprocess.run(["python3", "-m", "pyxml2pdf.Main"], check=True)
+    with pytest.raises(subprocess.CalledProcessError):
+        subprocess.run(["python3", "-m", "pyxml2pdf.Main", "test.xml"], check=True)
+    with pytest.raises(subprocess.CalledProcessError):
+        subprocess.run(["python3", "-m", "pyxml2pdf.Main", "test.test"], check=True)
+    with pytest.raises(subprocess.CalledProcessError):
+        subprocess.run(
+            ["python3", "-m", "pyxml2pdf.Main", "test.xml", "test.test"], check=True
+        )
+    with pytest.raises(subprocess.CalledProcessError):
+        subprocess.run(
+            ["python3", "-m", "pyxml2pdf.Main", "test.xml", "test.pdf"], check=True
+        )
