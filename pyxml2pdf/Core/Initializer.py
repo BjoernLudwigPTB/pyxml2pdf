@@ -15,14 +15,13 @@ class Initializer:
 
     :param str input_path: path to input xml-file
     :param str output_path: path to pdf file containing result
-    :param str properties_path: path to text file containing properties
     """
 
     __data: List[KeepTogether]
 
     def __init__(self, input_path, output_path, properties_path):
         self.__data = []
-        parser = Parser(properties_path, self.__data)
+        parser = Parser(self.__data)
         pdf = SimpleDocTemplate(
             output_path,
             pagesize=(178 * mm, 134 * mm),
