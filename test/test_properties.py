@@ -1,5 +1,10 @@
-from input.kursdaten_properties import (columns, rows_xmltag, subtables,
-                                        subtables_xmltag, table_title)
+from input.kursdaten_properties import (
+    columns,
+    rows_xmltag,
+    subtables,
+    subtables_xmltag,
+    table_title,
+)
 
 
 def test_rows_xmltag():
