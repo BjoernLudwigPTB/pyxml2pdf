@@ -17,7 +17,7 @@ table_title = "Ausbildungs- und Fahrtenprogramm 2020"
 # one and the same row, must each belong to one parent tag `rows_xmltag'. The column
 # widths are specified with 'width' in mm.
 columns = [
-    {"label": "Art", "tag": "Kursart", "width": 8},
+    {"label": "Art", "tag": ["Kursart"], "width": 8},
     {
         "label": "Datum",
         "tag": [
@@ -30,17 +30,17 @@ columns = [
         ],
         "width": 13,
     },
-    {"label": "Ort", "tag": "Ort1", "width": 19},
-    {"label": "Leitung", "tag": "Kursleiter", "width": 15},
+    {"label": "Ort", "tag": ["Ort1"], "width": 19},
+    {"label": "Leitung", "tag": ["Kursleiter"], "width": 15},
     {
         "label": "Beschreibung",
         "tag": ["Bezeichnung", "Bezeichnung2", "Beschreibung"],
         "width": 58,
     },
-    {"label": "Zielgruppe", "tag": "Zielgruppe", "width": 18},
+    {"label": "Zielgruppe", "tag": ["Zielgruppe"], "width": 18},
     {
         "label": "Voraussetzungen",
-        "tag": ["Voraussetzung", "Ausruestung", ["Kurskosten", "Leistungen"]],
+        "tag": ["Voraussetzung", "Ausruestung", "Kurskosten", "Leistungen"],
         "width": 46.8,
     },
 ]
