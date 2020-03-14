@@ -72,7 +72,7 @@ class Event(Element):
         :param str subtable_title: title of the subtable which contains the full event
 
         .. warning:: Do not call this function directly since it is automatically
-        called right after :meth:`get_full_row` is invoked.
+            called right after :meth:`get_full_row` is invoked.
         """
         self._reduced_columns.append(
             self.EventParagraph(self._build_description(link=subtable_title))
