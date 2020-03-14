@@ -1,19 +1,14 @@
+=========
 pyxml2pdf
 =========
+
+Core
+====
 
 Downloader
 ----------
 
-.. automodule:: Core.Downloader
-    :members:
-    :private-members:
-    :undoc-members:
-
-
-Initializer
------------
-
-.. automodule:: Core.Initializer
+.. automodule:: pyxml2pdf.Core.Downloader
     :members:
     :private-members:
     :undoc-members:
@@ -21,7 +16,15 @@ Initializer
 Event
 -----
 
-.. automodule:: Core.events
+.. automodule:: pyxml2pdf.Core.events
+    :members:
+    :private-members:
+    :undoc-members:
+
+Initializer
+-----------
+
+.. automodule:: pyxml2pdf.Core.Initializer
     :members:
     :private-members:
     :undoc-members:
@@ -29,7 +32,7 @@ Event
 Parser
 ------
 
-.. automodule:: Core.Parser
+.. automodule:: pyxml2pdf.Core.Parser
     :members:
     :private-members:
     :undoc-members:
@@ -37,7 +40,7 @@ Parser
 PostProcessor
 -------------
 
-.. automodule:: Core.PostProcessor
+.. automodule:: pyxml2pdf.Core.PostProcessor
     :members:
     :private-members:
     :undoc-members:
@@ -45,7 +48,45 @@ PostProcessor
 Sorter
 ------
 
-.. automodule:: Core.Sorter
+.. automodule:: pyxml2pdf.Core.Sorter
+    :members:
+    :private-members:
+    :undoc-members:
+
+model.tables
+============
+
+EventTable
+----------
+
+.. automodule:: pyxml2pdf.model.tables.EventTable
+    :members:
+    :private-members:
+    :undoc-members:
+
+TableBuilder
+------------
+
+.. automodule:: pyxml2pdf.model.tables.TableBuilder
+    :members:
+    :private-members:
+    :undoc-members:
+
+PdfVisualisation
+================
+
+Styles
+------
+
+.. automodule:: pyxml2pdf.PdfVisualisation.Styles
+    :members:
+    :private-members:
+    :undoc-members:
+
+TableStyle
+----------
+
+.. automodule:: pyxml2pdf.PdfVisualisation.TableStyle
     :members:
     :private-members:
     :undoc-members:
