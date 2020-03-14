@@ -1,4 +1,4 @@
-from input.kursdaten_properties import (
+from input.properties import (
     columns,
     rows_xmltag,
     subtables,

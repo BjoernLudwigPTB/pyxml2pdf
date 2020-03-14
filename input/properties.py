@@ -1,7 +1,3 @@
-# WARNING: This file is not read in at the moment. The different options are
-# presently spread over several modules and shall later be collected here and read in
-# at the according locations in the program flow.
-
 # The XML tag, which will be represented by one row in the table.
 rows_xmltag = "kurs"
 
@@ -77,3 +73,16 @@ subtables = [
     {"label": "Veranstaltungen für Familien", "content": [["Familie"], ["Familie"]]},
     {"label": "Jugendgruppen und -events", "content": [["Jugend"], ["Jugend"]]},
 ]
+
+# Set font for the table.
+font = {
+    "normal": "NewsGothicBT-Roman.ttf",
+    "italic": "NewsGothicBT-Italic.ttf",
+    "bold": "NewsGothicBT-Bold.ttf",
+    "bolditalic": "NewsGothicBT-BoldItalic.ttf",
+}
+
+# Set the font size for the table. 'normal' applies to all text except table and
+# column headings, where 'table_heading' applies to the very first line of the whole
+# table and additionally the first line of all subtables.
+fontsize = {"normal": 6.5, "table_heading": 12, "column_heading": 6.5}
