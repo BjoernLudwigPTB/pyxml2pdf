@@ -6,6 +6,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
 
+from input.properties import font, fontsize
 from pyxml2pdf.PdfVisualisation.Styles import Styles
 
 
@@ -72,21 +73,20 @@ class TableStyle:
         # Get custom_styles for all headings, texts, etc. from sample
         custom_styles = getSampleStyleSheet()
         # Overwrite the sample styles according to our needs.
-        # TODO this should be provided in the properties file
-        custom_styles.get("Normal").fontSize = 6.5
+        custom_styles.get("Normal").fontSize = fontsize["normal"]
         custom_styles.get("Normal").leading = custom_styles["Normal"].fontSize * 1.2
-        custom_styles.get("Normal").fontName = "NewsGothBT"
+        custom_styles.get("Normal").fontName = "normal_font"
         custom_styles.get("Italic").fontSize = custom_styles["Normal"].fontSize
         custom_styles.get("Italic").leading = custom_styles["Italic"].fontSize * 1.2
-        custom_styles.get("Italic").fontName = "NewsGothBT_Italic"
-        custom_styles.get("Heading1").fontSize = 12
+        custom_styles.get("Italic").fontName = "italic_font"
+        custom_styles.get("Heading1").fontSize = fontsize["table_heading"]
         custom_styles.get("Heading1").alignment = 1
         custom_styles.get("Heading1").leading = custom_styles["Heading1"].fontSize * 1.2
-        custom_styles.get("Heading1").fontName = "NewsGothBT_Bold"
-        custom_styles.get("Heading2").fontSize = custom_styles["Normal"].fontSize
+        custom_styles.get("Heading1").fontName = "bold_font"
+        custom_styles.get("Heading2").fontSize = fontsize["column_heading"]
         custom_styles.get("Heading2").alignment = 1
         custom_styles.get("Heading2").leading = custom_styles["Heading2"].fontSize * 1.2
-        custom_styles.get("Heading2").fontName = "NewsGothBT_Bold"
+        custom_styles.get("Heading2").fontName = "bold_font"
         self._custom_styles = custom_styles
 
         # Register font with reportlab.
@@ -102,29 +102,18 @@ class TableStyle:
         path_to_fonts = PurePath(__file__).parent.joinpath("fonts")
 
         # Finally lead and register fonts with reportlab.
+        registerFont(TTFont("normal_font", path_to_fonts.joinpath(font["normal"])))
+        registerFont(TTFont("bold_font", path_to_fonts.joinpath(font["bold"])))
+        registerFont(TTFont("italic_font", path_to_fonts.joinpath(font["italic"])))
         registerFont(
-            TTFont("NewsGothBT", path_to_fonts.joinpath("NewsGothicBT-Roman.ttf"))
-        )
-        registerFont(
-            TTFont("NewsGothBT_Bold", path_to_fonts.joinpath("NewsGothicBT-Bold.ttf"))
-        )
-        registerFont(
-            TTFont(
-                "NewsGothBT_Italic", path_to_fonts.joinpath("NewsGothicBT-Italic.ttf")
-            )
-        )
-        registerFont(
-            TTFont(
-                "NewsGothBT_BoldItalic",
-                path_to_fonts.joinpath("NewsGothicBT-BoldItalic.ttf"),
-            )
+            TTFont("bolditalic_font", path_to_fonts.joinpath(font["bolditalic"]))
         )
         registerFontFamily(
-            "NewsGothBT",
-            normal="NewsGothBT",
-            bold="NewsGothBT_Bold",
-            italic="NewsGothBT_Italic",
-            boldItalic="NewsGothBT_BoldItalic",
+            "custom_font",
+            normal="normal_font",
+            bold="bold_font",
+            italic="italic_font",
+            boldItalic="bolditalic_font",
         )
 
     @property
