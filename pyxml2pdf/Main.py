@@ -10,14 +10,12 @@ def main():
 
 
 def validate():
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         raise Exception("Not enough arguments")
     if ".xml" not in sys.argv[1]:
         raise Exception("No XML file detected")
     if ".pdf" not in sys.argv[2]:
         raise Exception("File must have PDF extension")
-    if ".properties" not in sys.argv[3]:
-        raise Exception("Properties file must have .properties extension")
 
 
 def init():
