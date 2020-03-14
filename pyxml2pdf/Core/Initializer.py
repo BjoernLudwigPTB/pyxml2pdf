@@ -19,7 +19,7 @@ class Initializer:
 
     __data: List[KeepTogether]
 
-    def __init__(self, input_path, output_path, properties_path):
+    def __init__(self, input_path, output_path):
         self.__data = []
         parser = Parser(self.__data)
         pdf = SimpleDocTemplate(

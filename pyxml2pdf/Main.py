@@ -5,7 +5,7 @@ from pyxml2pdf.Core.Initializer import Initializer
 
 def main():
     validate()
-    Initializer(sys.argv[1], sys.argv[2], sys.argv[3])
+    Initializer(sys.argv[1], sys.argv[2])
     print("\n-------------------------------DONE-------------------------------")
 
 
