@@ -5,14 +5,18 @@
 version: 2.1
 
 executors:
-  # Define a parameterized executor which accepts two parameters to choose the python
-  # version which will be used for the docker image and the tox actions.
+  # Define a parameterized executor which accepts two parameters to choose the Python
+  # version which will be used for the Docker image and the tox actions.
   test:
     working_directory: ~/repo
     parameters:
+      # Initialize the parameter and set default which specifies the Python Docker
+      # image tag. Should represent the same Python version as the tox Python version.
       tag:
         type: string
         default: "3.7"
+      # Initialize the parameter and set default which specifies the tox Python version.
+      # Should represent the same Python version as the Python Docker image tag.
       pyenv:
         type: string
         default: "py37"
@@ -125,12 +129,14 @@ workflows:
                 only: /master/
 
 jobs:
+  # Define the job to run all tests against Python 3.6.
   test36:
     executor:
       name: test
       tag: "3.6"
       pyenv: "py36"
 
+    # Call for the execution of all reusable commands specified above.
     steps:
       - create_folders_and_venv:
           pyenv: ${PYENV}
@@ -139,12 +145,31 @@ jobs:
       - store_results:
           pyenv: ${PYENV}
 
+  # Define the job to run all tests against Python 3.7.
+  test37:
+    executor:
+      name: test
+      tag: "3.7"
+      pyenv: "py37"
+
+    # Call for the execution of all reusable commands specified above.
+    steps:
+      - create_folders_and_venv:
+          pyenv: ${PYENV}
+      - tox:
+          pyenv: ${PYENV}
+      - store_results:
+          pyenv: ${PYENV}
+
+  # Define the job to run all tests against Python 3.7.
   test38:
     executor:
       name: test
       tag: "3.8"
       pyenv: "py38"
 
+    # Call for the execution of some reusable commands specified above and
+    # additionally produce coverage reports and send them to the according CI platforms.
     steps:
       - create_folders_and_venv:
           pyenv: ${PYENV}
@@ -185,20 +210,8 @@ jobs:
       - store_results:
           pyenv: ${PYENV}
 
-  test37:
-    executor:
-      name: test
-      tag: "3.7"
-      pyenv: "py37"
-
-    steps:
-      - create_folders_and_venv:
-          pyenv: ${PYENV}
-      - tox:
-          pyenv: ${PYENV}
-      - store_results:
-          pyenv: ${PYENV}
-
+  # Define the job to run after all tests have passed and release software based on
+  # python-semantic-release.
   semantic-release:
     executor: publisher
 
