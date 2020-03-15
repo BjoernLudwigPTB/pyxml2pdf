@@ -34,6 +34,11 @@ def test_columns():
         assert float(column["width"])
 
 
+def test_column_widths():
+    # Check if column widths sum up to 177.8mm.
+    assert sum(column["width"] for column in columns) == 177.8
+
+
 def test_subtables_xmltag():
     # Check type of `subtables_xmltag`.
     assert isinstance(subtables_xmltag, str)

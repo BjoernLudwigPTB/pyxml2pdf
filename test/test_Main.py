@@ -25,6 +25,12 @@ def test_init_main():
 
 
 @pytest.mark.online
+def test_validate_main():
+    with pytest.raises(RuntimeError):
+        Main.validate()
+
+
+@pytest.mark.online
 def test_input():
     with pytest.raises(RuntimeError):
         Main.main()
