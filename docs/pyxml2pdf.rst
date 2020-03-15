@@ -53,13 +53,13 @@ sorter
     :private-members:
     :undoc-members:
 
-model.tables
-============
+tables
+======
 
 tables
 ------
 
-.. automodule:: pyxml2pdf.model.tables.tables
+.. automodule:: pyxml2pdf.tables.tables
     :members:
     :private-members:
     :undoc-members:
@@ -67,7 +67,7 @@ tables
 builder
 -------
 
-.. automodule:: pyxml2pdf.model.tables.builder
+.. automodule:: pyxml2pdf.tables.builder
     :members:
     :private-members:
     :undoc-members:

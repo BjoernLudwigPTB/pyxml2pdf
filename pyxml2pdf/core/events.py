@@ -316,9 +316,11 @@ class Event(Element):
     def get_table_row(self, subtable_title):
         """Return the table row representation of the event
 
-        This is the API of :py:class:`core.events.Event` for getting the table row
+        This is the API of :py:class:`pyxml2pdf.core.events.Event` for getting the
+        table row
         representation of the event. It makes sure, that on the first call
-        :meth:`get_full_row` is invoked and otherwise :attr:`_reduced_row` is returned.
+        :meth:`get_full_row` is invoked and otherwise :attr:`self._reduced_row` is
+        returned.
 
         :param str subtable_title: the title of the subtable in which the row will
             be integrated

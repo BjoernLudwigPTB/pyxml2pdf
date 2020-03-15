@@ -1,4 +1,4 @@
-""":py:mod:`pyxml2pdf.core.Parser` is the interface between xml input and table output"""
+""":py:mod:`pyxml2pdf.core.parser` is the interface between xml input and table"""
 
 __all__ = ["Parser"]
 
