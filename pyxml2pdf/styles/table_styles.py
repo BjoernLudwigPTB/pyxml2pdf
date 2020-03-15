@@ -126,13 +126,12 @@ class TableStyle:
         """Return the custom styles and stylesheet for the tables
 
         :returns: the custom styles and stylesheet in the Form
-            `
-            {
-                "heading": List[Styles],
-                "normal": List[Styles],
-                "sub_heading": List[Styles],
-                "stylesheet": StyleSheet1,
-            }
-            `
+            .. code-block::
+                {
+                    "heading": List[Styles],
+                    "normal": List[Styles],
+                    "sub_heading": List[Styles],
+                    "stylesheet": StyleSheet1,
+                }
         """
         return self._custom_styles

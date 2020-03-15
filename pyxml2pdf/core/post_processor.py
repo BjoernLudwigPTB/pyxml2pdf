@@ -6,8 +6,8 @@ from PyPDF2.pdf import PageObject, PdfFileReader, PdfFileWriter
 class PostProcessor:
     """Arrange for needed modifications of the result to prepare for printing
 
-    This creates an instance of a :py:mod:`core.PostProcessor` for a multipage PDF
-    file to automate splitting and rotating.
+    This creates an instance of a :py:mod:`pyxml2pdf.core.post_processor` for a
+    multipage PDF file to automate splitting and rotating.
 
     :param str path:  path to the PDF file which shall be processed
     """
