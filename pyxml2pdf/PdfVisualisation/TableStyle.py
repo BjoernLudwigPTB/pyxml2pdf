@@ -1,12 +1,13 @@
 from pathlib import PurePath
+from typing import Dict, List, Tuple, Union
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import mm
-from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.styles import getSampleStyleSheet, StyleSheet1
 from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
 from reportlab.pdfbase.ttfonts import TTFont
 
-from input.properties import font, fontsize
+from input.properties import columns, font, fontsize
 from pyxml2pdf.PdfVisualisation.Styles import Styles
 
 
@@ -20,8 +21,12 @@ class TableStyle:
         * ...
     """
 
+    _column_widths: List[float]
+    _table_width: float
+    _custom_styles: Dict[str, Union[Tuple[str, ...], StyleSheet1]] = {}
+
     def __init__(self):
-        self.heading = [
+        self._custom_styles["heading"] = [
             Styles.valign_middle,
             Styles.background(colors.honeydew),
             Styles.box(colors.black),
@@ -29,7 +34,7 @@ class TableStyle:
             Styles.align_center,
         ]
 
-        self.normal = [
+        self._custom_styles["normal"] = [
             Styles.align_left,
             Styles.valign_middle,
             Styles.box(colors.black),
@@ -38,35 +43,10 @@ class TableStyle:
             Styles.rightpadding_reduce,
         ]
 
-        self.sub_heading = self.normal
+        self._custom_styles["sub_heading"] = self._custom_styles["normal"]
 
-        self.table_width = 177.8 * mm
-
-        # This specifies the column widths of the final result. The columns contain...
-        # TODO put in the properties files content here.
-        self._column_widths = [
-            # ... the type of the event.
-            7.2 * mm,
-            # ... the date and time of the event.
-            11.5 * mm,
-            # ... the region of the event.
-            18.7 * mm,
-            # ... the responsible person for the event.
-            14.5 * mm,
-            # ... the details regarding the content of the event. Note that this
-            # column width is calculated in the next step from the available total
-            # space and the sum of all other column widths.
-            0 * mm,
-            # ... the target audience the event.
-            18 * mm,
-            # ... the personal, material and financial prerequisites for the event.
-            47 * mm,
-        ]
-        self._column_widths[4] = (
-            self.table_width
-            - sum(self._column_widths[0:4])
-            - sum(self._column_widths[5:7])
-        )
+        # Extract the column widths from properties.
+        self._column_widths = [float(column["width"]) * mm for column in columns]
 
         # Set the resulting tables' styling with all the customization of
         # margins, fonts, fontsizes, etc...
@@ -88,7 +68,7 @@ class TableStyle:
         custom_styles.get("Heading2").alignment = 1
         custom_styles.get("Heading2").leading = custom_styles["Heading2"].fontSize * 1.2
         custom_styles.get("Heading2").fontName = "bold_font"
-        self._custom_styles = custom_styles
+        self._custom_styles["stylesheet"] = custom_styles
 
         # Register font with reportlab.
         self._init_font_family()
@@ -121,16 +101,36 @@ class TableStyle:
     def column_widths(self):
         """Return the column widths for the tables
 
-        :returns: the list of column widths
+        :returns: the list of column widths in mm
         :rtype: List[float]
         """
         return self._column_widths
 
     @property
-    def custom_styles(self):
-        """Return the custom stylesheet for the tables
+    def table_width(self) -> float:
+        """Return the full table width
 
-        :returns: the custom stylesheet
-        :rtype: reportlab.lib.styles.StyleSheet1
+        :returns: the sum of all column widths in mm
+        """
+        # Return table width unless not yet initialized, then initialize and return.
+        try:
+            return self._table_width
+        except AttributeError:
+            self._table_width = sum(set(self._column_widths))
+            return self._table_width
+
+    @property
+    def custom_styles(self) -> Dict[str, Union[Tuple[str, ...], StyleSheet1]]:
+        """Return the custom styles and stylesheet for the tables
+
+        :returns: the custom styles and stylesheet in the Form
+            ```
+            {
+                "heading": List[Styles],
+                "normal": List[Styles],
+                "sub_heading": List[Styles],
+                "stylesheet": StyleSheet1,
+            }
+            ```
         """
         return self._custom_styles

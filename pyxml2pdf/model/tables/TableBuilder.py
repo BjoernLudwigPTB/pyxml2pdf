@@ -11,7 +11,7 @@ class TableBuilder:
     def __init__(self):
         self._subtable_names_and_categs = self._parse_properties()
         self._table_style = TableStyle()
-        self._styles = self._table_style.custom_styles
+        self._stylesheet = self._table_style.custom_styles["stylesheet"]
         self._subtables = self.create_subtables()
 
     @staticmethod
@@ -89,9 +89,9 @@ class TableBuilder:
         # Create first row spanning the full width and title as content.
         title_row = [
             self.create_fixedwidth_table(
-                [[Paragraph(title, self._styles["Heading1"])]],
+                [[Paragraph(title, self._stylesheet["Heading1"])]],
                 self._table_style.table_width,
-                self._table_style.heading,
+                self._table_style.custom_styles["heading"],
             )
         ]
 
@@ -108,14 +108,16 @@ class TableBuilder:
         ]
 
         # Create row containing one column per heading.
-        columns = [Paragraph(heading, self._styles["Heading2"]) for heading in headings]
+        columns = [
+            Paragraph(heading, self._stylesheet["Heading2"]) for heading in headings
+        ]
 
         # Concatenate both rows.
         title_row.append(
             self.create_fixedwidth_table(
                 [columns],
                 self._table_style.column_widths,
-                self._table_style.sub_heading,
+                self._table_style.custom_styles["sub_heading"],
             )
         )
         return title_row
@@ -171,7 +173,7 @@ class TableBuilder:
         if widths is None:
             widths = self._table_style.column_widths
         if style is None:
-            style = self._table_style.normal
+            style = self._table_style.custom_styles["normal"]
         table = Table(cells, colWidths=widths)
         table.setStyle(style)
 

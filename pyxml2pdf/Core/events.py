@@ -50,7 +50,9 @@ class Event(Element):
         super().__init__(element.tag, element.attrib)
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
-        self.EventParagraph.style = self._table_style.custom_styles["Normal"]
+        self.EventParagraph.style = self._table_style.custom_styles["stylesheet"][
+            "Normal"
+        ]
         # Initialize definitely needed instance variables.
         self._init_categories()
         self._date = self._init_date()
