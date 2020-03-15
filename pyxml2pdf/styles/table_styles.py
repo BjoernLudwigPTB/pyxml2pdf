@@ -127,11 +127,11 @@ class TableStyle:
 
         :returns: the custom styles and stylesheet in the Form
             .. code-block:: python
-            {
-                "heading": List[Styles],
-                "normal": List[Styles],
-                "sub_heading": List[Styles],
-                "stylesheet": StyleSheet1
-            }
+                custom_styles = {
+                    "heading": List[Styles],
+                    "normal": List[Styles],
+                    "sub_heading": List[Styles],
+                    "stylesheet": StyleSheet1
+                }
         """
         return self._custom_styles
