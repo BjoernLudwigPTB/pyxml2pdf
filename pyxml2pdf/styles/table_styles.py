@@ -126,7 +126,7 @@ class TableStyle:
         """Return the custom styles and stylesheet for the tables
 
         :returns: the custom styles and stylesheet in the Form
-            .. code-block::
+
                 {
                     "heading": List[Styles],
                     "normal": List[Styles],
