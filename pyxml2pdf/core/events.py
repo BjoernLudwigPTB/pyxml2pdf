@@ -1,6 +1,6 @@
-"""Module to provide a wrapper :py:class:`core.events.Event` for xml extracted data"""
+"""A wrapper :py:class:`pyxml2pdf.core.events.Event` for xml extracted data"""
 import re
-from typing import List, Match
+from typing import List
 from xml.etree.ElementTree import Element
 
 from reportlab.platypus import Paragraph, Table
@@ -16,8 +16,9 @@ class Event(Element):
 
     :py:class:`xml.etree.ElementTree.Element` is augmented with the table row
     representation and the attributes and methods to manipulate everything
-    according to the final tables needs. A :py:class:`core.events.Event` can only
-    be initialized with an object of type :py:class:`xml.etree.ElementTree.Element`.
+    according to the final tables needs. A :py:class:`pyxml2pdf.core.events.Event`
+    can only be initialized with an object of type
+    :py:class:`xml.etree.ElementTree.Element`.
 
     :param xml.etree.ElementTree.Element element: the element to build the instance from
     """
@@ -117,7 +118,9 @@ class Event(Element):
 
         return execute_get_full_and_init_reduced_row
 
-    def _concatenate_tags_content(self, event_subelements, separator=" - "):
+    def _concatenate_tags_content(
+        self, event_subelements: List[str], separator: str = " " "- "
+    ) -> str:
         """Form one string from the texts of a subset of an event's children tags
 
         Form a string of the content for all desired event children tags by
@@ -126,11 +129,10 @@ class Event(Element):
         handles as well the concatenation of XML tags' content, if `event_tags` has more
         than one element.
 
-        :param List[str] event_subelements: list of all tags for which the
+        :param event_subelements: list of all tags for which the
             descriptive texts is wanted, even if it is just one
-        :param str separator: the separator in between the concatenated texts
+        :param separator: the separator in between the concatenated texts
         :returns: concatenated, separated texts of all tags for the current event
-        :rtype: str
         """
         return separator.join(
             [self.findtext(tag) for tag in event_subelements if self.findtext(tag)]
@@ -166,11 +168,12 @@ class Event(Element):
         return table_columns[:4]
 
     @staticmethod
-    def _remove_century(matchobj: Match) -> str:
+    def _remove_century(matchobj):
         """Remove the first two digits of the string representing the year
 
-        :param matchobj: the result of :py:meth:`re.sub`
+        :param typing.Match matchobj: the result of :py:meth:`re.sub`
         :return: the last two digits of the string representing the year
+        :rtype: str
         """
         return matchobj.group(0)[2:]
 
