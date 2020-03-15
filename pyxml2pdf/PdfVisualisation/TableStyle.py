@@ -43,6 +43,7 @@ class TableStyle:
         self.table_width = 177.8 * mm
 
         # This specifies the column widths of the final result. The columns contain...
+        # TODO put in the properties files content here.
         self._column_widths = [
             # ... the type of the event.
             7.2 * mm,
