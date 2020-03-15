@@ -35,7 +35,8 @@ columns = [
     },
     {"label": "Zielgruppe", "tag": ["Zielgruppe"], "width": 18},
     {
-        "label": "Voraussetzungen",
+        "label": "Voraussetzungen<br/>a) persönliche | b) "
+        "materielle | c) finanzielle",
         "tag": ["Voraussetzung", "Ausruestung", "Kurskosten", "Leistungen"],
         "width": 47,
     },
