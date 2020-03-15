@@ -4,8 +4,8 @@ from typing import List, Optional, Tuple, Union
 from reportlab.platypus import Flowable, Paragraph, Table
 
 from input.properties import columns, subtables
-from pyxml2pdf.model.tables.EventTable import EventTable
-from pyxml2pdf.PdfVisualisation.TableStyle import TableStyle
+from pyxml2pdf.styles.table_styles import TableStyle
+from pyxml2pdf.tables.tables import EventTable
 
 
 class TableBuilder:

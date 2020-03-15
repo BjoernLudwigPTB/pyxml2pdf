@@ -2,7 +2,7 @@ import pytest
 from reportlab.lib.colors import Color
 from reportlab.lib.styles import StyleSheet1
 
-from pyxml2pdf.PdfVisualisation.TableStyle import TableStyle
+from pyxml2pdf.styles.table_styles import TableStyle
 
 
 @pytest.fixture(scope="module")

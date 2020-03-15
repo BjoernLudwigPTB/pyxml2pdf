@@ -1,6 +1,6 @@
 import pytest
 
-from pyxml2pdf.Core.Downloader import Downloader
+from pyxml2pdf.core.downloader import Downloader
 
 
 @pytest.mark.online

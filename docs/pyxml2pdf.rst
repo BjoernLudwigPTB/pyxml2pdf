@@ -2,53 +2,53 @@
 pyxml2pdf
 =========
 
-Core
+core
 ====
 
-Downloader
+downloader
 ----------
 
-.. automodule:: pyxml2pdf.Core.Downloader
+.. automodule:: pyxml2pdf.core.downloader
     :members:
     :private-members:
     :undoc-members:
 
-Event
------
+events
+------
 
-.. automodule:: pyxml2pdf.Core.events
+.. automodule:: pyxml2pdf.core.events
     :members:
     :private-members:
     :undoc-members:
 
-Initializer
+initializer
 -----------
 
-.. automodule:: pyxml2pdf.Core.Initializer
+.. automodule:: pyxml2pdf.core.initializer
     :members:
     :private-members:
     :undoc-members:
 
-Parser
+parser
 ------
 
-.. automodule:: pyxml2pdf.Core.Parser
+.. automodule:: pyxml2pdf.core.parser
     :members:
     :private-members:
     :undoc-members:
 
-PostProcessor
--------------
+post_processor
+--------------
 
-.. automodule:: pyxml2pdf.Core.PostProcessor
+.. automodule:: pyxml2pdf.core.post_processor
     :members:
     :private-members:
     :undoc-members:
 
-Sorter
+sorter
 ------
 
-.. automodule:: pyxml2pdf.Core.Sorter
+.. automodule:: pyxml2pdf.core.sorter
     :members:
     :private-members:
     :undoc-members:
@@ -56,38 +56,37 @@ Sorter
 model.tables
 ============
 
-EventTable
-----------
-
-.. automodule:: pyxml2pdf.model.tables.EventTable
-    :members:
-    :private-members:
-    :undoc-members:
-
-TableBuilder
-------------
-
-.. automodule:: pyxml2pdf.model.tables.TableBuilder
-    :members:
-    :private-members:
-    :undoc-members:
-
-PdfVisualisation
-================
-
-Styles
+tables
 ------
 
-.. automodule:: pyxml2pdf.PdfVisualisation.Styles
+.. automodule:: pyxml2pdf.model.tables.tables
     :members:
     :private-members:
     :undoc-members:
 
-TableStyle
-----------
+builder
+-------
 
-.. automodule:: pyxml2pdf.PdfVisualisation.TableStyle
+.. automodule:: pyxml2pdf.model.tables.builder
     :members:
     :private-members:
     :undoc-members:
 
+styles
+======
+
+cell_formattings
+----------------
+
+.. automodule:: pyxml2pdf.styles.cell_formattings
+    :members:
+    :private-members:
+    :undoc-members:
+
+table_styles
+------------
+
+.. automodule:: pyxml2pdf.styles.table_styles
+    :members:
+    :private-members:
+    :undoc-members:
