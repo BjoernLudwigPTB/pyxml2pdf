@@ -3,78 +3,30 @@ from typing import List, Optional, Tuple, Union
 
 from reportlab.platypus import Flowable, Paragraph, Table
 
+from input.properties import columns, subtables
 from pyxml2pdf.model.tables.EventTable import EventTable
 from pyxml2pdf.PdfVisualisation.TableStyle import TableStyle
 
 
 class TableBuilder:
     def __init__(self):
-        self._subtable_names_and_categs = self._parse_properties()
         self._table_style = TableStyle()
         self._stylesheet = self._table_style.custom_styles["stylesheet"]
         self._subtables = self.create_subtables()
-
-    @staticmethod
-    def _parse_properties():
-        """
-        Extract all configuration information from properties file and set
-        up a dict containing all this information. Later at least it will
-        extract it.
-
-        :returns: the list with all configuration data out of properties file
-        :rtype: List[List[Union[str, List[str]]]]
-        """
-
-        klettern = [
-            "Klettern und Bouldern im Mittelgebirge",
-            ["Mittelgebirge"],
-            ["Klettern", "Bouldern", "Höhle"],
-        ]
-        wandern = [
-            "Wandern im Hoch - und Mittelgebirge",
-            ["Hochgebirge", "Mittelgebirge"],
-            ["Wandern"],
-        ]
-        mountainbiken = ["Mountainbiken", ["Mountainbiken"], ["Mountainbiken"]]
-        ausbildung = [
-            "Ausbildung, Wandern und Klettern in Berlin",
-            ["in Berlin"],
-            ["Grundlagenkurs", "Wandern", "Klettern"],
-        ]
-        bergsteigen = [
-            "Ski, Bergsteigen, Hochtouren und Klettern im Hochgebirge",
-            ["Hochgebirge"],
-            ["Bergsteigen", "Hochtouren", "Höhle", "Klettern", "Klettersteig", "Ski"],
-        ]
-        familie = ["Veranstaltungen für Familien", ["Familie"], ["Familie"]]
-        jugend = ["Jugendgruppen und -events", ["Jugend"], ["Jugend"]]
-
-        return [
-            familie,
-            ausbildung,
-            wandern,
-            mountainbiken,
-            bergsteigen,
-            jugend,
-            klettern,
-        ]
 
     def create_subtables(self):
         """Create subtables for all different kinds of events
 
         :return list[EventTable]: a list of all subtables
         """
-
-        subtables = []
-        for subtables_props in self._subtable_names_and_categs:
-            subtable = EventTable(
-                subtables_props[0], subtables_props[1], subtables_props[2]
+        subtables_list = []
+        for subtable in subtables:
+            subtable_table = EventTable(
+                subtable["label"], subtable["content"][0], subtable["content"][1]
             )
-            headers = self.make_header(subtables_props[0])
-            for header in headers:
-                subtable.append(header)
-            subtables.append(subtable)
-        return subtables
+            subtable_table.extend(self.make_header(subtable["label"]))
+            subtables_list.append(subtable_table)
+        return subtables_list
 
     def make_header(self, title):
         """ Build the first two rows of a subtable
@@ -95,27 +47,16 @@ class TableBuilder:
             )
         ]
 
-        # These are the column headings that should be populated from the
-        # properties-file.
-        headings = [
-            "Art",
-            "Datum",
-            "Ort",
-            "Leitung",
-            "Beschreibung",
-            "Zielgruppe",
-            "Voraussetzungen<br/>a) persönliche | b) " "materielle | c) finanzielle",
-        ]
-
         # Create row containing one column per heading.
-        columns = [
-            Paragraph(heading, self._stylesheet["Heading2"]) for heading in headings
+        columns_list = [
+            Paragraph(heading, self._stylesheet["Heading2"])
+            for heading in [column["label"] for column in columns]
         ]
 
         # Concatenate both rows.
         title_row.append(
             self.create_fixedwidth_table(
-                [columns],
+                [columns_list],
                 self._table_style.column_widths,
                 self._table_style.custom_styles["sub_heading"],
             )
