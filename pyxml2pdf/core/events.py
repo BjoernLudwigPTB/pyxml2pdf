@@ -103,7 +103,7 @@ class Event(Element):
 
             .. note:: This is ensured by a decorator, which is why the function
                 signature on `ReadTheDocs.org
-                <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#Core.events
+                <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#core.events
                 .Event.get_full_row>`_ is displayed incorrectly. The parameter and
                 return value are as follows...
 
@@ -276,7 +276,7 @@ class Event(Element):
 
         .. note:: This is ensured by a decorator, which is why the function
             signature on `ReadTheDocs.org
-            <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#Core.events
+            <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#core.events
             .Event.get_full_row>`_ is displayed incorrectly. The parameter and
             return value are as follows...
 
@@ -319,8 +319,8 @@ class Event(Element):
         This is the API of :py:class:`pyxml2pdf.core.events.Event` for getting the
         table row
         representation of the event. It makes sure, that on the first call
-        :meth:`get_full_row` is invoked and otherwise :attr:`self._reduced_row` is
-        returned.
+        :meth:`get_full_row` is invoked and otherwise
+        :attr:`pyxml2pdf.core.events.Event._reduced_row` is returned.
 
         :param str subtable_title: the title of the subtable in which the row will
             be integrated
