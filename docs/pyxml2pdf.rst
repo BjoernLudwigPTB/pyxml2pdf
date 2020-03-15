@@ -1,52 +1,92 @@
+=========
 pyxml2pdf
 =========
 
-Downloader
+core
+====
+
+downloader
 ----------
 
-.. automodule:: Core.Downloader
+.. automodule:: pyxml2pdf.core.downloader
     :members:
     :private-members:
     :undoc-members:
 
+events
+------
 
-Initializer
+.. automodule:: pyxml2pdf.core.events
+    :members:
+    :private-members:
+    :undoc-members:
+
+initializer
 -----------
 
-.. automodule:: Core.Initializer
+.. automodule:: pyxml2pdf.core.initializer
     :members:
     :private-members:
     :undoc-members:
 
-Event
------
-
-.. automodule:: Core.events
-    :members:
-    :private-members:
-    :undoc-members:
-
-Parser
+parser
 ------
 
-.. automodule:: Core.Parser
+.. automodule:: pyxml2pdf.core.parser
     :members:
     :private-members:
     :undoc-members:
 
-PostProcessor
--------------
+post_processor
+--------------
 
-.. automodule:: Core.PostProcessor
+.. automodule:: pyxml2pdf.core.post_processor
     :members:
     :private-members:
     :undoc-members:
 
-Sorter
+sorter
 ------
 
-.. automodule:: Core.Sorter
+.. automodule:: pyxml2pdf.core.sorter
     :members:
     :private-members:
     :undoc-members:
 
+model.tables
+============
+
+tables
+------
+
+.. automodule:: pyxml2pdf.model.tables.tables
+    :members:
+    :private-members:
+    :undoc-members:
+
+builder
+-------
+
+.. automodule:: pyxml2pdf.model.tables.builder
+    :members:
+    :private-members:
+    :undoc-members:
+
+styles
+======
+
+cell_formattings
+----------------
+
+.. automodule:: pyxml2pdf.styles.cell_formattings
+    :members:
+    :private-members:
+    :undoc-members:
+
+table_styles
+------------
+
+.. automodule:: pyxml2pdf.styles.table_styles
+    :members:
+    :private-members:
+    :undoc-members:

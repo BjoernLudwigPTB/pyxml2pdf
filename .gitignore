@@ -8,8 +8,8 @@ __pycache__/
 *.pdf
 *.xml
 
-# the properties
-*.properties
-
 # the download test result
 test_download
+
+# the hypothesis temps
+.hypothesis

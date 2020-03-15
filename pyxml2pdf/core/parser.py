@@ -1,28 +1,26 @@
-""":py:mod:`core.Parser` is the interface between xml input and table output"""
+""":py:mod:`pyxml2pdf.core.Parser` is the interface between xml input and table output"""
 
 __all__ = ["Parser"]
 
 import warnings
-from typing import List
+from typing import List, Optional
 
 from reportlab.platypus.flowables import KeepTogether
 
 from pyxml2pdf.core.events import Event
-from pyxml2pdf.model.tables.builder import TableBuilder
+from pyxml2pdf.tables.builder import TableBuilder
 
 
 class Parser:
     """XML parser to extract all interesting information from xml input
 
-    :param str properties: path to the properties file
-    :param List[KeepTogether] elements: optional cells
-        to populate the Parser
+    :param elements: cells to populate the Parser
     """
 
     _elements: List[KeepTogether]
     _table_manager: TableBuilder
 
-    def __init__(self, properties, elements=[]):
+    def __init__(self, elements: Optional[List[KeepTogether]] = []):
         self._elements = elements
         self._table_manager = TableBuilder()
 
@@ -40,11 +38,14 @@ class Parser:
         """
         if events:
             for event in events:
-                event = Event(event)
-                self._table_manager.distribute_event(event)
+                self._table_manager.distribute_event(Event(event))
             subtable_elements = self._table_manager.collect_subtables()
-            for subtable_element in subtable_elements:
-                self._elements.append(KeepTogether(subtable_element))
+            self._elements.extend(
+                [
+                    KeepTogether(subtable_element)
+                    for subtable_element in subtable_elements
+                ]
+            )
             return self._elements
         else:
             warnings.warn("There were no items to print.", RuntimeWarning)

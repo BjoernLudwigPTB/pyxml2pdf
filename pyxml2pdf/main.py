@@ -5,19 +5,17 @@ from pyxml2pdf.core.initializer import Initializer
 
 def main():
     validate()
-    Initializer(sys.argv[1], sys.argv[2], sys.argv[3])
+    Initializer(sys.argv[1], sys.argv[2])
     print("\n-------------------------------DONE-------------------------------")
 
 
 def validate():
-    if len(sys.argv) < 3:
-        raise Exception("Not enough arguments")
+    if len(sys.argv) < 2:
+        raise RuntimeError("Not enough arguments")
     if ".xml" not in sys.argv[1]:
-        raise Exception("No XML file detected")
+        raise RuntimeError("No XML file detected")
     if ".pdf" not in sys.argv[2]:
-        raise Exception("File must have PDF extension")
-    if ".properties" not in sys.argv[3]:
-        raise Exception("Properties file must have .properties extension")
+        raise RuntimeError("File must have PDF extension")
 
 
 def init():

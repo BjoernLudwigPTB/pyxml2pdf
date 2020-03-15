@@ -1,17 +1,14 @@
 """Module to provide a wrapper :py:class:`core.events.Event` for xml extracted data"""
-from pyxml2pdf.model.tables.builder import TableBuilder
-
-__all__ = ["Event"]
-
-
-import warnings
-from typing import List
+import re
+from typing import List, Match
 from xml.etree.ElementTree import Element
 
-from reportlab.platypus import Paragraph
-from reportlab.platypus import Table
+from reportlab.platypus import Paragraph, Table
 
 from pyxml2pdf.styles.table_styles import TableStyle
+from pyxml2pdf.tables.builder import TableBuilder
+
+__all__ = ["Event"]
 
 
 class Event(Element):
@@ -25,18 +22,27 @@ class Event(Element):
     :param xml.etree.ElementTree.Element element: the element to build the instance from
     """
 
-    _table_builder = TableBuilder()
-    _table_style = TableStyle()
+    class EventParagraph(Paragraph):
+        """A wrapper class for :py:class:`reportlab.platypus.Paragraph`
+
+        :py:class:`reportlab.platypus.Paragraph` is solely used with one
+        certain style, which is handed over in the constructor.
+
+        :param str text: the text to write into row
+        """
+
+        def __init__(self, text: str):
+            super().__init__(text, self.style)
+
+    _table_builder: TableBuilder = TableBuilder()
+    _table_style: TableStyle = TableStyle()
 
     _categories: List[str]
     _full_row: Table
     _reduced_row: Table
-    _subtable_title: str
-    _type: str
     _date: str
-    _region: str
     _responsible: str
-    _description: str
+    _reduced_columns: List[EventParagraph]
 
     def __init__(self, element):
         # Call Element constructor and extend ourselves by extending all children
@@ -44,14 +50,14 @@ class Event(Element):
         super().__init__(element.tag, element.attrib)
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
-        self._style = self._table_style.custom_styles["Normal"]
+        self.EventParagraph.style = self._table_style.custom_styles["stylesheet"][
+            "Normal"
+        ]
         # Initialize definitely needed instance variables.
         self._init_categories()
-        self._type = self._concatenate_tags_content(["Kursart"])
-        self._init_date()
-        self._region = self._concatenate_tags_content(["Ort1"])
+        self._date = self._init_date()
         self._responsible = self._concatenate_tags_content(["Kursleiter"])
-        self._init_full_row()
+        self._reduced_columns = self._init_full_row()
 
     def _init_categories(self):
         """Initialize the list of categories from the according xml tag's content"""
@@ -68,24 +74,13 @@ class Event(Element):
         :param str subtable_title: title of the subtable which contains the full event
 
         .. warning:: Do not call this function directly since it is automatically
-        called right after :meth:`get_full_row` is invoked.
+            called right after :meth:`get_full_row` is invoked.
         """
-        table_columns = [
-            Paragraph(self._type, self._style),
-            Paragraph(self._date, self._style),
-            Paragraph(self._region, self._style),
-            Paragraph(self._responsible, self._style),
-            Paragraph(
-                self._build_description(
-                    self._concatenate_tags_content(["Bezeichnung2"]),
-                    self._concatenate_tags_content(["Beschreibung"]),
-                    link=subtable_title,
-                ),
-                self._style,
-            ),
-        ]
+        self._reduced_columns.append(
+            self.EventParagraph(self._build_description(link=subtable_title))
+        )
         self._reduced_row = self._table_builder.create_fixedwidth_table(
-            [table_columns],
+            [self._reduced_columns],
             self._table_style.column_widths[:4]
             + [sum(self._table_style.column_widths[4:])],
         )
@@ -137,80 +132,77 @@ class Event(Element):
         :returns: concatenated, separated texts of all tags for the current event
         :rtype: str
         """
-        children_text = ""
-        for tag in event_subelements:
-            child_text: str = self.findtext(tag)
-            if child_text:
-                if children_text:
-                    children_text += separator + child_text
-                else:
-                    children_text = child_text
-        return children_text
+        return separator.join(
+            [self.findtext(tag) for tag in event_subelements if self.findtext(tag)]
+        )
 
-    def _init_full_row(self):
+    def _init_full_row(self) -> List[EventParagraph]:
         """Initialize the single table row containing all information of the event
 
         Extract interesting information from events children tags and connect them
         into a nicely formatted row of a table.
+
+        :return: the common starting columns of any table representation
         """
         table_columns = [
-            Paragraph(self._type, self._style),
-            Paragraph(self._date, self._style),
-            Paragraph(self._region, self._style),
-            Paragraph(self._responsible, self._style),
-            Paragraph(
-                self._build_description(
-                    self._concatenate_tags_content(["Bezeichnung2"]),
-                    self._concatenate_tags_content(["Beschreibung"]),
-                    self._concatenate_tags_content(["TrainerURL"]),
-                ),
-                self._style,
+            self.EventParagraph(self._concatenate_tags_content(["Kursart"])),
+            self.EventParagraph(self._date),
+            self.EventParagraph(self._concatenate_tags_content(["Ort1"])),
+            self.EventParagraph(self._responsible),
+            self.EventParagraph(
+                self._build_description(self._concatenate_tags_content(["TrainerURL"]))
             ),
-            Paragraph(self._concatenate_tags_content(["Zielgruppe"]), self._style),
-            Paragraph(
+            self.EventParagraph(self._concatenate_tags_content(["Zielgruppe"])),
+            self.EventParagraph(
                 self._parse_prerequisites(
                     self._concatenate_tags_content(["Voraussetzung"]),
                     self._concatenate_tags_content(["Ausruestung"]),
                     self._concatenate_tags_content(["Kurskosten"]),
                     self._concatenate_tags_content(["Leistungen"]),
-                ),
-                self._style,
+                )
             ),
         ]
         self._full_row = self._table_builder.create_fixedwidth_table([table_columns])
+        return table_columns[:4]
+
+    @staticmethod
+    def _remove_century(matchobj: Match) -> str:
+        """Remove the first two digits of the string representing the year
+
+        :param matchobj: the result of :py:meth:`re.sub`
+        :return: the last two digits of the string representing the year
+        """
+        return matchobj.group(0)[2:]
 
     def _init_date(self):
         """Create a properly formatted string containing the date of the event"""
         # Extract data from xml children tags' texts. Since the date can consist of
         # three date ranges, we concatenate them separated with a line containing
         # only an "und".
-        extracted_date = self._concatenate_tags_content(
-            ["TerminDatumVon1", "TerminDatumBis1"]
-        )
-        additional_dates = [
-            self._concatenate_tags_content(["TerminDatumVon2", "TerminDatumBis2"]),
-            self._concatenate_tags_content(["TerminDatumVon3", "TerminDatumBis3"]),
-        ]
-        for additional_date in additional_dates:
-            if additional_date:
-                extracted_date += "<br/>und<br/>" + additional_date
 
-        # Replace any extracted_date of a form similar to 31.12.2099 with "on request".
-        if "2099" in extracted_date:
+        dates = [
+            ["TerminDatumVon1", "TerminDatumBis1"],
+            ["TerminDatumVon2", "TerminDatumBis2"],
+            ["TerminDatumVon3", "TerminDatumBis3"],
+        ]
+
+        extracted_dates = [
+            self._concatenate_tags_content(date)
+            for date in dates
+            if self._concatenate_tags_content(date)
+        ]
+        extracted_dates = "<br/>und<br/>".join(extracted_dates)
+
+        # Replace any extracted_dates of a form similar to 31.12.2099 with "on request".
+        if "2099" in extracted_dates:
             new_date = "auf Anfrage"
-        elif extracted_date:
+        else:
             # Remove placeholders for missing time specifications and the first two
             # digits of the year specification.
-            new_date = (
-                extracted_date.replace("00:00", "")
-                .replace("2020", "20")
-                .replace("2019", "19")
-                .replace("2018", "18")
+            new_date = re.sub(
+                "[0-9]{4,}", self._remove_century, extracted_dates.replace("00:00", "")
             )
-        else:
-            # All other dates stay uninterpreted and will be dropped.
-            new_date = ""
-        self._date = new_date
+        return new_date
 
     @staticmethod
     def _parse_prerequisites(personal, material, financial, offers):
@@ -225,55 +217,53 @@ class Event(Element):
             the current event
         :rtype: str
         """
-        if personal:
-            personal_string = "a) " + personal + "<br/>"
-        else:
-            personal_string = "a) keine <br/>"
+        if not personal:
+            personal = "keine"
+        if not material:
+            material = "keine"
+        if not financial:
+            financial = "0,00"
+        if offers:
+            offers = offers.join([" (", ")"])
 
-        if material:
-            material_string = "b) " + material + "<br/>"
-        else:
-            material_string = "b) keine <br/>"
+        return "<br/>".join(
+            [
+                "".join(["a) ", personal]),
+                "".join(["b) ", material]),
+                "".join(["c) ", financial, " €", offers]),
+            ]
+        )
 
-        if financial:
-            financial_string = "c) " + financial + " €"
-            if offers:
-                financial_string += " (" + offers + ")"
-        else:
-            financial_string = "c) keine"
-        return personal_string + material_string + financial_string
-
-    def _build_description(self, name2="", description="", link=""):
+    def _build_description(self, link=""):
         """Build the description for the event
 
         This covers all cases with empty texts in some of the according children tags
         and the full as well as the reduced version with just the reference to the
         subtable where the full version can be found. Since the title of the event is
-        mandatory, it is not received as parameter but directly retrieved from the
+        mandatory, and the beginning of the description is always filled by the same
+        tags' texts those are not received as parameter but directly retrieved from the
         xml data.
 
-        :param str name2: the short name number two for the event
-        :param str description: the descriptive text
         :param str link: a link to more details like the trainer url or the subtable
         :returns: the full description including url if provided
         :rtype: str
         """
-        full_description = (
-            "<b>" + self._concatenate_tags_content(["Bezeichnung"]) + "</b>"
-        )
-        if name2:
-            full_description += " - " + name2
-        if description:
-            full_description += " - " + description
+        texts = [
+            self._concatenate_tags_content(["Bezeichnung"]).join(["<b>", "</b>"]),
+            self._concatenate_tags_content(["Bezeichnung2"]),
+            self._concatenate_tags_content(["Beschreibung"]),
+        ]
+        full_description = " – ".join([text for text in texts if text])
         if link:
-            if full_description[-1] != ".":
-                full_description += "."
-            full_description += " Mehr Infos unter <b><i>" + link + "</i></b>."
+            joiner = "." if full_description[-1] != "." else ""
+            full_description = joiner.join(
+                [full_description, link.join([" Mehr Infos unter <b><i>", "</i></b>."])]
+            )
 
         return full_description
 
     @create_reduced_after_full
-    def get_full_row(self, subtable_title=None):
+    def get_full_row(self, subtable_title: str = None) -> Table:
         """Exchange a table row with all the event's information against a
         subtable's title
 
@@ -287,23 +277,10 @@ class Event(Element):
             .Event.get_full_row>`_ is displayed incorrectly. The parameter and
             return value are as follows...
 
-        :param str subtable_title: the title of the subtable in which the row will
+        :param subtable_title: the title of the subtable in which the row will
             be integrated
         :returns: a table row with all the event's information
-        :rtype: Table
         """
-        # If subtable_title is provided, we assume the event has been written to this
-        # according subtable, so we store, that the event can be found there.
-        if subtable_title:
-            self._subtable_title = subtable_title
-        else:
-            try:
-                self._subtable_title
-            except AttributeError:
-                warnings.warn(
-                    "No title for a reference to the full event was given by any "
-                    "previous call. Thus it needs to be given this time."
-                )
         return self._full_row
 
     @property
@@ -350,7 +327,6 @@ class Event(Element):
         # :meth:`get_full_row` which automatically triggers the creation of the
         # reduced row for later uses.
         try:
-            self._reduced_row
+            return self._reduced_row
         except AttributeError:
             return self.get_full_row(subtable_title)
-        return self._reduced_row

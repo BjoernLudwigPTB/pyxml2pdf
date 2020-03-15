@@ -1,6 +1,6 @@
 import pytest
 
-from pyxml2pdf.model.tables.builder import TableBuilder
+from pyxml2pdf.tables.builder import TableBuilder
 
 
 @pytest.fixture

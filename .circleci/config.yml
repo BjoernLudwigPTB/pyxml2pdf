@@ -1,20 +1,45 @@
-# Python CircleCI 2.0 configuration file
+# Python CircleCI 2.1 configuration file
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
-version: 2
-jobs:
-  build:
-    docker:
-    - image: circleci/python:3.7
+version: 2.1
 
+executors:
+  # Define a parameterized executor which accepts two parameters to choose the Python
+  # version which will be used for the Docker image and the tox actions.
+  test:
     working_directory: ~/repo
+    parameters:
+      # Initialize the parameter and set default which specifies the Python Docker
+      # image tag. Should represent the same Python version as the tox Python version.
+      tag:
+        type: string
+        default: "3.7"
+      # Initialize the parameter and set default which specifies the tox Python version.
+      # Should represent the same Python version as the Python Docker image tag.
+      pyenv:
+        type: string
+        default: "py37"
+    docker:
+      - image: circleci/python:<< parameters.tag >>
+    environment:
+      PYENV: << parameters.pyenv >>
+  # Define the executor for the python semantic release.
+  publisher:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/python:3.8
 
+commands:
+  # Reusable command to prepare the environment for testing.
+  create_folders_and_venv:
+    description: "Prepare everything."
+    parameters:
+      pyenv:
+        type: string
     steps:
-
     # Checkout code.
     - checkout
-
     # Create test-result folder and the default output folder.
     - run:
         name: Create test result folder
@@ -26,59 +51,50 @@ jobs:
     # Download and cache dependencies.
     - restore_cache:
         keys:
-        - v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-        # Fallback to using the latest cache if no exact match is found.
-        - v1-dependencies-
+          - << parameters.pyenv >>-dependencies-
+              {{checksum "requirements/dev-requirements.txt" }}
+              {{ checksum "requirements/requirements.txt" }}
+          # Fallback to using the latest cache if no exact match is found.
+          - << parameters.pyenv >>-dependencies-
+
+    # Create pyxml2pdf virtual environment.
+    - run:
+        name: Create virtual environment
+        command: |
+          python3 -m venv << parameters.pyenv >>
+          source << parameters.pyenv >>/bin/activate
+          pip install --upgrade pip
+
+  # Reusable command to conduct actual testing.
+  tox:
+    description: "Perform tox testing."
+    parameters:
+      pyenv:
+        type: string
+    steps:
 
     # Install pyxml2pdf dependencies.
     - run:
         name: Install dependencies
         command: |
-          python3 -m venv venv
-          . venv/bin/activate
-          pip install -r requirements/requirements.txt
-          pip install -r requirements/dev-requirements.txt
+          python3 -m venv << parameters.pyenv >>
+          source << parameters.pyenv >>/bin/activate
+          pip install tox
 
-    # Install CI blocks dependencies.
+    # Perform tox testing.
     - run:
-        name: Install Codacy and Codecov reporter
+        name: Perform tox testing
         command: |
-          python3 -m venv venv
-          source venv/bin/activate
-          pip install codacy-coverage codecov
+          source << parameters.pyenv >>/bin/activate
+          tox -e << parameters.pyenv >>
 
-    - save_cache:
-        paths:
-        - ./venv
-        key: v1-dependencies-{{ checksum "requirements/dev-requirements.txt" }}
-
-    # Set up Code Climate by downloading test reporter as a static binary.
-    - run:
-        name: Set up Code Climate test-reporter
-        command: |
-          curl -L 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64' > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-
-    # Run coverage! We use pytest's test-runner (https://pytest.org)
-    # 1. Upload test report to Codacy using `python-codacy-coverage`
-    # 2. Upload test report to Codecov using `codecov`
-    # 3. Produce normal report to show in CircleCI 'test-reports'
-    - run:
-        name: Test and create coverage report
-        command: |
-          source venv/bin/activate
-          ./cc-test-reporter before-build
-          pytest -v --cov=. \
-           --junitxml=test_results/pytest/pytest.xml
-          coverage xml
-          ./cc-test-reporter after-build --coverage-input-type coverage.py \
-              --exit-code $?
-          python-codacy-coverage -r coverage.xml
-          codecov
-          mv coverage.xml ./test_results/pytest/
-          coverage report -m > test_results/pytest/coverage.log
-          mv ./output/ ./test_results/
-
+  # Reusable command to store the previously generated test results.
+  store_results:
+    description: "Store test results and artifacts."
+    parameters:
+      pyenv:
+        type: string
+    steps:
     # Store test results.
     - store_artifacts:
         path: test_results
@@ -86,3 +102,149 @@ jobs:
 
     - store_test_results:
         path: test_results
+
+    - save_cache:
+        paths:
+          - .tox/<< parameters.pyenv >>
+        key: >-
+          << parameters.pyenv >>-dependencies-
+            {{checksum "requirements/dev-requirements.txt" }}
+            {{ checksum "requirements/requirements.txt" }}
+
+workflows:
+  test_and_deploy:
+    jobs:
+      - test36
+      - test37
+      - test38
+      - semantic-release:
+          # Create 'release' job to create a release and publish it on GitHub.
+          requires:
+              - test36
+              - test37
+              - test38
+          filters:
+              branches:
+                # This assures the job only being triggered on branch master.
+                only: /master/
+
+jobs:
+  # Define the job to run all tests against Python 3.6.
+  test36:
+    executor:
+      name: test
+      tag: "3.6"
+      pyenv: "py36"
+
+    # Call for the execution of all reusable commands specified above.
+    steps:
+      - create_folders_and_venv:
+          pyenv: ${PYENV}
+      - tox:
+          pyenv: ${PYENV}
+      - store_results:
+          pyenv: ${PYENV}
+
+  # Define the job to run all tests against Python 3.7.
+  test37:
+    executor:
+      name: test
+      tag: "3.7"
+      pyenv: "py37"
+
+    # Call for the execution of all reusable commands specified above.
+    steps:
+      - create_folders_and_venv:
+          pyenv: ${PYENV}
+      - tox:
+          pyenv: ${PYENV}
+      - store_results:
+          pyenv: ${PYENV}
+
+  # Define the job to run all tests against Python 3.7.
+  test38:
+    executor:
+      name: test
+      tag: "3.8"
+      pyenv: "py38"
+
+    # Call for the execution of some reusable commands specified above and
+    # additionally produce coverage reports and send them to the according CI platforms.
+    steps:
+      - create_folders_and_venv:
+          pyenv: ${PYENV}
+
+      # Install CI blocks dependencies.
+      - run:
+          name: Install Codacy and Codecov reporter
+          command: |
+            source ${PYENV}/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements/requirements.txt
+            pip install -r requirements/dev-requirements.txt
+            pip install pytest pytest-cov codacy-coverage codecov
+
+      # Set up Code Climate by downloading test reporter as a static binary.
+      - run:
+          name: Set up Code Climate test-reporter
+          command: |
+            curl -L 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64' > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
+      # Prepare for sending coverage reports to code climate.
+      - run:
+          name: Prepare code climate
+          command: |
+            source ${PYENV}/bin/activate
+            ./cc-test-reporter before-build
+            pytest -v --cov=. --junitxml=test_results/pytest/pytest.xml
+            coverage xml
+            ./cc-test-reporter after-build --coverage-input-type coverage.py \
+                --exit-code $?
+            python-codacy-coverage -r coverage.xml
+            codecov
+            mv coverage.xml ./test_results/pytest/
+            coverage report -m > test_results/pytest/coverage.log
+            mv ./output/ ./test_results/
+
+      - store_results:
+          pyenv: ${PYENV}
+
+  # Define the job to run after all tests have passed and release software based on
+  # python-semantic-release.
+  semantic-release:
+    executor: publisher
+
+    steps:
+      # Checkout code
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            # Specify the unique identifier for the cache.
+            - publisher-dependencies
+
+      # Install dependencies.
+      - run:
+          name: Install dependencies
+          command: |
+            python3 -m venv venv
+            source venv/bin/activate
+            pip install --upgrade pip
+            pip install python-semantic-release
+
+      - save_cache:
+          paths:
+            - ./venv
+          key: >-
+            publisher-dependencies
+
+      # Publish it!
+      - run:
+          name: Run semantic-release publish
+          command: |
+            source venv/bin/activate
+            git config --global user.name "semantic-release (via CircleCI)"
+            git config --global user.email "bjoern.ludwig@ptb.de"
+            semantic-release publish
