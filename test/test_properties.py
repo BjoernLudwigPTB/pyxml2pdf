@@ -1,5 +1,9 @@
+import pathlib
+
 from input.properties import (
     columns,
+    font,
+    fontsize,
     rows_xmltag,
     subtables,
     subtables_xmltag,
@@ -22,6 +26,7 @@ def test_columns():
     assert isinstance(columns, list)
     for column in columns:
         assert isinstance(column, dict)
+        assert len(column) == 3
         for key in column:
             assert isinstance(key, str)
         assert "label" in column
@@ -45,10 +50,11 @@ def test_subtables_xmltag():
 
 
 def test_subtables():
-    # Check types and shape `subtables`.
+    # Check types and shape of `subtables`.
     assert isinstance(subtables, list)
     for subtable in subtables:
         assert isinstance(subtable, dict)
+        assert len(subtable) == 2
         for key in subtable:
             assert isinstance(key, str)
         assert "label" in subtable
@@ -59,3 +65,33 @@ def test_subtables():
             assert isinstance(criteria_list, list)
             for criteria in criteria_list:
                 assert isinstance(criteria, str)
+
+
+def test_font():
+    # Check types and shape of `font` and if specified files exist.
+    assert isinstance(font, dict)
+    assert len(font) == 4
+    assert "normal" in font
+    assert "italic" in font
+    assert "bold" in font
+    assert "bolditalic" in font
+
+    # Initialize path to fonts, to check for existence.
+    path_to_fonts = pathlib.PurePath(__file__).parent.joinpath("fonts")
+
+    for key in font:
+        assert isinstance(key, str)
+        assert isinstance(font[key], str)
+        pathlib.Path(path_to_fonts.joinpath(font[key])).exists()
+
+
+def test_fontsize():
+    # Check types and shape of `fontsize`.
+    assert isinstance(fontsize, dict)
+    assert len(fontsize) == 3
+    assert "normal" in fontsize
+    assert "table_heading" in fontsize
+    assert "column_heading" in fontsize
+    for key in fontsize:
+        assert isinstance(key, str)
+        assert float(fontsize[key])
