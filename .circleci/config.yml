@@ -19,7 +19,7 @@ executors:
       # Should represent the same Python version as the Python Docker image tag.
       pyenv:
         type: string
-        default: "py37"
+        default: "py38"
     docker:
       - image: circleci/python:<< parameters.tag >>
     environment:
