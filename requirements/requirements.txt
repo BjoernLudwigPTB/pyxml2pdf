@@ -5,13 +5,13 @@
 #    pip-compile --output-file=requirements/requirements.txt
 #
 args==0.1.0               # via clint
-certifi==2020.6.20        # via requests
+certifi==2020.11.8        # via requests
 chardet==3.0.4            # via requests
 clint==0.5.1              # via pyxml2pdf (setup.py)
 defusedxml==0.6.0         # via pyxml2pdf (setup.py)
 idna==2.10                # via requests
-pillow==8.0.0             # via reportlab
+pillow==8.0.1             # via reportlab
 pypdf2==1.26.0            # via pyxml2pdf (setup.py)
-reportlab==3.5.53         # via pyxml2pdf (setup.py)
-requests==2.24.0          # via pyxml2pdf (setup.py)
-urllib3==1.25.11          # via requests
+reportlab==3.5.55         # via pyxml2pdf (setup.py)
+requests==2.25.0          # via pyxml2pdf (setup.py)
+urllib3==1.26.2           # via requests
