@@ -1,3 +1,4 @@
+import argparse
 import os
 import sys
 
@@ -5,7 +6,46 @@ from pyxml2pdf.Core.Downloader import Downloader
 from pyxml2pdf.Core.Initializer import Initializer
 
 
+def _add_arguments():
+    # Execute pyxml2pdf with provided command line parameters.
+    parser = argparse.ArgumentParser(
+        description="A converter for XML data into nicely formatted tables in a PDF."
+    )
+    parser.add_argument(
+        "url",
+        nargs="+",
+        type=str,
+        default="https://www.alpinclub-berlin.de/kv/DRAFT_kursdaten.xml",
+        help="The URL to download XML file from if it is not present at the specified "
+        "location.",
+    )
+    parser.add_argument(
+        "path",
+        nargs="+",
+        type=str,
+        default="input/2021_DRAFT_kursdaten.xml",
+        help="The file path to store and open the XML file locally.",
+    )
+    parser.add_argument(
+        "pdf_output",
+        nargs="+",
+        type=str,
+        default="output/2021_DRAFT_kursdaten.pdf",
+        help="The file path to store the created PDF to.",
+    )
+    parser.add_argument(
+        "properties",
+        nargs="+",
+        type=str,
+        default="input/kursdaten_prop.properties",
+        help="The file path to the properties file, which contains the settings for "
+        "the table to be created.",
+    )
+    return parser.parse_args()
+
+
 def main():
+    args = _add_arguments()
     validate_inputs()
     if not os.path.isfile(sys.argv[2]):
         Downloader(*sys.argv[1:3])
