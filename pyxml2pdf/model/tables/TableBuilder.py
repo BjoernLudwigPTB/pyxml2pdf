@@ -45,6 +45,8 @@ class TableBuilder:
         jugend = ["Jugendgruppen und -events", ["Jugend"], ["Jugend"]]
 
         return [
+            wandern,
+            mountainbiken,
             familie,
             wandern,
             mountainbiken,
