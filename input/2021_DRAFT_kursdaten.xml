@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <?xml-stylesheet type="text/xsl" href="kursliste.xsl"?>
 <kursexport>
-<date>2020-11-15T19:58:20.892978</date>
+<date>2020-11-12T19:49:58.616161</date>
 <kurs>
     <counter>1</counter>
     <Kursnummer>F2100301</Kursnummer>
@@ -49,61 +49,8 @@
     <TerminDatumVon1>29.04.2021 10:00</TerminDatumVon1>
     <TerminDatumBis1>04.05.2021 20:00</TerminDatumBis1>
     <Ort2></Ort2>
-    <TerminDatumVon2></TerminDatumVon2>
-    <TerminDatumBis2></TerminDatumBis2>
-    <Ort3></Ort3>
-    <TerminDatumVon3></TerminDatumVon3>
-    <TerminDatumBis3></TerminDatumBis3>
-</kurs>
-<kurs>
-    <counter>2</counter>
-    <Kursnummer>F2100302</Kursnummer>
-    <Bezeichnung>Wochenendfahrt Zittauer Gebirge</Bezeichnung>
-    <Anzahlung></Anzahlung>
-    <Bezeichnung2>Wandern, Biken, Klettersteig, Klettern</Bezeichnung2>
-    <Bezeichnung3></Bezeichnung3>
-    <Kategorie>Klettern, Bouldern, Wandern, Mountainbiken, Mittelgebirge, Klettersteig, Bergsteigen</Kategorie>
-    <Leistungen>Orga, ÜN, Frühstück, Grillabend zzgl AR</Leistungen>
-    <Kostenstelle></Kostenstelle>
-    <Kurstermin>Sept/Okt 2021</Kurstermin>
-    <Abfahrt></Abfahrt>
-    <Anmeldeschluss>20.09.2021</Anmeldeschluss>
-    <Kursart>Gemeinschaftsfahrt</Kursart>
-    <TrainerURL>https://www.arno-behr.de/</TrainerURL>
-    <Zielgruppe>Alle Mitglieder, die Spaß an der Bewegung und Freude an Geselligkeit haben</Zielgruppe>
-    <Kursleiter>Arnold Behr</Kursleiter>
-    <Kursstatus>abgerechnet</Kursstatus>
-    <Beschreibung>Gesellige und gemütliche Wochenendfahrt  für all diejenigen, die Freude am Wandern, Biken, Klettersteig, evtl. Klettern, etc. und an gutem Essen haben. Auch bei schlechtem Wetter gibt es Alternativen (Kletterhalle, Spassbad, Eisdiele, etc.).</Beschreibung>
-    <Voraussetzung>Mitgliedschaft im AlpinClub Berlin.</Voraussetzung>
-    <Ausruestung>Hüttenschlafsack, ggf. Kletter- und Wanderausrüstung, ggf. Klettersteigset, ggf. Bike</Ausruestung>
-    <Besprechung></Besprechung>
-    <Anreise>individuell</Anreise>
-    <Stuetzpunktinfo>Die Jonsdorfer Hütte, oder auch Bergsteigerhütte ist eine Selbstversorgerhütte. Sie befindet sich im Kurort Jonsdorf, im Zittauer Gebirge. Direkt am Waldrand, in unmittelbarer Nähe zum größten Teil des Jonsdorfer Klettergebietes gelegen. In der Hütte befinden sich 18 Übernachtungsmöglichkeiten in Form eines 4-Bett- und eines 3-Bettzimmers, sowie 3 Matratzenlager. Die Hütte verfügt über Waschräume und Toiletten. Eine modern eingerichtete Küche sowie ein kleiner und ein großer Aufenthaltsraum vervollständigen das Angebot. </Stuetzpunktinfo>
-    <Kursziel></Kursziel>
-    <Treffpunkt></Treffpunkt>
-    <Bemerkungen></Bemerkungen>
-    <Tourbewertung></Tourbewertung>
-    <BuchungsArt></BuchungsArt>
-    <KundenTyp></KundenTyp>
-    <Anlagedatum>25.10.2020</Anlagedatum>
-    <Aenderungsdatum>25.10.2020</Aenderungsdatum>
-    <Kurskosten>80,00</Kurskosten>
-    <GeplanteTN>12</GeplanteTN>
-    <GebuchteTN>0</GebuchteTN>
-    <FreiePlaetze>12</FreiePlaetze>
-    <Warteliste>0</Warteliste>
-    <StornoOffen>0</StornoOffen>
-    <StornoErledigt>0</StornoErledigt>
-    <Versicherung></Versicherung>
-    <Versicherungsbetrag>0,00</Versicherungsbetrag>
-    <Versicherungsdatum></Versicherungsdatum>
-    <Ort1>Zittauer Gebirge, Kurort Jonsdorf</Ort1>
-    <Termin1ISO>2021-09-30T10:00:00Z</Termin1ISO>
-    <TerminDatumVon1>30.09.2021 10:00</TerminDatumVon1>
-    <TerminDatumBis1>04.10.2021 20:00</TerminDatumBis1>
-    <Ort2></Ort2>
-    <TerminDatumVon2></TerminDatumVon2>
-    <TerminDatumBis2></TerminDatumBis2>
+    <TerminDatumVon2>30.09.2021 10:00</TerminDatumVon2>
+    <TerminDatumBis2>04.10.2021 20:00</TerminDatumBis2>
     <Ort3></Ort3>
     <TerminDatumVon3></TerminDatumVon3>
     <TerminDatumBis3></TerminDatumBis3>
@@ -195,8 +142,8 @@
     <Aenderungsdatum>09.11.2020</Aenderungsdatum>
     <Kurskosten>10,00</Kurskosten>
     <GeplanteTN>24</GeplanteTN>
-    <GebuchteTN>2</GebuchteTN>
-    <FreiePlaetze>22</FreiePlaetze>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>24</FreiePlaetze>
     <Warteliste>0</Warteliste>
     <StornoOffen>0</StornoOffen>
     <StornoErledigt>0</StornoErledigt>
@@ -229,7 +176,7 @@
     <Anmeldeschluss>01.04.2021</Anmeldeschluss>
     <Kursart>Gemeinschaftsfahrt</Kursart>
     <TrainerURL>http://www.breidenstein.info</TrainerURL>
-    <Zielgruppe>KletterInnen, SandsteinfreundInnen</Zielgruppe>
+    <Zielgruppe>KletterInnen, Sandstein- FreundInnen</Zielgruppe>
     <Kursleiter>Jens Breidenstein</Kursleiter>
     <Kursstatus></Kursstatus>
     <Beschreibung>Herzlich eingeladen sind alle die gerne im Elbsandsteingebirge klettern. </Beschreibung>
@@ -282,7 +229,7 @@
     <Anmeldeschluss>01.07.2021</Anmeldeschluss>
     <Kursart>Gemeinschaftsfahrt</Kursart>
     <TrainerURL>http://www.breidenstein.info</TrainerURL>
-    <Zielgruppe>KletterInnen, SandsteinfreundInnen</Zielgruppe>
+    <Zielgruppe>KletterInnen, Sandstein- FreundInnen</Zielgruppe>
     <Kursleiter>Jens Breidenstein</Kursleiter>
     <Kursstatus></Kursstatus>
     <Beschreibung>Schmilka</Beschreibung>
@@ -309,7 +256,7 @@
     <Versicherung></Versicherung>
     <Versicherungsbetrag>0,00</Versicherungsbetrag>
     <Versicherungsdatum></Versicherungsdatum>
-    <Ort1>Elbsandstein -  Rauschenstein/Schmilka</Ort1>
+    <Ort1>Elbsandstein - Rauschenstein / Schmilka</Ort1>
     <Termin1ISO>2021-07-23T10:00:00Z</Termin1ISO>
     <TerminDatumVon1>23.07.2021 10:00</TerminDatumVon1>
     <TerminDatumBis1>25.07.2021 20:00</TerminDatumBis1>
@@ -335,7 +282,7 @@
     <Anmeldeschluss>01.08.2021</Anmeldeschluss>
     <Kursart>Gemeinschaftsfahrt</Kursart>
     <TrainerURL>http://www.breidenstein.info</TrainerURL>
-    <Zielgruppe>KletterInnen, SandsteinfreundInnen</Zielgruppe>
+    <Zielgruppe>KletterInnen, Sandstein- FreundInnen</Zielgruppe>
     <Kursleiter>Jens Breidenstein</Kursleiter>
     <Kursstatus></Kursstatus>
     <Beschreibung>Schrammsteine</Beschreibung>
@@ -362,7 +309,7 @@
     <Versicherung></Versicherung>
     <Versicherungsbetrag>0,00</Versicherungsbetrag>
     <Versicherungsdatum></Versicherungsdatum>
-    <Ort1>Elbsandstein -  Falkenstein/Schrammsteine</Ort1>
+    <Ort1>Elbsandstein - Falkenstein / Schrammsteine</Ort1>
     <Termin1ISO>2021-08-13T10:00:00Z</Termin1ISO>
     <TerminDatumVon1>13.08.2021 10:00</TerminDatumVon1>
     <TerminDatumBis1>15.08.2021 20:00</TerminDatumBis1>
@@ -441,7 +388,7 @@
     <Anmeldeschluss>01.07.2021</Anmeldeschluss>
     <Kursart>Gemeinschaftsfahrt</Kursart>
     <TrainerURL>http://www.breidenstein.info</TrainerURL>
-    <Zielgruppe>KletterInnen, SandsteinfreundInnen</Zielgruppe>
+    <Zielgruppe>KletterInnen, Sandstein- FreundInnen</Zielgruppe>
     <Kursleiter></Kursleiter>
     <Kursstatus></Kursstatus>
     <Beschreibung>Herzlich eingeladen sind alle die gerne im Elbsandstein klettern.</Beschreibung>
@@ -486,7 +433,7 @@
     <Anzahlung>Anzahlung ist bei Bestätigung der Teilnahme zu zahlen. Orga sowie Vorauszahlung Hüttenreservation (bei späterer Absage wird eine Stornierungsgebühr für die Hütten fällig).</Anzahlung>
     <Bezeichnung2>Rundtour auf die höchsten 3.000er</Bezeichnung2>
     <Bezeichnung3></Bezeichnung3>
-    <Kategorie>Hochtour, Hochgebirge, Bergsteigen</Kategorie>
+    <Kategorie>Hochtouren, Hochgebirge, Bergsteigen</Kategorie>
     <Leistungen>Orga, zzgl. ÜN, V, AR</Leistungen>
     <Kostenstelle></Kostenstelle>
     <Kurstermin>Sommerferien 2021</Kurstermin>
@@ -545,7 +492,7 @@
     <Kurstermin>Ostern 2021</Kurstermin>
     <Abfahrt></Abfahrt>
     <Anmeldeschluss></Anmeldeschluss>
-    <Kursart>?</Kursart>
+    <Kursart>Führung</Kursart>
     <TrainerURL></TrainerURL>
     <Zielgruppe>Ausdauernde Wanderer</Zielgruppe>
     <Kursleiter>Thilo Kunze</Kursleiter>
@@ -574,7 +521,7 @@
     <Versicherung></Versicherung>
     <Versicherungsbetrag>0,00</Versicherungsbetrag>
     <Versicherungsdatum></Versicherungsdatum>
-    <Ort1>Lausitzer Gebirge (Luické hory)</Ort1>
+    <Ort1>Lausitzer Gebirge (Luzické hory)</Ort1>
     <Termin1ISO>2021-04-02T12:00:00Z</Termin1ISO>
     <TerminDatumVon1>02.04.2021 12:00</TerminDatumVon1>
     <TerminDatumBis1>05.04.2021 15:00</TerminDatumBis1>
@@ -725,8 +672,8 @@
     <Aenderungsdatum>04.09.2020</Aenderungsdatum>
     <Kurskosten>30,00</Kurskosten>
     <GeplanteTN>6</GeplanteTN>
-    <GebuchteTN>3</GebuchteTN>
-    <FreiePlaetze>3</FreiePlaetze>
+    <GebuchteTN>1</GebuchteTN>
+    <FreiePlaetze>5</FreiePlaetze>
     <Warteliste>0</Warteliste>
     <StornoOffen>0</StornoOffen>
     <StornoErledigt>0</StornoErledigt>
@@ -762,8 +709,8 @@
     <Zielgruppe>Fortgeschrittene und solche die es werden wollen im Bereich mittelschwerer Skitouren.</Zielgruppe>
     <Kursleiter>Helmut Kleinschmidt</Kursleiter>
     <Kursstatus></Kursstatus>
-    <Beschreibung>Wir wollen die Planung und Durchführung von bis zu mittelschweren Skitouren trainieren. Die Touren werden je nach Schneeverhältnissen vor Ort ausgesucht. Erweiterte Material/Ausrüstungskunde, Vertiefter Umgang mit LVS, Lawinenschaufel und Lawinensonde, Spitzkehre und Spuranlage auch im steilen Gelände, Tourenplanung und Risikomanagement,  Lawinen-Risko-Check, dabei: Treffen eigener, begründbarer Entscheidungen zu Routenwahl und Spuranlage im Aufstieg/Abfahrt. (Bei schlechten Bedingungen gibt es die komfortable Ausweichmöglichkeit, das Skigebiet zum Freeride zu nutzen).</Beschreibung>
-    <Voraussetzung>Eine vorherige Teilnahme an einem Grundkurs Skitouren oder entsprechende Erfahrungen sind empfehelnswert. Der Kurs ist auch besuchbar nach dem erfolgreichen Absolvieren des Grundkurs Skitouren hier im Programm (F2105903). Verbindliche Zusage muss bis 5.Dez 2020 erfolgen, sonst ist die Unterkunft weg!Kondition für Touren bis zu 7 Std und 900Hm.</Voraussetzung>
+    <Beschreibung>Wir wollen die Planung und Durchführung von bis zu mittelschweren Skitouren trainieren. Die Touren werden je nach Schneeverhältnissen vor Ort ausgesucht. Erweiterte Material/Ausrüstungskunde, Vertiefter Umgang mit LVS, Lawinenschaufel und Lawinensonde, Spitzkehre und Spuranlage auch im steilen Gelände, Tourenplanung und Risikomanagement,  Lawinen-Risiko-Check, dabei: Treffen eigener, begründbarer Entscheidungen zu Routenwahl und Spuranlage im Aufstieg/Abfahrt. (Bei schlechten Bedingungen gibt es die komfortable Ausweichmöglichkeit, das Skigebiet zum Freeride zu nutzen).</Beschreibung>
+    <Voraussetzung>Eine vorherige Teilnahme an einem Grundkurs Skitouren oder entsprechende Erfahrungen sind empfehlenswert. Der Kurs ist auch besuchbar nach dem erfolgreichen Absolvieren des Grundkurs Skitouren hier im Programm (F2105903). Verbindliche Zusage muss bis 5.Dez 2020 erfolgen, sonst ist die Unterkunft weg!Kondition für Touren bis zu 7 Std und 900Hm.</Voraussetzung>
     <Ausruestung>Komplette Skitourenausrüstung (Tourenskischuhe, Tourenski, Tourenskistöcke, Felle, LVS-Gerät, Lawinenschaufel (Alu), Sonde, ABS Rucksack ist empfohlen). Ausrüstung ist eventuell auch leihbar. Informiert euch eigenständig dazu im Internet bzw. Bergsportläden. Weitere Ausrüstungsliste per Email nach Anmeldung.</Ausruestung>
     <Besprechung>Die Teilnahme an Vorbesprechung ist für die Teilnahme am Kurs unabdingbar und obligatorisch: Dienstag 21.Januar 2021 um 20:30 Uhr in der Geschäftsstelle des ACB.   skitourenalpinclub@gmx.de</Besprechung>
     <Anreise>in eigener Verantwortung</Anreise>
@@ -804,7 +751,7 @@
     <Anzahlung>bis 15.Februar 2021 unter Angabe der Kursnummer</Anzahlung>
     <Bezeichnung2>2 Tage in Berlin + 6 Tage Alpen</Bezeichnung2>
     <Bezeichnung3></Bezeichnung3>
-    <Kategorie>Hochtour, Sommer</Kategorie>
+    <Kategorie>Hochtouren, Sommer, Hochgebirge</Kategorie>
     <Leistungen>Orga, zzgl. AR, Liftkosten, ÜN+HP</Leistungen>
     <Kostenstelle></Kostenstelle>
     <Kurstermin>Juli 2021</Kurstermin>
@@ -816,7 +763,7 @@
     <Kursleiter>Helmut Kleinschmidt, Benjamin Centner</Kursleiter>
     <Kursstatus></Kursstatus>
     <Beschreibung>Grundkurs bzw. Aufbaukurs Hochtouren. Dazu gehört: Tourenplanung, Risikomanagement, grundlegende Steigeisentechniken, Umgang mit Eispickel, Spaltenbergung, Selbstrettung, Sicherungsmöglichkeiten in Fels und Eis, Begehung von Firnfeldern, Material/Ausrüstungskunde, das Treffen eigener, begründbarer Entscheidungen zu Routenwahl und Durchführung leichter bis mittelschwerer Hochtouren. Wichtige Inhalte werden in den zwei Vorbereitungsterminen in Berlin schon vorab vermittelt. </Beschreibung>
-    <Voraussetzung>Der Kurs richtet sich nicht an Bergsteiger-Einsteiger!, sondern bergsteigende ACB-Mitglieder mit fortgeschrittener Erfahrung im unvergletscherten Bereich, die nun den Schritt in den hochalpinen, vergletscherten Hochtourenbereich (hohe 2-3000er!) machen wollen. Kondition für Touren bis zu 8-9 Std und 1200Hm.</Voraussetzung>
+    <Voraussetzung>Der Kurs richtet sich nicht an Bergsteiger-Einsteiger!, sondern Bergsteigende mit fortgeschrittener Erfahrung im unvergletscherten Bereich, die nun den Schritt in den hochalpinen, vergletscherten Hochtourenbereich (hohe 2-3000er!) machen wollen. Kondition für Touren bis zu 8-9 Std und 1200Hm.</Voraussetzung>
     <Ausruestung>Komplette Hochtourenausrüstung muss vorhanden sein. Liste nach verbindlicher Anmeldung und Anzahlung ausführliche Besprechung der Liste in den zwei Vorbereitungsterminen in Berlin. </Ausruestung>
     <Besprechung>Die Teilnahme an den zwei obligatorischen Vorbereitungsterminen in Berlin werden nach verbindlicher Anmeldung und Anzahlung miteinander abgestimmt. </Besprechung>
     <Anreise>in eigener Verantwortung</Anreise>
@@ -828,7 +775,7 @@
     <BuchungsArt></BuchungsArt>
     <KundenTyp></KundenTyp>
     <Anlagedatum>09.11.2020</Anlagedatum>
-    <Aenderungsdatum>15.11.2020</Aenderungsdatum>
+    <Aenderungsdatum>09.11.2020</Aenderungsdatum>
     <Kurskosten>120,00</Kurskosten>
     <GeplanteTN>12</GeplanteTN>
     <GebuchteTN>0</GebuchteTN>
@@ -868,9 +815,9 @@
     <Zielgruppe>Sichere und gute Skifahrer</Zielgruppe>
     <Kursleiter>Helmut Kleinschmidt</Kursleiter>
     <Kursstatus></Kursstatus>
-    <Beschreibung>Für Sichere und gute Skifahrer, die erste Tiefschnee Erfahrungen jenseits der Piste schon gesammelt haben und nun den Übergang zu richtigen Skitouren lernen oder wieder auffrischen wollen. Kursinhalte: Material/Ausrüstungskunde, Umgang mit LVS,  Lawinenschaufel und Lawinensonde (Basics), Gehtechnik mit Fellen und Steighilfe, Spitzkehre und Spuranlage, Tourenplanung und Vorbereitung (Basics), Interpretation des Lawinenlageberichtes, Risikomanagement, Lawinen Risko Check (Basics), Routenwahl und Spuranlage im Aufstieg/Abfahrt, Abends: Theorie, Tourennachbesprechung und Planung nächste Tour, Tagsüber: Umsetzen des vermittelten Wissens in die Tourenpraxis</Beschreibung>
+    <Beschreibung>Für Sichere und gute Skifahrer, die erste Tiefschnee Erfahrungen jenseits der Piste schon gesammelt haben und nun den Übergang zu richtigen Skitouren lernen oder wieder auffrischen wollen. Kursinhalte: Material/Ausrüstungskunde, Umgang mit LVS,  Lawinenschaufel und Lawinensonde (Basics), Gehtechnik mit Fellen und Steighilfe, Spitzkehre und Spuranlage, Tourenplanung und Vorbereitung (Basics), Interpretation des Lawinenlageberichtes, Risikomanagement, Lawinen Risiko Check (Basics), Routenwahl und Spuranlage im Aufstieg/Abfahrt, Abends: Theorie, Tourennachbesprechung und Planung nächste Tour, Tagsüber: Umsetzen des vermittelten Wissens in die Tourenpraxis</Beschreibung>
     <Voraussetzung>Sicheres Skifahren und sauberer Parallelschwung auf roten und schwarzen Pisten. Kurvenfahren abseits der Piste im Tiefschnee sollte beherrscht werden. Das ist kein Skikurs für Tiefschneefahren! Ausdauer für Anstiege bis 6 Stunden bzw. 800 Höhenmeter mit Skitourenski.</Voraussetzung>
-    <Ausruestung>Komplette Skitourenausrüstung (Tourenskischuhe, Tourenski, Tourenskistöcke, Felle, LVS Geräöt, Lawinenschaufel (Alu), Sonde, ABS Rucksack ist empfohlen). Ausrüstung ist eventuell auch leihbar. Informiert euch eigenständig dazu im Internet bzw. Bergsportläden. Weitere Ausrüstungsliste nach Anmeldung per Email und Tipps bei Vortreffen.  </Ausruestung>
+    <Ausruestung>Komplette Skitourenausrüstung (Tourenskischuhe, Tourenski, Tourenskistöcke, Felle, LVS Gerät, Lawinenschaufel (Alu), Sonde, ABS Rucksack ist empfohlen). Ausrüstung ist eventuell auch leihbar. Informiert euch eigenständig dazu im Internet bzw. Bergsportläden. Weitere Ausrüstungsliste nach Anmeldung per Email und Tipps bei Vortreffen.  </Ausruestung>
     <Besprechung>Die Teilnahme an Vorbesprechung ist für die Teilnahme am Kurs unabdingbar und obligatorisch: Dienstag 19. Januar 2021 um 19:00 Uhr in der Geschäftsstelle des ACB. skitourenalpinclub@gmx.de</Besprechung>
     <Anreise>in eigener Verantwortung</Anreise>
     <Stuetzpunktinfo>Auffahrt vom Lager Walchen (Parkplatz) mit dem Taxi (zur Kostensenkung gemeinsam) bis zur Hütte empfohlen.</Stuetzpunktinfo>
