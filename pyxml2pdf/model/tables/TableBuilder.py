@@ -36,11 +36,6 @@ class TableBuilder:
             ["Wandern"],
         ]
         mountainbiken = ["Mountainbiken", ["Mountainbiken"], ["Mountainbiken"]]
-        ausbildung = [
-            "Ausbildung, Wandern und Klettern in Berlin",
-            ["in Berlin"],
-            ["Grundlagenkurs", "Wandern", "Klettern"],
-        ]
         bergsteigen = [
             "Ski, Bergsteigen, Hochtouren und Klettern im Hochgebirge",
             ["Hochgebirge"],
@@ -51,7 +46,6 @@ class TableBuilder:
 
         return [
             familie,
-            ausbildung,
             wandern,
             mountainbiken,
             bergsteigen,
@@ -77,7 +71,7 @@ class TableBuilder:
         return subtables
 
     def make_header(self, title):
-        """ Build the first two rows of a subtable
+        """Build the first two rows of a subtable
 
         Build the first two rows of a subtable with its title and column headings taken
         from the properties file.
@@ -146,8 +140,9 @@ class TableBuilder:
                 + "'s event on "
                 + event.date
                 + " would not be printed, because it does not contain a valid"
-                " combination of locations and activities. Either add a valid location"
-                " or add a valid activity or both.",
+                " combination of locations and activities. Currently it contains "
+                + str(event.categories)
+                + ". Either add a valid location or add a valid activity or both.",
                 RuntimeWarning,
             )
 
