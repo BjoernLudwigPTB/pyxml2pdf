@@ -92,7 +92,7 @@ class TableBuilder:
         # These are the column headings that should be populated from the
         # properties-file.
         headings = [
-            "Art",
+            "Charakter",
             "Datum",
             "Ort",
             "Leitung",
