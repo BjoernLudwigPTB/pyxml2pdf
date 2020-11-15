@@ -5,7 +5,7 @@ from pyxml2pdf.Core.Initializer import Initializer
 def convert():
     input_folder = "input/"
     domain = "https://www.alpinclub-berlin.de/kv/"
-    xml_filename = "2021_DRAFT_kursdaten.xml"
+    xml_filename = "DRAFT_kursdaten.xml"
     xml_path = input_folder + xml_filename
     url = domain + xml_filename
     input_path = input_folder + xml_filename
