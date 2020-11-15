@@ -15,7 +15,7 @@ class TableBuilder:
         self._subtables = self.create_subtables()
 
     @staticmethod
-    def _parse_properties():
+    def _parse_properties() -> List[List[Union[str, List[str]]]]:
         """
         Extract all configuration information from properties file and set
         up a dict containing all this information. Later at least it will
@@ -46,17 +46,15 @@ class TableBuilder:
 
         return [
             familie,
-            wandern,
-            mountainbiken,
             bergsteigen,
             jugend,
             klettern,
         ]
 
-    def create_subtables(self):
+    def create_subtables(self) -> List[EventTable]:
         """Create subtables for all different kinds of events
 
-        :return list[EventTable]: a list of all subtables
+        :return List[EventTable]: a list of all subtables
         """
 
         subtables = []
@@ -70,7 +68,7 @@ class TableBuilder:
             subtables.append(subtable)
         return subtables
 
-    def make_header(self, title):
+    def make_header(self, title: str) -> List[Table]:
         """Build the first two rows of a subtable
 
         Build the first two rows of a subtable with its title and column headings taken
@@ -159,9 +157,11 @@ class TableBuilder:
 
         :param cells: cells wrapped by a list representing the columns wrapped by a
             list representing the lines
-        :param widths: the column widths
-        :param style: desired table's style
-        :returns: table containing specified cells in fixed width, styled columns
+        :param widths: Optional column widths. The default results in reasonable
+            settings based on experience.
+        :param style: Optional table's style. The default results in reasonable
+            settings based on experience.
+        :returns: A table containing specified cells in fixed width, styled columns.
         """
         if widths is None:
             widths = self._table_style.column_widths
