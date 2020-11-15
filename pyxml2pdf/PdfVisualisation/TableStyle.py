@@ -10,7 +10,7 @@ from pyxml2pdf.PdfVisualisation.Styles import Styles
 
 
 class TableStyle:
-    """ Create a collection of styling information about the table to create
+    """Create a collection of styling information about the table to create
 
     Beautiful colors are:
         *   aliceblue (nicht mit azure)
@@ -44,7 +44,7 @@ class TableStyle:
         # This specifies the column widths of the final result. The columns contain...
         self._column_widths = [
             # ... the type of the event.
-            7.2 * mm,
+            14 * mm,
             # ... the date and time of the event.
             11.5 * mm,
             # ... the region of the event.
