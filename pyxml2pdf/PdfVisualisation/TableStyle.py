@@ -58,7 +58,7 @@ class TableStyle:
             # ... the target audience the event.
             17.4 * mm,
             # ... the personal, material and financial prerequisites for the event.
-            47 * mm,
+            49 * mm,
         ]
         self._column_widths[4] = (
             self.table_width

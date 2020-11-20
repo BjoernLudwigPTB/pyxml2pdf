@@ -42,7 +42,7 @@ class TableBuilder:
             ["Grundlagenkurs", "Wandern", "Klettern"],
         ]
         bergsteigen = [
-            "Ski, Bergsteigen, Hochtouren und Klettern im Hochgebirge",
+            "Ski, Bergsteigen und Hochtouren  im Hochgebirge",
             ["Hochgebirge"],
             ["Bergsteigen", "Hochtouren", "Höhle", "Klettern", "Klettersteig", "Ski"],
         ]
@@ -50,13 +50,13 @@ class TableBuilder:
         jugend = ["Jugendgruppen und -events", ["Jugend"], ["Jugend"]]
 
         return [
-            wandern,
-            mountainbiken,
-            familie,
-            ausbildung,
             bergsteigen,
             jugend,
+            ausbildung,
+            wandern,
+            mountainbiken,
             klettern,
+            familie,
         ]
 
     def create_subtables(self) -> List[EventTable]:
