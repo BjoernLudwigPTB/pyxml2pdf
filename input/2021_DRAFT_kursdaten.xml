@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <?xml-stylesheet type="text/xsl" href="kursliste.xsl"?>
 <kursexport>
-<date>2020-11-12T19:49:58.616161</date>
+<date>2020-11-18T19:02:06.858635</date>
 <kurs>
     <counter>1</counter>
     <Kursnummer>F2100301</Kursnummer>
@@ -49,8 +49,61 @@
     <TerminDatumVon1>29.04.2021 10:00</TerminDatumVon1>
     <TerminDatumBis1>04.05.2021 20:00</TerminDatumBis1>
     <Ort2></Ort2>
-    <TerminDatumVon2>30.09.2021 10:00</TerminDatumVon2>
-    <TerminDatumBis2>04.10.2021 20:00</TerminDatumBis2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter>2</counter>
+    <Kursnummer>F2100302</Kursnummer>
+    <Bezeichnung>Wochenendfahrt Zittauer Gebirge</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>Wandern, Biken, Klettersteig, Klettern</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Klettern, Bouldern, Wandern, Mountainbiken, Mittelgebirge, Klettersteig, Bergsteigen</Kategorie>
+    <Leistungen>Orga, ÜN, Frühstück, Grillabend zzgl AR</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>Sept/Okt 2021</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss>20.09.2021</Anmeldeschluss>
+    <Kursart>Gemeinschaftsfahrt</Kursart>
+    <TrainerURL>https://www.arno-behr.de/</TrainerURL>
+    <Zielgruppe>Alle Mitglieder, die Spaß an der Bewegung und Freude an Geselligkeit haben</Zielgruppe>
+    <Kursleiter>Arnold Behr</Kursleiter>
+    <Kursstatus>abgerechnet</Kursstatus>
+    <Beschreibung>Gesellige und gemütliche Wochenendfahrt  für all diejenigen, die Freude am Wandern, Biken, Klettersteig, evtl. Klettern, etc. und an gutem Essen haben. Auch bei schlechtem Wetter gibt es Alternativen (Kletterhalle, Spassbad, Eisdiele, etc.).</Beschreibung>
+    <Voraussetzung>Mitgliedschaft im AlpinClub Berlin.</Voraussetzung>
+    <Ausruestung>Hüttenschlafsack, ggf. Kletter- und Wanderausrüstung, ggf. Klettersteigset, ggf. Bike</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>individuell</Anreise>
+    <Stuetzpunktinfo>Die Jonsdorfer Hütte, oder auch Bergsteigerhütte ist eine Selbstversorgerhütte. Sie befindet sich im Kurort Jonsdorf, im Zittauer Gebirge. Direkt am Waldrand, in unmittelbarer Nähe zum größten Teil des Jonsdorfer Klettergebietes gelegen. In der Hütte befinden sich 18 Übernachtungsmöglichkeiten in Form eines 4-Bett- und eines 3-Bettzimmers, sowie 3 Matratzenlager. Die Hütte verfügt über Waschräume und Toiletten. Eine modern eingerichtete Küche sowie ein kleiner und ein großer Aufenthaltsraum vervollständigen das Angebot. </Stuetzpunktinfo>
+    <Kursziel></Kursziel>
+    <Treffpunkt></Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>25.10.2020</Anlagedatum>
+    <Aenderungsdatum>25.10.2020</Aenderungsdatum>
+    <Kurskosten>80,00</Kurskosten>
+    <GeplanteTN>12</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>12</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Zittauer Gebirge, Kurort Jonsdorf</Ort1>
+    <Termin1ISO>2021-09-30T10:00:00Z</Termin1ISO>
+    <TerminDatumVon1>30.09.2021 10:00</TerminDatumVon1>
+    <TerminDatumBis1>04.10.2021 20:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
     <Ort3></Ort3>
     <TerminDatumVon3></TerminDatumVon3>
     <TerminDatumBis3></TerminDatumBis3>
@@ -142,8 +195,8 @@
     <Aenderungsdatum>09.11.2020</Aenderungsdatum>
     <Kurskosten>10,00</Kurskosten>
     <GeplanteTN>24</GeplanteTN>
-    <GebuchteTN>0</GebuchteTN>
-    <FreiePlaetze>24</FreiePlaetze>
+    <GebuchteTN>6</GebuchteTN>
+    <FreiePlaetze>18</FreiePlaetze>
     <Warteliste>0</Warteliste>
     <StornoOffen>0</StornoOffen>
     <StornoErledigt>0</StornoErledigt>
@@ -354,8 +407,8 @@
     <Aenderungsdatum>09.11.2020</Aenderungsdatum>
     <Kurskosten>20,00</Kurskosten>
     <GeplanteTN>20</GeplanteTN>
-    <GebuchteTN>0</GebuchteTN>
-    <FreiePlaetze>20</FreiePlaetze>
+    <GebuchteTN>4</GebuchteTN>
+    <FreiePlaetze>16</FreiePlaetze>
     <Warteliste>0</Warteliste>
     <StornoOffen>0</StornoOffen>
     <StornoErledigt>0</StornoErledigt>
@@ -429,9 +482,9 @@
 <kurs>
     <counter>10</counter>
     <Kursnummer>F2102208</Kursnummer>
-    <Bezeichnung>Hochtourenwoche Stubaier Hauptkamm</Bezeichnung>
+    <Bezeichnung>Hochtourenwoche Stubai</Bezeichnung>
     <Anzahlung>Anzahlung ist bei Bestätigung der Teilnahme zu zahlen. Orga sowie Vorauszahlung Hüttenreservation (bei späterer Absage wird eine Stornierungsgebühr für die Hütten fällig).</Anzahlung>
-    <Bezeichnung2>Rundtour auf die höchsten 3.000er</Bezeichnung2>
+    <Bezeichnung2>Rundtour auf die höchsten 3.000er im Stubaier Hauptkamm</Bezeichnung2>
     <Bezeichnung3></Bezeichnung3>
     <Kategorie>Hochtouren, Hochgebirge, Bergsteigen</Kategorie>
     <Leistungen>Orga, zzgl. ÜN, V, AR</Leistungen>
@@ -458,7 +511,7 @@
     <KundenTyp></KundenTyp>
     <Anlagedatum>30.10.2020</Anlagedatum>
     <Aenderungsdatum>30.10.2020</Aenderungsdatum>
-    <Kurskosten>60,00</Kurskosten>
+    <Kurskosten>80,00</Kurskosten>
     <GeplanteTN>5</GeplanteTN>
     <GebuchteTN>0</GebuchteTN>
     <FreiePlaetze>5</FreiePlaetze>
@@ -471,7 +524,7 @@
     <Ort1>Stubai (Tirol)</Ort1>
     <Termin1ISO>2021-07-26T15:00:00Z</Termin1ISO>
     <TerminDatumVon1>26.07.2021 15:00</TerminDatumVon1>
-    <TerminDatumBis1>03.08.2021 14:00</TerminDatumBis1>
+    <TerminDatumBis1>03.08.2021 15:00</TerminDatumBis1>
     <Ort2></Ort2>
     <TerminDatumVon2></TerminDatumVon2>
     <TerminDatumBis2></TerminDatumBis2>
@@ -510,7 +563,7 @@
     <BuchungsArt></BuchungsArt>
     <KundenTyp></KundenTyp>
     <Anlagedatum>09.11.2020</Anlagedatum>
-    <Aenderungsdatum>09.11.2020</Aenderungsdatum>
+    <Aenderungsdatum>16.11.2020</Aenderungsdatum>
     <Kurskosten>105,00</Kurskosten>
     <GeplanteTN>12</GeplanteTN>
     <GebuchteTN>0</GebuchteTN>
@@ -548,7 +601,7 @@
     <Kursart>Ausbildung</Kursart>
     <TrainerURL></TrainerURL>
     <Zielgruppe>ACB-lerInnen, die sicherer sichern und entspannter klettern und fallen möchten</Zielgruppe>
-    <Kursleiter>Björn Ludwig</Kursleiter>
+    <Kursleiter>Björn Ludwig, Michaela Ludwig</Kursleiter>
     <Kursstatus></Kursstatus>
     <Beschreibung>Sicher fallen und weich sichern am Fels und alles, was man dazu wissen und können sollte. Wir beschäftigen uns ein ganzes Wochenende mit dem Thema in allen Facetten um anschließend auch furchtloser und wilder aber vor allem sicherer und entspannter über dem letzten Haken zu klettern. Übernachten werden wir auf Michas Campingplatz in unmittelbarer Nähe zum Steinbruch.</Beschreibung>
     <Voraussetzung>Erfahrung im Vorstieg am Fels</Voraussetzung>
@@ -672,8 +725,8 @@
     <Aenderungsdatum>04.09.2020</Aenderungsdatum>
     <Kurskosten>30,00</Kurskosten>
     <GeplanteTN>6</GeplanteTN>
-    <GebuchteTN>1</GebuchteTN>
-    <FreiePlaetze>5</FreiePlaetze>
+    <GebuchteTN>3</GebuchteTN>
+    <FreiePlaetze>3</FreiePlaetze>
     <Warteliste>0</Warteliste>
     <StornoOffen>0</StornoOffen>
     <StornoErledigt>0</StornoErledigt>
@@ -693,6 +746,59 @@
 </kurs>
 <kurs>
     <counter>15</counter>
+    <Kursnummer>F2104203</Kursnummer>
+    <Bezeichnung>Klettern im Segelrevier: Kalymnos</Bezeichnung>
+    <Anzahlung>Gemeinschaftskasse</Anzahlung>
+    <Bezeichnung2>Optionale Ausbildungsmodule outdoor</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Klettern, Mittelgebirge, Wassersport</Kategorie>
+    <Leistungen>Orga zzgl. ÜN + V + AR</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>März 2021</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss>06.02.2021</Anmeldeschluss>
+    <Kursart>Gemeinschaftsfahrt / Ausbildung</Kursart>
+    <TrainerURL>https://tortours.net/sailclimb/acb2021/</TrainerURL>
+    <Zielgruppe>KletterInnen mit Vorerfahrung</Zielgruppe>
+    <Kursleiter></Kursleiter>
+    <Kursstatus></Kursstatus>
+    <Beschreibung>Die griechische Insel Kalymnos ist ein weltbekanntes Sportklettergebiet in der südlichen Ägäis umgeben von traumhaftem türkisblauem Wasser - damit auch ein beliebtes Segelrevier. Kletterrouten gibt es in allen Schwierigkeitsgraden und guter Bohrhaken-Absicherung, die man z.B. mit dem Boot gut erreicht. Verbesserung der Kletterfertigkeiten in natürlicher Umgebung, abends Schwimmen im Meer.  Optionales Ausbildungsmodul: Von der Halle an den Fels</Beschreibung>
+    <Voraussetzung>Klettern ab dem V. Grad UIAA. Vorstiegserfahrung am Fels oder Nutzung des Ausbildungsmoduls.</Voraussetzung>
+    <Ausruestung>Kletterausrüstung incl Helm (Ausleihe möglich), Seile nach Absprache</Ausruestung>
+    <Besprechung>Vorbesprechung (Termin offen) im Hüttenweg</Besprechung>
+    <Anreise>Anreiseplanung bei der Vorbesprechung, typischerweise via Kos.  Kombinierbar mit Segeltour als Fahrgemeinschaft. </Anreise>
+    <Stuetzpunktinfo>Passend zur Kletterfahrt bietet Torsten folgende Segeltour auf einer kleinen Yacht: Segeln von Fels zu Fels, optionales Manövertraining, Schlafen in der Koje, gemeinsame Selbstversorgung in der Kombüse. Gemeinsame Vorbesprechung. Separate Abrechnung.</Stuetzpunktinfo>
+    <Kursziel>Klettern in küstennahem Kalkstein mit Sintersäulen</Kursziel>
+    <Treffpunkt>Die DAV-Veranstaltung beginnt jeweils an den täglich gewählten Felsen. </Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>18.11.2020</Anlagedatum>
+    <Aenderungsdatum>18.11.2020</Aenderungsdatum>
+    <Kurskosten>50,00</Kurskosten>
+    <GeplanteTN>8</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>8</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Kalymnos</Ort1>
+    <Termin1ISO>2021-03-06T10:00:00Z</Termin1ISO>
+    <TerminDatumVon1>06.03.2021 10:00</TerminDatumVon1>
+    <TerminDatumBis1>13.03.2021 20:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter>16</counter>
     <Kursnummer>F2105901</Kursnummer>
     <Bezeichnung>Skitouren im Schatten der Wildspitze</Bezeichnung>
     <Anzahlung>bis 8.Dezember 2020 unter Angabe der Kursnummer</Anzahlung>
@@ -722,7 +828,7 @@
     <BuchungsArt></BuchungsArt>
     <KundenTyp></KundenTyp>
     <Anlagedatum>09.11.2020</Anlagedatum>
-    <Aenderungsdatum>09.11.2020</Aenderungsdatum>
+    <Aenderungsdatum>16.11.2020</Aenderungsdatum>
     <Kurskosten>100,00</Kurskosten>
     <GeplanteTN>8</GeplanteTN>
     <GebuchteTN>0</GebuchteTN>
@@ -745,13 +851,13 @@
     <TerminDatumBis3></TerminDatumBis3>
 </kurs>
 <kurs>
-    <counter>16</counter>
+    <counter>17</counter>
     <Kursnummer>F2105902</Kursnummer>
     <Bezeichnung>Hochtouren-Camp für Einsteiger und Wiedereinsteiger</Bezeichnung>
     <Anzahlung>bis 15.Februar 2021 unter Angabe der Kursnummer</Anzahlung>
     <Bezeichnung2>2 Tage in Berlin + 6 Tage Alpen</Bezeichnung2>
     <Bezeichnung3></Bezeichnung3>
-    <Kategorie>Hochtouren, Sommer, Hochgebirge</Kategorie>
+    <Kategorie>Hochtour, Hochgebirge, Sommer</Kategorie>
     <Leistungen>Orga, zzgl. AR, Liftkosten, ÜN+HP</Leistungen>
     <Kostenstelle></Kostenstelle>
     <Kurstermin>Juli 2021</Kurstermin>
@@ -763,7 +869,7 @@
     <Kursleiter>Helmut Kleinschmidt, Benjamin Centner</Kursleiter>
     <Kursstatus></Kursstatus>
     <Beschreibung>Grundkurs bzw. Aufbaukurs Hochtouren. Dazu gehört: Tourenplanung, Risikomanagement, grundlegende Steigeisentechniken, Umgang mit Eispickel, Spaltenbergung, Selbstrettung, Sicherungsmöglichkeiten in Fels und Eis, Begehung von Firnfeldern, Material/Ausrüstungskunde, das Treffen eigener, begründbarer Entscheidungen zu Routenwahl und Durchführung leichter bis mittelschwerer Hochtouren. Wichtige Inhalte werden in den zwei Vorbereitungsterminen in Berlin schon vorab vermittelt. </Beschreibung>
-    <Voraussetzung>Der Kurs richtet sich nicht an Bergsteiger-Einsteiger!, sondern Bergsteigende mit fortgeschrittener Erfahrung im unvergletscherten Bereich, die nun den Schritt in den hochalpinen, vergletscherten Hochtourenbereich (hohe 2-3000er!) machen wollen. Kondition für Touren bis zu 8-9 Std und 1200Hm.</Voraussetzung>
+    <Voraussetzung>Der Kurs richtet sich nicht an Bergsteiger-Einsteiger!, sondern bergsteigende ACB-Mitglieder mit fortgeschrittener Erfahrung im unvergletscherten Bereich, die nun den Schritt in den hochalpinen, vergletscherten Hochtourenbereich (hohe 2-3000er!) machen wollen. Kondition für Touren bis zu 8-9 Std und 1200Hm.</Voraussetzung>
     <Ausruestung>Komplette Hochtourenausrüstung muss vorhanden sein. Liste nach verbindlicher Anmeldung und Anzahlung ausführliche Besprechung der Liste in den zwei Vorbereitungsterminen in Berlin. </Ausruestung>
     <Besprechung>Die Teilnahme an den zwei obligatorischen Vorbereitungsterminen in Berlin werden nach verbindlicher Anmeldung und Anzahlung miteinander abgestimmt. </Besprechung>
     <Anreise>in eigener Verantwortung</Anreise>
@@ -775,7 +881,7 @@
     <BuchungsArt></BuchungsArt>
     <KundenTyp></KundenTyp>
     <Anlagedatum>09.11.2020</Anlagedatum>
-    <Aenderungsdatum>09.11.2020</Aenderungsdatum>
+    <Aenderungsdatum>16.11.2020</Aenderungsdatum>
     <Kurskosten>120,00</Kurskosten>
     <GeplanteTN>12</GeplanteTN>
     <GebuchteTN>0</GebuchteTN>
@@ -798,7 +904,7 @@
     <TerminDatumBis3></TerminDatumBis3>
 </kurs>
 <kurs>
-    <counter>17</counter>
+    <counter>18</counter>
     <Kursnummer>F2105903</Kursnummer>
     <Bezeichnung>Leichte Skitouren Ostalpen: Grundkurs/Auffrischung</Bezeichnung>
     <Anzahlung>bis 9. Januar 2021 unter Angabe der Kursnummer oder sonst bar bei Vortreffen,</Anzahlung>
@@ -815,9 +921,9 @@
     <Zielgruppe>Sichere und gute Skifahrer</Zielgruppe>
     <Kursleiter>Helmut Kleinschmidt</Kursleiter>
     <Kursstatus></Kursstatus>
-    <Beschreibung>Für Sichere und gute Skifahrer, die erste Tiefschnee Erfahrungen jenseits der Piste schon gesammelt haben und nun den Übergang zu richtigen Skitouren lernen oder wieder auffrischen wollen. Kursinhalte: Material/Ausrüstungskunde, Umgang mit LVS,  Lawinenschaufel und Lawinensonde (Basics), Gehtechnik mit Fellen und Steighilfe, Spitzkehre und Spuranlage, Tourenplanung und Vorbereitung (Basics), Interpretation des Lawinenlageberichtes, Risikomanagement, Lawinen Risiko Check (Basics), Routenwahl und Spuranlage im Aufstieg/Abfahrt, Abends: Theorie, Tourennachbesprechung und Planung nächste Tour, Tagsüber: Umsetzen des vermittelten Wissens in die Tourenpraxis</Beschreibung>
+    <Beschreibung>Für Sichere und gute Skifahrer, die erste Tiefschnee Erfahrungen jenseits der Piste schon gesammelt haben und nun den Übergang zu richtigen Skitouren lernen oder wieder auffrischen wollen. Kursinhalte: Material/Ausrüstungskunde, Umgang mit LVS,  Lawinenschaufel und Lawinensonde (Basics), Gehtechnik mit Fellen und Steighilfe, Spitzkehre und Spuranlage, Tourenplanung und Vorbereitung (Basics), Interpretation des Lawinenlageberichtes, Risikomanagement, Lawinen-Risiko-Check (Basics), Routenwahl und Spuranlage im Aufstieg/Abfahrt, Abends: Theorie, Tourennachbesprechung und Planung nächste Tour, Tagsüber: Umsetzen des vermittelten Wissens in die Tourenpraxis</Beschreibung>
     <Voraussetzung>Sicheres Skifahren und sauberer Parallelschwung auf roten und schwarzen Pisten. Kurvenfahren abseits der Piste im Tiefschnee sollte beherrscht werden. Das ist kein Skikurs für Tiefschneefahren! Ausdauer für Anstiege bis 6 Stunden bzw. 800 Höhenmeter mit Skitourenski.</Voraussetzung>
-    <Ausruestung>Komplette Skitourenausrüstung (Tourenskischuhe, Tourenski, Tourenskistöcke, Felle, LVS Gerät, Lawinenschaufel (Alu), Sonde, ABS Rucksack ist empfohlen). Ausrüstung ist eventuell auch leihbar. Informiert euch eigenständig dazu im Internet bzw. Bergsportläden. Weitere Ausrüstungsliste nach Anmeldung per Email und Tipps bei Vortreffen.  </Ausruestung>
+    <Ausruestung>Komplette Skitourenausrüstung (Tourenskischuhe, Tourenski, Tourenskistöcke, Felle, LVS-Gerät, Lawinenschaufel (Alu), Sonde, ABS Rucksack ist empfohlen). Ausrüstung ist eventuell auch leihbar. Informiert euch eigenständig dazu im Internet bzw. Bergsportläden. Weitere Ausrüstungsliste nach Anmeldung per Email und Tipps bei Vortreffen.  </Ausruestung>
     <Besprechung>Die Teilnahme an Vorbesprechung ist für die Teilnahme am Kurs unabdingbar und obligatorisch: Dienstag 19. Januar 2021 um 19:00 Uhr in der Geschäftsstelle des ACB. skitourenalpinclub@gmx.de</Besprechung>
     <Anreise>in eigener Verantwortung</Anreise>
     <Stuetzpunktinfo>Auffahrt vom Lager Walchen (Parkplatz) mit dem Taxi (zur Kostensenkung gemeinsam) bis zur Hütte empfohlen.</Stuetzpunktinfo>
@@ -828,7 +934,7 @@
     <BuchungsArt></BuchungsArt>
     <KundenTyp></KundenTyp>
     <Anlagedatum>09.11.2020</Anlagedatum>
-    <Aenderungsdatum>09.11.2020</Aenderungsdatum>
+    <Aenderungsdatum>16.11.2020</Aenderungsdatum>
     <Kurskosten>90,00</Kurskosten>
     <GeplanteTN>8</GeplanteTN>
     <GebuchteTN>0</GebuchteTN>
@@ -843,6 +949,318 @@
     <Termin1ISO>2021-02-14T16:00:00Z</Termin1ISO>
     <TerminDatumVon1>14.02.2021 16:00</TerminDatumVon1>
     <TerminDatumBis1>19.02.2021 16:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter>1</counter>
+    <Kursnummer>G99001</Kursnummer>
+    <Bezeichnung>Toprope: Klettern und Sichern</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>3 Tage je 3 Std</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, in Berlin</Kategorie>
+    <Leistungen>Kurs, zzgl. Halleneintritte</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa monatlich auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursart>Ausbildung / Einstieg</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Anfänger</Zielgruppe>
+    <Kursleiter>Tom Pfeifer</Kursleiter>
+    <Beschreibung>klettertechnische Grundfertigkeiten, Material, Knoten, Anseilen, Partnercheck, Partnersicherung, Gefahren erkennen und vermeiden, erste Fallübung am Seil  Prüfung zum DAV-Indoorkletterschein Toprope inklusive</Beschreibung>
+    <Voraussetzung>ACB-MitgliederInnen  ohne Klettererfahrung oder mit Boulderkenntnissen.  </Voraussetzung>
+    <Ausruestung>Ausrüstung kann geliehen werden</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>DAV-Kletterschein Toprope</Kursziel>
+    <Treffpunkt>Hüttenweg 43, Berlin-Zehlendorf</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>23.10.2020</Aenderungsdatum>
+    <Kurskosten>36,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Hüttenweg</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter>2</counter>
+    <Kursnummer>G99002</Kursnummer>
+    <Bezeichnung>Vorstieg: Klettern und Sichern</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>3 Tage je 3 Std</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, in Berlin</Kategorie>
+    <Leistungen>Kurs, zzgl. Halleneintritte</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa quartalsweise auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursart>Ausbildung</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Anfänger mit Toprope-Erfahrung</Zielgruppe>
+    <Kursleiter>Tom Pfeifer</Kursleiter>
+    <Beschreibung>Ausrüstungskunde. Sicher Vorstieg sichern, Gefahren erkennen und vermeiden. Zwischensicherungen einhängen. Übungen zum Stürzen und Halten.  Prüfung zum DAV-Indoorkletterschein Vorstieg inklusive</Beschreibung>
+    <Voraussetzung>ACB-MitgliederInnen, die bereits sicher Toprope sichern, im 5. Grad UIAA klettern und sich stabil an der Wand halten können.</Voraussetzung>
+    <Ausruestung>Ausrüstung kann geliehen werden</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>DAV-Kletterschein Vorstieg</Kursziel>
+    <Treffpunkt>Hüttenweg 43, Berlin-Zehlendorf</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>23.10.2020</Aenderungsdatum>
+    <Kurskosten>36,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Hüttenweg</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter>3</counter>
+    <Kursnummer>G99003</Kursnummer>
+    <Bezeichnung>Technische Vorbereitung Felsklettern</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>2 Tage je 3,5 Std</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, in Berlin</Kategorie>
+    <Leistungen>Kurs, zzgl. Halleneintritte</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa quartalsweise auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursart>Ausbildung</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Fortgeschrittene mit Vorstiegserfahrung</Zielgruppe>
+    <Kursleiter>Tom Pfeifer</Kursleiter>
+    <Beschreibung>HMS, Abseilen mit Acht und Tuber, Umbau / Fädeln am großen und kleinen Ring, einfacher Stand, Sichern von oben/ Nachholen, Besonderheiten Vorstieg Fels.  Vorbereitung zum DAV-Outdoorkletterschein</Beschreibung>
+    <Voraussetzung>ACB-MitgliederInnen mit Vorstiegserfahrung (Fortgeschrittene), ggf. weitere Familienmitglieder mit Topropeerfahrung.   Sichern und Klettern im 5. Grad UIAA</Voraussetzung>
+    <Ausruestung>Ausrüstung kann geliehen werden</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>Vorbereitung zum DAV-Kletterschein Outdoor</Kursziel>
+    <Treffpunkt>Hüttenweg 43, Berlin-Zehlendorf</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>27.11.2019</Aenderungsdatum>
+    <Kurskosten>38,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Außenanlage nach Absprache</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter>4</counter>
+    <Kursnummer>G99004</Kursnummer>
+    <Bezeichnung>Sicherungs- und Sturztraining Vorstieg</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>1 Termin zu 3 Std</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, in Berlin</Kategorie>
+    <Leistungen>Kurs, zzgl. Halleneintritte</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa quartalsweise auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursart>Ausbildung</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Fortgeschrittene mit Vorstiegs-Erfahrung</Zielgruppe>
+    <Kursleiter>Tom Pfeifer</Kursleiter>
+    <Beschreibung>Sicherungstraining zum DAV-Indoorkletterschein Vorstieg: Sturztraining, Weiches Sichern, Umgang mit Halbautomaten, Hintergründe und Praxistraining zu verschiedenen Geräten.</Beschreibung>
+    <Voraussetzung>ACB-MitgliederInnen mit Vorstiegserfahrung  Sicherungskenntnisse Vorstieg, Klettern im 5. Grad UIAA</Voraussetzung>
+    <Ausruestung>Ausrüstung kann geliehen werden</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>Sicherungsfertigkeiten erweitern</Kursziel>
+    <Treffpunkt>nach Vereinbarung</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>27.11.2019</Aenderungsdatum>
+    <Kurskosten>19,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Kletterhalle nach Absprache</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter>5</counter>
+    <Kursnummer>G99005</Kursnummer>
+    <Bezeichnung>Schnupperklettern und -bouldern</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>1 Tag 3 Std Erwachsene</Bezeichnung2>
+    <Bezeichnung3>Klettern macht Spaß!</Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Klettern, Bouldern, in Berlin</Kategorie>
+    <Leistungen>Betreuung, Material, Eintritte. Mitglieder 15,-</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa monatlich auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursart>Einstieg</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Nichtmitglieder und Mitglieder (Anfänger)</Zielgruppe>
+    <Kursleiter>Tom Pfeifer</Kursleiter>
+    <Beschreibung>Kennenlernen der Sportarten Klettern (im Toprope) und Bouldern sowie des Vereins. Ihr werdet von erfahrenen Trainern gesichert und erhaltet Informationen zur Kletterausbildung. </Beschreibung>
+    <Voraussetzung>Erwachsene Nichtmitglieder und Mitglieder  ohne Klettererfahrung</Voraussetzung>
+    <Ausruestung>Ausrüstung ist inklusive. Mitbringen: Hallenschuhe mit dünner fester Sohle (keine Joggingschuhe mit weicher Gummiwulst), lange bequeme Hose, Haargummi bei langen Haaren, Imbiss + Wasserflasche </Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel>Kennenlernen der Sportart</Kursziel>
+    <Treffpunkt>Hüttenweg 43, Berlin-Zehlendorf</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>02.12.2019</Anlagedatum>
+    <Aenderungsdatum>09.12.2019</Aenderungsdatum>
+    <Kurskosten>25,00</Kurskosten>
+    <GeplanteTN>6</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>6</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Hüttenweg</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter>6</counter>
+    <Kursnummer>G99020</Kursnummer>
+    <Bezeichnung>Orientierung: Karte, Kompass Höhenmesser.</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>2 Termine zu je 4 Stunden</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Grundlagenkurs, Wandern, in Berlin</Kategorie>
+    <Leistungen>Kurs</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin>etwa quartalsweise auf Anfrage</Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursart>Ausbildung / Einstieg</Kursart>
+    <TrainerURL>https://wanderseite.blog/</TrainerURL>
+    <Zielgruppe>Anfänger</Zielgruppe>
+    <Kursleiter>Lars Reichenberg</Kursleiter>
+    <Beschreibung>zweiteiliger Grundlagenkurs Orientierung mit Karte, Kompass und Höhenmesser, Tag 1 Theoretische Grundlagen mit praktischer Kartenarbeit, Tag 2 Praxisteil im Gelände.   Ziel ist das Beherrschen von Grundlagen der Kartenkunde und der Orientierung im Gelände, Sicherer Umgang mit dem Kompass und dem Höhenmesser.</Beschreibung>
+    <Voraussetzung>keine</Voraussetzung>
+    <Ausruestung>wenn möglich Spiegelkompass mit Deklinationskorrektur und DAV-Planzeiger, Schreibstift, Schreibblock, Bleistift, Radiergummi, Lupe, Stechzirkel, Schreibbrett, eure persönliche Verpflegung, wetterfeste Kleidung und ggf. einen Regenschirm für den zweiten Tag </Ausruestung>
+    <Besprechung>Informationen bei Lars unter 0176 30424413 oder unter wanderseite@gmail.com</Besprechung>
+    <Anreise>selbst</Anreise>
+    <Stuetzpunktinfo>1. Teil Theoretische Grundlagen in der ACB-Geschäftsstelle, Spielhagenstr. 4 in 10585 Berlin. Ggf. bitte klingeln 2. Teil Praxis in der Natur am Sonntag (genauer Ort wird am ersten Termin bekanntgegeben, höchstwahrscheinlich nahe S-Bhf. Heerstr. oder S-Bhf. Grunewald) </Stuetzpunktinfo>
+    <Kursziel>Orientierung vom Flachland bis zum alpinen Gelände</Kursziel>
+    <Treffpunkt>1. Tag Geschäftsstelle, Spielhagenstr. 4</Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>22.10.2018</Anlagedatum>
+    <Aenderungsdatum>05.11.2018</Aenderungsdatum>
+    <Kurskosten>15,00</Kurskosten>
+    <GeplanteTN>8</GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze>8</FreiePlaetze>
+    <Warteliste>0</Warteliste>
+    <StornoOffen>0</StornoOffen>
+    <StornoErledigt>0</StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag>0,00</Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Spielhagenstraße</Ort1>
+    <Termin1ISO>2099-01-01T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1>01.01.2099 00:00</TerminDatumBis1>
     <Ort2></Ort2>
     <TerminDatumVon2></TerminDatumVon2>
     <TerminDatumBis2></TerminDatumBis2>
