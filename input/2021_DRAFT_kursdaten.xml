@@ -1271,9 +1271,9 @@
 <kurs>
     <counter></counter>
     <Kursnummer></Kursnummer>
-    <Bezeichnung></Bezeichnung>
+    <Bezeichnung>3. Jungendvollversammlung</Bezeichnung>
     <Anzahlung></Anzahlung>
-    <Bezeichnung2></Bezeichnung2>
+    <Bezeichnung2>Das Datum gilt vorbehaltlich etwaiger Einschränkungen zum angegebenen Zeitpunkt. Checkt regelmäßig die Homepage für Updates.</Bezeichnung2>
     <Bezeichnung3></Bezeichnung3>
     <Kategorie>Jugend</Kategorie>
     <Leistungen></Leistungen>
@@ -1281,10 +1281,10 @@
     <Kurstermin></Kurstermin>
     <Abfahrt></Abfahrt>
     <Anmeldeschluss></Anmeldeschluss>
-    <Kursart>Jugend</Kursart>
+    <Kursart>Gemeinschaftsfahrt / Jugend</Kursart>
     <TrainerURL></TrainerURL>
-    <Zielgruppe></Zielgruppe>
-    <Kursleiter></Kursleiter>
+    <Zielgruppe>Kinder und Jugendliche des ACB, JuRef, Jugendleiter- und HelferInnen</Zielgruppe>
+    <Kursleiter>Louise Zepter, Margarete Zepter</Kursleiter>
     <Kursstatus></Kursstatus>
     <Beschreibung></Beschreibung>
     <Voraussetzung></Voraussetzung>
@@ -1310,10 +1310,170 @@
     <Versicherung></Versicherung>
     <Versicherungsbetrag></Versicherungsbetrag>
     <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Kletterhalle Hüttenweg</Ort1>
+    <Termin1ISO>2020-05-24T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1>24.05.2021 00:00</TerminDatumVon1>
+    <TerminDatumBis1>25.05.2021 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter></counter>
+    <Kursnummer></Kursnummer>
+    <Bezeichnung>Boofenfahrt
+</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>evtl. mit den Sektionen aus Dresden und Jena.</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Jugend</Kategorie>
+    <Leistungen>Orga, zzgl. V, AR/FG</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin></Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursart>Jugend</Kursart>
+    <TrainerURL>https://www.alpinclub-berlin.de/jugend/team/122-florian-schaefer</TrainerURL>
+    <Zielgruppe>Kinder und Jugendliche des ACB</Zielgruppe>
+    <Kursleiter>Florian Förster</Kursleiter>
+    <Kursstatus></Kursstatus>
+    <Beschreibung></Beschreibung>
+    <Voraussetzung></Voraussetzung>
+    <Ausruestung></Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise></Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel></Kursziel>
+    <Treffpunkt></Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>19.11.2020</Anlagedatum>
+    <Aenderungsdatum>20.11.2020</Aenderungsdatum>
+    <Kurskosten></Kurskosten>
+    <GeplanteTN></GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze></FreiePlaetze>
+    <Warteliste></Warteliste>
+    <StornoOffen></StornoOffen>
+    <StornoErledigt></StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag></Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Sächsische Schweiz</Ort1>
+    <Termin1ISO>2021-05-13T00:00:00Z</Termin1ISO>
+    <TerminDatumVon1>13.05.2021 00:00</TerminDatumVon1>
+    <TerminDatumBis1>16.05.2021 00:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter></counter>
+    <Kursnummer></Kursnummer>
+    <Bezeichnung>Kletterreise mit Vorkenntnissen</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2></Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Jugend</Kategorie>
+    <Leistungen>Orga, zzgl. V, AR/FG</Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin></Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursart>Jugend</Kursart>
+    <TrainerURL>https://www.alpinclub-berlin.de/jugend/team/130-margarete-zepter</TrainerURL>
+    <Zielgruppe>Kinder und Jugendliche des ACB</Zielgruppe>
+    <Kursleiter>Margarete Zepter</Kursleiter>
+    <Kursstatus></Kursstatus>
+    <Beschreibung>Diese Reise geht in die Berge. Draußen Klettern und Wandern ist also Programm. Vergangene Reisen gingen zB. zur Blaueishütte. Meldet Euch falls ihr Lust auf etwas bestimmtes habt. Den Zeitraum stimmen wir noch ab, aber es wird sicher eine Woche in den Sommerferien</Beschreibung>
+    <Voraussetzung>Erfahrung im Topropesichern und -klettern</Voraussetzung>
+    <Ausruestung>Kletterausrüstung soweit vorhanden</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise></Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel></Kursziel>
+    <Treffpunkt></Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>19.11.2020</Anlagedatum>
+    <Aenderungsdatum>20.11.2020</Aenderungsdatum>
+    <Kurskosten></Kurskosten>
+    <GeplanteTN></GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze></FreiePlaetze>
+    <Warteliste></Warteliste>
+    <StornoOffen></StornoOffen>
+    <StornoErledigt></StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag></Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
     <Ort1></Ort1>
+    <Termin1ISO></Termin1ISO>
+    <TerminDatumVon1></TerminDatumVon1>
+    <TerminDatumBis1></TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
+<kurs>
+    <counter></counter>
+    <Kursnummer></Kursnummer>
+    <Bezeichnung>Kinder-Jugend-Familien-Sommerfest.</Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2>Termin erst mal nur vorläufig</Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Jugend</Kategorie>
+    <Leistungen></Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin></Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursart>Jugend</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe>Kinder und Jugendliche des ACB, Eltern und Geschwister</Zielgruppe>
+    <Kursleiter>Margarete Zepter, Louise Zepter</Kursleiter>
+    <Kursstatus></Kursstatus>
+    <Beschreibung>Wir freuen uns dieses Jahr wieder auf Mitbringbuffet, Slacken, Klettern, Spielen und noch mehr. Einzelheiten zum genauen Termin, dem Veranstaltungsort und -ablauf findet ihr kurzfristig auf alpinclub-berlin.de unter Jugend</Beschreibung>
+    <Voraussetzung></Voraussetzung>
+    <Ausruestung>Kletterausrüstung, falls verfügbar</Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise></Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel></Kursziel>
+    <Treffpunkt></Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>19.11.2020</Anlagedatum>
+    <Aenderungsdatum>20.11.2020</Aenderungsdatum>
+    <Kurskosten></Kurskosten>
+    <GeplanteTN></GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze></FreiePlaetze>
+    <Warteliste></Warteliste>
+    <StornoOffen></StornoOffen>
+    <StornoErledigt></StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag></Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1>Je nach Wetter: Kletterturm Spandau oder Kletterhalle Hüttenweg</Ort1>
     <Termin1ISO>2021-07-23T16:00:00Z</Termin1ISO>
-    <TerminDatumVon1>23.07.2021 16:00</TerminDatumVon1>
-    <TerminDatumBis1>29.07.2021 16:00</TerminDatumBis1>
+    <TerminDatumVon1>14.08.2021 10:00</TerminDatumVon1>
+    <TerminDatumBis1>14.08.2021 16:00</TerminDatumBis1>
     <Ort2></Ort2>
     <TerminDatumVon2></TerminDatumVon2>
     <TerminDatumBis2></TerminDatumBis2>
