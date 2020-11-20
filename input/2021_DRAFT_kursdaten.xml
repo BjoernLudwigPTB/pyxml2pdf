@@ -1268,4 +1268,57 @@
     <TerminDatumVon3></TerminDatumVon3>
     <TerminDatumBis3></TerminDatumBis3>
 </kurs>
+<kurs>
+    <counter></counter>
+    <Kursnummer></Kursnummer>
+    <Bezeichnung></Bezeichnung>
+    <Anzahlung></Anzahlung>
+    <Bezeichnung2></Bezeichnung2>
+    <Bezeichnung3></Bezeichnung3>
+    <Kategorie>Jugend</Kategorie>
+    <Leistungen></Leistungen>
+    <Kostenstelle></Kostenstelle>
+    <Kurstermin></Kurstermin>
+    <Abfahrt></Abfahrt>
+    <Anmeldeschluss></Anmeldeschluss>
+    <Kursart>Jugend</Kursart>
+    <TrainerURL></TrainerURL>
+    <Zielgruppe></Zielgruppe>
+    <Kursleiter></Kursleiter>
+    <Kursstatus></Kursstatus>
+    <Beschreibung></Beschreibung>
+    <Voraussetzung></Voraussetzung>
+    <Ausruestung></Ausruestung>
+    <Besprechung></Besprechung>
+    <Anreise></Anreise>
+    <Stuetzpunktinfo></Stuetzpunktinfo>
+    <Kursziel></Kursziel>
+    <Treffpunkt></Treffpunkt>
+    <Bemerkungen></Bemerkungen>
+    <Tourbewertung></Tourbewertung>
+    <BuchungsArt></BuchungsArt>
+    <KundenTyp></KundenTyp>
+    <Anlagedatum>19.11.2020</Anlagedatum>
+    <Aenderungsdatum>20.11.2020</Aenderungsdatum>
+    <Kurskosten></Kurskosten>
+    <GeplanteTN></GeplanteTN>
+    <GebuchteTN>0</GebuchteTN>
+    <FreiePlaetze></FreiePlaetze>
+    <Warteliste></Warteliste>
+    <StornoOffen></StornoOffen>
+    <StornoErledigt></StornoErledigt>
+    <Versicherung></Versicherung>
+    <Versicherungsbetrag></Versicherungsbetrag>
+    <Versicherungsdatum></Versicherungsdatum>
+    <Ort1></Ort1>
+    <Termin1ISO>2021-07-23T16:00:00Z</Termin1ISO>
+    <TerminDatumVon1>23.07.2021 16:00</TerminDatumVon1>
+    <TerminDatumBis1>29.07.2021 16:00</TerminDatumBis1>
+    <Ort2></Ort2>
+    <TerminDatumVon2></TerminDatumVon2>
+    <TerminDatumBis2></TerminDatumBis2>
+    <Ort3></Ort3>
+    <TerminDatumVon3></TerminDatumVon3>
+    <TerminDatumBis3></TerminDatumBis3>
+</kurs>
 </kursexport>
