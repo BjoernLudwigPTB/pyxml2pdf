@@ -36,6 +36,11 @@ class TableBuilder:
             ["Wandern"],
         ]
         mountainbiken = ["Mountainbiken", ["Mountainbiken"], ["Mountainbiken"]]
+        ausbildung = [
+            "Ausbildung, Wandern und Klettern in Berlin",
+            ["in Berlin"],
+            ["Grundlagenkurs", "Wandern", "Klettern"],
+        ]
         bergsteigen = [
             "Ski, Bergsteigen, Hochtouren und Klettern im Hochgebirge",
             ["Hochgebirge"],
@@ -48,6 +53,7 @@ class TableBuilder:
             wandern,
             mountainbiken,
             familie,
+            ausbildung,
             bergsteigen,
             jugend,
             klettern,
