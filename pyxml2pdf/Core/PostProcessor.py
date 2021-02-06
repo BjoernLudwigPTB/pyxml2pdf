@@ -12,14 +12,14 @@ class PostProcessor:
     :param str path:  path to the PDF file which shall be processed
     """
 
-    _path: str
-    _directory: str
-    _name: str
+    _full_output_path_: str
+    _output_directory_name: str
+    _output_base_filename: str
 
     def __init__(self, path):
-        self._path = path
-        self._directory = os.path.dirname(path)
-        self._name = os.path.splitext(os.path.basename(path))[0]
+        self._full_output_path_ = path
+        self._output_directory_name = os.path.dirname(path)
+        self._output_base_filename = os.path.splitext(os.path.basename(path))[0]
 
     def finalize_print_preparation(self):
         """Take the resulting multi page PDF and split into rotated single pages
@@ -30,16 +30,25 @@ class PostProcessor:
         <https://www.johndcook.com/blog/2015/05/01/rotating-pdf-pages-with-python/>`_
         """
 
-        pdf: PdfFileReader = PdfFileReader(self._path)
+        pdf: PdfFileReader = PdfFileReader(self._full_output_path_)
         for page_number in range(pdf.getNumPages()):
             pdf_writer: PdfFileWriter = PdfFileWriter()
             page: PageObject = pdf.getPage(page_number)
             page.rotateCounterClockwise(90)
             pdf_writer.addPage(page)
-            output_filename: str = "%s_seite_%02d.pdf" % (self._name, page_number + 1)
+            output_filename: str = (
+                f"{self._output_base_filename}_seite_"
+                f"{str(page_number + 1).zfill(2)}.pdf"
+            )
 
-            pdf_out = open(os.path.join(self._directory, output_filename), "wb")
+            pdf_out = open(
+                os.path.join(self._output_directory_name, output_filename), "wb"
+            )
             pdf_writer.write(pdf_out)
             pdf_out.close()
 
-        print("Create ", pdf.getNumPages(), " single paged PDFs.")
+        print(
+            f"Create {pdf.getNumPages()} single paged PDFs.\n\n"
+            f"You can find them concatenated at file://"
+            f"{os.path.dirname(os.path.realpath(__file__))[:os.path.dirname(os.path.realpath(__file__)).rfind('pyxml2pdf')] + self._full_output_path_}"
+        )
