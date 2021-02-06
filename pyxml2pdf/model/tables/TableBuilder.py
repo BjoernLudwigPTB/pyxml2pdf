@@ -54,16 +54,18 @@ class TableBuilder:
             ],
         ]
         familie = ["Veranstaltungen für Familien", ["Familie"], ["Familie"]]
-        jugend = ["Jugendgruppen und -events", ["Jugend"], ["Jugend"]]
+        jugend = ["Jugendevents", ["Jugend"], ["Jugend"]]
 
+        # At this location we specify the order of appearance in the table. Thus this
+        # is the place to adjust for reducing the whitespace at the end of the tables.
         return [
             bergsteigen,
             jugend,
-            ausbildung,
-            wandern,
             mountainbiken,
-            klettern,
+            wandern,
             familie,
+            klettern,
+            ausbildung,
         ]
 
     def create_subtables(self) -> List[EventTable]:
