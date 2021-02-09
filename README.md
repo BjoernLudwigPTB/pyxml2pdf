@@ -29,15 +29,13 @@ The intended way of using this software is calling
 [_MainPredefined.py_](pyxml2pdf/main.py) with the following command line parameters
 
 1. The URL to download XML file from if it is not present at the specified location.
-1. The file path to store and open the XML file locally.
+1. The file path to store (or open if it exists) the XML file locally.
 1. The file path to store the created PDF to.
-1. The file path to the properties file, which contains the settings for the table to
-   be created.
    
 A call thus could look like:
 
 ```shell
-$ python pyxml2pdf/Main.py https://www.alpinclub-berlin.de/kv/DRAFT_kursdaten.xml input/2021_DRAFT_kursdaten.xml output/DRAFT_kursdaten.pdf input/kursdaten_prop.properties
+$ python pyxml2pdf/main.py https://www.alpinclub-berlin.de/kv/kursdaten.xml input/2021_02_kursdaten.xml output/2021_02_kursdaten.pdf
 ```
 
 ## Documentation
