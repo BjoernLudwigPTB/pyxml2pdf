@@ -26,13 +26,13 @@ def test_init_main():
 
 @pytest.mark.online
 def test_validate_main():
-    with pytest.raises(RuntimeError):
-        main.validate()
+    with pytest.raises(ValueError):
+        main.validate_inputs()
 
 
 @pytest.mark.online
 def test_input():
-    with pytest.raises(RuntimeError):
+    with pytest.raises(SystemExit):
         main.main()
 
 

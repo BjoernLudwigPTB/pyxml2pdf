@@ -5,6 +5,5 @@ from pyxml2pdf.core.parser import Parser
 
 def test_collect_xml_data_empty_call():
     """Parser should warm us if data will not be printed, because it lacks content"""
-    parser = Parser()
-    with pytest.warns(RuntimeWarning):
-        parser.collect_xml_data(events=None)
+    with pytest.raises(TypeError):
+        Parser()
