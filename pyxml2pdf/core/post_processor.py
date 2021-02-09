@@ -1,6 +1,6 @@
 import os
 
-from PyPDF2.pdf import PageObject, PdfFileReader, PdfFileWriter
+from PyPDF2.pdf import PageObject, PdfFileReader, PdfFileWriter  # type: ignore
 
 
 class PostProcessor:

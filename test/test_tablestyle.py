@@ -1,6 +1,6 @@
 import pytest
-from reportlab.lib.colors import Color
-from reportlab.lib.styles import StyleSheet1
+from reportlab.lib.colors import Color  # type: ignore
+from reportlab.lib.styles import StyleSheet1  # type: ignore
 
 from pyxml2pdf.styles.table_styles import TableStyle
 

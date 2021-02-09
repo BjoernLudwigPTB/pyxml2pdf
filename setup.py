@@ -3,7 +3,7 @@
 
 import os
 
-from setuptools import find_packages, setup
+from setuptools import find_packages, setup  # type: ignore
 
 # Get release version from pyxml2pdf/__init__.py.
 from pyxml2pdf import __version__ as version

@@ -1,6 +1,6 @@
 from typing import List
 
-from reportlab.platypus import Table
+from reportlab.platypus import Table  # type:ignore
 
 
 class EventTable:

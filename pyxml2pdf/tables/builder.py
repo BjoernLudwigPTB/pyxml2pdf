@@ -1,9 +1,9 @@
 import warnings
 from typing import List, Optional, Tuple, Union
 
-from reportlab.platypus import Flowable, Paragraph, Table
+from reportlab.platypus import Flowable, Paragraph, Table  # type: ignore
 
-from input.properties import columns, subtables
+from input.properties import columns, subtables  # type: ignore
 from pyxml2pdf.styles.table_styles import TableStyle
 from pyxml2pdf.tables.tables import EventTable
 

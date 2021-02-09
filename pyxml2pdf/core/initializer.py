@@ -1,9 +1,9 @@
 from typing import List
 
-from defusedxml.ElementTree import parse
-from reportlab.lib.pagesizes import mm
-from reportlab.platypus import SimpleDocTemplate
-from reportlab.platypus.flowables import KeepTogether
+from defusedxml.ElementTree import parse  # type: ignore
+from reportlab.lib.pagesizes import mm  # type: ignore
+from reportlab.platypus import SimpleDocTemplate  # type: ignore
+from reportlab.platypus.flowables import KeepTogether  # type: ignore
 
 from pyxml2pdf.core.parser import Parser
 from pyxml2pdf.core.post_processor import PostProcessor

@@ -1,9 +1,9 @@
 """A wrapper :py:class:`pyxml2pdf.core.events.Event` for xml extracted data"""
 import re
-from typing import List
+from typing import cast, List
 from xml.etree.ElementTree import Element
 
-from reportlab.platypus import Paragraph, Table
+from reportlab.platypus import Paragraph, Table  # type: ignore
 
 from pyxml2pdf.styles.table_styles import TableStyle
 from pyxml2pdf.tables.builder import TableBuilder
@@ -135,7 +135,11 @@ class Event(Element):
         :returns: concatenated, separated texts of all tags for the current event
         """
         return separator.join(
-            [self.findtext(tag) for tag in event_subelements if self.findtext(tag)]
+            [
+                cast(str, self.findtext(tag))
+                for tag in event_subelements
+                if self.findtext(tag)
+            ]
         )
 
     def _init_full_row(self) -> List[EventParagraph]:

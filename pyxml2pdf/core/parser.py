@@ -3,9 +3,9 @@
 __all__ = ["Parser"]
 
 import warnings
-from typing import List, Optional
+from typing import List
 
-from reportlab.platypus.flowables import KeepTogether
+from reportlab.platypus.flowables import KeepTogether  # type: ignore
 
 from pyxml2pdf.core.events import Event
 from pyxml2pdf.tables.builder import TableBuilder
@@ -20,7 +20,7 @@ class Parser:
     _elements: List[KeepTogether]
     _table_manager: TableBuilder
 
-    def __init__(self, elements: Optional[List[KeepTogether]] = []):
+    def __init__(self, elements: List[KeepTogether]):
         self._elements = elements
         self._table_manager = TableBuilder()
 

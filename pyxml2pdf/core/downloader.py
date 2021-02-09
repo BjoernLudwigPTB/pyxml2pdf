@@ -1,5 +1,5 @@
 import requests
-from clint.textui import progress
+from clint.textui import progress  # type: ignore
 
 
 class Downloader:

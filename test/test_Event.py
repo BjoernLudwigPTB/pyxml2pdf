@@ -6,7 +6,7 @@ from xml.etree.ElementTree import Element
 import pytest
 from hypothesis import given
 from hypothesis.strategies import dates, text
-from reportlab.platypus.tables import Table
+from reportlab.platypus.tables import Table  # type: ignore
 
 from pyxml2pdf.core.events import Event
 from pyxml2pdf.styles.table_styles import TableStyle

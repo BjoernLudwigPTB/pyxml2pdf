@@ -1,13 +1,16 @@
 from pathlib import PurePath
 from typing import Dict, List, Tuple, Union
 
-from reportlab.lib import colors
-from reportlab.lib.pagesizes import mm
-from reportlab.lib.styles import getSampleStyleSheet, StyleSheet1
-from reportlab.pdfbase.pdfmetrics import registerFont, registerFontFamily
-from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib import colors  # type: ignore
+from reportlab.lib.pagesizes import mm  # type: ignore
+from reportlab.lib.styles import getSampleStyleSheet, StyleSheet1  # type: ignore
+from reportlab.pdfbase.pdfmetrics import (
+    registerFont,
+    registerFontFamily,  # type: ignore
+)
+from reportlab.pdfbase.ttfonts import TTFont  # type: ignore
 
-from input.properties import columns, font, fontsize
+from input.properties import columns, font, fontsize  # type: ignore
 from .cell_formattings import CellFormattingCommands
 
 
