@@ -126,8 +126,9 @@ class Event(Element):
         Form a string of the content for all desired event children tags by
         concatenating them together with a separator. This is especially necessary,
         since :py:mod:`reportlab.platypus.Paragraph` cannot handle `None`s as texts but
-        handles as well the concatenation of XML tags' content, if `event_tags` has more
-        than one element.
+        handles as well the concatenation of XML tags' content, if `event_subelements`
+        has more than one element. So we ensure the result to be at least an empty
+        string.
 
         :param event_subelements: list of all tags for which the
             descriptive texts is wanted, even if it is just one
@@ -149,9 +150,10 @@ class Event(Element):
         into a nicely formatted row of a table.
 
         :return: the common starting columns of any table representation
+        :rtype: List[EventParagraph]
         """
         table_columns = [
-            self.EventParagraph(self._concatenate_tags_content(["Kursart"])),
+            self.EventParagraph(self._build_type()),
             self.EventParagraph(self._date),
             self.EventParagraph(self._concatenate_tags_content(["Ort1"])),
             self.EventParagraph(self._responsible),
@@ -212,7 +214,9 @@ class Event(Element):
         return new_date
 
     @staticmethod
-    def _parse_prerequisites(personal, material, financial, offers):
+    def _parse_prerequisites(
+        personal: str, material: str, financial: str, offers: str
+    ) -> str:
         """
         Determine all prerequisites and assemble a string accordingly.
 
@@ -241,7 +245,7 @@ class Event(Element):
             ]
         )
 
-    def _build_description(self, link=""):
+    def _build_description(self, link: str = "") -> str:
         """Build the description for the event
 
         This covers all cases with empty texts in some of the according children tags
@@ -268,6 +272,19 @@ class Event(Element):
             )
 
         return full_description
+
+    def _build_type(self) -> str:
+        """Build the type for the event
+
+        This assembles the type of the event from the different kinds.
+
+        :returns: the entry in the type column of the event
+        :rtype: str
+        """
+        types = self._concatenate_tags_content(["Kursart"])
+        types = types.replace("Gemeinschaftsfahrt", "Eigenverant- wortlich")
+
+        return types
 
     @create_reduced_after_full
     def get_full_row(self, subtable_title: str = None) -> Table:

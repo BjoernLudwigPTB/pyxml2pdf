@@ -6,3 +6,4 @@ pytest
 pytest-cov
 mock
 hypothesis
+black

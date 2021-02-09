@@ -62,7 +62,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "pyxml2pdf"
-copyright = "2019, Björn Ludwig"
+copyright = "2020, Björn Ludwig"
 author = "Björn Ludwig, Wojciech Kur"
 
 # The version info for the project you're documenting, acts as replacement for

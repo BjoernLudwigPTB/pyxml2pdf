@@ -17,7 +17,7 @@ class TableBuilder:
     def create_subtables(self):
         """Create subtables for all different kinds of events
 
-        :return list[EventTable]: a list of all subtables
+        :return List[EventTable]: a list of all subtables
         """
         subtables_list = []
         for subtable in subtables:
@@ -28,8 +28,8 @@ class TableBuilder:
             subtables_list.append(subtable_table)
         return subtables_list
 
-    def make_header(self, title):
-        """ Build the first two rows of a subtable
+    def make_header(self, title: str) -> List[Table]:
+        """Build the first two rows of a subtable
 
         Build the first two rows of a subtable with its title and column headings taken
         from the properties file.
@@ -89,8 +89,9 @@ class TableBuilder:
                 + "'s event on "
                 + event.date
                 + " would not be printed, because it does not contain a valid"
-                " combination of locations and activities. Either add a valid location"
-                " or add a valid activity or both.",
+                " combination of locations and activities. Currently it contains "
+                + str(event.categories)
+                + ". Either add a valid location or add a valid activity or both.",
                 RuntimeWarning,
             )
 
@@ -107,9 +108,11 @@ class TableBuilder:
 
         :param cells: cells wrapped by a list representing the columns wrapped by a
             list representing the lines
-        :param widths: the column widths
-        :param style: desired table's style
-        :returns: table containing specified cells in fixed width, styled columns
+        :param widths: Optional column widths. The default results in reasonable
+            settings based on experience.
+        :param style: Optional table's style. The default results in reasonable
+            settings based on experience.
+        :returns: A table containing specified cells in fixed width, styled columns.
         """
         if widths is None:
             widths = self._table_style.column_widths
