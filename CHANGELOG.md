@@ -1,0 +1,29 @@
+# Changelog
+
+<!--next-version-placeholder-->
+
+## v0.1.0 (2021-02-09)
+### Feature
+* **EventTable:** Introduce extend method for `EventTable.py` und use it in `TableBuilder.py` ([`f205071`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/f2050712137bb0d4011895e517e6b2158c91ed8e))
+* **properties:** Parse and process fonts from `properties.py` ([`07edc8a`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/07edc8a94e7126963dba395150e3d160455493a5))
+
+### Documentation
+* **README:** Improve documentation of commandline parameters ([`86d1734`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/86d1734f9b77e01c1a63797147d96b0b115aebca))
+* **readthedocs:** Refine code block in docstring of `table_styles.py::custom_styles()` ([`4ea2e62`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/4ea2e62b4121c6378ffad3262ccabf73e234541c))
+* **readthedocs:** Refine code block in docstring of `table_styles.py::custom_styles()` ([`e931524`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/e931524bd4dc8cc6f4c4579266da8a14174b331c))
+* **readthedocs:** Refine code block in docstring of `table_styles.py::custom_styles()` ([`c7d900e`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/c7d900e9cf74ff17a5f35d63d1a54fa5d1306ce1))
+* **readthedocs:** Repair code block in docstring of `table_styles.py::custom_styles()` ([`1aac9ad`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/1aac9ad15d3517f338a5f60de95ebeeb9bf45da3))
+* **readthedocs:** Improve code block in docstring of `table_styles.py::custom_styles()` ([`f39a82b`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/f39a82bd078036cb5bc5182318ab077ca491cd2d))
+* **readthedocs:** Improve docstrings of `table_styles.py::custom_styles()` ([`0c4fbc2`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/0c4fbc2f246f0d9b7686383cefe3ad872dd5b9e8))
+* **readthedocs:** Improve docstrings of `post_processor.py` and `table_styles.py` ([`25a2774`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/25a277437164b7e5bee7424470cffd0b43645c66))
+* **readthedocs:** Improve docstrings of `events.py::Event.get_table_row()` ([`3862d53`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/3862d534c6e7f576673def2dde5ed02657b19322))
+* **readthedocs:** Improve docstrings of `events.py`, `parser.py` and `table_styles.py` ([`79068eb`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/79068eb6ed5a56c4c16ee40c9d0fd39fbedba817))
+* **readthedocs:** Improve docstrings of `events.py::Event` ([`6031852`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/60318528832080789990260c2554e5b3fa3f2e11))
+* **Event:** Refine docstring of `events.py::Event.get_full_row` ([`30d5daa`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/30d5daa6d659b142243e24763e5f23e0a4091e22))
+* **Event:** Refine docstring of `events.py::Event._init_reduced_row()` ([`dd76c10`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/dd76c104cba6514d451d2b982415c5c25bda5e04))
+* **readthedocs:** Reinsert sphinx docs for all packages and modules ([`860282c`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/860282c50b5423dc4a0a3a26516cdaa266b848b6))
+* **readthedocs:** Remove hint about end of 2019 from ReadTheDocs ([`5843554`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/5843554bfa8732302b05ac564974f2da8cd52933))
+* **readme:** Include hint on scheduled Heroku deployment into `README.md` ([`287ee95`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/287ee958bb53d46f819c6a7406099c528f6325dd))
+* **readme:** Correct s typo in the `README.md` ([`d42106c`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/d42106c7c2698f5966fa60975d722f8e61bc5ca6))
+* **readme:** Introduce new badges to `README.md` with release number and compatible Python versions ([`78dd7b4`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/78dd7b4c0c543ae42c10594d3a6d923099da7c67))
+* **setup:** Specify Python versions as classifiers in `setup.py` to make them more visible ([`e71b768`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/e71b7687781a29ef1c604eccd5804cc269a9cedc))
