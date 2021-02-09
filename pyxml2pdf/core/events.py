@@ -98,7 +98,7 @@ class Event(Element):
             subtable's title
 
             This ensures, that after handing over the full information, the reduced
-            version with a reference to the subtable containing the  full version is
+            version with a reference to the subtable containing the full version is
             created.
 
             .. note:: This is ensured by a decorator, which is why the function
@@ -168,14 +168,14 @@ class Event(Element):
         return table_columns[:4]
 
     @staticmethod
-    def _remove_century(matchobj):
+    def _remove_century(four_digit_year):
         """Remove the first two digits of the string representing the year
 
-        :param typing.Match matchobj: the result of :py:meth:`re.sub`
+        :param typing.Match four_digit_year: the result of :py:meth:`re.sub`
         :return: the last two digits of the string representing the year
         :rtype: str
         """
-        return matchobj.group(0)[2:]
+        return four_digit_year.group(0)[2:]
 
     def _init_date(self):
         """Create a properly formatted string containing the date of the event"""
