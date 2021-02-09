@@ -1,6 +1,6 @@
 from typing import List
 
-from reportlab.platypus import Table
+from reportlab.platypus import Table  # type:ignore
 
 
 class EventTable:
@@ -27,9 +27,18 @@ class EventTable:
         self.locations = locations
         self.activities = activities
 
-    def append(self, event):
+    def append(self, event: Table):
         """Append an event to the end of the table
 
-        :param reportlab.platypus.Table event:
+        :param event: a single event that should be
+            appended to the table's list of events
         """
         self.events.append(event)
+
+    def extend(self, event_list):
+        """Append a a list of events to the end of the table
+
+        :param event_list: a list of events that should be appended to the table's
+            list of events
+        """
+        self.events.extend(event_list)

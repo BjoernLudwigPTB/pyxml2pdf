@@ -1,13 +1,13 @@
 from typing import List
 
-from defusedxml.ElementTree import parse
-from reportlab.lib.pagesizes import mm
-from reportlab.platypus import SimpleDocTemplate
-from reportlab.platypus.flowables import KeepTogether
+from defusedxml.ElementTree import parse  # type: ignore
+from reportlab.lib.pagesizes import mm  # type: ignore
+from reportlab.platypus import SimpleDocTemplate  # type: ignore
+from reportlab.platypus.flowables import KeepTogether  # type: ignore
 
-from pyxml2pdf.Core.Parser import Parser
-from pyxml2pdf.Core.PostProcessor import PostProcessor
-from pyxml2pdf.Core.Sorter import Sorter
+from pyxml2pdf.core.parser import Parser
+from pyxml2pdf.core.post_processor import PostProcessor
+from pyxml2pdf.core.sorter import Sorter
 
 
 class Initializer:
@@ -15,14 +15,13 @@ class Initializer:
 
     :param str input_path: path to input xml-file
     :param str output_path: path to pdf file containing result
-    :param str properties_path: path to text file containing properties
     """
 
     __data: List[KeepTogether]
 
-    def __init__(self, input_path, output_path, properties_path):
+    def __init__(self, input_path, output_path):
         self.__data = []
-        parser = Parser(properties_path, self.__data)
+        parser = Parser(self.__data)
         pdf = SimpleDocTemplate(
             output_path,
             pagesize=(178 * mm, 134 * mm),

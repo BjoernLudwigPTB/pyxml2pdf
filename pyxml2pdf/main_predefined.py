@@ -1,5 +1,5 @@
-from pyxml2pdf.Core.Downloader import Downloader
-from pyxml2pdf.Core.Initializer import Initializer
+from pyxml2pdf.core.downloader import Downloader
+from pyxml2pdf.core.initializer import Initializer
 
 
 def convert():
@@ -9,13 +9,11 @@ def convert():
     xml_path = input_folder + xml_filename
     url = domain + xml_filename
     input_path = input_folder + xml_filename
-    properties_filename = "kursdaten_prop.properties"
-    properties_path = input_folder + properties_filename
     output_folder = "output/"
     output_filename = "2021_DRAFT_kursdaten.pdf"
     output_path = output_folder + output_filename
     Downloader(url, xml_path)
-    Initializer(input_path, output_path, properties_path)
+    Initializer(input_path, output_path)
     print("\n-------------------------------DONE-------------------------------")
 
 

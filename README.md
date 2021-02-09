@@ -20,13 +20,13 @@ the deployment on [Heroku](https://www.heroku.com).
 ## Getting started 
 
 As a starting point you could take a look at the execution of
-[MainPredefined.py](pyxml2pdf/MainPredefined.py) which will download a publicly
+[MainPredefined.py](pyxml2pdf/main_predefined.py) which will download a publicly
 available XML file into the folder *input* and process it as desired to produce the
 output files (one file containing all generated pages in landscape and additionally
 one file per page rotated into portrait) and place them in the subfolder *output*.
 
 The intended way of using this software is calling
-[_MainPredefined.py_](pyxml2pdf/Main.py) with the following command line parameters
+[_MainPredefined.py_](pyxml2pdf/main.py) with the following command line parameters
 
 1. The URL to download XML file from if it is not present at the specified location.
 1. The file path to store and open the XML file locally.

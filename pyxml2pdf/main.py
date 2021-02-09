@@ -2,8 +2,8 @@ import argparse
 import os
 import sys
 
-from pyxml2pdf.Core.Downloader import Downloader
-from pyxml2pdf.Core.Initializer import Initializer
+from pyxml2pdf.core.downloader import Downloader
+from pyxml2pdf.core.initializer import Initializer
 
 
 def _add_arguments():
@@ -49,7 +49,7 @@ def main():
     validate_inputs()
     if not os.path.isfile(sys.argv[2]):
         Downloader(*sys.argv[1:3])
-    Initializer(*sys.argv[2:])
+    Initializer(*sys.argv[2:4])
     print("\n-------------------------------DONE-------------------------------")
 
 

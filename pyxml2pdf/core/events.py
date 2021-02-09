@@ -1,12 +1,12 @@
-"""Module to provide a wrapper :py:class:`Core.events.Event` for xml extracted data"""
+"""A wrapper :py:class:`pyxml2pdf.core.events.Event` for xml extracted data"""
 import re
-from typing import List, Match
+from typing import cast, List
 from xml.etree.ElementTree import Element
 
-from reportlab.platypus import Paragraph, Table
+from reportlab.platypus import Paragraph, Table  # type: ignore
 
-from pyxml2pdf.model.tables.TableBuilder import TableBuilder
-from pyxml2pdf.PdfVisualisation.TableStyle import TableStyle
+from pyxml2pdf.styles.table_styles import TableStyle
+from pyxml2pdf.tables.builder import TableBuilder
 
 __all__ = ["Event"]
 
@@ -16,8 +16,9 @@ class Event(Element):
 
     :py:class:`xml.etree.ElementTree.Element` is augmented with the table row
     representation and the attributes and methods to manipulate everything
-    according to the final tables needs. A :py:class:`Core.events.Event` can only
-    be initialized with an object of type :py:class:`xml.etree.ElementTree.Element`.
+    according to the final tables needs. A :py:class:`pyxml2pdf.core.events.Event`
+    can only be initialized with an object of type
+    :py:class:`xml.etree.ElementTree.Element`.
 
     :param xml.etree.ElementTree.Element element: the element to build the instance from
     """
@@ -50,7 +51,9 @@ class Event(Element):
         super().__init__(element.tag, element.attrib)
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
-        self.EventParagraph.style = self._table_style.custom_styles["Normal"]
+        self.EventParagraph.style = self._table_style.custom_styles["stylesheet"][
+            "Normal"
+        ]
         # Initialize definitely needed instance variables.
         self._init_categories()
         self._date = self._init_date()
@@ -72,7 +75,7 @@ class Event(Element):
         :param str subtable_title: title of the subtable which contains the full event
 
         .. warning:: Do not call this function directly since it is automatically
-        called right after :meth:`get_full_row` is invoked.
+            called right after :meth:`get_full_row` is invoked.
         """
         self._reduced_columns.append(
             self.EventParagraph(self._build_description(link=subtable_title))
@@ -95,12 +98,12 @@ class Event(Element):
             subtable's title
 
             This ensures, that after handing over the full information, the reduced
-            version with a reference to the subtable containing the  full version is
+            version with a reference to the subtable containing the full version is
             created.
 
             .. note:: This is ensured by a decorator, which is why the function
                 signature on `ReadTheDocs.org
-                <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#Core.events
+                <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#core.events
                 .Event.get_full_row>`_ is displayed incorrectly. The parameter and
                 return value are as follows...
 
@@ -115,7 +118,9 @@ class Event(Element):
 
         return execute_get_full_and_init_reduced_row
 
-    def _concatenate_tags_content(self, event_subelements, separator=" - "):
+    def _concatenate_tags_content(
+        self, event_subelements: List[str], separator: str = " " "- "
+    ) -> str:
         """Form one string from the texts of a subset of an event's children tags
 
         Form a string of the content for all desired event children tags by
@@ -125,14 +130,17 @@ class Event(Element):
         has more than one element. So we ensure the result to be at least an empty
         string.
 
-        :param List[str] event_subelements: list of all tags for which the
+        :param event_subelements: list of all tags for which the
             descriptive texts is wanted, even if it is just one
-        :param str separator: the separator in between the concatenated texts
+        :param separator: the separator in between the concatenated texts
         :returns: concatenated, separated texts of all tags for the current event
-        :rtype: str
         """
         return separator.join(
-            [self.findtext(tag) for tag in event_subelements if self.findtext(tag)]
+            [
+                cast(str, self.findtext(tag))
+                for tag in event_subelements
+                if self.findtext(tag)
+            ]
         )
 
     def _init_full_row(self) -> List[EventParagraph]:
@@ -166,13 +174,14 @@ class Event(Element):
         return table_columns[:4]
 
     @staticmethod
-    def _remove_century(matchobj: Match) -> str:
+    def _remove_century(four_digit_year):
         """Remove the first two digits of the string representing the year
 
-        :param matchobj: the result of :py:meth:`re.sub`
+        :param typing.Match four_digit_year: the result of :py:meth:`re.sub`
         :return: the last two digits of the string representing the year
+        :rtype: str
         """
-        return matchobj.group(0)[2:]
+        return four_digit_year.group(0)[2:]
 
     def _init_date(self):
         """Create a properly formatted string containing the date of the event"""
@@ -278,7 +287,7 @@ class Event(Element):
         return types
 
     @create_reduced_after_full
-    def get_full_row(self, subtable_title=None):
+    def get_full_row(self, subtable_title: str = None) -> Table:
         """Exchange a table row with all the event's information against a
         subtable's title
 
@@ -288,14 +297,13 @@ class Event(Element):
 
         .. note:: This is ensured by a decorator, which is why the function
             signature on `ReadTheDocs.org
-            <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#Core.events
+            <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#core.events
             .Event.get_full_row>`_ is displayed incorrectly. The parameter and
             return value are as follows...
 
-        :param str subtable_title: the title of the subtable in which the row will
+        :param subtable_title: the title of the subtable in which the row will
             be integrated
         :returns: a table row with all the event's information
-        :rtype: Table
         """
         return self._full_row
 
@@ -329,9 +337,11 @@ class Event(Element):
     def get_table_row(self, subtable_title):
         """Return the table row representation of the event
 
-        This is the API of :py:class:`Core.events.Event` for getting the table row
+        This is the API of :py:class:`pyxml2pdf.core.events.Event` for getting the
+        table row
         representation of the event. It makes sure, that on the first call
-        :meth:`get_full_row` is invoked and otherwise :attr:`_reduced_row` is returned.
+        :meth:`get_full_row` is invoked and otherwise
+        :attr:`pyxml2pdf.core.events.Event._reduced_row` is returned.
 
         :param str subtable_title: the title of the subtable in which the row will
             be integrated

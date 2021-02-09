@@ -1,28 +1,26 @@
-""":py:mod:`Core.Parser` is the interface between xml input and table output"""
+""":py:mod:`pyxml2pdf.core.parser` is the interface between xml input and table"""
 
 __all__ = ["Parser"]
 
 import warnings
 from typing import List
 
-from reportlab.platypus.flowables import KeepTogether
+from reportlab.platypus.flowables import KeepTogether  # type: ignore
 
-from pyxml2pdf.Core.events import Event
-from pyxml2pdf.model.tables.TableBuilder import TableBuilder
+from pyxml2pdf.core.events import Event
+from pyxml2pdf.tables.builder import TableBuilder
 
 
 class Parser:
     """XML parser to extract all interesting information from xml input
 
-    :param str properties: path to the properties file
-    :param List[KeepTogether] elements: optional cells
-        to populate the Parser
+    :param elements: cells to populate the Parser
     """
 
     _elements: List[KeepTogether]
     _table_manager: TableBuilder
 
-    def __init__(self, properties, elements=[]):
+    def __init__(self, elements: List[KeepTogether]):
         self._elements = elements
         self._table_manager = TableBuilder()
 
