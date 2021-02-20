@@ -29,22 +29,22 @@ class TableStyle:
     _custom_styles: Dict[str, Union[Tuple[str, ...], StyleSheet1]] = {}
 
     def __init__(self):
-        self._custom_styles["heading"] = [
+        self._custom_styles["heading"] = (
             CellFormattingCommands.valign_middle,
             CellFormattingCommands.background(colors.honeydew),
             CellFormattingCommands.box(colors.black),
             CellFormattingCommands.inner_grid(colors.black),
             CellFormattingCommands.align_center,
-        ]
+        )
 
-        self._custom_styles["normal"] = [
+        self._custom_styles["normal"] = (
             CellFormattingCommands.align_left,
             CellFormattingCommands.valign_middle,
             CellFormattingCommands.box(colors.black),
             CellFormattingCommands.inner_grid(colors.black),
             CellFormattingCommands.leftpadding_reduce,
             CellFormattingCommands.rightpadding_reduce,
-        ]
+        )
 
         self._custom_styles["sub_heading"] = self._custom_styles["normal"]
 
@@ -129,12 +129,5 @@ class TableStyle:
         """Return the custom styles and stylesheet for the tables
 
         :returns: the custom styles and stylesheet in the Form
-            ::
-                custom_styles = {
-                    "heading": List[Styles],
-                    "normal": List[Styles],
-                    "sub_heading": List[Styles],
-                    "stylesheet": StyleSheet1
-                }
         """
         return self._custom_styles
