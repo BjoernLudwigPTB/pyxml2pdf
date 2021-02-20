@@ -5,7 +5,7 @@ from input.properties import (  # type: ignore
     font,
     fontsize,
     rows_xmltag,
-    subtables,
+    subtable_settings,
     subtables_xmltag,
     table_title,
 )
@@ -51,17 +51,17 @@ def test_subtables_xmltag():
 
 def test_subtables():
     # Check types and shape of `subtables`.
-    assert isinstance(subtables, list)
-    for subtable in subtables:
+    assert isinstance(subtable_settings, list)
+    for subtable in subtable_settings:
         assert isinstance(subtable, dict)
         assert len(subtable) == 2
         for key in subtable:
             assert isinstance(key, str)
         assert "label" in subtable
         assert isinstance(subtable["label"], str)
-        assert "content" in subtable
-        assert isinstance(subtable["content"], list)
-        for criteria_list in subtable["content"]:
+        assert "include" in subtable
+        assert isinstance(subtable["include"], list)
+        for criteria_list in subtable["include"]:
             assert isinstance(criteria_list, list)
             for criteria in criteria_list:
                 assert isinstance(criteria, str)
