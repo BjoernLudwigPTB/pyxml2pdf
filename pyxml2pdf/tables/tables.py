@@ -19,10 +19,10 @@ class XMLTable:
 
     def __init__(self, title: str, locations: List[str], activities: List[str]):
         """Initialize a table containing a subset of the XML data"""
-        self.events = []
-        self.title = title
-        self.locations: List[str] = locations
-        self.activities = activities
+        self._events = []  # type: List[Table]
+        self._title = title  # type: str
+        self._locations = locations  # type: List[str]
+        self._activities = activities  # type: List[str]
 
     def append(self, event: Table):
         """Append an event to the end of the table
@@ -69,7 +69,7 @@ class XMLTable:
     @property
     def locations(self) -> List[str]:
         """List[str]: List of locations where the activities take place"""
-        return self._locations  # type: List[str]
+        return self._locations
 
     @locations.setter
     def locations(self, value: List[str]):

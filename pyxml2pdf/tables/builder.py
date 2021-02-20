@@ -14,10 +14,10 @@ class TableBuilder:
     """Takes over all tasks for building and working with the tables created"""
 
     def __init__(self):
-        self._table_style = TableStyle()  # type: TableStyle
+        self._table_style = XMLTableStyle()  # type: XMLTableStyle
         self._stylesheet = self._table_style.custom_styles[
             "stylesheet"
-        ]  # type: Union[Tuple[str, ...], StyleSheet1]
+        ]  # type: TableStyle
         self._subtables = self.create_subtables()  # type: List[XMLTable]
 
     def create_subtables(self) -> List[XMLTable]:
@@ -105,18 +105,20 @@ class TableBuilder:
         self,
         cells: List[List[Flowable]],
         widths: Optional[Union[float, List[float]]] = None,
-        style: Optional[Union[Tuple[str, ...], StyleSheet1]] = None,
+        style: Optional[XMLTableStyle] = None,
     ) -> Table:
         """Create a table with specified column widths
 
         Create a table from specified cells with fixed column widths and a specific
         style.
 
-        :param cells: cells wrapped by a list representing the columns wrapped by a
-            list representing the lines
-        :param widths: Optional column widths. The default results in reasonable
-            settings based on experience.
-        :param style: Optional table's style. The default results in reasonable
+        :param List[List[Flowable]] cells: cells wrapped by a list representing the
+            columns wrapped by a list representing the lines
+        :param Optional[Union[float, List[float]]] widths: Optional column widths.
+            The default results in reasonable settings based on experience.
+        :param Optional[XMLTableStyle] style: Optional table's style. The default
+        results in
+        reasonable
             settings based on experience.
         :returns: A table containing specified cells in fixed width, styled columns.
         """

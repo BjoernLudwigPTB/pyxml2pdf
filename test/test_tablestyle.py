@@ -1,30 +1,31 @@
 import pytest
 from reportlab.lib.colors import Color  # type: ignore
 from reportlab.lib.styles import StyleSheet1  # type: ignore
+from reportlab.platypus import TableStyle  # type: ignore
 
-from pyxml2pdf.styles.table_styles import TableStyle
+from pyxml2pdf.styles.table_styles import XMLTableStyle
 
 
 @pytest.fixture(scope="module")
 def tablestyle():
-    return TableStyle()
+    return XMLTableStyle()
 
 
 def test_tablestyle_custom_styles(tablestyle):
-    # Check types and shape of `_custom_styles`.
-    assert isinstance(tablestyle._custom_styles, dict)
-    assert "heading" in tablestyle._custom_styles
-    assert "normal" in tablestyle._custom_styles
-    assert "sub_heading" in tablestyle._custom_styles
-    assert "stylesheet" in tablestyle._custom_styles
-    for style in (
-        style
-        for style in tablestyle._custom_styles.items()
-        if not style[0] == "stylesheet"
+    # Check types and shape of `custom_styles`.
+    assert isinstance(tablestyle.custom_styles, dict)
+    assert "heading" in tablestyle.custom_styles
+    assert "normal" in tablestyle.custom_styles
+    assert "sub_heading" in tablestyle.custom_styles
+    assert "stylesheet" in tablestyle.custom_styles
+    for key, style in (
+        (key, style)
+        for key, style in tablestyle.custom_styles.items()
+        if not key == "stylesheet"
     ):
-        assert isinstance(style[0], str)
-        assert isinstance(style[1], tuple)
-        for style_element in style[1]:
+        assert isinstance(key, str)
+        assert isinstance(style, TableStyle)
+        for style_element in style.getCommands():
             assert isinstance(style_element, tuple)
             for style_element_atom in style_element:
                 assert (
@@ -48,15 +49,11 @@ def test_tablestyle_column_widths(tablestyle):
 
 
 def test_tablestyle_table_width(tablestyle):
-    # Before table_width was initially requested via the appropriate property method,
-    # it will not be initialized and thus an AttributeError is thrown. Afterwards
-    # the direct access should work as well.
-    with pytest.raises(AttributeError):
-        assert tablestyle._table_width
-    # Check type of `table_width`.
+    """Check type of `table_width`."""
     assert isinstance(tablestyle.table_width, float)
-    assert tablestyle._table_width
+    assert tablestyle.table_width
 
 
 def test_tablestyle__init_font_family_call(tablestyle):
+    """Check if initialisation of font family runs without error and returns nothing."""
     assert tablestyle._init_font_family() is None

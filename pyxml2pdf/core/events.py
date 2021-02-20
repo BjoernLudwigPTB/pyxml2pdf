@@ -2,10 +2,10 @@
 import re
 from typing import cast, List
 
-import defusedxml
+import defusedxml  # type: ignore
 from reportlab.platypus import Paragraph, Table  # type: ignore
 
-from pyxml2pdf.styles.table_styles import TableStyle
+from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.builder import TableBuilder
 
 # Monkeypatch standard library xml vulnerabilities.

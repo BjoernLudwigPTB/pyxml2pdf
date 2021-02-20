@@ -41,6 +41,7 @@ def _add_arguments() -> Dict[str, str]:
     parser.add_argument(
         "-p",
         "--pdf",
+        metavar="<path to Pdf file>",
         nargs=1,
         type=str,
         default="output/kursdaten.pdf",
