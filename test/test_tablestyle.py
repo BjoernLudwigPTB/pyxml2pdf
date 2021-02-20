@@ -23,7 +23,7 @@ def test_tablestyle_custom_styles(tablestyle):
         if not style[0] == "stylesheet"
     ):
         assert isinstance(style[0], str)
-        assert isinstance(style[1], list)
+        assert isinstance(style[1], tuple)
         for style_element in style[1]:
             assert isinstance(style_element, tuple)
             for style_element_atom in style_element:
