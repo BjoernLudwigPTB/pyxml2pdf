@@ -39,7 +39,7 @@ class Parser:
         if events:
             for event in events:
                 self._table_manager.distribute_event(Event(event))
-            subtable_elements = self._table_manager.collect_subtables()
+            subtable_elements = self._table_manager.subtables
             self._elements.extend(
                 [
                     KeepTogether(subtable_element)

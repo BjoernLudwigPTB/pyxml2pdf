@@ -70,11 +70,9 @@ class TableBuilder:
         )
         return title_row
 
-    def collect_subtables(self) -> List[Table]:
-        """Collect all subtables at once
-
-        :return: the subtables
-        """
+    @property
+    def subtables(self) -> List[Table]:
+        """List[Table]: Return all subtables at once"""
         return [element for subtable in self._subtables for element in subtable.events]
 
     def distribute_event(self, event):
