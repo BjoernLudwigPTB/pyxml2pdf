@@ -2,6 +2,7 @@
   <dictionary name="bjorn">
     <words>
       <w>bolditalic</w>
+      <w>monkeypatch</w>
       <w>tablestyle</w>
       <w>xmltag</w>
     </words>

@@ -3,6 +3,7 @@ from datetime import date
 from typing import Callable, Dict
 from xml.etree.ElementTree import Element
 
+import defusedxml
 import pytest
 from hypothesis import given
 from hypothesis.strategies import dates, text
@@ -10,6 +11,9 @@ from reportlab.platypus.tables import Table  # type: ignore
 
 from pyxml2pdf.core.events import Event
 from pyxml2pdf.styles.table_styles import TableStyle
+
+# Monkeypatch standard library xml vulnerabilities.
+defusedxml.defuse_stdlib()
 
 
 @pytest.fixture
