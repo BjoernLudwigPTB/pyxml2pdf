@@ -3,15 +3,15 @@ from typing import List
 from reportlab.platypus import Table  # type:ignore
 
 
-class EventTable:
-    """An :class:`EventTable` contains a subset of the xml inputs
+class XMLTable:
+    """An :class:`XMLTable` contains a subset of the xml file's content in a Table
 
-    Contains all events which cover the mentioned activities at the
-    mentioned locations. Every event listed covers at least one of the
-    listed activities at one of the listed locations.
+    Contains all XML tags which match the desired content specified in :attr:`content`.
+    Every XML tag listed has at least one subtag from each of the lists in
+    :attr:`content`.
 
     :param str title: Name of the table
-    :param str locations: List of locations where the activities take place
+    :param List[List[str]] locations: List of locations where the activities take place
     :param str activities: List of activities covered by the listed events
     """
 
