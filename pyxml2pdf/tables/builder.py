@@ -1,6 +1,7 @@
 import warnings
 from typing import List, Optional, Tuple, Union
 
+from reportlab.lib.styles import StyleSheet1
 from reportlab.platypus import Flowable, Paragraph, Table  # type: ignore
 
 from input.properties import columns, subtables  # type: ignore
@@ -9,15 +10,20 @@ from pyxml2pdf.tables.tables import EventTable
 
 
 class TableBuilder:
-    def __init__(self):
-        self._table_style = TableStyle()
-        self._stylesheet = self._table_style.custom_styles["stylesheet"]
-        self._subtables = self.create_subtables()
+    """Takes over all tasks for building and working with the tables created"""
 
-    def create_subtables(self):
+    def __init__(self):
+        self._table_style = TableStyle()  # type: TableStyle
+        self._stylesheet = self._table_style.custom_styles[
+            "stylesheet"
+        ]  # type: Union[Tuple[str, ...], StyleSheet1]
+        self._subtables = self.create_subtables()  # type: List[EventTable]
+
+    def create_subtables(self) -> List[EventTable]:
         """Create subtables for all different kinds of events
 
-        :return List[EventTable]: a list of all subtables
+        :returns: a list of all subtables
+        :rtype: List[EventTable]
         """
         subtables_list = []
         for subtable in subtables:
@@ -35,8 +41,9 @@ class TableBuilder:
         from the properties file.
 
         :param str title: the title of the subtable
+
         :returns: two line table with title and headings
-        :rtype: List[reportlab.platypus.Table]
+        :rtype: List[Table]
         """
         # Create first row spanning the full width and title as content.
         title_row = [
@@ -73,7 +80,7 @@ class TableBuilder:
     def distribute_event(self, event):
         """Distribute an event to the subtables according to the related categories
 
-        :param Core.events.Event event: event to distribute
+        :param Event event: Event to distribute
         """
         distribution_failed = True
         set_of_cats = set(event.categories)
@@ -99,7 +106,7 @@ class TableBuilder:
         self,
         cells: List[List[Flowable]],
         widths: Optional[Union[float, List[float]]] = None,
-        style: Optional[List[Tuple[Union[str, Tuple[int]]]]] = None,
+        style: Optional[Union[Tuple[str, ...], StyleSheet1]] = None,
     ) -> Table:
         """Create a table with specified column widths
 
