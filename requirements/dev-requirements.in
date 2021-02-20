@@ -7,3 +7,5 @@ pytest-cov
 mock
 hypothesis
 black
+sphinx
+sphinx_rtd_theme
