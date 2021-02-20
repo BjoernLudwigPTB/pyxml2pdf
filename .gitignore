@@ -12,4 +12,7 @@ __pycache__/
 test_download
 
 # the hypothesis temps
-.hypothesis
+.hypothesis/
+
+# build temps
+*.egg-info/
