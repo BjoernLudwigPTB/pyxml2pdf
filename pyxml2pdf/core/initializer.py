@@ -13,15 +13,16 @@ from pyxml2pdf.core.sorter import Sorter
 class Initializer:
     """Coordinate the construction of the pdf result
 
-    :param str input_path: path to input xml-file
-    :param str output_path: path to pdf file containing result
+    Keep strings together, start the actual parsing and build the PDF
+
+    :param str input_path: Path to input XML file
+    :param str output_path: Path to resulting PDF file
     """
 
-    __data: List[KeepTogether]
-
-    def __init__(self, input_path, output_path):
-        self.__data = []
-        parser = Parser(self.__data)
+    def __init__(self, input_path: str, output_path: str):
+        #: The processed content of the XML file as table rows and columns
+        self._data = []  # type: List[KeepTogether]
+        parser = Parser(self._data)
         pdf = SimpleDocTemplate(
             output_path,
             pagesize=(178 * mm, 134 * mm),
@@ -36,7 +37,7 @@ class Initializer:
 
         parser.collect_xml_data(sorted_courses)
 
-        pdf.build(self.__data)
+        pdf.build(self._data)
 
         pdf_postprocessor = PostProcessor(output_path)
         pdf_postprocessor.finalize_print_preparation()
