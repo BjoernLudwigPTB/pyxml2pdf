@@ -4,7 +4,7 @@ from typing import Callable, Dict
 
 import defusedxml
 import pytest
-from hypothesis import given
+from hypothesis import given, HealthCheck, settings
 from hypothesis.strategies import dates, text
 from reportlab.platypus.tables import Table  # type: ignore
 
@@ -206,6 +206,7 @@ def test_call_parse_prerequisites_with_offers(s):
     )
 
 
+@settings(suppress_health_check=(HealthCheck.function_scoped_fixture,))
 @given(dates(min_value=date(1000, 1, 1)))
 def test_remove_country(test_event, dat):
     assert re.sub(
