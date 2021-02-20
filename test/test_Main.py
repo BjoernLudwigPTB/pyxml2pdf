@@ -24,10 +24,18 @@ def test_init_main():
                 assert mock_exit.call_args[0][0] == 42
 
 
-@pytest.mark.online
 def test_validate_main():
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         main.validate_inputs()
+
+
+def test_validate_main_with_input():
+    main.validate_inputs({"local_file": "my_file.xml"})
+
+
+def test_validate_main_with_invalid_input():
+    with pytest.raises(ValueError):
+        main.validate_inputs({"foo": "bar"})
 
 
 @pytest.mark.online
