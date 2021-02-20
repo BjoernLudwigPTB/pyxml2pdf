@@ -50,7 +50,7 @@
     <TerminDatumVon3></TerminDatumVon3>
     <TerminDatumBis3></TerminDatumBis3>
     <Anmeldeschluss>25.11.2019</Anmeldeschluss>
-    <Kursleiter>Thilo Kunze</Kursleiter>
+    <Kursleiter>Maxi Musterfrau</Kursleiter>
     <Kursart>G</Kursart>
     <TrainerURL></TrainerURL>
     <Zielgruppe>Menschen mit Freude an Naturerlebnis und Bewegung</Zielgruppe>
@@ -421,7 +421,7 @@
     <TerminDatumVon3></TerminDatumVon3>
     <TerminDatumBis3></TerminDatumBis3>
     <Anmeldeschluss></Anmeldeschluss>
-    <Kursleiter>Jens Breidenstein</Kursleiter>
+    <Kursleiter>Hansi Soundso</Kursleiter>
     <Kursart>A/E</Kursart>
     <TrainerURL></TrainerURL>
     <Zielgruppe>Anfänger</Zielgruppe>
@@ -438,14 +438,14 @@
     <Kostenstelle></Kostenstelle>
     <Kurstermin>etwa quartalsweise auf Anfrage</Kurstermin>
     <Abfahrt></Abfahrt>
-    <Beschreibung>zweiteiliger Grundlagenkurs Orientierung mit Karte, Kompass und Höhenmesser, Tag 1 Theoretische Grundlagen mit praktischer Kartenarbeit, Tag 2 Praxisteil im Gelände.   Ziel ist das Beherrschen von Grundlagen der Kartenkunde und der Orientierung im Gelände, Sicherer Umgang mit dem Kompass und dem Höhenmesser.</Beschreibung>
+    <Beschreibung>zweiteiliger Grundlagenkurs Orientierung mit Karte, Kompass und Höhenmesser, Tag 1 Theoretische Grundlagen mit praktischer Kartenarbeit, Tag 2 Praxisteil im Gelände. Ziel ist das Beherrschen von Grundlagen der Kartenkunde und der Orientierung im Gelände, Sicherer Umgang mit dem Kompass und dem Höhenmesser.</Beschreibung>
     <Voraussetzung>keine</Voraussetzung>
     <Ausruestung>wenn möglich Spiegelkompass mit Deklinationskorrektur und DAV-Planzeiger, Schreibstift, Schreibblock, Bleistift, Radiergummi, Lupe, Stechzirkel, Schreibbrett, eure persönliche Verpflegung, wetterfeste Kleidung und ggf. einen Regenschirm für den zweiten Tag </Ausruestung>
-    <Besprechung>Informationen bei Lars unter 0176 30424413 oder unter wanderseite@gmail.com</Besprechung>
+    <Besprechung>Informationen bei Gertrud</Besprechung>
     <Anreise>selbst</Anreise>
-    <Stuetzpunktinfo>1. Teil Theoretische Grundlagen in der ACB-Geschäftsstelle, Spielhagenstr. 4 in 10585 Berlin. Ggf. bitte klingeln 2. Teil Praxis in der Natur am Sonntag (genauer Ort wird am ersten Termin bekanntgegeben, höchstwahrscheinlich nahe S-Bhf. Heerstr. oder S-Bhf. Grunewald) </Stuetzpunktinfo>
+    <Stuetzpunktinfo>1. Teil Theoretische Grundlagen in der Geschäftsstelle. Ggf. bitte klingeln 2. Teil Praxis in der Natur am Sonntag (genauer Ort wird am ersten Termin bekanntgegeben.</Stuetzpunktinfo>
     <Kursziel>Orientierung vom Flachland bis zum alpinen Gelände</Kursziel>
-    <Treffpunkt>1. Tag Geschäftsstelle, Spielhagenstr. 4</Treffpunkt>
+    <Treffpunkt>1. Tag Geschäftsstelle4</Treffpunkt>
     <Bemerkungen></Bemerkungen>
     <Tourbewertung></Tourbewertung>
     <Memo12></Memo12>
@@ -474,9 +474,9 @@
     <TerminDatumVon3></TerminDatumVon3>
     <TerminDatumBis3></TerminDatumBis3>
     <Anmeldeschluss></Anmeldeschluss>
-    <Kursleiter>Lars Reichenberg</Kursleiter>
+    <Kursleiter>Gertrud Wildenstein</Kursleiter>
     <Kursart>A/E</Kursart>
-    <TrainerURL>https://wanderseite.blog/</TrainerURL>
+    <TrainerURL></TrainerURL>
     <Zielgruppe>Anfänger</Zielgruppe>
 </kurs>
 </kursexport>
