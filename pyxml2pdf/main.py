@@ -54,7 +54,7 @@ def main():
 
 
 def validate_inputs():
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 3:
         raise ValueError(
             f"We expected four inputs in the commandline parameters, "
             f"but only {len(sys.argv)} were given. Please specify the "
@@ -79,12 +79,6 @@ def validate_inputs():
             f"Expected third commandline parameter to be PDF path and filename "
             f"but {sys.argv[3]} was given. Please specify path and "
             f"valid filename for a PDF file."
-        )
-    if ".properties" not in sys.argv[4]:
-        raise ValueError(
-            f"Expected fourth commandline parameter to be .properties path and "
-            f"filename but {sys.argv[4]} was given. Please specify path and "
-            f"valid filename for a .properties file."
         )
 
 
