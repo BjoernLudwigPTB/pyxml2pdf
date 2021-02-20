@@ -1,12 +1,14 @@
 import pathlib
 
 from input.properties import (  # type: ignore
+    Column,
     columns,
     font,
     fontsize,
     rows_xmltag,
     subtable_settings,
     subtables_xmltag,
+    SubtableSetting,
     table_title,
 )
 
@@ -25,23 +27,18 @@ def test_columns():
     # Check types and shape `columns`.
     assert isinstance(columns, list)
     for column in columns:
-        assert isinstance(column, dict)
+        assert isinstance(column, Column)
         assert len(column) == 3
-        for key in column:
-            assert isinstance(key, str)
-        assert "label" in column
-        assert isinstance(column["label"], str)
-        assert "tag" in column
-        assert isinstance(column["tag"], list)
-        for tag in column["tag"]:
+        assert isinstance(column.label, str)
+        assert isinstance(column.tag, list)
+        for tag in column.tag:
             assert isinstance(tag, str)
-        assert "width" in column
-        assert float(column["width"])
+        assert float(column.width)
 
 
 def test_column_widths():
     # Check if column widths sum up to 177.8mm.
-    assert sum(column["width"] for column in columns) == 177.8
+    assert sum(column.width for column in columns) == 177.8
 
 
 def test_subtables_xmltag():
@@ -53,15 +50,11 @@ def test_subtables():
     # Check types and shape of `subtables`.
     assert isinstance(subtable_settings, list)
     for subtable in subtable_settings:
-        assert isinstance(subtable, dict)
+        assert isinstance(subtable, SubtableSetting)
         assert len(subtable) == 2
-        for key in subtable:
-            assert isinstance(key, str)
-        assert "label" in subtable
-        assert isinstance(subtable["label"], str)
-        assert "include" in subtable
-        assert isinstance(subtable["include"], list)
-        for criteria_list in subtable["include"]:
+        assert isinstance(subtable.label, str)
+        assert isinstance(subtable.include, list)
+        for criteria_list in subtable.include:
             assert isinstance(criteria_list, list)
             for criteria in criteria_list:
                 assert isinstance(criteria, str)

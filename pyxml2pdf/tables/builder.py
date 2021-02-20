@@ -4,9 +4,9 @@ from typing import List, Optional, Tuple, Union
 from reportlab.lib.styles import StyleSheet1
 from reportlab.platypus import Flowable, Paragraph, Table  # type: ignore
 
-from input.properties import columns, subtables  # type: ignore
+from input.properties import columns, subtable_settings  # type: ignore
 from pyxml2pdf.styles.table_styles import TableStyle
-from pyxml2pdf.tables.tables import EventTable
+from pyxml2pdf.tables.tables import XMLTable
 
 
 class TableBuilder:
@@ -17,20 +17,20 @@ class TableBuilder:
         self._stylesheet = self._table_style.custom_styles[
             "stylesheet"
         ]  # type: Union[Tuple[str, ...], StyleSheet1]
-        self._subtables = self.create_subtables()  # type: List[EventTable]
+        self._subtables = self.create_subtables()  # type: List[XMLTable]
 
-    def create_subtables(self) -> List[EventTable]:
+    def create_subtables(self) -> List[XMLTable]:
         """Create subtables for all different kinds of events
 
         :returns: a list of all subtables
-        :rtype: List[EventTable]
+        :rtype: List[XMLTable]
         """
         subtables_list = []
-        for subtable in subtables:
-            subtable_table = EventTable(
-                subtable["label"], subtable["content"][0], subtable["content"][1]
+        for subtable in subtable_settings:
+            subtable_table = XMLTable(
+                subtable.label, subtable.include[0], subtable.include[1]
             )
-            subtable_table.extend(self.make_header(subtable["label"]))
+            subtable_table.extend(self.make_header(subtable.label))
             subtables_list.append(subtable_table)
         return subtables_list
 
@@ -57,7 +57,7 @@ class TableBuilder:
         # Create row containing one column per heading.
         columns_list = [
             Paragraph(heading, self._stylesheet["Heading2"])
-            for heading in [column["label"] for column in columns]
+            for heading in [column.label for column in columns]
         ]
 
         # Concatenate both rows.

@@ -51,7 +51,7 @@ class TableStyle:
         self._custom_styles["sub_heading"] = self._custom_styles["normal"]
 
         # Extract the column widths from properties.
-        self._column_widths = [float(column["width"]) * mm for column in columns]
+        self._column_widths = [float(column.width) * mm for column in columns]
 
         # Set the resulting tables' styling with all the customization of
         # margins, fonts, fontsizes, etc...
