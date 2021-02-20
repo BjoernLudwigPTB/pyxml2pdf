@@ -1,3 +1,5 @@
+"""This module contains the class :class:`PostProcessor` to arrange the result pages"""
+
 import os
 
 from PyPDF2.pdf import PageObject, PdfFileReader, PdfFileWriter  # type: ignore

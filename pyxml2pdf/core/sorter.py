@@ -1,3 +1,8 @@
+"""This module contains the class :class:`Sorter` to sort the resulting table."""
+
+from datetime import datetime
+
+
 class Sorter:
     """Provides a method to sort from xml extracted data by a tag containing a date
 

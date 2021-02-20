@@ -1,3 +1,5 @@
+"""This module contains the class :class:`Initializer` to coordinate the process."""
+
 from typing import List
 
 from defusedxml.ElementTree import parse  # type: ignore

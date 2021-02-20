@@ -1,3 +1,10 @@
+"""Convert XML input to PDF table
+
+This is the main point of contact to convert your XML table to Pdf. This module
+is supposed to be called as a script with input parameters provided from standard in as
+described in the README.
+"""
+
 import argparse
 import os
 import sys
@@ -8,7 +15,7 @@ from pyxml2pdf.core.initializer import Initializer
 
 
 def _add_arguments() -> Dict[str, str]:
-    # Execute pyxml2pdf with provided command line parameters.
+    """Execute pyxml2pdf with provided command line parameters."""
     parser = argparse.ArgumentParser(
         description="A converter for XML data into nicely formatted tables in a PDF."
     )
@@ -44,6 +51,7 @@ def _add_arguments() -> Dict[str, str]:
 
 
 def main():
+    """This method is the workhorse of the application but expects stdin input."""
     args = _add_arguments()
     validate_inputs(args)
     if not os.path.isfile(args["local_file"][0]):
@@ -66,6 +74,7 @@ def validate_inputs(args: Dict[str, str]):
 
 
 def init():
+    """This construct we chose to properly test command line calls of this script."""
     if __name__ == "__main__":
         sys.exit(main())
 

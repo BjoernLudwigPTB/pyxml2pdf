@@ -1,3 +1,5 @@
+"""This module contains a class :class:`XMLTable` to collect the XML's content."""
+
 from typing import List
 
 from reportlab.platypus import Table  # type:ignore

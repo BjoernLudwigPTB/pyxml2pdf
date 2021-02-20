@@ -1,17 +1,19 @@
+"""This module contains the class :class:`XMLTableStyle` to style the result"""
+
 from pathlib import PurePath
 from typing import Dict, List, Tuple, Union
 
-from reportlab.lib import colors  # type: ignore
+from reportlab.lib.colors import black, Color, honeydew  # type: ignore
 from reportlab.lib.pagesizes import mm  # type: ignore
-from reportlab.lib.styles import getSampleStyleSheet, StyleSheet1  # type: ignore
-from reportlab.pdfbase.pdfmetrics import (
+from reportlab.lib.styles import getSampleStyleSheet  # type: ignore
+from reportlab.pdfbase.pdfmetrics import (  # type: ignore
     registerFont,
-    registerFontFamily,  # type: ignore
+    registerFontFamily,
 )
 from reportlab.pdfbase.ttfonts import TTFont  # type: ignore
+from reportlab.platypus import TableStyle  # type: ignore
 
 from input.properties import columns, font, fontsize  # type: ignore
-from .cell_formattings import CellFormattingCommands
 
 
 class TableStyle:

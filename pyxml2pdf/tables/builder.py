@@ -1,11 +1,12 @@
-import warnings
-from typing import List, Optional, Tuple, Union
+"""This module contains the class :class:`TableBuilder` which deals with XML tables."""
 
-from reportlab.lib.styles import StyleSheet1
-from reportlab.platypus import Flowable, Paragraph, Table  # type: ignore
+import warnings
+from typing import List, Optional, Union
+
+from reportlab.platypus import Flowable, Paragraph, Table, TableStyle  # type: ignore
 
 from input.properties import columns, subtable_settings  # type: ignore
-from pyxml2pdf.styles.table_styles import TableStyle
+from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.tables import XMLTable
 
 

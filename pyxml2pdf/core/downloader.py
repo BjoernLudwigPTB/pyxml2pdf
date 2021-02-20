@@ -1,3 +1,5 @@
+"""This module contains the class :class:`Downloader` to download the input file."""
+
 import requests
 from clint.textui import progress  # type: ignore
 
