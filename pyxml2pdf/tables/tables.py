@@ -9,15 +9,14 @@ class EventTable:
     Contains all events which cover the mentioned activities at the
     mentioned locations. Every event listed covers at least one of the
     listed activities at one of the listed locations.
+
+    :param str title: Name of the table
+    :param str locations: List of locations where the activities take place
+    :param str activities: List of activities covered by the listed events
     """
 
     def __init__(self, title: str, locations: List[str], activities: List[str]):
-        """Initialize a table containing a subset of the XML data
-
-        :param str title: Name of the table
-        :param str locations: List of locations where the activities take place
-        :param str activities: List of activities covered by the listed events
-        """
+        """Initialize a table containing a subset of the XML data"""
         self.events = []
         self.title = title
         self.locations: List[str] = locations
