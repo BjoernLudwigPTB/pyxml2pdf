@@ -62,7 +62,6 @@ tables
 .. automodule:: pyxml2pdf.tables.tables
     :members:
     :private-members:
-    :undoc-members:
 
 builder
 -------
