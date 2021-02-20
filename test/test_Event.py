@@ -1,7 +1,6 @@
 import re
 from datetime import date
 from typing import Callable, Dict
-from xml.etree.ElementTree import Element
 
 import defusedxml
 import pytest
@@ -14,6 +13,7 @@ from pyxml2pdf.styles.table_styles import TableStyle
 
 # Monkeypatch standard library xml vulnerabilities.
 defusedxml.defuse_stdlib()
+from xml.etree.ElementTree import Element
 
 
 @pytest.fixture

@@ -1,7 +1,6 @@
 """A wrapper :py:class:`pyxml2pdf.core.events.Event` for xml extracted data"""
 import re
 from typing import cast, List
-from xml.etree.ElementTree import Element
 
 import defusedxml
 from reportlab.platypus import Paragraph, Table  # type: ignore
@@ -9,10 +8,11 @@ from reportlab.platypus import Paragraph, Table  # type: ignore
 from pyxml2pdf.styles.table_styles import TableStyle
 from pyxml2pdf.tables.builder import TableBuilder
 
-__all__ = ["Event"]
-
 # Monkeypatch standard library xml vulnerabilities.
 defusedxml.defuse_stdlib()
+from xml.etree.ElementTree import Element
+
+__all__ = ["Event"]
 
 
 class Event(Element):
