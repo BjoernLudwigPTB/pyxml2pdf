@@ -1,14 +1,14 @@
+"""This is the set of parameters for interpretation the XML input and formatting"""
+
 # The XML tag, which will be represented by one row in the table.
+from typing import List
+
 rows_xmltag = "row_tag"
 
 #: The XML tag, which will be used to identify the row for error message printing.
 identifier_xmltag = [
-    "TerminDatumVon1",
-    "TerminDatumBis1",
-    "TerminDatumVon2",
-    "TerminDatumBis2",
-    "TerminDatumVon3",
-    "TerminDatumBis3",
+    "Name",
+    "Info",
 ]  # type: List[str]
 
 # The table title is displayed as the content of the very first cell in full table

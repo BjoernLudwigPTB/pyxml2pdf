@@ -1,3 +1,5 @@
+"""This is the set of parameters for interpretation the XML input and formatting"""
+
 from typing import List, NamedTuple
 
 #: The XML tag, which will be represented by one row in the table.
