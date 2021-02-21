@@ -96,7 +96,8 @@ class TableBuilder:
                 + " would not be printed, because it does not contain a valid"
                 " combination of criteria. Currently it contains "
                 + str(row.criteria)
-                + ". If this Please add valid filter criteria.",
+                + ". If it is supposed to shown please adapt the tables' "
+                "include-filters or adapt the XML tags content .",
                 RuntimeWarning,
             )
 
