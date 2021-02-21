@@ -2,6 +2,6 @@
 <project version="4">
   <component name="GitToolBoxProjectSettings">
     <option name="commitMessageValidation" value="true" />
-    <option name="commitMessageValidationRegex" value="(?:fix|chore|docs|feat|refactor|style|test|ci)(\(.*\))?: .*" />
+    <option name="commitMessageValidationRegex" value="(?:fix|chore|wip|docs|feat|refactor|style|test|ci)(\(.*\))?: .*" />
   </component>
 </project>
