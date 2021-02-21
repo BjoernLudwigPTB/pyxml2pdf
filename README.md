@@ -5,10 +5,6 @@
   <a href="https://pyxml2pdf.readthedocs.io/en/latest/">
     <img src="https://readthedocs.org/projects/pyxml2pdf/badge/?version=latest" alt="ReadTheDocs badge">
   </a>
-  <!-- CodeClimate Maintainability -->
-  <a href="https://codeclimate.com/github/BjoernLudwigPTB/pyxml2pdf/maintainability">
-    <img src="https://api.codeclimate.com/v1/badges/fe9134d2e9449bd42175/maintainability" alt="CodeClimate badge">
-  </a>
   <!-- Codacy Code Quality -->
   <a href="https://www.codacy.com/manual/blus_projects/pyxml2pdf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BjoernLudwigPTB/pyxml2pdf&amp;utm_campaign=Badge_Grade">
     <img src="https://api.codacy.com/project/badge/Grade/d8cd591a0e814ed59f9e6f4a0ac5cf4c" alt="Codacy badge">
@@ -38,12 +34,13 @@ Since we forked the <a href="https://github.com/kuras120/XMLToPDFConverter">upst
 this project has generalized quite a bit towards the generation of a multipage PDF file 
 containing a table with subtables each containing a subset of the xml tags based on the 
 texts of some of their children tags. We work on this project mainly every end of a
-quarter.
+quarter of a year.
 </p>
 
 ## Table of content
 
 - [💫 Quickstart](#quickstart)
+- [👓 Example](#example)
 - [📖 Documentation](#documentation)
 - [💻 Installation](#installation)
 - [💨 Coming soon](#coming-soon)
@@ -53,24 +50,67 @@ quarter.
 
 ## 💫 Quickstart 
 
-As a starting point you could take a look at the execution of
-[main.py](pyxml2pdf/main.py) which will download a publicly
-available XML file into the folder *input* and process it as desired to produce the
-output files (one file containing all generated pages in landscape and additionally
-one file per page rotated into portrait) and place them in the subfolder *output*.
+As a starting point you could call
+
+```shell
+$ python -m main.py input/my_test_download.xml
+```
+
+which will download a publicly available XML file into the folder *input* and process
+it as desired to produce the output files (one file containing all generated pages in 
+landscape and additionally one file per page rotated into portrait) and place them in 
+the subfolder *output*.
 
 The intended way of using this software is calling
 [_main.py_](pyxml2pdf/main.py) with the following command line parameters
 
-1. The URL to download XML file from if it is not present at the specified location.
-1. The file path to store (or open if it exists) the XML file locally.
-1. The file path to store the created PDF to.
-   
-A call thus could look like:
+- positional arguments:
+  _local_file_ The local file path to the XML file. If this file is not present,
+  the optional input parameter '--url' needs to be provided with the URL from which the file shall be downloaded.
 
-```shell
-$ python pyxml2pdf/main.py https://www.alpinclub-berlin.de/kv/kursdaten.xml input/2021_02_kursdaten.xml output/2021_02_kursdaten.pdf
+- optional arguments:
+  -u URL, --url URL
+    The URL from which the file shall be downloaded. This is only used, if the specified
+    local file is not present. Defaults to ['https://www.alpinclub-berlin.de/kv/kursdaten.xml'](https://www.alpinclub-berlin.de/kv/kursdaten.xml)
+  -p <path to Pdf file>, --pdf <path to Pdf file>
+    The file path to store the created PDF to. Defaults to `'output/kursdaten.pdf'`
+
+Convert XML input to PDF table. Since we forked the [upstream](https://github.com/kuras120/XMLToPDFConverter)
+this project has generalized a lot towards the generation of a multipage PDF file
+containing a table with subtables each containing a subset of the xml tags based on the
+texts of some of their children tags.
+
+## 👓 Example
+
+Imagine you have an XML file with similar groups of tags and subtags.
+
+```xml
+<main_tag>
+    <row_tag>
+        <name_tag>Name 1</name_tag>
+        <info_tag>Info 1</info_tag>
+        <filter_tag>Filter_1-1 Filter_1-2</filter_tag>
+    </row_tag>
+    <row_tag>
+        <name_tag>Name 2</name_tag>
+        <info_tag>Info 2</info_tag>
+        <filter_tag>Filter_2-1 Filter_2-2 Filter_2-3</filter_tag>
+    </row_tag>
+    [...]
+    <row_tag>
+        <name_tag>Name n</name_tag>
+        <info_tag>Info n</info_tag>
+        <filter_tag>Filter_n-1</filter_tag>
+    </row_tag>
+</main_tag>
 ```
+
+Now you want to visualize all `row_tag`s with their subtags `name_tag` and `info_tag`
+spread fed into separate columns. And lastly you want to group those `row_tags` which 
+satisfy certain filter criteria, that is their `filter_tag` contains certain
+combinations of space-separated texts. Those groups of `row_tag`s are extracted into
+several subtables each with a separating heading line and the corresponding column
+headings.
 
 ## 📖 Documentation
 
@@ -92,7 +132,6 @@ and install it via:
 ## 💨 Coming soon
  
 The next big step will be the deployment on [Heroku](https://www.heroku.com).
-
 
 ## 👋 Get in touch
  
