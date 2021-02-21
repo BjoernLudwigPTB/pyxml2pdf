@@ -16,3 +16,4 @@ test_download
 
 # build temps
 *.egg-info/
+docs/_build/
