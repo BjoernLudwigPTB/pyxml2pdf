@@ -48,7 +48,7 @@ quarter of a year.
 - [⚠ Disclaimer](#disclaimer)
 - [️© License](#license)
 
-## 💫 Quickstart 
+## 💫Quickstart 
 
 As a starting point you could call
 
@@ -75,12 +75,7 @@ The intended way of using this software is calling
   -p <path to Pdf file>, --pdf <path to Pdf file>
     The file path to store the created PDF to. Defaults to `'output/kursdaten.pdf'`
 
-Convert XML input to PDF table. Since we forked the [upstream](https://github.com/kuras120/XMLToPDFConverter)
-this project has generalized a lot towards the generation of a multipage PDF file
-containing a table with subtables each containing a subset of the xml tags based on the
-texts of some of their children tags.
-
-## 👓 Example
+## 👓Example
 
 Imagine you have an XML file with similar groups of tags and subtags.
 
@@ -112,14 +107,14 @@ combinations of space-separated texts. Those groups of `row_tag`s are extracted 
 several subtables each with a separating heading line and the corresponding column
 headings.
 
-## 📖 Documentation
+## 📖Documentation
 
 The full developer reference with all public interfaces you can find on [ReadTheDocs
 ](https://pyxml2pdf.readthedocs.io/). User documentation might still take a while for
 us to generate, since it is only us working on the project and using it as far as we
 know.
 
-## 💻 Installation
+## 💻Installation
 
 The installation of pyxml2pdf is as straightforward as the Python 
 ecosystem suggests. Just [create a virtual environment](https://docs.python.org/3/library/venv.html)
@@ -129,16 +124,16 @@ and install it via:
 (venv) $ pip install pyxml2pdf
 ```
 
-## 💨 Coming soon
+## 💨Coming soon
  
 The next big step will be the deployment on [Heroku](https://www.heroku.com).
 
-## 👋 Get in touch
+## 👋Get in touch
  
 In case you have any questions on this project do not hesitate to get in touch with
 [us](https://github.com/BjoernLudwigPTB/pyxml2pdf/graphs/contributors).
 
-## ⚠ Disclaimer
+## ⚠Disclaimer
 
 This software is developed in sole responsibility of Björn Ludwig. The software is made
 available "as is" free of cost. The author assumes no responsibility whatsoever for its
@@ -146,7 +141,6 @@ use by other parties, and makes no guarantees, expressed or implied, about its q
 reliability, safety, suitability or any other characteristic. In no event will the 
 author be liable for any direct, indirect or consequential damage arising in connection
 with the use of this software.
-
-## © License
+## ©License
 
 pyxml2pdf is distributed under the [GPLv3 license](https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/LICENSE).
