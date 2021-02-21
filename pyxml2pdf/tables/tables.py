@@ -13,40 +13,37 @@ class XMLTable:
     :attr:`content`.
 
     :param str title: Name of the table
-    :param List[List[str]] locations: List of locations where the activities take place
-    :param str activities: List of activities covered by the listed events
+    :param List[List[str]] include_filters: nested list of criteria to collect in table
     """
 
-    def __init__(self, title: str, locations: List[str], activities: List[str]):
+    def __init__(self, title: str, include_filters: List[List[str]]):
         """Initialize a table containing a subset of the XML data"""
-        self._events = []  # type: List[Table]
+        self._rows = []  # type: List[Table]
         self._title = title  # type: str
-        self._locations = locations  # type: List[str]
-        self._activities = activities  # type: List[str]
+        self._include_filters = include_filters  # type: List[List[str]]
 
-    def append(self, event: Table):
-        """Append an event to the end of the table
+    def append(self, row: Table):
+        """Append a row to the end of the table
 
-        :param event: a single event that should be appended to the table
+        :param row: a single row that should be appended to the table
         """
-        self.events.append(event)
+        self.rows.append(row)
 
-    def extend(self, event_list: List[Table]):
-        """Append a a list of events to the end of the table
+    def extend(self, rows: List[Table]):
+        """Append a a list of rows to the end of the table
 
-        :param event_list: a list of events that should be appended to the table's
-            list of events
+        :param rows: a list of rows that should be appended to the table
         """
-        self.events.extend(event_list)
+        self.rows.extend(rows)
 
     @property
-    def events(self) -> List[Table]:
-        """List[Table]: The list of events as Table objects"""
-        return self._events
+    def rows(self) -> List[Table]:
+        """List[Table]: The list of rows as Table objects"""
+        return self._rows
 
-    @events.setter
-    def events(self, value: List[Table]):
-        self._events = value
+    @rows.setter
+    def rows(self, value: List[Table]):
+        self._rows = value
 
     @property
     def title(self) -> str:
@@ -58,19 +55,10 @@ class XMLTable:
         self._title = value
 
     @property
-    def activities(self) -> List[str]:
-        """List[str]: List of activities covered by the listed events"""
-        return self._activities
+    def include_filters(self) -> List[List[str]]:
+        """List[List[str]]: include_filters to match XML contents for including"""
+        return self._include_filters
 
-    @activities.setter
-    def activities(self, value: List[str]):
-        self._activities = value
-
-    @property
-    def locations(self) -> List[str]:
-        """List[str]: List of locations where the activities take place"""
-        return self._locations
-
-    @locations.setter
-    def locations(self, value: List[str]):
-        self._locations = value
+    @include_filters.setter
+    def include_filters(self, value: List[List[str]]):
+        self._include_filters = value
