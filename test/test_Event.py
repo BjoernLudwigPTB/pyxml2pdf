@@ -65,7 +65,7 @@ def prerequisites() -> Dict[str, str]:
 
 def test_event_init(test_event):
     """Test initialization of :py:mod:`Event` and check for all expected members"""
-    assert test_event._categories
+    assert test_event._criteria
     assert test_event._full_row
     assert isinstance(test_event._init_reduced_row, Callable)
     assert isinstance(test_event.get_full_row, Callable)
