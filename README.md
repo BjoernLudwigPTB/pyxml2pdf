@@ -106,7 +106,7 @@ Imagine you have an XML file with similar groups of tags and subtags.
 ```
 
 Now you want to visualize all `row_tag`s with their subtags `name_tag` and `info_tag`
-spread fed into separate columns. And lastly you want to group those `row_tags` which 
+fed into separate columns. And lastly you want to group those `row_tags` which 
 satisfy certain filter criteria, that is their `filter_tag` contains certain
 combinations of space-separated texts. Those groups of `row_tag`s are extracted into
 several subtables each with a separating heading line and the corresponding column
