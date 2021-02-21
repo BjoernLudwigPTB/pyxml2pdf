@@ -76,28 +76,27 @@ class TableBuilder:
         """List[Table]: Return all subtables at once"""
         return [element for subtable in self._subtables for element in subtable.events]
 
-    def distribute_event(self, event):
-        """Distribute an event to the subtables according to the related categories
+    def distribute_row(self, row):
+        """Distribute an event to the subtables according to the related criteria
 
-        :param Event event: Event to distribute
+        :param Event row: Event to distribute
         """
         distribution_failed = True
-        set_of_cats = set(event.categories)
+        set_of_crits = set(row.criteria)
         for subtable in self._subtables:
-            if set_of_cats.intersection(
+            if set_of_crits.intersection(
                 subtable.activities
-            ) and set_of_cats.intersection(subtable.locations):
-                subtable.append(event.get_table_row(subtable.title))
+            ) and set_of_crits.intersection(subtable.locations):
+                subtable.append(row.get_table_row(subtable.title))
                 distribution_failed = False
         if distribution_failed:
             warnings.warn(
-                event.responsible
-                + "'s event on "
-                + event.date
+                "XML row identified by "
+                + row.identifier
                 + " would not be printed, because it does not contain a valid"
-                " combination of locations and activities. Currently it contains "
-                + str(event.categories)
-                + ". Either add a valid location or add a valid activity or both.",
+                " combination of criteria. Currently it contains "
+                + str(row.criteria)
+                + ". If this Please add valid filter criteria.",
                 RuntimeWarning,
             )
 
