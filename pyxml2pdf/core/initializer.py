@@ -3,10 +3,10 @@
 from typing import List
 
 from defusedxml.ElementTree import parse  # type: ignore
-from reportlab.lib.pagesizes import mm  # type: ignore
 from reportlab.platypus import SimpleDocTemplate  # type: ignore
 from reportlab.platypus.flowables import KeepTogether  # type: ignore
 
+from input.properties_template import pagesize, rows_xmltag, sort_xmltag
 from pyxml2pdf.core.parser import Parser
 from pyxml2pdf.core.post_processor import PostProcessor
 from pyxml2pdf.core.sorter import Sorter
@@ -27,15 +27,15 @@ class Initializer:
         parser = Parser(self._data)
         pdf = SimpleDocTemplate(
             output_path,
-            pagesize=(178 * mm, 134 * mm),
+            pagesize=pagesize,
             topMargin=0.0,
             bottomMargin=0.0,
             leftMargin=0.0,
             rightMargin=0.0,
         )
         doc = parse(input_path)
-        sorter = Sorter(doc.findall("kurs"))
-        sorted_courses = sorter.sort_parsed_xml("TerminDatumVon1")
+        sorter = Sorter(doc.findall(rows_xmltag))
+        sorted_courses = sorter.sort_parsed_xml(sort_xmltag)
 
         parser.collect_xml_data(sorted_courses)
 

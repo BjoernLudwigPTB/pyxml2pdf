@@ -5,7 +5,7 @@ from typing import List, Optional, Union
 
 from reportlab.platypus import Flowable, Paragraph, Table, TableStyle  # type: ignore
 
-from input.properties import columns, subtable_settings  # type: ignore
+from input.properties_template import columns, subtable_settings  # type: ignore
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.tables import XMLTable
 
@@ -21,16 +21,14 @@ class TableBuilder:
         self._subtables = self.create_subtables()  # type: List[XMLTable]
 
     def create_subtables(self) -> List[XMLTable]:
-        """Create subtables for all different kinds of events
+        """Create subtables for all different kinds of rows
 
         :returns: a list of all subtables
         :rtype: List[XMLTable]
         """
         subtables_list = []
         for subtable in subtable_settings:
-            subtable_table = XMLTable(
-                subtable.label, subtable.include[0], subtable.include[1]
-            )
+            subtable_table = XMLTable(subtable.label, subtable.include)
             subtable_table.extend(self.make_header(subtable.label))
             subtables_list.append(subtable_table)
         return subtables_list
@@ -74,19 +72,21 @@ class TableBuilder:
     @property
     def subtables(self) -> List[Table]:
         """List[Table]: Return all subtables at once"""
-        return [element for subtable in self._subtables for element in subtable.events]
+        return [element for subtable in self._subtables for element in subtable.rows]
 
     def distribute_row(self, row):
-        """Distribute an event to the subtables according to the related criteria
+        """Distribute a row to the subtables according to the related criteria
 
-        :param Event row: Event to distribute
+        :param XMLRow row: row to distribute
         """
         distribution_failed = True
         set_of_crits = set(row.criteria)
         for subtable in self._subtables:
-            if set_of_crits.intersection(
-                subtable.activities
-            ) and set_of_crits.intersection(subtable.locations):
+            crit_filters_intersection = [
+                set_of_crits.intersection(include_filters)
+                for include_filters in subtable.include_filters
+            ]
+            if all(crit_filters_intersection):
                 subtable.append(row.get_table_row(subtable.title))
                 distribution_failed = False
         if distribution_failed:

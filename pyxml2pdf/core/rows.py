@@ -3,13 +3,13 @@
 Specifically it contains a class :class:`XMLCell` for unified styled cells and
 a class :class:`XMLRow` for xml extracted data.
 """
-from typing import cast, List, Type
+from typing import cast, List, Set, Type
 
 import defusedxml  # type: ignore
 from reportlab.lib.styles import StyleSheet1
 from reportlab.platypus import Paragraph, Table  # type: ignore
 
-from input.properties import columns, identifier_xmltag, subtables_xmltag
+from input.properties_template import columns, identifier_xmltag, subtables_xmltag
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.builder import TableBuilder
 
@@ -61,7 +61,7 @@ class XMLRow(Element):
     _table_builder: TableBuilder = TableBuilder()
     _table_style: XMLTableStyle = XMLTableStyle()
 
-    _criteria: List[str]
+    _criteria: Set[str]
     _identifier: str
     _cell_styler: Type[XMLCell] = XMLCell
 
@@ -75,14 +75,14 @@ class XMLRow(Element):
             "Normal"
         ]
         # Initialize definitely needed instance variables.
-        self._init_criteria()
+        self._criteria = self._init_criteria()
         self._identifier = self._concatenate_tags_content(identifier_xmltag)
         self._mandatory_columns = self._init_full_row()
 
     def _init_criteria(self):
         """Initialize the list of criteria from the according xml tag's content"""
         criteria: str = self._concatenate_tags_content([subtables_xmltag])
-        self._criteria = criteria.split(", ")
+        return set(criteria.split(", "))
 
     def _concatenate_tags_content(
         self, cell_tags: List[str], separator: str = " - "
@@ -137,11 +137,11 @@ class XMLRow(Element):
         return self._full_row
 
     @property
-    def criteria(self):
+    def criteria(self) -> Set[str]:
         """Return the event's criteria
 
         :returns: a list of the event's criteria
-        :rtype: List[str]
+        :rtype: Set[str]
         """
         return self._criteria
 
