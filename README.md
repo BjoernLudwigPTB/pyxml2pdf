@@ -63,14 +63,15 @@ The intended way of using this software is calling
 [_main.py_](pyxml2pdf/main.py) with the following command line parameters
 
 - positional arguments:
-  _local_file_ The local file path to the XML file. If this file is not present,
-  the optional input parameter '--url' needs to be provided with the URL from which the file shall be downloaded.
+  - `<local_file>` The local file path to the XML file. If this file is not present,
+    the optional input parameter '--url' needs to be provided with the URL from which
+    the file shall be downloaded.
 
 - optional arguments:
-  -u URL, --url URL
+  - `-u <URL>, --url <URL>`
     The URL from which the file shall be downloaded. This is only used, if the specified
     local file is not present. Defaults to ['https://www.alpinclub-berlin.de/kv/kursdaten.xml'](https://www.alpinclub-berlin.de/kv/kursdaten.xml)
-  -p <path to Pdf file>, --pdf <path to Pdf file>
+  - `-p <path to Pdf file>, --pdf <path to Pdf file>`
     The file path to store the created PDF to. Defaults to `'output/kursdaten.pdf'`
 
 ## 👓Example
