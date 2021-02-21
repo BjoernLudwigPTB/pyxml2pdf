@@ -77,6 +77,7 @@ class XMLRow(Element):
         # Initialize definitely needed instance variables.
         self._init_criteria()
         self._identifier = self._concatenate_tags_content(identifier_xmltag)
+        self._mandatory_columns = self._init_full_row()
 
     def _init_criteria(self):
         """Initialize the list of criteria from the according xml tag's content"""
