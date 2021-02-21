@@ -10,7 +10,7 @@ class Sorter:
     code to our needs of sorting a list of :py:class:`xml.etree.ElementTree.Element`
     by the texts of one of their tags containing a string representation of a date.
 
-    :param List[xml.etree.ElementTree.Element] courses: events that where extracted
+    :param List[xml.etree.ElementTree.Element] courses: rows that where extracted
         from an xml source
     """
 
@@ -22,14 +22,19 @@ class Sorter:
 
         Taken from `effbot.org <http://effbot.org/zone/element-sort.htm>`_ and adapted.
 
-        :param str sort_key: the xml tag which contains the data
+        :param str sort_key: the XML tag which contains the data
         """
 
         def get_key(course):
             _key = course.findtext(sort_key)
-            if _key:
-                return datetime.strptime(_key, "%d.%m.%Y %H:%M")
-            return datetime.strptime("01.01.2099 00:00", "%d.%m.%Y %H:%M")
+            # Try to provide a reasonable sortable date string.
+            try:
+                if _key:
+                    return datetime.strptime(_key, "%d.%m.%Y %H:%M")
+                return datetime.strptime("01.01.2099 00:00", "%d.%m.%Y %H:%M")
+            except ValueError:
+                # If that did not work return the key itself.
+                return _key
 
         self._courses[:] = sorted(self._courses, key=get_key)
         return self._courses[:]
