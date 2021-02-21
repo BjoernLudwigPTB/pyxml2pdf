@@ -57,7 +57,7 @@ class TableBuilder:
 
         # Create row containing one column per heading.
         columns_list = [
-            Paragraph(heading, self._stylesheet["Heading2"])
+            Paragraph(heading, self._stylesheet.get("Heading2"))
             for heading in [column.label for column in columns]
         ]
 
