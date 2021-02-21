@@ -31,10 +31,9 @@
 
 <p align="justify">
 Since we forked the <a href="https://github.com/kuras120/XMLToPDFConverter">upstream</a>
-this project has generalized quite a bit towards the *generation of a multipage PDF file* 
-containing a table with subtables each containing a subset of an XML files content
-arranged in rows and columns. We work on this project mainly every quarter.
-</p>
+this project has generalized quite a bit towards the <b>generation of a multipage PDF
+file</b>  containing a table with subtables each containing a subset of an XML files
+content arranged in rows and columns. We work on this project mainly every quarter.</p>
 
 ## Table of content
 
