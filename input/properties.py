@@ -1,4 +1,4 @@
-from typing import Dict, List, NamedTuple
+from typing import List, NamedTuple
 
 #: The XML tag, which will be represented by one row in the table.
 rows_xmltag = "kurs"  # type: str
@@ -55,7 +55,7 @@ SubtableSetting = NamedTuple(
 #: listed in the respective subtable should match at least one of each of the sublists
 #: include-filters. There will be one subtable for each set of label and
 #: include-filters, as long as at least one element is found for the subtable.
-subtable_settings = [
+subtable_settings = (
     SubtableSetting(
         label="Wandern im Hoch- und Mittelgebirge",
         include=[["Hochgebirge", "Mittelgebirge"], ["Wandern"]],
@@ -84,21 +84,23 @@ subtable_settings = [
     SubtableSetting(
         label="Jugendgruppen und -events", include=[["Jugend"], ["Jugend"]]
     ),
-]  # type: List[SubtableSetting]
+)  # type: Tuple[SubtableSetting]
 
+Font = NamedTuple(
+    "Font", [("normal", str), ("italic", str), ("bold", str), ("bolditalic", str)]
+)
 #: Fonts for the table.
-font = {
-    "normal": "NewsGothicBT-Roman.ttf",
-    "italic": "NewsGothicBT-Italic.ttf",
-    "bold": "NewsGothicBT-Bold.ttf",
-    "bolditalic": "NewsGothicBT-BoldItalic.ttf",
-}  # type: Dict[str, str]
+font = Font(
+    normal="NewsGothicBT-Roman.ttf",
+    italic="NewsGothicBT-Italic.ttf",
+    bold="NewsGothicBT-Bold.ttf",
+    bolditalic="NewsGothicBT-BoldItalic.ttf",
+)  # type: Font
 
+FontSize = NamedTuple(
+    "FontSize", [("normal", float), ("table_heading", float), ("column_heading", float)]
+)
 #: Set the font size for the table. 'normal' applies to all text except table and
 #: column headings, where 'table_heading' applies to the very first line of the whole
 #: table and additionally the first line of all subtables.
-fontsize = {
-    "normal": 6.5,
-    "table_heading": 12,
-    "column_heading": 6.5,
-}  # type: Dict[str, float]
+fontsize = FontSize(normal=6.5, table_heading=12, column_heading=6.5,)  # type: FontSize

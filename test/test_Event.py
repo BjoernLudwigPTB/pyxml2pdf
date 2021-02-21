@@ -2,14 +2,14 @@ import re
 from datetime import date
 from typing import Callable, Dict
 
-import defusedxml
+import defusedxml  # type: ignore
 import pytest
 from hypothesis import given, HealthCheck, settings
 from hypothesis.strategies import dates, text
 from reportlab.platypus.tables import Table  # type: ignore
 
 from pyxml2pdf.core.events import Event
-from pyxml2pdf.styles.table_styles import TableStyle
+from pyxml2pdf.styles.table_styles import XMLTableStyle
 
 # Monkeypatch standard library xml vulnerabilities.
 defusedxml.defuse_stdlib()
@@ -49,8 +49,8 @@ def test_event(test_element) -> Event:
 
 
 @pytest.fixture
-def table_style() -> TableStyle:
-    return TableStyle()
+def table_style() -> XMLTableStyle:
+    return XMLTableStyle()
 
 
 @pytest.fixture

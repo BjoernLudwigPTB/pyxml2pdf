@@ -40,7 +40,7 @@ class Event(Element):
             super().__init__(text, self.style)
 
     _table_builder: TableBuilder = TableBuilder()
-    _table_style: TableStyle = TableStyle()
+    _table_style: XMLTableStyle = XMLTableStyle()
 
     _categories: List[str]
     _full_row: Table
