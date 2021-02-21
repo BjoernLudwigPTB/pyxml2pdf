@@ -33,9 +33,10 @@ class Event(XMLRow):
     _cell_styler: Type[XMLCell]
 
     def __init__(self, element):
+        # Initialize definitely needed instance variables.
+        self._date = self._responsible = ""
         # Call XMLRow constructor
         super().__init__(element)
-        # Initialize definitely needed instance variables.
         self._date = self._init_date()
         self._responsible = self._concatenate_tags_content(["Kursleiter"])
         self._reduced_columns = self._init_full_row()
