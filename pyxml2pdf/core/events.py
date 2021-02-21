@@ -1,43 +1,25 @@
 """A wrapper :py:class:`pyxml2pdf.core.events.Event` for xml extracted data"""
 import re
-from typing import cast, List
+from typing import List, Type
 
-import defusedxml  # type: ignore
-from reportlab.platypus import Paragraph, Table  # type: ignore
+import defusedxml
+from reportlab.platypus import Table  # type: ignore
 
+from pyxml2pdf.core.rows import XMLCell, XMLRow
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.builder import TableBuilder
 
 # Monkeypatch standard library xml vulnerabilities.
 defusedxml.defuse_stdlib()
-from xml.etree.ElementTree import Element
 
 __all__ = ["Event"]
 
 
-class Event(Element):
-    """A wrapper class for :py:class:`xml.etree.ElementTree.Element`
-
-    :py:class:`xml.etree.ElementTree.Element` is augmented with the table row
-    representation and the attributes and methods to manipulate everything
-    according to the final tables needs. A :py:class:`pyxml2pdf.core.events.Event`
-    can only be initialized with an object of type
-    :py:class:`xml.etree.ElementTree.Element`.
+class Event(XMLRow):
+    """A specialisation of :class:`XMLRow` onto events from an ACB event program
 
     :param xml.etree.ElementTree.Element element: the element to build the instance from
     """
-
-    class EventParagraph(Paragraph):
-        """A wrapper class for :py:class:`reportlab.platypus.Paragraph`
-
-        :py:class:`reportlab.platypus.Paragraph` is solely used with one
-        certain style, which is handed over in the constructor.
-
-        :param str text: the text to write into row
-        """
-
-        def __init__(self, text: str):
-            super().__init__(text, self.style)
 
     _table_builder: TableBuilder = TableBuilder()
     _table_style: XMLTableStyle = XMLTableStyle()
@@ -47,27 +29,16 @@ class Event(Element):
     _reduced_row: Table
     _date: str
     _responsible: str
-    _reduced_columns: List[EventParagraph]
+    _reduced_columns: List[XMLCell]
+    _cell_styler: Type[XMLCell]
 
     def __init__(self, element):
-        # Call Element constructor and extend ourselves by extending all children
-        # tags to create an underlying copy of element.
-        super().__init__(element.tag, element.attrib)
-        self.extend(list(element))
-        # Initialize needed objects especially for table creation.
-        self.EventParagraph.style = self._table_style.custom_styles["stylesheet"][
-            "Normal"
-        ]
+        # Call XMLRow constructor
+        super().__init__(element)
         # Initialize definitely needed instance variables.
-        self._init_categories()
         self._date = self._init_date()
         self._responsible = self._concatenate_tags_content(["Kursleiter"])
         self._reduced_columns = self._init_full_row()
-
-    def _init_categories(self):
-        """Initialize the list of categories from the according xml tag's content"""
-        categories: str = self._concatenate_tags_content(["Kategorie"])
-        self._categories = categories.split(", ")
 
     def _init_reduced_row(self, subtable_title):
         """Initializes the reduced version of the event
@@ -82,7 +53,7 @@ class Event(Element):
             called right after :meth:`get_full_row` is invoked.
         """
         self._reduced_columns.append(
-            self.EventParagraph(self._build_description(link=subtable_title))
+            self._cell_styler(self._build_description(link=subtable_title))
         )
         self._reduced_row = self._table_builder.create_fixedwidth_table(
             [self._reduced_columns],
@@ -122,50 +93,25 @@ class Event(Element):
 
         return execute_get_full_and_init_reduced_row
 
-    def _concatenate_tags_content(
-        self, event_subelements: List[str], separator: str = " " "- "
-    ) -> str:
-        """Form one string from the texts of a subset of an event's children tags
-
-        Form a string of the content for all desired event children tags by
-        concatenating them together with a separator. This is especially necessary,
-        since :py:mod:`reportlab.platypus.Paragraph` cannot handle `None`s as texts but
-        handles as well the concatenation of XML tags' content, if `event_subelements`
-        has more than one element. So we ensure the result to be at least an empty
-        string.
-
-        :param event_subelements: list of all tags for which the
-            descriptive texts is wanted, even if it is just one
-        :param separator: the separator in between the concatenated texts
-        :returns: concatenated, separated texts of all tags for the current event
-        """
-        return separator.join(
-            [
-                cast(str, self.findtext(tag))
-                for tag in event_subelements
-                if self.findtext(tag)
-            ]
-        )
-
-    def _init_full_row(self) -> List[EventParagraph]:
+    def _init_full_row(self) -> List[XMLCell]:
         """Initialize the single table row containing all information of the event
 
         Extract interesting information from events children tags and connect them
         into a nicely formatted row of a table.
 
         :return: the common starting columns of any table representation
-        :rtype: List[EventParagraph]
+        :rtype: List[XMLCell]
         """
         table_columns = [
-            self.EventParagraph(self._build_type()),
-            self.EventParagraph(self._date),
-            self.EventParagraph(self._concatenate_tags_content(["Ort1"])),
-            self.EventParagraph(self._responsible),
-            self.EventParagraph(
+            self._cell_styler(self._build_type()),
+            self._cell_styler(self._date),
+            self._cell_styler(self._concatenate_tags_content(["Ort1"])),
+            self._cell_styler(self._responsible),
+            self._cell_styler(
                 self._build_description(self._concatenate_tags_content(["TrainerURL"]))
             ),
-            self.EventParagraph(self._concatenate_tags_content(["Zielgruppe"])),
-            self.EventParagraph(
+            self._cell_styler(self._concatenate_tags_content(["Zielgruppe"])),
+            self._cell_styler(
                 self._parse_prerequisites(
                     self._concatenate_tags_content(["Voraussetzung"]),
                     self._concatenate_tags_content(["Ausruestung"]),
@@ -188,7 +134,7 @@ class Event(Element):
         return four_digit_year.group(0)[2:]
 
     def _init_date(self):
-        """Create a properly formatted string containing the date of the event"""
+        """Create a properly formatted string containing the identifier of the event"""
         # Extract data from xml children tags' texts. Since the date can consist of
         # three date ranges, we concatenate them separated with a line containing
         # only an "und".
@@ -312,15 +258,6 @@ class Event(Element):
         return self._full_row
 
     @property
-    def categories(self):
-        """Return the event's categories
-
-        :returns: a list of the event's categories
-        :rtype: List[str]
-        """
-        return self._categories
-
-    @property
     def responsible(self):
         """Return the name of the person being responsible for the event
 
@@ -330,10 +267,10 @@ class Event(Element):
         return self._responsible
 
     @property
-    def date(self):
-        """Return the date of the event
+    def identifier(self):
+        """Return the identifier of the event
 
-        :returns: date
+        :returns: identifier
         :rtype: str
         """
         return self._date
