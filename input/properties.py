@@ -3,6 +3,16 @@ from typing import List, NamedTuple
 #: The XML tag, which will be represented by one row in the table.
 rows_xmltag = "kurs"  # type: str
 
+#: The XML tag, which will be used to identify the row for error message printing.
+identifier_xmltag = [
+    "TerminDatumVon1",
+    "TerminDatumBis1",
+    "TerminDatumVon2",
+    "TerminDatumBis2",
+    "TerminDatumVon3",
+    "TerminDatumBis3",
+]  # type: List[str]
+
 #: The table title is displayed as the content of the very first cell in full table
 #: width.
 table_title = "Ausbildungs- und Fahrtenprogramm 2021"  # type: str
