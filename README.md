@@ -1,20 +1,80 @@
-# pyxml2pdf
+<p align="center">
+  <!-- CircleCI Tests -->
+  <a href="https://circleci.com/gh/BjoernLudwigPTB/pyxml2pdf"><img alt="CircleCI pipeline status badge" src="https://circleci.com/gh/BjoernLudwigPTB/pyxml2pdf.svg?style=shield"></a>
+  <!-- ReadTheDocs Documentation -->
+  <a href="https://pyxml2pdf.readthedocs.io/en/latest/">
+    <img src="https://readthedocs.org/projects/pyxml2pdf/badge/?version=latest" alt="ReadTheDocs badge">
+  </a>
+  <!-- Codacy Code Quality -->
+  <a href="https://www.codacy.com/manual/blus_projects/pyxml2pdf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BjoernLudwigPTB/pyxml2pdf&amp;utm_campaign=Badge_Grade">
+    <img src="https://api.codacy.com/project/badge/Grade/d8cd591a0e814ed59f9e6f4a0ac5cf4c" alt="Codacy badge">
+  </a>
+  <!-- CodeCov(erage) -->
+  <a href="https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf">
+    <img src="https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf/branch/master/graph/badge.svg"/>
+  </a>
+  <!-- PyPI Version -->
+  <a href="https://pypi.org/project/pyxml2pdf">
+    <img src="https://img.shields.io/pypi/v/pyxml2pdf.svg?label=release&color=blue&style=flat-square" alt="pypi">
+  </a>
+  <!-- PyPI Python Version -->
+  <a href="https://pypi.org/project/pyxml2pdf">
+    <img src="https://img.shields.io/pypi/pyversions/pyxml2pdf" alt="Python Version">
+  </a>
+  <!-- PyPI License -->
+  <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">
+    <img alt="PyPI - license badge" src="https://img.shields.io/pypi/l/pyxml2pdf?color=bright">
+  </a>
+</p>
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyxml2pdf)
-[![PyPI release number](https://badge.fury.io/py/pyxml2pdf.svg)](https://pypi.org/project/pyxml2pdf/)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d8cd591a0e814ed59f9e6f4a0ac5cf4c)](https://www.codacy.com/manual/blus_projects/pyxml2pdf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BjoernLudwigPTB/pyxml2pdf&amp;utm_campaign=Badge_Grade)
-[![CircleCI](https://circleci.com/gh/BjoernLudwigPTB/pyxml2pdf.svg?style=shield)](https://circleci.com/gh/BjoernLudwigPTB/pyxml2pdf)
-[![Maintainability](https://api.codeclimate.com/v1/badges/fe9134d2e9449bd42175/maintainability)](https://codeclimate.com/github/BjoernLudwigPTB/pyxml2pdf/maintainability)
-[![codecov](https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf/branch/master/graph/badge.svg)](https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf)
-[![Documentation Status](https://readthedocs.org/projects/pyxml2pdf/badge/?version=latest)](https://pyxml2pdf.readthedocs.io/en/latest/?badge=latest)
+<h1 align="center">Convert your XML into a Pdf table</h1>
 
+<p align="justify">
+Since we forked the <a href="https://github.com/kuras120/XMLToPDFConverter">upstream</a>
+this project has generalized quite a bit towards the <b>generation of a multipage PDF
+file</b>  containing a table with subtables each containing a subset of an XML files
+content arranged in rows and columns. We work on this project mainly every quarter.</p>
 
-Convert XML input to PDF table. Since we forked the [upstream](https://github.com/kuras120/XMLToPDFConverter)
-this project has generalized a lot towards the generation of a multipage PDF file
-containing a table with subtables each containing a subset of the xml tags based on the
-texts of some of their children tags.
+## Table of content
 
-## Example
+- [💫 Quickstart](#quickstart)
+- [👓 Example](#example)
+- [📖 Documentation](#documentation)
+- [💻 Installation](#installation)
+- [💨 Coming soon](#coming-soon)
+- [👋 Get in touch](#get-in-touch)
+- [⚠ Disclaimer](#disclaimer)
+- [️© License](#license)
+
+## 💫Quickstart 
+
+As a starting point you could call
+
+```shell
+$ python -m main.py input/my_test_download.xml
+```
+
+which will download a publicly available XML file into the folder *input* and process
+it as desired to produce the output files (one file containing all generated pages in 
+landscape and additionally one file per page rotated into portrait) and place them in 
+the subfolder *output*.
+
+The intended way of using this software is calling
+[_main.py_](pyxml2pdf/main.py) with the following command line parameters
+
+- positional arguments:
+  - `<local_file>` The local file path to the XML file. If this file is not present,
+    the optional input parameter '--url' needs to be provided with the URL from which
+    the file shall be downloaded.
+
+- optional arguments:
+  - `-u <URL>, --url <URL>`
+    The URL from which the file shall be downloaded. This is only used, if the specified
+    local file is not present. Defaults to ['https://www.alpinclub-berlin.de/kv/kursdaten.xml'](https://www.alpinclub-berlin.de/kv/kursdaten.xml)
+  - `-p <path to Pdf file>, --pdf <path to Pdf file>`
+    The file path to store the created PDF to. Defaults to `'output/kursdaten.pdf'`
+
+## 👓Example
 
 Imagine you have an XML file with similar groups of tags and subtags.
 
@@ -40,56 +100,46 @@ Imagine you have an XML file with similar groups of tags and subtags.
 ```
 
 Now you want to visualize all `row_tag`s with their subtags `name_tag` and `info_tag`
-spread fed into separate columns. And lastly you want to group those `row_tags` which 
+fed into separate columns. And lastly you want to group those `row_tags` which 
 satisfy certain filter criteria, that is their `filter_tag` contains certain
 combinations of space-separated texts. Those groups of `row_tag`s are extracted into
-several subtables each with a separating heading line the corresponding column headings.
+several subtables each with a separating heading line and the corresponding column
+headings.
 
-## Getting started 
-
-As a starting point you could call
-
-```shell
-$ python -m main.py input/my_test_download.xml
-```
-
- which will download a publicly available XML file into the folder *input* and process
-it as desired to produce the output files (one file containing all generated pages in 
-landscape and additionally one file per page rotated into portrait) and place them in 
-the subfolder *output*.
-
-The intended way of using this software is calling
-[_main.py_](pyxml2pdf/main.py) with the following command line parameters
-
-- positional arguments:
-  _local_file_ The local file path to the XML file. If this file is not present,
-  the optional input parameter '--url' needs to be provided with the URL from which the file shall be downloaded.
-
-- optional arguments:
-  -u URL, --url URL
-    The URL from which the file shall be downloaded. This is only used, if the specified
-    local file is not present. Defaults to ['https://www.alpinclub-berlin.de/kv/kursdaten.xml'](https://www.alpinclub-berlin.de/kv/kursdaten.xml)
-  -p <path to Pdf file>, --pdf <path to Pdf file>
-    The file path to store the created PDF to. Defaults to `'output/kursdaten.pdf'`
-
-A call thus could look like:
-
-```shell
-$ python pyxml2pdf/main.py input/kursdaten.xml
-```
-
-## Documentation
+## 📖Documentation
 
 The full developer reference with all public interfaces you can find on [ReadTheDocs
 ](https://pyxml2pdf.readthedocs.io/). User documentation might still take a while for
 us to generate, since it is only us working on the project and using it as far as we
 know.
 
-## Next steps
+## 💻Installation
 
-The next big step will be the deployment on [Heroku](https://www.heroku.com). 
+The installation of pyxml2pdf is as straightforward as the Python 
+ecosystem suggests. Just [create a virtual environment](https://docs.python.org/3/library/venv.html)
+and install it via: 
+
+```shell
+(venv) $ pip install pyxml2pdf
+```
+
+## 💨Coming soon
  
-## Get in touch
+The next big step will be the deployment on [Heroku](https://www.heroku.com).
+
+## 👋Get in touch
  
 In case you have any questions on this project do not hesitate to get in touch with
 [us](https://github.com/BjoernLudwigPTB/pyxml2pdf/graphs/contributors).
+
+## ⚠Disclaimer
+
+This software is developed in sole responsibility of Björn Ludwig. The software is made
+available "as is" free of cost. The author assumes no responsibility whatsoever for its
+use by other parties, and makes no guarantees, expressed or implied, about its quality, 
+reliability, safety, suitability or any other characteristic. In no event will the 
+author be liable for any direct, indirect or consequential damage arising in connection
+with the use of this software.
+## ©License
+
+pyxml2pdf is distributed under the [GPLv3 license](https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/LICENSE).
