@@ -13,6 +13,14 @@ downloader
     :private-members:
     :undoc-members:
 
+rows
+----
+
+.. automodule:: pyxml2pdf.core.rows
+    :members:
+    :private-members:
+    :undoc-members:
+
 events
 ------
 
