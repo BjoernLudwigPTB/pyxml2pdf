@@ -6,11 +6,11 @@ described in the README.
 """
 
 import argparse
-import os
 import sys
 from typing import Dict
 
-from pyxml2pdf.core.downloader import Downloader
+from download import download
+
 from pyxml2pdf.core.initializer import Initializer
 
 
@@ -23,7 +23,7 @@ def _add_arguments() -> Dict[str, str]:
         "local_file",
         nargs="+",
         type=str,
-        default="input/kursdaten.xml",
+        default="input/template.xml",
         help="The local file path to the XML file. If this file is not present, "
         "the optional input parameter '--url' needs to be provided with the URL "
         "from which the file shall be downloaded.",
@@ -33,10 +33,13 @@ def _add_arguments() -> Dict[str, str]:
         "--url",
         nargs=1,
         type=str,
-        default="https://www.alpinclub-berlin.de/kv/kursdaten.xml",
+        default=[
+            "https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/input/"
+            "template.xml"
+        ],
         help="The URL from which the file shall be downloaded. This is only used, "
         "if the specified local file is not present. Defaults to "
-        "'https://www.alpinclub-berlin.de/kv/kursdaten.xml'",
+        "'https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/input/template.xml'",
     )
     parser.add_argument(
         "-p",
@@ -44,7 +47,7 @@ def _add_arguments() -> Dict[str, str]:
         metavar="<path to Pdf file>",
         nargs=1,
         type=str,
-        default="output/kursdaten.pdf",
+        default=["output/template.pdf"],
         help="The file path to store the created PDF to. Defaults to "
         "'output/kursdaten.pdf'",
     )
@@ -55,8 +58,13 @@ def main():
     """This method is the workhorse of the application but expects stdin input."""
     args = _add_arguments()
     validate_inputs(args)
-    if not os.path.isfile(args["local_file"][0]):
-        Downloader(args["url"][0], args["local_file"][0])
+    download(
+        args["url"][0],
+        args["local_file"][0],
+        replace=False,
+        progressbar=True,
+        verbose=False,
+    )
     Initializer(args["local_file"][0], args["pdf"][0])
     print("\n-------------------------------DONE-------------------------------")
 
@@ -68,9 +76,10 @@ def validate_inputs(args: Dict[str, str]):
     """
     if "local_file" not in args:
         raise ValueError(
-            f"We expected at least the local XML as input parameter, "
-            f"but only {args} were given. Please specify the "
-            f"local path and filename of a valid XML file."
+            f"We expected at least the local XML as input parameter, but only {args} "
+            f"were given. Please specify the local path and filename of a valid "
+            f"XML file or a download URL and the path to store the file to. See "
+            f"'python main.py --help' for details."
         )
 
 
