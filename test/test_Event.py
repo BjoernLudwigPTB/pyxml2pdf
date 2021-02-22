@@ -107,10 +107,15 @@ def test_event_get_reduced_row(test_event, subtable_title):
 
 
 def test_event_reduced_rows_column_widths(test_event, subtable_title, table_style):
-    """Reduced row should be created with column widths according to full row"""
+    """Reduced row should be created with column widths according to full row
+
+    This test actually makes sense only for the case of data that allows for the
+    creation of reduced rows and need to be adapted then to the number of common
+    columns.
+    """
     test_event._init_reduced_row(subtable_title)
-    assert test_event._reduced_row._colWidths[:4] == table_style.column_widths[:4]
-    assert test_event._reduced_row._colWidths[-1] == sum(table_style.column_widths[4:])
+    assert test_event._reduced_row._colWidths[:3] == table_style.column_widths[:3]
+    assert test_event._reduced_row._colWidths[-1] == sum(table_style.column_widths[3:])
 
 
 def test_event_reduced_creation(test_event, subtable_title):
