@@ -40,7 +40,8 @@ class Initializer:
 
         parser.collect_xml_data(sorted_courses)
 
-        pdf.build(self._data)
+        if self._data:
+            pdf.build(self._data)
 
-        pdf_postprocessor = PostProcessor(output_path)
-        pdf_postprocessor.finalize_print_preparation()
+            pdf_postprocessor = PostProcessor(output_path)
+            pdf_postprocessor.finalize_print_preparation()
