@@ -3,11 +3,11 @@
 from typing import List
 
 from defusedxml.ElementTree import parse  # type: ignore
-from reportlab.lib.units import mm
+from reportlab.lib.units import mm  # type: ignore
 from reportlab.platypus import SimpleDocTemplate  # type: ignore
 from reportlab.platypus.flowables import KeepTogether  # type: ignore
 
-from input.properties_template import pagesize, rows_xmltag, sort_xmltag
+from input.properties_template import pagesize, rows_xmltag, sort_xmltag  # type: ignore
 from pyxml2pdf.core.parser import Parser
 from pyxml2pdf.core.post_processor import PostProcessor
 from pyxml2pdf.core.sorter import Sorter

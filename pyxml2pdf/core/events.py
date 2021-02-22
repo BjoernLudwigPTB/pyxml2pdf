@@ -2,7 +2,7 @@
 import re
 from typing import List, Type
 
-import defusedxml
+import defusedxml  # type: ignore
 from reportlab.platypus import Table  # type: ignore
 
 from pyxml2pdf.core.rows import XMLCell, XMLRow
