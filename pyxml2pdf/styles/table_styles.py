@@ -55,11 +55,10 @@ class XMLTableStyle:
         PADDING,
     )  # type: CellFormattingCommand
     BACKGROUND = (
-        "BOX",
+        "BACKGROUND",
         *FULL_ROW,
-        LINE_THICKNESS,
         BACKGROUND_COLOR,
-    )  # type: LineFormattingCommand
+    )  # type: CellFormattingCommand
     BOX = ("BOX", *FULL_ROW, 0.25, LINE_COLOR)  # type: LineFormattingCommand
     INNERGRID = (
         "INNERGRID",
