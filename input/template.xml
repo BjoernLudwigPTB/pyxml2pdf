@@ -1,42 +1,27 @@
-<root>
-    <taskGroup available="true" description="heading.no1">
-        <subTaskGroup description="Chleb">
-            <subtasks>
-                <task class="model.tasks.SimpleTask" type="SimpleTask">
-                    <hook>query.no1.no1</hook>
-                    <state>false</state>
-                </task>
-            </subtasks>
-        </subTaskGroup>
-        <subTaskGroup description="">
-            <subtasks>
-                <task class="model.tasks.SimpleTask" type="SimpleTask">
-                    <hook>query.no1.no2</hook>
-                    <state>true</state>
-                </task>
-            </subtasks>
-        </subTaskGroup>
-        <subTaskGroup description="Mleko">
-            <subtasks>
-                <task class="model.tasks.SimpleTask" type="SimpleTask">
-                    <hook>query.no1.no3</hook>
-                    <comment>mleko dobre na kaca</comment>
-                </task>
-            </subtasks>
-        </subTaskGroup>
-        <subTaskGroup description="">
-            <subtasks>
-                <task class="model.tasks.SimpleTask" type="SimpleTask">
-                    <hook>query.no1.no4</hook>
-                    <state>true</state>
-                </task>
-            </subtasks>
-        </subTaskGroup>
-    </taskGroup>
-    <title>title.no1</title>
-    <object.data>
-        <name.and.surname>Adalbert Chicken</name.and.surname>
-        <email>adalbert.chicken@gmail.com</email>
-        <date>01/10/2018</date>
-    </object.data>
-</root>
+<main_tag>
+    <row_tag>
+        <name_tag>Name 1</name_tag>
+        <info_tag>Info 1</info_tag>
+        <filter_tag>Filter_1, Filter_2</filter_tag>
+    </row_tag>
+    <row_tag>
+        <name_tag>Name 2</name_tag>
+        <info_tag>Info 2</info_tag>
+        <filter_tag>Filter_2, Filter_3</filter_tag>
+    </row_tag>
+    <row_tag>
+        <name_tag>Name 3</name_tag>
+        <info_tag>Info 3</info_tag>
+        <filter_tag>Filter_2</filter_tag>
+    </row_tag>
+    <row_tag>
+        <name_tag>Name 4</name_tag>
+        <info_tag>Info 4</info_tag>
+        <filter_tag>Filter_1, Filter_3</filter_tag>
+    </row_tag>
+    <row_tag>
+        <name_tag>Name 5</name_tag>
+        <info_tag>Info 5</info_tag>
+        <filter_tag>Filter_1</filter_tag>
+    </row_tag>
+</main_tag>

@@ -1,12 +1,17 @@
 import pathlib
 
-from input.properties import (  # type: ignore
+from input.properties_template import (  # type: ignore
+    Column,
     columns,
     font,
+    Font,
     fontsize,
+    FontSize,
+    pagesize,
     rows_xmltag,
-    subtables,
+    subtable_settings,
     subtables_xmltag,
+    SubtableSetting,
     table_title,
 )
 
@@ -25,23 +30,18 @@ def test_columns():
     # Check types and shape `columns`.
     assert isinstance(columns, list)
     for column in columns:
-        assert isinstance(column, dict)
+        assert isinstance(column, Column)
         assert len(column) == 3
-        for key in column:
-            assert isinstance(key, str)
-        assert "label" in column
-        assert isinstance(column["label"], str)
-        assert "tag" in column
-        assert isinstance(column["tag"], list)
-        for tag in column["tag"]:
+        assert isinstance(column.label, str)
+        assert isinstance(column.tag, list)
+        for tag in column.tag:
             assert isinstance(tag, str)
-        assert "width" in column
-        assert float(column["width"])
+        assert float(column.width)
 
 
 def test_column_widths():
     # Check if column widths sum up to 177.8mm.
-    assert sum(column["width"] for column in columns) == 177.8
+    assert sum(column.width for column in columns) < pagesize[0]
 
 
 def test_subtables_xmltag():
@@ -51,17 +51,13 @@ def test_subtables_xmltag():
 
 def test_subtables():
     # Check types and shape of `subtables`.
-    assert isinstance(subtables, list)
-    for subtable in subtables:
-        assert isinstance(subtable, dict)
+    assert isinstance(subtable_settings, tuple)
+    for subtable in subtable_settings:
+        assert isinstance(subtable, SubtableSetting)
         assert len(subtable) == 2
-        for key in subtable:
-            assert isinstance(key, str)
-        assert "label" in subtable
-        assert isinstance(subtable["label"], str)
-        assert "content" in subtable
-        assert isinstance(subtable["content"], list)
-        for criteria_list in subtable["content"]:
+        assert isinstance(subtable.label, str)
+        assert isinstance(subtable.include, list)
+        for criteria_list in subtable.include:
             assert isinstance(criteria_list, list)
             for criteria in criteria_list:
                 assert isinstance(criteria, str)
@@ -69,29 +65,27 @@ def test_subtables():
 
 def test_font():
     # Check types and shape of `font` and if specified files exist.
-    assert isinstance(font, dict)
+    assert isinstance(font, Font)
     assert len(font) == 4
-    assert "normal" in font
-    assert "italic" in font
-    assert "bold" in font
-    assert "bolditalic" in font
+    assert "normal" in font._fields
+    assert "italic" in font._fields
+    assert "bold" in font._fields
+    assert "bolditalic" in font._fields
 
     # Initialize path to fonts, to check for existence.
     path_to_fonts = pathlib.PurePath(__file__).parent.joinpath("fonts")
 
-    for key in font:
-        assert isinstance(key, str)
-        assert isinstance(font[key], str)
-        pathlib.Path(path_to_fonts.joinpath(font[key])).exists()
+    for name in font:
+        assert isinstance(name, str)
+        pathlib.Path(path_to_fonts.joinpath(name)).exists()
 
 
 def test_fontsize():
     # Check types and shape of `fontsize`.
-    assert isinstance(fontsize, dict)
+    assert isinstance(fontsize, FontSize)
     assert len(fontsize) == 3
-    assert "normal" in fontsize
-    assert "table_heading" in fontsize
-    assert "column_heading" in fontsize
-    for key in fontsize:
-        assert isinstance(key, str)
-        assert float(fontsize[key])
+    assert "normal" in fontsize._fields
+    assert "table_heading" in fontsize._fields
+    assert "column_heading" in fontsize._fields
+    for size in fontsize:
+        assert float(size)

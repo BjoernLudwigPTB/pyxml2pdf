@@ -4,11 +4,18 @@
       <w>addopts</w>
       <w>aliceblue</w>
       <w>bolditalic</w>
+      <w>crit</w>
+      <w>crits</w>
       <w>deps</w>
       <w>fixedwidth</w>
+      <w>fontsize</w>
       <w>monkeypatch</w>
+      <w>stdin</w>
       <w>subtable's</w>
+      <w>tablebuilder</w>
       <w>tablestyle</w>
+      <w>xmlcell</w>
+      <w>xmltable</w>
       <w>xmltag</w>
     </words>
   </dictionary>

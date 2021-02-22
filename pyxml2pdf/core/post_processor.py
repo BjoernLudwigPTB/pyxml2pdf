@@ -1,3 +1,5 @@
+"""This module contains the class :class:`PostProcessor` to arrange the result pages"""
+
 import os
 
 from PyPDF2.pdf import PageObject, PdfFileReader, PdfFileWriter  # type: ignore
@@ -41,14 +43,19 @@ class PostProcessor:
                 f"{str(page_number + 1).zfill(2)}.pdf"
             )
 
-            pdf_out = open(
+            with open(
                 os.path.join(self._output_directory_name, output_filename), "wb"
-            )
-            pdf_writer.write(pdf_out)
-            pdf_out.close()
+            ) as pdf_out:
+                pdf_writer.write(pdf_out)
 
+        path_to_pdf = (
+            os.path.dirname(os.path.realpath(__file__))[
+                : os.path.dirname(os.path.realpath(__file__)).rfind("pyxml2pdf")
+            ]
+            + self._full_output_path_
+        )
         print(
             f"Create {pdf.getNumPages()} single paged PDFs.\n\n"
             f"You can find them concatenated at file://"
-            f"{os.path.dirname(os.path.realpath(__file__))[:os.path.dirname(os.path.realpath(__file__)).rfind('pyxml2pdf')] + self._full_output_path_}"
+            f"{path_to_pdf}"
         )

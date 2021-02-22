@@ -1,4 +1,4 @@
-""":py:mod:`pyxml2pdf.core.parser` is the interface between xml input and table"""
+""":py:mod:`pyxml2pdf.core.parser` is the interface between XML input and table"""
 
 __all__ = ["Parser"]
 
@@ -7,12 +7,12 @@ from typing import List
 
 from reportlab.platypus.flowables import KeepTogether  # type: ignore
 
-from pyxml2pdf.core.events import Event
+from pyxml2pdf.core.rows import XMLRow
 from pyxml2pdf.tables.builder import TableBuilder
 
 
 class Parser:
-    """XML parser to extract all interesting information from xml input
+    """XML parser to extract all interesting information from XML input
 
     :param elements: cells to populate the Parser
     """
@@ -27,10 +27,10 @@ class Parser:
     def collect_xml_data(self, events):
         """Traverse the parsed xml data and gather collected event data
 
-        The collected xml data then is passed to the table_manager and all arranged
+        The collected XML data then is passed to the table_manager and all arranged
         data is return.
 
-        :param List[Event] events: a list of the items from which the texts shall be
+        :param List[XMLRow] events: a list of the items from which the texts shall be
             extracted into a nicely formatted table
         :returns: list of all table rows containing the relevant
             event data
@@ -38,7 +38,7 @@ class Parser:
         """
         if events:
             for event in events:
-                self._table_manager.distribute_event(Event(event))
+                self._table_manager.distribute_row(XMLRow(event))
             subtable_elements = self._table_manager.subtables
             self._elements.extend(
                 [
@@ -47,5 +47,5 @@ class Parser:
                 ]
             )
             return self._elements
-        else:
-            warnings.warn("There were no items to print.", RuntimeWarning)
+
+        return warnings.warn("There were no items to print.", RuntimeWarning)

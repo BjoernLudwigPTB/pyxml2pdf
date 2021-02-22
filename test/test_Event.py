@@ -2,41 +2,13 @@ import re
 from datetime import date
 from typing import Callable, Dict
 
-import defusedxml
 import pytest
 from hypothesis import given, HealthCheck, settings
 from hypothesis.strategies import dates, text
 from reportlab.platypus.tables import Table  # type: ignore
 
 from pyxml2pdf.core.events import Event
-from pyxml2pdf.styles.table_styles import TableStyle
-
-# Monkeypatch standard library xml vulnerabilities.
-defusedxml.defuse_stdlib()
-from xml.etree.ElementTree import Element
-
-
-@pytest.fixture
-def test_element() -> Element:
-    """Create a test element
-
-    :returns: and element
-    """
-    test_tag = "test"
-    test_attrib1 = "attrib1"
-    test_attrib_2 = "attrib2"
-    test_attrib = {"1": test_attrib1, "2": test_attrib_2}
-    test_element = Element(test_tag, test_attrib)
-    return test_element
-
-
-@pytest.fixture
-def subtable_title() -> str:
-    """Create a title for a test subtable
-
-    :returns: a test subtable's title
-    """
-    return "Test subtable title"
+from pyxml2pdf.core.rows import XMLRow
 
 
 @pytest.fixture
@@ -46,11 +18,6 @@ def test_event(test_element) -> Event:
     :returns: an event matching the test_element
     """
     return Event(test_element)
-
-
-@pytest.fixture
-def table_style() -> TableStyle:
-    return TableStyle()
 
 
 @pytest.fixture
@@ -65,7 +32,7 @@ def prerequisites() -> Dict[str, str]:
 
 def test_event_init(test_event):
     """Test initialization of :py:mod:`Event` and check for all expected members"""
-    assert test_event._categories
+    assert test_event._criteria
     assert test_event._full_row
     assert isinstance(test_event._init_reduced_row, Callable)
     assert isinstance(test_event.get_full_row, Callable)
@@ -73,7 +40,7 @@ def test_event_init(test_event):
 
 def test_event_parent(test_event):
     """Test if parent class of :py:mod:`Event` is :py:mod:`Element`"""
-    assert isinstance(test_event, Element)
+    assert isinstance(test_event, XMLRow)
 
 
 def test_event_tag(test_element, test_event):
@@ -106,11 +73,18 @@ def test_event_get_reduced_row(test_event, subtable_title):
     assert test_event._reduced_row._ncols == 5
 
 
-def test_event_reduced_rows_column_widths(test_event, subtable_title, table_style):
-    """Reduced row should be created with column widths according to full row"""
+def test_event_reduced_rows_column_widths(test_event, subtable_title, test_table_style):
+    """Reduced row should be created with column widths according to full row
+
+    This test actually makes sense only for the case of data that allows for the
+    creation of reduced rows and need to be adapted then to the number of common
+    columns.
+    """
     test_event._init_reduced_row(subtable_title)
-    assert test_event._reduced_row._colWidths[:4] == table_style.column_widths[:4]
-    assert test_event._reduced_row._colWidths[-1] == sum(table_style.column_widths[4:])
+    assert test_event._reduced_row._colWidths[:3] == test_table_style.column_widths[:3]
+    assert test_event._reduced_row._colWidths[-1] == sum(
+        test_table_style.column_widths[3:]
+    )
 
 
 def test_event_reduced_creation(test_event, subtable_title):

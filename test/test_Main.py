@@ -6,13 +6,6 @@ from pyxml2pdf import main
 
 
 @pytest.mark.online
-def test_all():
-    from pyxml2pdf import main_predefined
-
-    main_predefined.convert()
-
-
-@pytest.mark.online
 def test_init_main():
     import mock
 

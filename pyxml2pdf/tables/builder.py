@@ -1,36 +1,35 @@
+"""This module contains the class :class:`TableBuilder` which deals with XML tables."""
+
 import warnings
-from typing import List, Optional, Tuple, Union
+from typing import List, Optional, Union
 
-from reportlab.lib.styles import StyleSheet1
-from reportlab.platypus import Flowable, Paragraph, Table  # type: ignore
+from reportlab.platypus import Flowable, Paragraph, Table, TableStyle  # type: ignore
 
-from input.properties import columns, subtables  # type: ignore
-from pyxml2pdf.styles.table_styles import TableStyle
-from pyxml2pdf.tables.tables import EventTable
+from input.properties_template import columns, subtable_settings  # type: ignore
+from pyxml2pdf.styles.table_styles import XMLTableStyle
+from pyxml2pdf.tables.tables import XMLTable
 
 
 class TableBuilder:
     """Takes over all tasks for building and working with the tables created"""
 
     def __init__(self):
-        self._table_style = TableStyle()  # type: TableStyle
+        self._table_style = XMLTableStyle()  # type: XMLTableStyle
         self._stylesheet = self._table_style.custom_styles[
             "stylesheet"
-        ]  # type: Union[Tuple[str, ...], StyleSheet1]
-        self._subtables = self.create_subtables()  # type: List[EventTable]
+        ]  # type: TableStyle
+        self._subtables = self.create_subtables()  # type: List[XMLTable]
 
-    def create_subtables(self) -> List[EventTable]:
-        """Create subtables for all different kinds of events
+    def create_subtables(self) -> List[XMLTable]:
+        """Create subtables for all different kinds of rows
 
         :returns: a list of all subtables
-        :rtype: List[EventTable]
+        :rtype: List[XMLTable]
         """
         subtables_list = []
-        for subtable in subtables:
-            subtable_table = EventTable(
-                subtable["label"], subtable["content"][0], subtable["content"][1]
-            )
-            subtable_table.extend(self.make_header(subtable["label"]))
+        for subtable in subtable_settings:
+            subtable_table = XMLTable(subtable.label, subtable.include)
+            subtable_table.extend(self.make_header(subtable.label))
             subtables_list.append(subtable_table)
         return subtables_list
 
@@ -56,8 +55,8 @@ class TableBuilder:
 
         # Create row containing one column per heading.
         columns_list = [
-            Paragraph(heading, self._stylesheet["Heading2"])
-            for heading in [column["label"] for column in columns]
+            Paragraph(heading, self._stylesheet.get("Heading2"))
+            for heading in [column.label for column in columns]
         ]
 
         # Concatenate both rows.
@@ -73,30 +72,32 @@ class TableBuilder:
     @property
     def subtables(self) -> List[Table]:
         """List[Table]: Return all subtables at once"""
-        return [element for subtable in self._subtables for element in subtable.events]
+        return [element for subtable in self._subtables for element in subtable.rows]
 
-    def distribute_event(self, event):
-        """Distribute an event to the subtables according to the related categories
+    def distribute_row(self, row):
+        """Distribute a row to the subtables according to the related criteria
 
-        :param Event event: Event to distribute
+        :param XMLRow row: row to distribute
         """
         distribution_failed = True
-        set_of_cats = set(event.categories)
+        set_of_crits = set(row.criteria)
         for subtable in self._subtables:
-            if set_of_cats.intersection(
-                subtable.activities
-            ) and set_of_cats.intersection(subtable.locations):
-                subtable.append(event.get_table_row(subtable.title))
+            crit_filters_intersection = [
+                set_of_crits.intersection(include_filters)
+                for include_filters in subtable.include_filters
+            ]
+            if all(crit_filters_intersection):
+                subtable.append(row.get_table_row(subtable.title))
                 distribution_failed = False
         if distribution_failed:
             warnings.warn(
-                event.responsible
-                + "'s event on "
-                + event.date
+                "XML row identified by "
+                + row.identifier
                 + " would not be printed, because it does not contain a valid"
-                " combination of locations and activities. Currently it contains "
-                + str(event.categories)
-                + ". Either add a valid location or add a valid activity or both.",
+                " combination of criteria. Currently it contains "
+                + str(row.criteria)
+                + ". If it is supposed to shown please adapt the tables' "
+                "include-filters or adapt the XML tags content .",
                 RuntimeWarning,
             )
 
@@ -104,18 +105,20 @@ class TableBuilder:
         self,
         cells: List[List[Flowable]],
         widths: Optional[Union[float, List[float]]] = None,
-        style: Optional[Union[Tuple[str, ...], StyleSheet1]] = None,
+        style: Optional[XMLTableStyle] = None,
     ) -> Table:
         """Create a table with specified column widths
 
         Create a table from specified cells with fixed column widths and a specific
         style.
 
-        :param cells: cells wrapped by a list representing the columns wrapped by a
-            list representing the lines
-        :param widths: Optional column widths. The default results in reasonable
-            settings based on experience.
-        :param style: Optional table's style. The default results in reasonable
+        :param List[List[Flowable]] cells: cells wrapped by a list representing the
+            columns wrapped by a list representing the lines
+        :param Optional[Union[float, List[float]]] widths: Optional column widths.
+            The default results in reasonable settings based on experience.
+        :param Optional[XMLTableStyle] style: Optional table's style. The default
+        results in
+        reasonable
             settings based on experience.
         :returns: A table containing specified cells in fixed width, styled columns.
         """

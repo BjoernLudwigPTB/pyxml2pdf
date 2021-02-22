@@ -83,18 +83,27 @@ Imagine you have an XML file with similar groups of tags and subtags.
     <row_tag>
         <name_tag>Name 1</name_tag>
         <info_tag>Info 1</info_tag>
-        <filter_tag>Filter_1-1 Filter_1-2</filter_tag>
+        <filter_tag>Filter_1, Filter_2</filter_tag>
     </row_tag>
     <row_tag>
         <name_tag>Name 2</name_tag>
         <info_tag>Info 2</info_tag>
-        <filter_tag>Filter_2-1 Filter_2-2 Filter_2-3</filter_tag>
+        <filter_tag>Filter_2, Filter_3</filter_tag>
     </row_tag>
-    [...]
     <row_tag>
-        <name_tag>Name n</name_tag>
-        <info_tag>Info n</info_tag>
-        <filter_tag>Filter_n-1</filter_tag>
+        <name_tag>Name 3</name_tag>
+        <info_tag>Info 3</info_tag>
+        <filter_tag>Filter_2</filter_tag>
+    </row_tag>
+    <row_tag>
+        <name_tag>Name 4</name_tag>
+        <info_tag>Info 4</info_tag>
+        <filter_tag>Filter_1, Filter_3</filter_tag>
+    </row_tag>
+    <row_tag>
+        <name_tag>Name 5</name_tag>
+        <info_tag>Info 5</info_tag>
+        <filter_tag>Filter_1</filter_tag>
     </row_tag>
 </main_tag>
 ```
@@ -102,9 +111,11 @@ Imagine you have an XML file with similar groups of tags and subtags.
 Now you want to visualize all `row_tag`s with their subtags `name_tag` and `info_tag`
 fed into separate columns. And lastly you want to group those `row_tags` which 
 satisfy certain filter criteria, that is their `filter_tag` contains certain
-combinations of space-separated texts. Those groups of `row_tag`s are extracted into
+combinations of comma-separated texts. Those groups of `row_tag`s are extracted into
 several subtables each with a separating heading line and the corresponding column
 headings.
+
+![page one of the processed template.xml](output/template_seite_01_rotated.png)
 
 ## 📖Documentation
 
