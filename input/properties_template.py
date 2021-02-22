@@ -47,7 +47,7 @@ SubtableSetting = NamedTuple(
 # at least one element is found for the subtable. To _match_ the criteria,
 # the element's `subtables_xmltag`'s content needs to contain at least one of the
 # list elements of each of the nested lists, given here.
-subtable_settings = [
+subtable_settings = (
     SubtableSetting(label="Filter 1", include=[["Filter_1"]]),
     SubtableSetting(
         label="Filter 1 und Filter 2", include=[["Filter_1"], ["Filter_2"]]
@@ -63,7 +63,7 @@ subtable_settings = [
         label="Filter 1 und Filter 3", include=[["Filter_1"], ["Filter_3"]]
     ),
     SubtableSetting(label="Filter 1 oder Filter 3", include=[["Filter_1", "Filter_3"]]),
-]  # type: Tuple[SubtableSetting]
+)  # type: Tuple[SubtableSetting, ...]
 
 Font = NamedTuple(
     "Font", [("normal", str), ("italic", str), ("bold", str), ("bolditalic", str)]
