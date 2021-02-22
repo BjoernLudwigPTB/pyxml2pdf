@@ -31,10 +31,13 @@ class XMLTableStyle:
         * ...
     """
 
+    # Prepare a reusable constant for assigning settings to all cells of an area.
     FULL_ROW = (
         (0, 0),
         (-1, -1),
     )  # type: Tuple[Tuple[int, int], Tuple[int, int]]
+
+    # Set important defaults for the table.
     LINE_THICKNESS = 0.25  # type: float
     LINE_COLOR = black  # type: Color
     BACKGROUND_COLOR = honeydew  # type: Color
