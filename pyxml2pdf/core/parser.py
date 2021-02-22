@@ -48,5 +48,4 @@ class Parser:
             )
             return self._elements
 
-        warnings.warn("There were no items to print.", RuntimeWarning)
-        return None
+        return warnings.warn("There were no items to print.", RuntimeWarning)
