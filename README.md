@@ -106,7 +106,7 @@ combinations of space-separated texts. Those groups of `row_tag`s are extracted 
 several subtables each with a separating heading line and the corresponding column
 headings.
 
-![page one of the processed draft.xml](output/draft_seite_01_rotiert.png)
+![page one of the processed template.xml](output/template_seite_01_rotiert.png)
 
 ## 📖Documentation
 
