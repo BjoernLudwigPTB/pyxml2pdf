@@ -43,11 +43,10 @@ class PostProcessor:
                 f"{str(page_number + 1).zfill(2)}.pdf"
             )
 
-            pdf_out = open(
+            with open(
                 os.path.join(self._output_directory_name, output_filename), "wb"
-            )
-            pdf_writer.write(pdf_out)
-            pdf_out.close()
+            ) as pdf_out:
+                pdf_writer.write(pdf_out)
 
         path_to_pdf = (
             os.path.dirname(os.path.realpath(__file__))[
