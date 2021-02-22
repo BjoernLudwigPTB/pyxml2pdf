@@ -3,7 +3,7 @@
 from typing import List, NamedTuple, Tuple
 
 #: the page size of the generated Pdf.
-pagesize = (90.1, 94)
+pagesize = (90.1, 84.3)
 
 
 #: The XML tag, which will be represented by one row in the table.

@@ -22,16 +22,6 @@
     <row_tag>
         <name_tag>Name 5</name_tag>
         <info_tag>Info 5</info_tag>
-        <filter_tag>Filter_2, Filter_3</filter_tag>
-    </row_tag>
-    <row_tag>
-        <name_tag>Name 6</name_tag>
-        <info_tag>Info 6</info_tag>
         <filter_tag>Filter_1</filter_tag>
-    </row_tag>
-    <row_tag>
-        <name_tag>Name 7</name_tag>
-        <info_tag>Info 7</info_tag>
-        <filter_tag>Filter_2, Filter_3</filter_tag>
     </row_tag>
 </main_tag>
