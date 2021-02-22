@@ -6,10 +6,14 @@ a class :class:`XMLRow` for xml extracted data.
 from typing import cast, List, Set, Type
 
 import defusedxml  # type: ignore
-from reportlab.lib.styles import StyleSheet1
+from reportlab.lib.styles import StyleSheet1  # type: ignore
 from reportlab.platypus import Paragraph, Table  # type: ignore
 
-from input.properties_template import columns, identifier_xmltag, subtables_xmltag
+from input.properties_template import (  # type: ignore
+    columns,
+    identifier_xmltag,
+    subtables_xmltag,
+)
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.builder import TableBuilder
 
@@ -17,7 +21,7 @@ from pyxml2pdf.tables.builder import TableBuilder
 defusedxml.defuse_stdlib()
 from xml.etree.ElementTree import Element
 
-__all__ = ["XMLRow"]
+__all__ = ["XMLCell", "XMLRow"]
 
 
 class XMLCell(Paragraph):
@@ -146,7 +150,7 @@ class XMLRow(Element):
         return self._criteria
 
     @property
-    def identifier(self):
+    def identifier(self) -> str:
         """Return the identifier of the event
 
         :returns: identifier
@@ -154,7 +158,7 @@ class XMLRow(Element):
         """
         return self._identifier
 
-    def get_table_row(self, subtable_title: str):
+    def get_table_row(self, subtable_title: str) -> Table:
         """Return the table row representation of the XML tag
 
         This is the API of :py:class:`XMLRow` for getting the
