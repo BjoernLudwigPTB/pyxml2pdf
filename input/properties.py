@@ -1,6 +1,6 @@
 """This is the set of parameters for interpretation the XML input and formatting"""
 
-from typing import List, NamedTuple
+from typing import List, NamedTuple, Tuple
 
 #: The XML tag, which will be represented by one row in the table.
 rows_xmltag = "kurs"  # type: str
@@ -96,7 +96,7 @@ subtable_settings = (
     SubtableSetting(
         label="Jugendgruppen und -events", include=[["Jugend"], ["Jugend"]]
     ),
-)  # type: Tuple[SubtableSetting]
+)  # type: Tuple[SubtableSetting, ...]
 
 Font = NamedTuple(
     "Font", [("normal", str), ("italic", str), ("bold", str), ("bolditalic", str)]
