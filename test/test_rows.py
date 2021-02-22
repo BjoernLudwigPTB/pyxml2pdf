@@ -1,23 +1,11 @@
 from typing import Callable
 
 import defusedxml  # type: ignore
-import pytest
 from reportlab.platypus.tables import Table  # type: ignore
-
-from pyxml2pdf.core.rows import XMLRow
 
 # Monkeypatch standard library xml vulnerabilities.
 defusedxml.defuse_stdlib()
 from xml.etree.ElementTree import Element
-
-
-@pytest.fixture
-def test_row(test_element) -> XMLRow:
-    """Create a test row related to the test_element
-
-    :returns: a row matching the test_element
-    """
-    return XMLRow(test_element)
 
 
 def test_row_init(test_row):

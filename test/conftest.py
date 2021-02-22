@@ -1,6 +1,7 @@
 import defusedxml
 import pytest
 
+from pyxml2pdf.core.rows import XMLRow
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 
 # Monkeypatch standard library xml vulnerabilities.
@@ -34,3 +35,12 @@ def subtable_title() -> str:
 @pytest.fixture
 def table_style() -> XMLTableStyle:
     return XMLTableStyle()
+
+
+@pytest.fixture
+def test_row(test_element) -> XMLRow:
+    """Create a test row related to the test_element
+
+    :returns: a row matching the test_element
+    """
+    return XMLRow(test_element)
