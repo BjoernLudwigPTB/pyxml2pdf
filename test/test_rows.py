@@ -1,6 +1,7 @@
-from typing import Callable
+from typing import Callable, Set
 
 import defusedxml  # type: ignore
+from hypothesis import given, HealthCheck, settings, strategies as hst
 from reportlab.platypus.tables import Table  # type: ignore
 
 # Monkeypatch standard library xml vulnerabilities.
@@ -37,3 +38,23 @@ def test_row_call_get_full_row(test_row, subtable_title):
 
 def test_concatenate_tags_content(test_row):
     test_row._concatenate_tags_content(["test"])
+
+
+def test_row_get_criteria(test_row):
+    """Test if set and get of criteria work"""
+    assert isinstance(test_row.criteria, Set)
+
+
+def test_row_get_identifier(test_row):
+    """Test if set and get of criteria work"""
+    assert isinstance(test_row.identifier, str)
+
+
+@settings(suppress_health_check=(HealthCheck.function_scoped_fixture,))
+@given(title=hst.text())
+def test_row_get_table_row(test_row, title):
+    """Test if get_table_row works the first time with full_row and second time"""
+    first_row = test_row.get_table_row(title)
+    assert isinstance(first_row, Table)
+    test_row._reduced_row = first_row
+    assert test_row.get_table_row(title) == first_row

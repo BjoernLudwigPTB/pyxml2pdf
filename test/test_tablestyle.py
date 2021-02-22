@@ -1,26 +1,18 @@
-import pytest
 from reportlab.lib.colors import Color  # type: ignore
 from reportlab.lib.styles import StyleSheet1  # type: ignore
 from reportlab.platypus import TableStyle  # type: ignore
 
-from pyxml2pdf.styles.table_styles import XMLTableStyle
 
-
-@pytest.fixture(scope="module")
-def tablestyle():
-    return XMLTableStyle()
-
-
-def test_tablestyle_custom_styles(tablestyle):
+def test_tablestyle_custom_styles(test_table_style):
     # Check types and shape of `custom_styles`.
-    assert isinstance(tablestyle.custom_styles, dict)
-    assert "heading" in tablestyle.custom_styles
-    assert "normal" in tablestyle.custom_styles
-    assert "sub_heading" in tablestyle.custom_styles
-    assert "stylesheet" in tablestyle.custom_styles
+    assert isinstance(test_table_style.custom_styles, dict)
+    assert "heading" in test_table_style.custom_styles
+    assert "normal" in test_table_style.custom_styles
+    assert "sub_heading" in test_table_style.custom_styles
+    assert "stylesheet" in test_table_style.custom_styles
     for key, style in (
         (key, style)
-        for key, style in tablestyle.custom_styles.items()
+        for key, style in test_table_style.custom_styles.items()
         if not key == "stylesheet"
     ):
         assert isinstance(key, str)
@@ -37,23 +29,23 @@ def test_tablestyle_custom_styles(tablestyle):
                 )
                 if isinstance(style_element_atom, tuple):
                     assert len(style_element_atom) == 2
-    assert isinstance(tablestyle._custom_styles["stylesheet"], StyleSheet1)
+    assert isinstance(test_table_style._custom_styles["stylesheet"], StyleSheet1)
 
 
-def test_tablestyle_column_widths(tablestyle):
+def test_tablestyle_column_widths(test_table_style):
     # Check types and shape of `column_widths`.
-    assert tablestyle.column_widths
-    assert isinstance(tablestyle.column_widths, list)
-    for width in tablestyle.column_widths:
+    assert test_table_style.column_widths
+    assert isinstance(test_table_style.column_widths, list)
+    for width in test_table_style.column_widths:
         assert float(width)
 
 
-def test_tablestyle_table_width(tablestyle):
+def test_tablestyle_table_width(test_table_style):
     """Check type of `table_width`."""
-    assert isinstance(tablestyle.table_width, float)
-    assert tablestyle.table_width
+    assert isinstance(test_table_style.table_width, float)
+    assert test_table_style.table_width
 
 
-def test_tablestyle__init_font_family_call(tablestyle):
+def test_tablestyle__init_font_family_call(test_table_style):
     """Check if initialisation of font family runs without error and returns nothing."""
-    assert tablestyle._init_font_family() is None
+    assert test_table_style._init_font_family() is None

@@ -1,4 +1,4 @@
-import defusedxml
+import defusedxml  # type: ignore
 import pytest
 
 from pyxml2pdf.core.rows import XMLRow
@@ -33,7 +33,7 @@ def subtable_title() -> str:
 
 
 @pytest.fixture
-def table_style() -> XMLTableStyle:
+def test_table_style() -> XMLTableStyle:
     return XMLTableStyle()
 
 
