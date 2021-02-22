@@ -7,6 +7,7 @@ from input.properties_template import (  # type: ignore
     Font,
     fontsize,
     FontSize,
+    pagesize,
     rows_xmltag,
     subtable_settings,
     subtables_xmltag,
@@ -40,7 +41,7 @@ def test_columns():
 
 def test_column_widths():
     # Check if column widths sum up to 177.8mm.
-    assert sum(column.width for column in columns) == 177.8
+    assert sum(column.width for column in columns) < pagesize[0]
 
 
 def test_subtables_xmltag():

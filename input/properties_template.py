@@ -1,11 +1,9 @@
 """This is the set of parameters for interpretation the XML input and formatting"""
 
-from typing import List, NamedTuple
-
-from reportlab.lib.units import mm
+from typing import List, NamedTuple, Tuple
 
 #: the page size of the generated Pdf.
-pagesize = (100 * mm, 100 * mm)
+pagesize = (90.1, 94)
 
 
 #: The XML tag, which will be represented by one row in the table.

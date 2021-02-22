@@ -3,6 +3,7 @@
 from typing import List
 
 from defusedxml.ElementTree import parse  # type: ignore
+from reportlab.lib.units import mm
 from reportlab.platypus import SimpleDocTemplate  # type: ignore
 from reportlab.platypus.flowables import KeepTogether  # type: ignore
 
@@ -27,7 +28,7 @@ class Initializer:
         parser = Parser(self._data)
         pdf = SimpleDocTemplate(
             output_path,
-            pagesize=pagesize,
+            pagesize=[size * mm for size in pagesize],
             topMargin=0.0,
             bottomMargin=0.0,
             leftMargin=0.0,
