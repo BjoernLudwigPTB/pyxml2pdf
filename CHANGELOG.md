@@ -2,6 +2,23 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.0 (2021-02-22)
+### Feature
+* **XML:** Allow for processing general XML files and prepare examples ([`2a3b7e9`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/2a3b7e9dec9301840176408b0e36036725ef1b9a))
+
+### Fix
+* **TableStyles:** Turn background in colorful again ([`90bc427`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/90bc427f9386dc625107035084e213bd85de2145))
+* **XMLRow:** Introduce mandatory call to create full row representation ([`799c870`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/799c87050231a4be79cf9d92ea25f17207619ff0))
+* **TableBuilder:** Fix an issue with the stylesheet reference ([`3f65a96`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/3f65a9634ca9ec6aef591988ac5451d1816b8def))
+
+### Documentation
+* **events:** Reintroduce events into docs ([`b2654ee`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/b2654ee25adbe6761a17dba30c3bc8c61c27acf8))
+* **README:** Improve README ([`8eff47a`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/8eff47a76a810d087ce6720c674db622100389e5))
+* **README:** Introduce more descriptions ([`adaefa4`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/adaefa421a8888f9325fac8e4cdeb9df203cfb0b))
+* **README:** Adapt command in README to new version ([`9eca5ad`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/9eca5ad3c6b1d6c33d91271bca1d3b381b354e53))
+
+**[See all commits in this version](https://github.com/BjoernLudwigPTB/pyxml2pdf/compare/v0.1.0...v0.2.0)**
+
 ## v0.1.0 (2021-02-09)
 ### Feature
 * **EventTable:** Introduce extend method for `EventTable.py` und use it in `TableBuilder.py` ([`f205071`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/f2050712137bb0d4011895e517e6b2158c91ed8e))
