@@ -31,14 +31,7 @@ setup(
     keywords="xml pdf conversion",
     packages=find_packages(exclude=["test"]),
     documentation="pyxml2pdf.readthedocs.io",
-    install_requires=[
-        "defusedxml",
-        "reportlab",
-        "requests",
-        "pypdf2",
-        "clint",
-        "download",
-    ],
+    install_requires=["defusedxml", "reportlab", "download"],
     python_requires=">=3.6",
     classifiers=[
         "Development Status :: 4 - Beta",
