@@ -30,8 +30,8 @@
 <h1 align="center">Convert your XML into a Pdf table</h1>
 
 <p align="justify">
-Generate a <b>multi-page PDF file</b> from an <b>XML file</b> whose contents are
-displayed in <b>tables and sub-tables</b> based on <b>filter criteria</b>.
+Generate a <b>multi-page PDF file</b> from an <b>XML file</b> with the contents
+displayed in <b>several tables</b> based on <b>filter criteria</b>.
 </p>
 
 ## Table of content
