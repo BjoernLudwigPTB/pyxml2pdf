@@ -30,10 +30,9 @@
 <h1 align="center">Convert your XML into a Pdf table</h1>
 
 <p align="justify">
-Since we forked the <a href="https://github.com/kuras120/XMLToPDFConverter">upstream</a>
-this project has generalized quite a bit towards the <b>generation of a multipage PDF
-file</b>  containing a table with subtables each containing a subset of an XML files
-content arranged in rows and columns. We work on this project mainly every quarter.</p>
+Generate a <b>multi-page PDF file</b> from an <b>XML file</b> whose contents are
+displayed in <b>tables and sub-tables</b> based on <b>filter criteria</b>.
+</p>
 
 ## Table of content
 
