@@ -39,7 +39,7 @@ class PostProcessor:
             page.rotateCounterClockwise(90)
             pdf_writer.addPage(page)
             output_filename: str = (
-                f"{self._output_base_filename}_seite_"
+                f"{self._output_base_filename}_page_"
                 f"{str(page_number + 1).zfill(2)}.pdf"
             )
 
