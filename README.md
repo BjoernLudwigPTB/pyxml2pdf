@@ -70,13 +70,14 @@ The intended way of using this software is calling
 - optional arguments:
   - `-u <URL>, --url <URL>`
     The URL from which the file shall be downloaded. This is only used, if the specified
-    local file is not present. Defaults to ['https://www.alpinclub-berlin.de/kv/kursdaten.xml'](https://www.alpinclub-berlin.de/kv/kursdaten.xml)
+    local file is not present. Defaults to ['https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/input/template.xml'](https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/input/template.xml)
   - `-p <path to Pdf file>, --pdf <path to Pdf file>`
-    The file path to store the created PDF to. Defaults to `'output/kursdaten.pdf'`
+    The file path to store the created PDF to. Defaults to `'output/template.pdf'`
 
 ## 👓Example
 
-Imagine you have an XML file with similar groups of tags and subtags.
+As an example we look at our _input/template.xml_ and the processed result. Imagine you
+have an XML file with similar groups of tags and subtags.
 
 ```xml
 <main_tag>
