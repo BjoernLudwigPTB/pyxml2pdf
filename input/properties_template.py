@@ -50,19 +50,19 @@ SubtableSetting = NamedTuple(
 subtable_settings = (
     SubtableSetting(label="Filter 1", include=[["Filter_1"]]),
     SubtableSetting(
-        label="Filter 1 und Filter 2", include=[["Filter_1"], ["Filter_2"]]
+        label="Filter 1 and Filter 2", include=[["Filter_1"], ["Filter_2"]]
     ),
-    SubtableSetting(label="Filter 1 oder Filter 2", include=[["Filter_1", "Filter_2"]]),
+    SubtableSetting(label="Filter 1 or Filter 2", include=[["Filter_1", "Filter_2"]]),
     SubtableSetting(label="Filter 2", include=[["Filter_2"]]),
     SubtableSetting(
         label="Filter 2 und Filter 3", include=[["Filter_2"], ["Filter_3"]]
     ),
-    SubtableSetting(label="Filter 2 oder Filter 3", include=[["Filter_2", "Filter_3"]]),
+    SubtableSetting(label="Filter 2 or Filter 3", include=[["Filter_2", "Filter_3"]]),
     SubtableSetting(label="Filter 3", include=[["Filter_3"]]),
     SubtableSetting(
-        label="Filter 1 und Filter 3", include=[["Filter_1"], ["Filter_3"]]
+        label="Filter 1 and Filter 3", include=[["Filter_1"], ["Filter_3"]]
     ),
-    SubtableSetting(label="Filter 1 oder Filter 3", include=[["Filter_1", "Filter_3"]]),
+    SubtableSetting(label="Filter 1 or Filter 3", include=[["Filter_1", "Filter_3"]]),
 )  # type: Tuple[SubtableSetting, ...]
 
 Font = NamedTuple(
