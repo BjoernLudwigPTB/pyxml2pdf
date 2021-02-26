@@ -31,9 +31,9 @@ Column = NamedTuple("Column", [("label", str), ("tag", List[str]), ("width", flo
 #: one and the same row, must each belong to one parent tag `rows_xmltag'. The column
 #: widths are specified with 'width' in mm.
 columns = [
-    Column(label="Name", tag=["name_tag"], width=30),
-    Column(label="Info", tag=["info_tag"], width=30),
-    Column(label="Filter", tag=["filter_tag"], width=30),
+    Column(label="name", tag=["name_tag"], width=30),
+    Column(label="info", tag=["info_tag"], width=30),
+    Column(label="filter", tag=["filter_tag"], width=30),
 ]
 # The XML tag used to select the respective rows for the subtables.
 subtables_xmltag = "filter_tag"
@@ -48,21 +48,21 @@ SubtableSetting = NamedTuple(
 # the element's `subtables_xmltag`'s content needs to contain at least one of the
 # list elements of each of the nested lists, given here.
 subtable_settings = (
-    SubtableSetting(label="Filter 1", include=[["Filter_1"]]),
+    SubtableSetting(label="filter 1", include=[["filter_1"]]),
     SubtableSetting(
-        label="Filter 1 and Filter 2", include=[["Filter_1"], ["Filter_2"]]
+        label="filter 1 and filter 2", include=[["filter_1"], ["filter_2"]]
     ),
-    SubtableSetting(label="Filter 1 or Filter 2", include=[["Filter_1", "Filter_2"]]),
-    SubtableSetting(label="Filter 2", include=[["Filter_2"]]),
+    SubtableSetting(label="filter 1 or filter 2", include=[["filter_1", "filter_2"]]),
+    SubtableSetting(label="filter 2", include=[["filter_2"]]),
     SubtableSetting(
-        label="Filter 2 und Filter 3", include=[["Filter_2"], ["Filter_3"]]
+        label="filter 2 and filter 3", include=[["filter_2"], ["filter_3"]]
     ),
-    SubtableSetting(label="Filter 2 or Filter 3", include=[["Filter_2", "Filter_3"]]),
-    SubtableSetting(label="Filter 3", include=[["Filter_3"]]),
+    SubtableSetting(label="filter 2 or filter 3", include=[["filter_2", "filter_3"]]),
+    SubtableSetting(label="filter 3", include=[["filter_3"]]),
     SubtableSetting(
-        label="Filter 1 and Filter 3", include=[["Filter_1"], ["Filter_3"]]
+        label="filter 1 and filter 3", include=[["filter_1"], ["filter_3"]]
     ),
-    SubtableSetting(label="Filter 1 or Filter 3", include=[["Filter_1", "Filter_3"]]),
+    SubtableSetting(label="filter 1 or filter 3", include=[["filter_1", "filter_3"]]),
 )  # type: Tuple[SubtableSetting, ...]
 
 Font = NamedTuple(
