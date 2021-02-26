@@ -43,6 +43,7 @@ content arranged in rows and columns. We work on this project mainly every quart
 - [💻 Installation](#installation)
 - [💨 Coming soon](#coming-soon)
 - [👋 Get in touch](#get-in-touch)
+- [💎 Acknowledgement](#acknowledgement)
 - [⚠ Disclaimer](#disclaimer)
 - [️© License](#license)
 
@@ -143,6 +144,15 @@ The next big step will be the deployment on [Heroku](https://www.heroku.com).
  
 In case you have any questions on this project do not hesitate to get in touch with
 [us](https://github.com/BjoernLudwigPTB/pyxml2pdf/graphs/contributors).
+
+## 💎Acknowledgement
+
+This project was prepared by [Wojciech Kur](https://github.com/kuras120) in his
+repository [XMLtoPDFConverter](https://github.com/kuras120/XMLToPDFConverter). We are
+grateful for his effort in designing the basic structure and built upon his main ideas.
+At some point our project diverged as much from his original work, as for us to justify
+to decouple our project from his. The fork is still kept (and maintained) as a special 
+case in [pyacb2pdf](https://github.com/BjoernLudwigPTB/pyacb2pdf).
 
 ## ⚠Disclaimer
 
