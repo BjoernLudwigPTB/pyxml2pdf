@@ -84,27 +84,27 @@ have an XML file with similar groups of tags and subtags.
     <row_tag>
         <name_tag>Name 1</name_tag>
         <info_tag>Info 1</info_tag>
-        <filter_tag>Filter_1, Filter_2</filter_tag>
+        <filter_tag>filter_1, filter_2</filter_tag>
     </row_tag>
     <row_tag>
         <name_tag>Name 2</name_tag>
         <info_tag>Info 2</info_tag>
-        <filter_tag>Filter_2, Filter_3</filter_tag>
+        <filter_tag>filter_2, filter_3</filter_tag>
     </row_tag>
     <row_tag>
         <name_tag>Name 3</name_tag>
         <info_tag>Info 3</info_tag>
-        <filter_tag>Filter_2</filter_tag>
+        <filter_tag>filter_2</filter_tag>
     </row_tag>
     <row_tag>
         <name_tag>Name 4</name_tag>
         <info_tag>Info 4</info_tag>
-        <filter_tag>Filter_1, Filter_3</filter_tag>
+        <filter_tag>filter_1, filter_3</filter_tag>
     </row_tag>
     <row_tag>
         <name_tag>Name 5</name_tag>
         <info_tag>Info 5</info_tag>
-        <filter_tag>Filter_1</filter_tag>
+        <filter_tag>filter_1</filter_tag>
     </row_tag>
 </main_tag>
 ```
@@ -120,10 +120,7 @@ headings.
 
 ## 📖Documentation
 
-The full developer reference with all public interfaces you can find on [ReadTheDocs
-](https://pyxml2pdf.readthedocs.io/). User documentation might still take a while for
-us to generate, since it is only us working on the project and using it as far as we
-know.
+The API reference you can find on [ReadTheDocs](https://pyxml2pdf.readthedocs.io/).
 
 ## 💻Installation
 
