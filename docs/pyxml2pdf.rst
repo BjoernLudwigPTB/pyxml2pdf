@@ -1,17 +1,16 @@
-=========
-pyxml2pdf
-=========
+=============
+API reference
+=============
+
+properties
+==========
+
+.. automodule:: input.properties
+    :members:
+    :undoc-members:
 
 core
 ====
-
-downloader
-----------
-
-.. automodule:: pyxml2pdf.core.downloader
-    :members:
-    :private-members:
-    :undoc-members:
 
 rows
 ----
@@ -81,14 +80,6 @@ builder
 
 styles
 ======
-
-cell_formattings
-----------------
-
-.. automodule:: pyxml2pdf.styles.cell_formattings
-    :members:
-    :private-members:
-    :undoc-members:
 
 table_styles
 ------------
