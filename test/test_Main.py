@@ -38,17 +38,6 @@ def test_input():
 
 
 def test_main_call():
-    with pytest.raises(subprocess.CalledProcessError):
-        subprocess.run(["python3", "-m", "pyxml2pdf.main"], check=True)
-    with pytest.raises(subprocess.CalledProcessError):
-        subprocess.run(["python3", "-m", "pyxml2pdf.main", "test.xml"], check=True)
-    with pytest.raises(subprocess.CalledProcessError):
-        subprocess.run(["python3", "-m", "pyxml2pdf.main", "test.test"], check=True)
-    with pytest.raises(subprocess.CalledProcessError):
-        subprocess.run(
-            ["python3", "-m", "pyxml2pdf.main", "test.xml", "test.test"], check=True
-        )
-    with pytest.raises(subprocess.CalledProcessError):
-        subprocess.run(
-            ["python3", "-m", "pyxml2pdf.main", "test.xml", "test.pdf"], check=True
-        )
+    subprocess.run(
+        ["python3", "-m", "pyxml2pdf.main", "input/template.xml"], check=True
+    )

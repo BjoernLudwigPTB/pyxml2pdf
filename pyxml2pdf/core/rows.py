@@ -9,11 +9,7 @@ import defusedxml  # type: ignore
 from reportlab.lib.styles import StyleSheet1  # type: ignore
 from reportlab.platypus import Paragraph, Table  # type: ignore
 
-from input.properties_template import (  # type: ignore
-    columns,
-    identifier_xmltag,
-    subtables_xmltag,
-)
+from input.properties import columns, filter_xmltag, identifier_xmltag  # type: ignore
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.builder import TableBuilder
 
@@ -85,7 +81,7 @@ class XMLRow(Element):
 
     def _init_criteria(self):
         """Initialize the list of criteria from the according xml tag's content"""
-        criteria: str = self._concatenate_tags_content([subtables_xmltag])
+        criteria: str = self._concatenate_tags_content([filter_xmltag])
         return set(criteria.split(", "))
 
     def _concatenate_tags_content(

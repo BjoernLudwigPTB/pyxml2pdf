@@ -13,7 +13,7 @@ from reportlab.pdfbase.pdfmetrics import (  # type: ignore
 from reportlab.pdfbase.ttfonts import TTFont  # type: ignore
 from reportlab.platypus import TableStyle  # type: ignore
 
-from input.properties_template import columns, font, fontsize  # type: ignore
+from input.properties import columns, font, fontsize  # type: ignore
 
 LineFormattingCommand = Tuple[str, Tuple[int, int], Tuple[int, int], float, Color]
 CellFormattingCommand = Tuple[

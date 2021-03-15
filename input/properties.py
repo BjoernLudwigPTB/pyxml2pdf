@@ -1,118 +1,154 @@
-"""This is the set of parameters for interpretation the XML input and formatting"""
+"""The applied set of parameters for interpreting the XML input and output formatting
 
-from typing import List, NamedTuple, Tuple
+To change these setting just take any of the provided variables and overwrite it with
+your desired value in *input/custom_properties.py*. I.e. to change the :attr:`pagesize`
+to something a bit smaller than ISO A5 put the following into
+*input/custom_properties.py*:
 
-#: The XML tag, which will be represented by one row in the table.
-rows_xmltag = "kurs"  # type: str
+.. code-block:: python
+   :linenos:
 
-#: The XML tag, which will be used to identify the row for error message printing.
-identifier_xmltag = [
-    "TerminDatumVon1",
-    "TerminDatumBis1",
-    "TerminDatumVon2",
-    "TerminDatumBis2",
-    "TerminDatumVon3",
-    "TerminDatumBis3",
-]  # type: List[str]
+   pagesize = (178, 134)
+"""
+from typing import List, Tuple
 
-#: The table title is displayed as the content of the very first cell in full table
-#: width.
-table_title = "Ausbildungs- und Fahrtenprogramm 2021"  # type: str
+from pyxml2pdf.core.types import Column, Font, FontSize, PageSize, SubtableSetting
+from . import custom_properties
 
-Column = NamedTuple("Column", [("label", str), ("tag", List[str]), ("width", float)])
-#: The specification for the table columns. The desired column headings are specified
-#: as 'label' and the XML tags containing the content to be displayed in the table
-#: columns are specified as 'tag'. By default, the content of each tag is transferred
-#: to one cell. If several tags are to be merged within one cell, nested lists can be
-#: used here. All tags listed here, which finally shall be displayed in the columns of
-#: one and the same row, must each belong to one parent tag `rows_xmltag'. The column
-#: widths are specified with 'width' in mm.
-columns = [
-    Column(label="Art", tag=["Kursart"], width=7.2),
-    Column(
-        label="Datum",
-        tag=[
-            "TerminDatumVon1",
-            "TerminDatumBis1",
-            "TerminDatumVon2",
-            "TerminDatumBis2",
-            "TerminDatumVon3",
-            "TerminDatumBis3",
-        ],
-        width=11.5,
-    ),
-    Column(label="Ort", tag=["Ort1"], width=18.7),
-    Column(label="Leitung", tag=["Kursleiter"], width=14.5),
-    Column(
-        label="Beschreibung",
-        tag=["Bezeichnung", "Bezeichnung2", "Beschreibung"],
-        width=60.9,
-    ),
-    Column(label="Zielgruppe", tag=["Zielgruppe"], width=18),
-    Column(
-        label="Voraussetzungen<br/>a) persönliche | b) " "materielle | c) finanzielle",
-        tag=["Voraussetzung", "Ausruestung", "Kurskosten", "Leistungen"],
-        width=47,
-    ),
-]  # type: List[Column]
+pagesize: PageSize
+"""The page size of the output Pdf in mm"""
+try:
+    pagesize = custom_properties.pagesize
+except AttributeError:
+    pagesize = (90.1, 84.3)
 
-#: The XML tag used to select the respective rows for the subtables.
-subtables_xmltag = "Kategorie"  # type: str
+rows_xmltag: str
+"""The XML tag, which will be represented by one row in the table"""
+try:
+    rows_xmltag = custom_properties.rows_xmltag
+except AttributeError:
+    rows_xmltag = "row_tag"
 
-SubtableSetting = NamedTuple(
-    "SubtableSetting", [("label", str), ("include", List[List[str]])]
-)
-#: The subtables headings and `subtables_xmltag`'s content on which to decide what
-#: tags should be included. All tags from the XML file which are supposed to be
-#: listed in the respective subtable should match at least one of each of the sublists
-#: include-filters. There will be one subtable for each set of label and
-#: include-filters, as long as at least one element is found for the subtable.
-subtable_settings = (
-    SubtableSetting(
-        label="Wandern im Hoch- und Mittelgebirge",
-        include=[["Hochgebirge", "Mittelgebirge"], ["Wandern"]],
-    ),
-    SubtableSetting(
-        label="Klettern und Bouldern im Mittelgebirge",
-        include=[["Mittelgebirge"], ["Klettern", "Bouldern", "Höhle"]],
-    ),
-    SubtableSetting(
-        label="Ausbildung, Wandern und Klettern in Berlin",
-        include=[["in Berlin"], ["Ausbildung", "Wandern", "Klettern"]],
-    ),
-    SubtableSetting(
-        label="Mountainbiken", include=[["Mountainbiken"], ["Mountainbiken"]]
-    ),
-    SubtableSetting(
-        label="Ski, Bergsteigen, Hochtouren und Klettern im Hochgebirge",
-        include=[
-            ["Hochgebirge"],
-            ["Bergsteigen", "Hochtouren", "Höhle", "Klettern", "Klettersteig", "Ski"],
-        ],
-    ),
-    SubtableSetting(
-        label="Veranstaltungen für Familien", include=[["Familie"], ["Familie"]]
-    ),
-    SubtableSetting(
-        label="Jugendgruppen und -events", include=[["Jugend"], ["Jugend"]]
-    ),
-)  # type: Tuple[SubtableSetting, ...]
+identifier_xmltag: List[str]
+"""The XML tag, which will be used to identify the row for error message printing
 
-Font = NamedTuple(
-    "Font", [("normal", str), ("italic", str), ("bold", str), ("bolditalic", str)]
-)
-#: Fonts for the table.
-font = Font(
-    normal="NewsGothicBT-Roman.ttf",
-    italic="NewsGothicBT-Italic.ttf",
-    bold="NewsGothicBT-Bold.ttf",
-    bolditalic="NewsGothicBT-BoldItalic.ttf",
-)  # type: Font
+This is used in case an instance of :attr:`rows_xmltag` in the input XML file does 
+match any filter criteria and thus would not be included in the output. This results in
+an error message telling which element is not printed where :attr:`identifier_xmltag` is
+used to inform about which element is affected. The error message starts with 
+something close to::
 
-FontSize = NamedTuple(
-    "FontSize", [("normal", float), ("table_heading", float), ("column_heading", float)]
-)
-#: Set the font size for the table. 'normal' applies to all text except table and
-#: column headings, where 'table_heading' applies to the very first line of the whole
-#: table and additionally the first line of all subtables.
-fontsize = FontSize(normal=6.5, table_heading=12, column_heading=6.5,)  # type: FontSize
+    XML row identified by <IDENTIFIER_XMLTAG's CONTENT> would not be printed, 
+    because it does not contain a valid combination of criteria.
+"""
+try:
+    identifier_xmltag = custom_properties.identifier_xmltag
+except AttributeError:
+    identifier_xmltag = [
+        "name_tag",
+        "info_tag",
+        "filter_tag",
+    ]
+
+sort_xmltag: str
+"""The XML tag, which will be used to sort the tables' rows
+
+If possible the tags' contents will be sorted as dates otherwise they will be sorted
+alphanumerically, each in ascending order.
+"""
+try:
+    sort_xmltag = custom_properties.sort_xmltag
+except AttributeError:
+    sort_xmltag = "name_tag"
+
+columns: List[Column]
+"""This is of what and how to include into output's columns
+
+The desired column headings in the output are supposed to be specified as 'label' and 
+the XML tags containing the content to be displayed in the corresponding rows of the
+output's column are supposed to be specified as 'tag'. By default,
+the content of each tag is transferred to one cell. If several tags are to be merged
+within one cell, nested lists can be used here. All tags listed here, which finally
+shall be displayed in the columns of one and the same row, must each belong to one
+parent tag :attr:`rows_xmltag`. The column widths are specified with 'width' in mm.
+"""
+try:
+    columns = custom_properties.columns
+except AttributeError:
+    columns = [
+        Column(label="name", tag=["name_tag"], width=30),
+        Column(label="info", tag=["info_tag"], width=30),
+        Column(label="filter", tag=["filter_tag"], width=30),
+    ]
+
+filter_xmltag: str
+"""The XML tag used to check for filter criteria in the respective rows"""
+try:
+    filter_xmltag = custom_properties.filter_xmltag
+except AttributeError:
+    filter_xmltag = "filter_tag"
+
+subtable_settings: Tuple[SubtableSetting, ...]
+"""The subtables' headings and filter criteria to choose the XML's content to display
+
+There will be one subtable for each set of a label and include 
+filter-criteria, as long as at least one element is found for the subtable. To 
+*match* the criteria, the element's :attr:`filter_xmltag`'s content needs to contain at 
+least one of the list elements of each of the nested lists, given here. The
+:attr:`filter_xmltag`'s content will be compared against the given include filters, 
+where for comma-separated elements of one list a boolean OR is used and a
+boolean AND for the separate lists.
+"""
+try:
+    subtable_settings = custom_properties.subtable_settings
+except AttributeError:
+    subtable_settings = (
+        SubtableSetting(label="filter 1", include=[["filter_1"]]),
+        SubtableSetting(
+            label="filter 1 and filter 2", include=[["filter_1"], ["filter_2"]]
+        ),
+        SubtableSetting(
+            label="filter 1 or filter 2", include=[["filter_1", "filter_2"]]
+        ),
+        SubtableSetting(label="filter 2", include=[["filter_2"]]),
+        SubtableSetting(
+            label="filter 2 and filter 3", include=[["filter_2"], ["filter_3"]]
+        ),
+        SubtableSetting(
+            label="filter 2 or filter 3", include=[["filter_2", "filter_3"]]
+        ),
+        SubtableSetting(label="filter 3", include=[["filter_3"]]),
+        SubtableSetting(
+            label="filter 1 and filter 3", include=[["filter_1"], ["filter_3"]]
+        ),
+        SubtableSetting(
+            label="filter 1 or filter 3", include=[["filter_1", "filter_3"]]
+        ),
+    )
+
+font: Font
+"""Fonts for the output
+
+Files with the respective file names are expected to be found inside the subfolder
+*pyxml2pdf/styles/fonts/*.
+"""
+try:
+    font = custom_properties.font
+except AttributeError:
+    font = Font(
+        normal="NewsGothicBT-Roman.ttf",
+        italic="NewsGothicBT-Italic.ttf",
+        bold="NewsGothicBT-Bold.ttf",
+        bolditalic="NewsGothicBT-BoldItalic.ttf",
+    )
+
+fontsize: FontSize
+"""Set the font size for the table.
+
+This is the font sizes used throughout the output table, where *normal* applies to all
+text except table and column headings.
+"""
+try:
+    fontsize = custom_properties.fontsize
+except AttributeError:
+    fontsize = FontSize(normal=6.5, table_heading=12, column_heading=6.5,)
