@@ -51,7 +51,7 @@ displayed in <b>several tables</b> based on <b>filter criteria</b>.
 As a starting point you could call
 
 ```shell
-$ python -m main.py input/my_test_download.xml
+$ python -m pyxml2pdf.main input/template.xml
 ```
 
 which will download a publicly available XML file into the folder *input* and process

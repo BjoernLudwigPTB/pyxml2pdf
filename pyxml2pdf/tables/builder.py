@@ -5,7 +5,7 @@ from typing import List, Optional, Union
 
 from reportlab.platypus import Flowable, Paragraph, Table, TableStyle  # type: ignore
 
-from input.properties_template import columns, subtable_settings  # type: ignore
+from input.properties import columns, subtable_settings  # type: ignore
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.tables import XMLTable
 
@@ -96,8 +96,8 @@ class TableBuilder:
                 + " would not be printed, because it does not contain a valid"
                 " combination of criteria. Currently it contains "
                 + str(row.criteria)
-                + ". If it is supposed to shown please adapt the tables' "
-                "include-filters or adapt the XML tags content .",
+                + ". If it is supposed to be shown please adapt the tables' "
+                "include-filters or adapt the XML tag's content.",
                 RuntimeWarning,
             )
 
@@ -117,9 +117,7 @@ class TableBuilder:
         :param Optional[Union[float, List[float]]] widths: Optional column widths.
             The default results in reasonable settings based on experience.
         :param Optional[XMLTableStyle] style: Optional table's style. The default
-        results in
-        reasonable
-            settings based on experience.
+            results in reasonable settings based on experience.
         :returns: A table containing specified cells in fixed width, styled columns.
         """
         if widths is None:

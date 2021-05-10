@@ -1,19 +1,19 @@
 import pathlib
+from typing import Tuple
 
-from input.properties_template import (  # type: ignore
-    Column,
+from input.properties import (
     columns,
+    filter_xmltag,
     font,
-    Font,
     fontsize,
-    FontSize,
+    identifier_xmltag,
     pagesize,
     rows_xmltag,
+    sort_xmltag,
     subtable_settings,
-    subtables_xmltag,
-    SubtableSetting,
-    table_title,
+    SubtableSetting,  # type: ignore
 )
+from pyxml2pdf.core.types import Column, Font, FontSize  # type: ignore
 
 
 def test_rows_xmltag():
@@ -21,9 +21,11 @@ def test_rows_xmltag():
     assert isinstance(rows_xmltag, str)
 
 
-def test_table_title():
-    # Check type of `table_title`.
-    assert isinstance(table_title, str)
+def test_identifier_xmltag():
+    # Check type of `identifier_xmltag`.
+    assert isinstance(identifier_xmltag, list)
+    for tag in identifier_xmltag:
+        assert isinstance(tag, str)
 
 
 def test_columns():
@@ -39,14 +41,27 @@ def test_columns():
         assert float(column.width)
 
 
+def test_pagesize():
+    # Check if pagesize is of correct type and size.
+    assert isinstance(pagesize, Tuple)
+    assert len(pagesize) == 2
+    for size in pagesize:
+        assert isinstance(size, float)
+
+
 def test_column_widths():
-    # Check if column widths sum up to 177.8mm.
+    # Check if column widths match pagesize.
     assert sum(column.width for column in columns) < pagesize[0]
 
 
-def test_subtables_xmltag():
-    # Check type of `subtables_xmltag`.
-    assert isinstance(subtables_xmltag, str)
+def test_filter_xmltag():
+    # Check type of `filter_xmltag`.
+    assert isinstance(filter_xmltag, str)
+
+
+def test_sort_xmltag():
+    # Check type of `sort_xmltag`.
+    assert isinstance(sort_xmltag, str)
 
 
 def test_subtables():
