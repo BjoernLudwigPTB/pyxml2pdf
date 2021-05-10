@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2021-05-10)
+### Feature
+* **properties:** Refurbish properties' use and enable easy overwriting via _properties_custom.py_ ([`cb0a755`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/cb0a75579183fb2d12eb9710a926eb7fac547710))
+
+### Documentation
+* Greatly improve docs and fix README example call ([`7e5e1dd`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/7e5e1dd94583391b8625753967357b637c7f2d74))
+
+**[See all commits in this version](https://github.com/BjoernLudwigPTB/pyxml2pdf/compare/v0.2.0...v0.3.0)**
+
 ## v0.2.0 (2021-02-22)
 ### Feature
 * **XML:** Allow for processing general XML files and prepare examples ([`2a3b7e9`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/2a3b7e9dec9301840176408b0e36036725ef1b9a))
