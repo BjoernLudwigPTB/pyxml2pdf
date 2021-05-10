@@ -15,12 +15,25 @@ from typing import List, Tuple
 from pyxml2pdf.core.types import Column, Font, FontSize, PageSize, SubtableSetting
 from . import custom_properties
 
+
+def _inform_about_fallback_setting(
+    fallback_setting_name: str, fallback_setting_value: object
+):
+    """Inform user about the absence of a custom value for one of the settings"""
+    print(
+        f"No custom setting found for '{fallback_setting_name}', falling back to "
+        f"{fallback_setting_value}."
+    )
+
+
 pagesize: PageSize
 """The page size of the output Pdf in mm"""
+
 try:
     pagesize = custom_properties.pagesize
 except AttributeError:
     pagesize = (90.1, 84.3)
+    _inform_about_fallback_setting("pagesize", pagesize)
 
 rows_xmltag: str
 """The XML tag, which will be represented by one row in the table"""
@@ -28,6 +41,7 @@ try:
     rows_xmltag = custom_properties.rows_xmltag
 except AttributeError:
     rows_xmltag = "row_tag"
+    _inform_about_fallback_setting("rows_xmltag", rows_xmltag)
 
 identifier_xmltag: List[str]
 """The XML tag, which will be used to identify the row for error message printing
@@ -49,6 +63,7 @@ except AttributeError:
         "info_tag",
         "filter_tag",
     ]
+    _inform_about_fallback_setting("identifier_xmltag", identifier_xmltag)
 
 sort_xmltag: str
 """The XML tag, which will be used to sort the tables' rows
@@ -60,6 +75,7 @@ try:
     sort_xmltag = custom_properties.sort_xmltag
 except AttributeError:
     sort_xmltag = "name_tag"
+    _inform_about_fallback_setting("sort_xmltag", sort_xmltag)
 
 columns: List[Column]
 """This is of what and how to include into output's columns
@@ -80,6 +96,7 @@ except AttributeError:
         Column(label="info", tag=["info_tag"], width=30),
         Column(label="filter", tag=["filter_tag"], width=30),
     ]
+    _inform_about_fallback_setting("columns", columns)
 
 filter_xmltag: str
 """The XML tag used to check for filter criteria in the respective rows"""
@@ -87,6 +104,7 @@ try:
     filter_xmltag = custom_properties.filter_xmltag
 except AttributeError:
     filter_xmltag = "filter_tag"
+    _inform_about_fallback_setting("filter_xmltag", filter_xmltag)
 
 subtable_settings: Tuple[SubtableSetting, ...]
 """The subtables' headings and filter criteria to choose the XML's content to display
@@ -125,6 +143,7 @@ except AttributeError:
             label="filter 1 or filter 3", include=[["filter_1", "filter_3"]]
         ),
     )
+    _inform_about_fallback_setting("subtable_settings", subtable_settings)
 
 font: Font
 """Fonts for the output
@@ -141,6 +160,7 @@ except AttributeError:
         bold="NewsGothicBT-Bold.ttf",
         bolditalic="NewsGothicBT-BoldItalic.ttf",
     )
+    _inform_about_fallback_setting("font", font)
 
 fontsize: FontSize
 """Set the font size for the table.
@@ -152,3 +172,4 @@ try:
     fontsize = custom_properties.fontsize
 except AttributeError:
     fontsize = FontSize(normal=6.5, table_heading=12, column_heading=6.5,)
+    _inform_about_fallback_setting("fontsize", fontsize)
