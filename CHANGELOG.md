@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.2 (2021-09-19)
+### Fix
+* **main:** Insert actual raw template.xml download url as default value and refine command line help ([`6743dc5`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/6743dc5cf0ffeee1396ad4eb107aea89f1600870))
+* **input:** Reintroduce input into newly packaged project structure ([`4b3b91a`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/4b3b91ad0bf3c1e516ef84f310b6dd4bad6be42d))
+
+**[See all commits in this version](https://github.com/BjoernLudwigPTB/pyxml2pdf/compare/v0.3.1...v0.3.2)**
+
 ## v0.3.1 (2021-09-19)
 ### Fix
 * **fonts:** Include fonts in release ([`493bb6a`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/493bb6aa5cfaf6989a30ba38e5d0bf45002ac441))
