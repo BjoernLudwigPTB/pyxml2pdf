@@ -13,7 +13,7 @@ from reportlab.pdfbase.pdfmetrics import (  # type: ignore
 from reportlab.pdfbase.ttfonts import TTFont  # type: ignore
 from reportlab.platypus import TableStyle  # type: ignore
 
-from input.properties import columns, font, fontsize  # type: ignore
+from pyxml2pdf.input.properties import columns, font, fontsize  # type: ignore
 
 LineFormattingCommand = Tuple[str, Tuple[int, int], Tuple[int, int], float, Color]
 CellFormattingCommand = Tuple[
@@ -22,7 +22,7 @@ CellFormattingCommand = Tuple[
 
 
 class XMLTableStyle:
-    """ Create a collection of styling information about the table to create
+    """Create a collection of styling information about the table to create
 
     Beautiful colors are:
         *   aliceblue (not with azure)
@@ -105,7 +105,12 @@ class XMLTableStyle:
 
         self._custom_styles: Dict[str, Union[StyleSheet1, TableStyle]] = {
             "heading": TableStyle(
-                [self.VALIGN_MIDDLE, self.BACKGROUND, self.BOX, self.ALIGN_CENTER,]
+                [
+                    self.VALIGN_MIDDLE,
+                    self.BACKGROUND,
+                    self.BOX,
+                    self.ALIGN_CENTER,
+                ]
             ),
             "stylesheet": custom_stylesheet,
         }

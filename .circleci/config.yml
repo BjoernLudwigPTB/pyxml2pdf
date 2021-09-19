@@ -45,8 +45,6 @@ commands:
         name: Create test result folder
         command: |
           mkdir test-results
-          mkdir test-results/pytest
-          mkdir -p output
 
     # Download and cache dependencies.
     - restore_cache:
@@ -179,7 +177,7 @@ jobs:
           name: Install pyxml2pdf, Codacy and Codecov reporter
           command: |
             source ${PYENV}/bin/activate
-            pip install .
+            pip install -e .
             pip install pytest pytest-cov hypothesis codacy-coverage codecov
 
       # Set up Code Climate by downloading test reporter as a static binary.
@@ -195,15 +193,13 @@ jobs:
           command: |
             source ${PYENV}/bin/activate
             ./cc-test-reporter before-build
-            pytest -v --cov=. --junitxml=test_results/pytest/pytest.xml
-            coverage xml
+            pytest -v --cov-report xml --cov=src . --junitxml=test_results/pytest.xml
             ./cc-test-reporter after-build --coverage-input-type coverage.py \
                 --exit-code $?
             python-codacy-coverage -r coverage.xml
             codecov
-            mv coverage.xml ./test_results/pytest/
-            coverage report -m > test_results/pytest/coverage.log
-            mv ./output/ ./test_results/
+            mv coverage.xml ./test_results/
+            coverage report -m > test_results/coverage.log
 
       - store_results:
           pyenv: ${PYENV}

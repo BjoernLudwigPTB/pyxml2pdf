@@ -48,12 +48,7 @@ class PostProcessor:
             ) as pdf_out:
                 pdf_writer.write(pdf_out)
 
-        path_to_pdf = (
-            os.path.dirname(os.path.realpath(__file__))[
-                : os.path.dirname(os.path.realpath(__file__)).rfind("pyxml2pdf")
-            ]
-            + self._full_output_path_
-        )
+        path_to_pdf = os.path.join(os.getcwd(), self._full_output_path_)
         print(
             f"Create {pdf.getNumPages()} single paged PDFs.\n\n"
             f"You can find them concatenated at file://"

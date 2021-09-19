@@ -1,7 +1,8 @@
 import pathlib
 from typing import Tuple
 
-from input.properties import (
+from pyxml2pdf.core.types import Column, Font, FontSize  # type: ignore
+from pyxml2pdf.input.properties import (
     columns,
     filter_xmltag,
     font,
@@ -13,7 +14,6 @@ from input.properties import (
     subtable_settings,
     SubtableSetting,  # type: ignore
 )
-from pyxml2pdf.core.types import Column, Font, FontSize  # type: ignore
 
 
 def test_rows_xmltag():

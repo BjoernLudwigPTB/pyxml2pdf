@@ -3,11 +3,11 @@
 import warnings
 from typing import List, Optional, Union
 
-from pyxml2pdf.styles.table_styles import XMLTableStyle
-from pyxml2pdf.tables.tables import XMLTable
 from reportlab.platypus import Flowable, Paragraph, Table, TableStyle  # type: ignore
 
-from input.properties import columns, subtable_settings  # type: ignore
+from pyxml2pdf.styles.table_styles import XMLTableStyle
+from pyxml2pdf.tables.tables import XMLTable
+from ..input.properties import columns, subtable_settings  # type: ignore
 
 
 class TableBuilder:
