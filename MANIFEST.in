@@ -1,0 +1,2 @@
+graft src/pyxml2pdf/styles/fonts
+prune test
