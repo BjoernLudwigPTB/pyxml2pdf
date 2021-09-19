@@ -180,7 +180,7 @@ jobs:
           command: |
             source ${PYENV}/bin/activate
             pip install .
-            pip install pytest pytest-cov codacy-coverage codecov
+            pip install pytest pytest-cov hypothesis codacy-coverage codecov
 
       # Set up Code Climate by downloading test reporter as a static binary.
       - run:
