@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.1 (2021-09-19)
+### Fix
+* **fonts:** Include fonts in release ([`493bb6a`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/493bb6aa5cfaf6989a30ba38e5d0bf45002ac441))
+
+**[See all commits in this version](https://github.com/BjoernLudwigPTB/pyxml2pdf/compare/v0.3.0...v0.3.1)**
+
 ## v0.3.0 (2021-05-10)
 ### Feature
 * **properties:** Refurbish properties' use and enable easy overwriting via _properties_custom.py_ ([`cb0a755`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/cb0a75579183fb2d12eb9710a926eb7fac547710))
