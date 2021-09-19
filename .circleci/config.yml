@@ -198,9 +198,8 @@ jobs:
                 --exit-code $?
             python-codacy-coverage -r coverage.xml
             codecov
-            mv coverage.xml ./test_results/pytest/
-            coverage report -m > test_results/pytest/coverage.log
-            mv ./output/ ./test_results/
+            mv coverage.xml ./test_results/
+            coverage report -m > test_results/coverage.log
 
       - store_results:
           pyenv: ${PYENV}
