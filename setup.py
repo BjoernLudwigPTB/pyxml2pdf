@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
 """Install pyxml2pdf in Python path."""
-
 import os
 
 from setuptools import find_packages, setup  # type: ignore
 
-# Get release version from pyxml2pdf/__init__.py.
-from pyxml2pdf import __version__ as version
+current_release_version = "0.3.0"
 
 
 def read(fname):
@@ -21,7 +18,7 @@ def readme():
 
 setup(
     name="pyxml2pdf",
-    version=version,
+    version=current_release_version,
     description="Transfer XML to well formatted PDF table.",
     long_description=readme(),
     long_description_content_type="text/markdown",
@@ -29,7 +26,9 @@ setup(
     author=u"Björn Ludwig, Wojciech Kur",
     author_email="bjoern.ludwig@ptb.de",
     keywords="xml pdf conversion",
-    packages=find_packages(exclude=["test"]),
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+    include_package_data=True,
     documentation="pyxml2pdf.readthedocs.io",
     install_requires=["defusedxml", "download", "reportlab", "pypdf2"],
     python_requires=">=3.6",

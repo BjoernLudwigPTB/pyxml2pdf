@@ -5,10 +5,9 @@ __all__ = ["Parser"]
 import warnings
 from typing import List
 
-from reportlab.platypus.flowables import KeepTogether  # type: ignore
-
 from pyxml2pdf.core.rows import XMLRow
 from pyxml2pdf.tables.builder import TableBuilder
+from reportlab.platypus.flowables import KeepTogether  # type: ignore
 
 
 class Parser:

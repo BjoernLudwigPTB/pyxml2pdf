@@ -155,10 +155,10 @@ try:
     font = custom_properties.font
 except AttributeError:
     font = Font(
-        normal="NewsGothicBT-Roman.ttf",
-        italic="NewsGothicBT-Italic.ttf",
-        bold="NewsGothicBT-Bold.ttf",
-        bolditalic="NewsGothicBT-BoldItalic.ttf",
+        normal="LiberationSans-Regular.ttf",
+        italic="LiberationSans-Italic.ttf",
+        bold="LiberationSans-Bold.ttf",
+        bolditalic="LiberationSans-BoldItalic.ttf",
     )
     _inform_about_fallback_setting("font", font)
 
@@ -171,5 +171,9 @@ text except table and column headings.
 try:
     fontsize = custom_properties.fontsize
 except AttributeError:
-    fontsize = FontSize(normal=6.5, table_heading=12, column_heading=6.5,)
+    fontsize = FontSize(
+        normal=6.5,
+        table_heading=12,
+        column_heading=6.5,
+    )
     _inform_about_fallback_setting("fontsize", fontsize)
