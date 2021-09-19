@@ -176,12 +176,10 @@ jobs:
 
       # Install CI blocks dependencies.
       - run:
-          name: Install Codacy and Codecov reporter
+          name: Install pyxml2pdf, Codacy and Codecov reporter
           command: |
             source ${PYENV}/bin/activate
-            pip install --upgrade pip
-            pip install -r requirements/requirements.txt
-            pip install -r requirements/dev-requirements.txt
+            pip install .
             pip install pytest pytest-cov codacy-coverage codecov
 
       # Set up Code Climate by downloading test reporter as a static binary.
