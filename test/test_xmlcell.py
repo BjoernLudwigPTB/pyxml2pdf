@@ -2,9 +2,9 @@ import pytest
 from hypothesis import given, HealthCheck, settings, strategies as hst
 from reportlab.lib.styles import ParagraphStyle  # type: ignore
 
-from input.properties import subtable_settings  # type: ignore
 from pyxml2pdf.core.rows import XMLCell
 from pyxml2pdf.core.types import SubtableSetting  # type: ignore
+from pyxml2pdf.input.properties import subtable_settings  # type: ignore
 
 
 @pytest.fixture
