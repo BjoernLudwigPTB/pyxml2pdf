@@ -10,11 +10,16 @@ import sys
 from typing import Dict
 
 from download import download  # type: ignore
+
 from pyxml2pdf.core.initializer import Initializer
 
 
 def _add_arguments() -> Dict[str, str]:
-    """Execute pyxml2pdf with provided command line parameters."""
+    """Define pyxml2pdf command line parameters and help"""
+    _default_download_url = (
+        "https://raw.githubusercontent.com/BjoernLudwigPTB/"
+        "pyxml2pdf/master/input/template.xml"
+    )
     parser = argparse.ArgumentParser(
         description="A converter for XML data into nicely formatted tables in a PDF."
     )
@@ -22,23 +27,20 @@ def _add_arguments() -> Dict[str, str]:
         "local_file",
         nargs="+",
         type=str,
-        default="input/template.xml",
         help="The local file path to the XML file. If this file is not present, "
-        "the optional input parameter '--url' needs to be provided with the URL "
-        "from which the file shall be downloaded.",
+        "it will be downloaded. The download url can be specified via the '--url' "
+        "parameter.",
     )
     parser.add_argument(
         "-u",
         "--url",
+        metavar="<download url>",
         nargs=1,
         type=str,
-        default=[
-            "https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/input/"
-            "template.xml"
-        ],
+        default=[_default_download_url],
         help="The URL from which the file shall be downloaded. This is only used, "
-        "if the specified local file is not present. Defaults to "
-        "'https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/input/template.xml'",
+        "if the specified 'local_file' is not present in the file system. Defaults to "
+        f"'{_default_download_url}'",
     )
     parser.add_argument(
         "-p",
@@ -46,9 +48,9 @@ def _add_arguments() -> Dict[str, str]:
         metavar="<path to Pdf file>",
         nargs=1,
         type=str,
-        default=["output/template.pdf"],
-        help="The file path to store the created PDF to. Defaults to "
-        "'output/kursdaten.pdf'",
+        default=["pyxml2pdf_output.pdf"],
+        help="The relative file path from the current working directory and filename "
+        "to store the created Pdf to. Defaults to 'pyxml2pdf_output.pdf'",
     )
     return vars(parser.parse_args())
 
