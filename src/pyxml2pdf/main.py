@@ -10,15 +10,14 @@ import sys
 from typing import Dict
 
 from download import download  # type: ignore
-
 from pyxml2pdf.core.initializer import Initializer
 
 
 def _add_arguments() -> Dict[str, str]:
     """Define pyxml2pdf command line parameters and help"""
     _default_download_url = (
-        "https://raw.githubusercontent.com/BjoernLudwigPTB/"
-        "pyxml2pdf/master/input/template.xml"
+        "https://raw.githubusercontent.com/BjoernLudwigPTB/pyxml2pdf/"
+        "master/src/pyxml2pdf/input/template.xml"
     )
     parser = argparse.ArgumentParser(
         description="A converter for XML data into nicely formatted tables in a PDF."
