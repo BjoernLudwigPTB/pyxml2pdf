@@ -10,7 +10,6 @@ import sys
 from typing import Dict
 
 from download import download  # type: ignore
-
 from pyxml2pdf.core.initializer import Initializer
 
 

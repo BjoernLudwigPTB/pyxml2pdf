@@ -6,12 +6,12 @@ a class :class:`XMLRow` for xml extracted data.
 from typing import cast, List, Set, Type
 
 import defusedxml  # type: ignore
+from pyxml2pdf.styles.table_styles import XMLTableStyle
+from pyxml2pdf.tables.builder import TableBuilder
 from reportlab.lib.styles import StyleSheet1  # type: ignore
 from reportlab.platypus import Paragraph, Table  # type: ignore
 
 from input.properties import columns, filter_xmltag, identifier_xmltag  # type: ignore
-from pyxml2pdf.styles.table_styles import XMLTableStyle
-from pyxml2pdf.tables.builder import TableBuilder
 
 # Monkeypatch standard library xml vulnerabilities.
 defusedxml.defuse_stdlib()
