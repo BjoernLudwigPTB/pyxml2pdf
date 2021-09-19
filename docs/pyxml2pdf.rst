@@ -5,7 +5,7 @@ API reference
 properties
 ==========
 
-.. automodule:: input.properties
+.. automodule:: pyxml2pdf.input.properties
     :members:
     :undoc-members:
 
