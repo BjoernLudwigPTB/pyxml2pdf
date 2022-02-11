@@ -1,8 +1,13 @@
+[paths]
+source =
+   src
+   */site-packages
+
 [run]
-omit =
-    setup.py
-    # omit anything in a virtual environment
-    .tox/*
-    py??/*
-    # omit test suite
-    test/*
+branch = true
+parallel = true
+source =
+    test
+
+[report]
+show_missing = true
