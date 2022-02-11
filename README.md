@@ -5,10 +5,6 @@
   <a href="https://pyxml2pdf.readthedocs.io/en/latest/">
     <img src="https://readthedocs.org/projects/pyxml2pdf/badge/?version=latest" alt="ReadTheDocs badge">
   </a>
-  <!-- Codacy Code Quality -->
-  <a href="https://www.codacy.com/manual/blus_projects/pyxml2pdf?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BjoernLudwigPTB/pyxml2pdf&amp;utm_campaign=Badge_Grade">
-    <img src="https://api.codacy.com/project/badge/Grade/d8cd591a0e814ed59f9e6f4a0ac5cf4c" alt="Codacy badge">
-  </a>
   <!-- CodeCov(erage) -->
   <a href="https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf">
     <img src="https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf/branch/main/graph/badge.svg" alt="CodeCov badge"/>
