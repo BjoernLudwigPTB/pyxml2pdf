@@ -182,7 +182,6 @@ jobs:
     executor:
       name: test
       tag: << parameters.tag >>
-      pyenv: << parameters.pyenv >>
 
     # Call for the execution of some reusable commands specified above and
     # additionally produce coverage reports and send them to the according CI platforms.
