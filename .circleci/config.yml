@@ -87,9 +87,18 @@ commands:
 workflows:
   test_and_deploy:
     jobs:
-      #- test37
-      #- test38
-      #- test39
+      - test:
+          name: "test_python_3.7"
+          tag: "3.7"
+          pyenv: "py37"
+      - test:
+          name: "test_python_3.8"
+          tag: "3.8"
+          pyenv: "py38"
+      - test:
+          name: "test_python_3.9"
+          tag: "3.9"
+          pyenv: "py39"
       - test:
           name: "test_python_3.10"
           tag: "3.10"
@@ -97,76 +106,15 @@ workflows:
           posargs: "-- --cov {envsitepackagesdir}/pyxml2pdf"
       - semantic-release:
           requires:
-              #- test37
-              #- test38
-              #- test39
+              - test_python_3.7
+              - test_python_3.8
+              - test_python_3.9
               - test_python_3.10
           filters:
               branches:
                 only: /master/
 
 jobs:
-  test37:
-    parameters:
-      tag:
-        type: string
-        default: "3.7"
-      pyenv:
-        type: string
-        default: "py37"
-
-    executor:
-      name: tester
-      tag: << parameters.tag >>
-
-    steps:
-      - create_folders_and_venv:
-          pyenv: << parameters.pyenv >>
-      - tox:
-          pyenv: << parameters.pyenv >>
-      - store_results:
-          pyenv: << parameters.pyenv >>
-  test38:
-    parameters:
-      tag:
-        type: string
-        default: "3.8"
-      pyenv:
-        type: string
-        default: "py38"
-
-    executor:
-      name: tester
-      tag: << parameters.tag >>
-
-    steps:
-      - create_folders_and_venv:
-          pyenv: << parameters.pyenv >>
-      - tox:
-          pyenv: << parameters.pyenv >>
-      - store_results:
-          pyenv: << parameters.pyenv >>
-  test39:
-    parameters:
-      tag:
-        type: string
-        default: "3.9"
-      pyenv:
-        type: string
-        default: "py39"
-
-    executor:
-      name: tester
-      tag: << parameters.tag >>
-
-    steps:
-      - create_folders_and_venv:
-          pyenv: << parameters.pyenv >>
-      - tox:
-          pyenv: << parameters.pyenv >>
-      - store_results:
-          pyenv: << parameters.pyenv >>
-
   test:
     parameters:
       tag:
