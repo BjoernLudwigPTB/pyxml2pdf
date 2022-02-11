@@ -2,6 +2,15 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.3 (2022-02-11)
+### Fix
+* **setup:** Introduce Python 3.9 and 3.10 into allowed versions and remove 3.6 ([`fdfc14d`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/fdfc14d78f092820c1757b1fea973cc1fe795578))
+
+### Documentation
+* **README:** Update image after changing the font ([`5cbcfd9`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/5cbcfd92cf51737c6a8561f8c3bdd301151713b6))
+
+**[See all commits in this version](https://github.com/BjoernLudwigPTB/pyxml2pdf/compare/v0.3.2...v0.3.3)**
+
 ## v0.3.2 (2021-09-19)
 ### Fix
 * **main:** Insert actual raw template.xml download url as default value and refine command line help ([`6743dc5`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/6743dc5cf0ffeee1396ad4eb107aea89f1600870))
