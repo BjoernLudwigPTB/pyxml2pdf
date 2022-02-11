@@ -11,7 +11,7 @@
   </a>
   <!-- CodeCov(erage) -->
   <a href="https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf">
-    <img src="https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf/branch/master/graph/badge.svg"/>
+    <img src="https://codecov.io/gh/BjoernLudwigPTB/pyxml2pdf/branch/main/graph/badge.svg" alt="CodeCov badge"/>
   </a>
   <!-- PyPI Version -->
   <a href="https://pypi.org/project/pyxml2pdf">
@@ -70,7 +70,7 @@ The intended way of using this software is calling
 - optional arguments:
   - `-u <URL>, --url <URL>`
     The URL from which the file shall be downloaded. This is only used, if the specified
-    local file is not present. Defaults to ['https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/input/template.xml'](https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/input/template.xml)
+    local file is not present. Defaults to ['https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/main/input/template.xml'](https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/main/input/template.xml)
   - `-p <path to Pdf file>, --pdf <path to Pdf file>`
     The file path to store the created PDF to. Defaults to `'output/template.pdf'`
 
@@ -160,4 +160,4 @@ author be liable for any direct, indirect or consequential damage arising in con
 with the use of this software.
 ## ©License
 
-pyxml2pdf is distributed under the [GPLv3 license](https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/master/LICENSE).
+pyxml2pdf is distributed under the [GPLv3 license](https://github.com/BjoernLudwigPTB/pyxml2pdf/blob/main/LICENSE).

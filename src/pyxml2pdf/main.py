@@ -17,7 +17,7 @@ def _add_arguments() -> Dict[str, str]:
     """Define pyxml2pdf command line parameters and help"""
     _default_download_url = (
         "https://raw.githubusercontent.com/BjoernLudwigPTB/pyxml2pdf/"
-        "master/src/pyxml2pdf/input/template.xml"
+        "main/src/pyxml2pdf/input/template.xml"
     )
     parser = argparse.ArgumentParser(
         description="A converter for XML data into nicely formatted tables in a PDF."

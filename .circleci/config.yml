@@ -5,48 +5,32 @@
 version: 2.1
 
 executors:
-  # Define a parameterized executor which accepts two parameters to choose the Python
-  # version which will be used for the Docker image and the tox actions.
-  test:
+  tester:
     working_directory: ~/repo
     parameters:
-      # Initialize the parameter and set default which specifies the Python Docker
-      # image tag. Should represent the same Python version as the tox Python version.
       tag:
         type: string
-        default: "3.7"
-      # Initialize the parameter and set default which specifies the tox Python version.
-      # Should represent the same Python version as the Python Docker image tag.
-      pyenv:
-        type: string
-        default: "py38"
+        default: "3.10"
     docker:
-      - image: circleci/python:<< parameters.tag >>
-    environment:
-      PYENV: << parameters.pyenv >>
-  # Define the executor for the python semantic release.
+      - image: cimg/python:<< parameters.tag >>
   publisher:
     working_directory: ~/repo
     docker:
-      - image: circleci/python:3.8
+      - image: cimg/python:3.10
 
 commands:
-  # Reusable command to prepare the environment for testing.
   create_folders_and_venv:
     description: "Prepare everything."
     parameters:
       pyenv:
         type: string
     steps:
-    # Checkout code.
     - checkout
-    # Create test-result folder and the default output folder.
     - run:
         name: Create test result folder
         command: |
           mkdir test-results
 
-    # Download and cache dependencies.
     - restore_cache:
         keys:
           - << parameters.pyenv >>-dependencies-
@@ -55,45 +39,36 @@ commands:
           # Fallback to using the latest cache if no exact match is found.
           - << parameters.pyenv >>-dependencies-
 
-    # Create pyxml2pdf virtual environment.
     - run:
         name: Create virtual environment
         command: |
           python3 -m venv << parameters.pyenv >>
-          source << parameters.pyenv >>/bin/activate
-          pip install --upgrade pip
+          echo 'source << parameters.pyenv >>/bin/activate' >> $BASH_ENV
 
-  # Reusable command to conduct actual testing.
+    - run:
+        name: Upgrade pip
+        command: |
+          pip install --upgrade pip pip-tools
+          python -m piptools sync requirements/requirements.txt requirements/dev-requirements.txt
+
   tox:
     description: "Perform tox testing."
     parameters:
       pyenv:
         type: string
+        default: "py310"
+      posargs:
+        type: string
+        default: ""
     steps:
+    - run: tox -e << parameters.pyenv >> << parameters.posargs >>
 
-    # Install pyxml2pdf dependencies.
-    - run:
-        name: Install dependencies
-        command: |
-          python3 -m venv << parameters.pyenv >>
-          source << parameters.pyenv >>/bin/activate
-          pip install tox
-
-    # Perform tox testing.
-    - run:
-        name: Perform tox testing
-        command: |
-          source << parameters.pyenv >>/bin/activate
-          tox -e << parameters.pyenv >>
-
-  # Reusable command to store the previously generated test results.
   store_results:
     description: "Store test results and artifacts."
     parameters:
       pyenv:
         type: string
     steps:
-    # Store test results.
     - store_artifacts:
         path: test_results
         destination: test_results
@@ -112,97 +87,106 @@ commands:
 workflows:
   test_and_deploy:
     jobs:
-      - test36
-      - test37
-      - test38
+      - test:
+          name: "test_python_3.7"
+          tag: "3.7"
+          pyenv: "py37"
+      - test:
+          name: "test_python_3.8"
+          tag: "3.8"
+          pyenv: "py38"
+      - test:
+          name: "test_python_3.9"
+          tag: "3.9"
+          pyenv: "py39"
+      - test:
+          name: "test_python_3.10"
+          tag: "3.10"
+          pyenv: "py310"
+          posargs: "-- --cov {envsitepackagesdir}/pyxml2pdf"
       - semantic-release:
-          # Create 'release' job to create a release and publish it on GitHub.
           requires:
-              - test36
-              - test37
-              - test38
+              - test_python_3.7
+              - test_python_3.8
+              - test_python_3.9
+              - test_python_3.10
           filters:
               branches:
-                # This assures the job only being triggered on branch master.
-                only: /master/
+                only: main
 
 jobs:
-  # Define the job to run all tests against Python 3.6.
-  test36:
+  test:
+    parameters:
+      tag:
+        type: string
+        default: "3.10"
+      pyenv:
+        type: string
+        default: "py310"
+      posargs:
+        type: string
+        default: ""
+
     executor:
-      name: test
-      tag: "3.6"
-      pyenv: "py36"
-
-    # Call for the execution of all reusable commands specified above.
-    steps:
-      - create_folders_and_venv:
-          pyenv: ${PYENV}
-      - tox:
-          pyenv: ${PYENV}
-      - store_results:
-          pyenv: ${PYENV}
-
-  # Define the job to run all tests against Python 3.7.
-  test37:
-    executor:
-      name: test
-      tag: "3.7"
-      pyenv: "py37"
-
-    # Call for the execution of all reusable commands specified above.
-    steps:
-      - create_folders_and_venv:
-          pyenv: ${PYENV}
-      - tox:
-          pyenv: ${PYENV}
-      - store_results:
-          pyenv: ${PYENV}
-
-  # Define the job to run all tests against Python 3.7.
-  test38:
-    executor:
-      name: test
-      tag: "3.8"
-      pyenv: "py38"
+      name: tester
+      tag: << parameters.tag >>
 
     # Call for the execution of some reusable commands specified above and
     # additionally produce coverage reports and send them to the according CI platforms.
     steps:
       - create_folders_and_venv:
-          pyenv: ${PYENV}
+          pyenv: << parameters.pyenv >>
 
       # Install CI blocks dependencies.
       - run:
-          name: Install pyxml2pdf, Codacy and Codecov reporter
+          name: Install pyxml2pdf and Codecov reporter
           command: |
-            source ${PYENV}/bin/activate
             pip install -e .
-            pip install pytest pytest-cov hypothesis codacy-coverage codecov
 
-      # Set up Code Climate by downloading test reporter as a static binary.
-      - run:
-          name: Set up Code Climate test-reporter
-          command: |
-            curl -L 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64' > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
+      - when:
+          condition: << parameters.posargs >>
+          steps:
+            - run:
+                name: Set up Code Climate test-reporter
+                command: |
+                  curl -L 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64' > ./cc-test-reporter
+                  chmod +x ./cc-test-reporter
+                  ./cc-test-reporter before-build
 
-      # Prepare for sending coverage reports to code climate.
-      - run:
-          name: Prepare code climate
-          command: |
-            source ${PYENV}/bin/activate
-            ./cc-test-reporter before-build
-            pytest -v --cov-report xml --cov=src . --junitxml=test_results/pytest.xml
-            ./cc-test-reporter after-build --coverage-input-type coverage.py \
-                --exit-code $?
-            python-codacy-coverage -r coverage.xml
-            codecov
-            mv coverage.xml ./test_results/
-            coverage report -m > test_results/coverage.log
+      - tox:
+          pyenv: << parameters.pyenv >>
+          posargs: << parameters.posargs >>
+
+      - when:
+          condition: << parameters.posargs >>
+          steps:
+            - run:
+                name: Set up Code Climate test-reporter
+                command: |
+                  curl -L 'https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64' > ./cc-test-reporter
+                  chmod +x ./cc-test-reporter
+            - run:
+                name: Install CodeCov coverage reporter
+                command: |
+                  curl -s https://codecov.io/bash > codecov;
+                  VERSION=$(grep -o 'VERSION=\"[0-9\.]*\"' codecov | cut -d'"' -f2);
+                  for i in 1 256 512
+                  do
+                    shasum -a $i -c --ignore-missing <(curl -s "https://raw.githubusercontent.com/codecov/codecov-bash/${VERSION}/SHA${i}SUM") ||
+                    shasum -a $i -c <(curl -s "https://raw.githubusercontent.com/codecov/codecov-bash/${VERSION}/SHA${i}SUM")
+                  done
+                  chmod u+x codecov
+            - run:
+                name: Prepare code climate
+                command: |
+                  ./cc-test-reporter after-build --coverage-input-type coverage.py \
+                      --exit-code $?
+                  ./codecov
+                  mv coverage.xml ./test_results/
+                  coverage report -m > test_results/coverage.log
 
       - store_results:
-          pyenv: ${PYENV}
+          pyenv: << parameters.pyenv >>
 
   # Define the job to run after all tests have passed and release software based on
   # python-semantic-release.
