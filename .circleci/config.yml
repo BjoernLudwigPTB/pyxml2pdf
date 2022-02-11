@@ -87,9 +87,9 @@ commands:
 workflows:
   test_and_deploy:
     jobs:
-      - test37
-      - test38
-      - test39
+      #- test37
+      #- test38
+      #- test39
       - test:
           name: "test_python_3.10"
           tag: "3.10"
@@ -97,9 +97,9 @@ workflows:
           posargs: "--cov-report xml --cov=src"
       - semantic-release:
           requires:
-              - test37
-              - test38
-              - test39
+              #- test37
+              #- test38
+              #- test39
               - test_python_3.10
           filters:
               branches:
