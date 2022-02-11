@@ -5,7 +5,7 @@
 version: 2.1
 
 executors:
-  test:
+  tester:
     working_directory: ~/repo
     parameters:
       tag:
@@ -116,7 +116,7 @@ jobs:
         default: "py37"
 
     executor:
-      name: test
+      name: tester
       tag: << parameters.pyenv >>
 
     steps:
@@ -136,7 +136,7 @@ jobs:
         default: "py38"
 
     executor:
-      name: test
+      name: tester
       tag: << parameters.pyenv >>
 
     steps:
@@ -156,7 +156,7 @@ jobs:
         default: "py39"
 
     executor:
-      name: test
+      name: tester
       tag: << parameters.pyenv >>
 
     steps:
@@ -180,7 +180,7 @@ jobs:
         default: ""
 
     executor:
-      name: test
+      name: tester
       tag: << parameters.tag >>
 
     # Call for the execution of some reusable commands specified above and
