@@ -93,6 +93,7 @@ workflows:
       - test39
       - test:
           name: "test_python_3.10"
+          tag: "3.10"
           pyenv: "py310"
           posargs: "--cov-report xml --cov=src"
       - semantic-release:
