@@ -112,7 +112,7 @@ workflows:
               - test_python_3.10
           filters:
               branches:
-                only: /master/
+                only: main
 
 jobs:
   test:
