@@ -16,7 +16,7 @@ idna==3.3
     # via requests
 pillow==9.0.1
     # via reportlab
-pypdf2==1.26.0
+PyPDF2==1.26.0
     # via pyxml2pdf (setup.py)
 reportlab==3.6.6
     # via pyxml2pdf (setup.py)
