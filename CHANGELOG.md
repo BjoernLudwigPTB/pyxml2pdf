@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.4 (2022-07-24)
+### Fix
+* **post_processor:** Adapt to most recent PyPDF2 import paths after their breaking change ([`08062bd`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/08062bdf4dd5817d4e6336e9709271c7a94b510b))
+* Pin PyPDF2 version (closes #10) ([`0b53246`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/0b5324629fbf3f950a7a53f017afb133669d008a))
+
+**[See all commits in this version](https://github.com/BjoernLudwigPTB/pyxml2pdf/compare/v0.3.3...v0.3.4)**
+
 ## v0.3.3 (2022-02-11)
 ### Fix
 * **setup:** Introduce Python 3.9 and 3.10 into allowed versions and remove 3.6 ([`fdfc14d`](https://github.com/BjoernLudwigPTB/pyxml2pdf/commit/fdfc14d78f092820c1757b1fea973cc1fe795578))
