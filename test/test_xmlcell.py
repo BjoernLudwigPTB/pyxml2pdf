@@ -15,7 +15,9 @@ def test_table_settings() -> SubtableSetting:
 @pytest.fixture
 def test_xmlcell_class(test_table_style):
     my_cell_class = XMLCell
-    my_cell_class.style = test_table_style.custom_styles["stylesheet"]["Normal"]
+    my_cell_class.style = (  # type: ignore[method-assign]
+        test_table_style.custom_styles["stylesheet"]["Normal"]
+    )
     return my_cell_class
 
 
