@@ -3,10 +3,11 @@ import re
 from typing import List, Type
 
 import defusedxml  # type: ignore
+from reportlab.platypus import Table  # type: ignore
+
 from pyxml2pdf.core.rows import XMLCell, XMLRow
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.builder import TableBuilder
-from reportlab.platypus import Table  # type: ignore
 
 # Monkeypatch standard library xml vulnerabilities.
 defusedxml.defuse_stdlib()
