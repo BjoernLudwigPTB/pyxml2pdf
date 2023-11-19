@@ -188,3 +188,11 @@ def test_remove_country(test_event, dat):
     assert re.sub(
         "[0-9]{4,}", test_event._remove_century, dat.strftime("%d.%m.%Y")
     ) == dat.strftime("%d.%m.%y")
+
+
+def test_event_has_property_responsible(test_event):
+    assert isinstance(test_event.responsible, str)
+
+
+def test_event_has_property_identifier(test_event):
+    assert isinstance(test_event.responsible, str)
