@@ -67,7 +67,7 @@ def test_event_init_reduced_call(test_event, subtable_title):
 
 
 def test_event_get_reduced_row(test_event, subtable_title):
-    """Reduced row should be created as just one table row with five columns"""
+    """Reduced row should be created as just one table row with fewer columns"""
     test_event._init_reduced_row(subtable_title)
     assert test_event._reduced_row._nrows == 1
     assert test_event._reduced_row._ncols == 2
