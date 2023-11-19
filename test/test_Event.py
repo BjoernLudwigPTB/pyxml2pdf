@@ -1,6 +1,6 @@
 import re
 from datetime import date
-from typing import Callable, Dict
+from typing import Dict
 
 import pytest
 from hypothesis import given, HealthCheck, settings
@@ -34,8 +34,8 @@ def test_event_init(test_event):
     """Test initialization of :py:mod:`Event` and check for all expected members"""
     assert test_event._criteria
     assert test_event._full_row
-    assert isinstance(test_event._init_reduced_row, Callable)
-    assert isinstance(test_event.get_full_row, Callable)
+    assert callable(test_event._init_reduced_row)
+    assert callable(test_event.get_full_row)
 
 
 def test_event_parent(test_event):
@@ -67,10 +67,10 @@ def test_event_init_reduced_call(test_event, subtable_title):
 
 
 def test_event_get_reduced_row(test_event, subtable_title):
-    """Reduced row should be created as just one table row with five columns"""
+    """Reduced row should be created as just one table row with fewer columns"""
     test_event._init_reduced_row(subtable_title)
     assert test_event._reduced_row._nrows == 1
-    assert test_event._reduced_row._ncols == 5
+    assert test_event._reduced_row._ncols == 2
 
 
 def test_event_reduced_rows_column_widths(test_event, subtable_title, test_table_style):
@@ -81,9 +81,11 @@ def test_event_reduced_rows_column_widths(test_event, subtable_title, test_table
     columns.
     """
     test_event._init_reduced_row(subtable_title)
-    assert test_event._reduced_row._colWidths[:3] == test_table_style.column_widths[:3]
-    assert test_event._reduced_row._colWidths[-1] == sum(
-        test_table_style.column_widths[3:]
+    assert test_event._reduced_row._colWidths[:1] == test_table_style.column_widths[:1]
+    assert (
+        test_event._reduced_row._colWidths[1]
+        == test_event._reduced_row._colWidths[-1]
+        == sum(test_table_style.column_widths[1:])
     )
 
 
@@ -99,14 +101,14 @@ def test_event_compare_reduced_row(test_event, subtable_title):
     """Reduced row should contain the same as full up to column 4 but not afterwards"""
     full_row = test_event.get_full_row(subtable_title)
     reduced_row = test_event._reduced_row
-    assert str(full_row._cellvalues[0][:4]) == str(reduced_row._cellvalues[0][:4])
-    assert str(full_row._cellvalues[0][:5]) != str(reduced_row._cellvalues[0][:5])
+    assert str(full_row._cellvalues[0][0]) == str(reduced_row._cellvalues[0][0])
+    assert str(full_row._cellvalues[0][:-1]) != str(reduced_row._cellvalues[0][:-1])
 
 
 def test_event_content_reduced_row(test_event, subtable_title):
     """Reduced row should end with subtable title followed by a period"""
     test_event._init_reduced_row(subtable_title)
-    test_string = "<b><i>" + subtable_title + "</i></b>."
+    test_string = f"Main entry in subtable '{subtable_title}'."
     assert (
         test_event._reduced_row._cellvalues[0][-1].text[-len(test_string) :]
         == test_string
@@ -186,3 +188,11 @@ def test_remove_country(test_event, dat):
     assert re.sub(
         "[0-9]{4,}", test_event._remove_century, dat.strftime("%d.%m.%Y")
     ) == dat.strftime("%d.%m.%y")
+
+
+def test_event_has_property_responsible(test_event):
+    assert isinstance(test_event.responsible, str)
+
+
+def test_event_has_property_identifier(test_event):
+    assert isinstance(test_event.responsible, str)

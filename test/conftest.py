@@ -19,11 +19,10 @@ def test_element() -> Element:
     test_attrib1 = "attrib1"
     test_attrib_2 = "attrib2"
     test_attrib = {"1": test_attrib1, "2": test_attrib_2}
-    test_element = Element(test_tag, test_attrib)
-    return test_element
+    return Element(test_tag, test_attrib)
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def subtable_title() -> str:
     """Create a title for a test subtable
 

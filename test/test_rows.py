@@ -1,4 +1,4 @@
-from typing import Callable, Set
+from typing import Set
 
 import defusedxml  # type: ignore
 from hypothesis import given, HealthCheck, settings, strategies as hst
@@ -13,7 +13,7 @@ def test_row_init(test_row):
     """Test initialization of :py:mod:`Event` and check for all expected members"""
     assert test_row._criteria
     assert test_row._full_row
-    assert isinstance(test_row.get_full_row, Callable)
+    assert callable(test_row.get_full_row)
 
 
 def test_row_parent(test_row):
@@ -46,7 +46,7 @@ def test_row_get_criteria(test_row):
 
 
 def test_row_get_identifier(test_row):
-    """Test if set and get of criteria work"""
+    """Test if set and get of identifier work"""
     assert isinstance(test_row.identifier, str)
 
 

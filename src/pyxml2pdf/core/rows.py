@@ -6,13 +6,13 @@ a class :class:`XMLRow` for xml extracted data.
 from typing import cast, List, Set, Type
 
 import defusedxml  # type: ignore
-from reportlab.lib.styles import StyleSheet1  # type: ignore
+from reportlab.lib.styles import ParagraphStyle  # type: ignore
 from reportlab.platypus import Paragraph, Table  # type: ignore
 
 from pyxml2pdf.input.properties import (
-    columns,
-    filter_xmltag,
-    identifier_xmltag,
+    COLUMNS,
+    FILTER_XMLTAG,
+    IDENTIFIER_XMLTAG,
 )  # type: ignore
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.builder import TableBuilder
@@ -36,18 +36,19 @@ class XMLCell(Paragraph):
     :param str text: the text to write into row
     """
 
-    _style: StyleSheet1
+    _style: ParagraphStyle
 
-    def __init__(self, text: str):
+    def __init__(self, text: str) -> None:
         super().__init__(text, self.style)
 
     @property
-    def style(self) -> StyleSheet1:
-        """StyleSheet1: The one for all stylesheet to style all cells."""
+    def style(self) -> ParagraphStyle:
+        """The one for all stylesheet to style all cells"""
         return self._style
 
     @style.setter
-    def style(self, value: StyleSheet1):
+    def style(self, value: ParagraphStyle) -> None:
+        """Setter for the one for all stylesheet to style all cells"""
         self._style = value
 
 
@@ -67,31 +68,32 @@ class XMLRow(Element):
 
     _criteria: Set[str]
     _identifier: str
+    _reduced_row: Table
     _cell_styler: Type[XMLCell] = XMLCell
 
-    def __init__(self, element):
+    def __init__(self, element: Element) -> None:
         # Call Element constructor and extend ourselves by extending all children
         # tags to create an underlying copy of element.
         super().__init__(element.tag, element.attrib)
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
-        self._cell_styler.style = self._table_style.custom_styles["stylesheet"][
-            "Normal"
-        ]
+        self._cell_styler.style = (  # type: ignore[method-assign]
+            self._table_style.custom_styles["stylesheet"]["Normal"]
+        )
         # Initialize definitely needed instance variables.
         self._criteria = self._init_criteria()
-        self._identifier = self._concatenate_tags_content(identifier_xmltag)
-        self._mandatory_columns = self._init_full_row()
+        self._identifier = self._concatenate_tags_content(IDENTIFIER_XMLTAG)
+        self._init_full_row()
 
-    def _init_criteria(self):
+    def _init_criteria(self) -> Set[str]:
         """Initialize the list of criteria from the according xml tag's content"""
-        criteria: str = self._concatenate_tags_content([filter_xmltag])
+        criteria: str = self._concatenate_tags_content([FILTER_XMLTAG])
         return set(criteria.split(", "))
 
     def _concatenate_tags_content(
         self, cell_tags: List[str], separator: str = " - "
     ) -> str:
-        """Form one string from the texts of a set of XML tags's to fill a cell
+        """Form one string from the texts of a set of XML tags to fill a cell
 
         Form a string of the content for all desired XML tags by
         concatenating them together with a separator. This is especially necessary,
@@ -109,6 +111,27 @@ class XMLRow(Element):
             [cast(str, self.findtext(tag)) for tag in cell_tags if self.findtext(tag)]
         )
 
+    def _init_reduced_row(self, subtable_title):
+        """Initializes the reduced version of the table row
+
+        Create a table row in proper format but just containing a brief description
+        of the element represented by the row and a reference to the fully described
+        element at another place, namely the subtable with the given title.
+
+        :param str subtable_title: title of the subtable which contains the full row
+        """
+        reduced_columns = [
+            self._cell_styler(self._concatenate_tags_content(COLUMNS[0].tag)),
+            self._cell_styler(f"Main entry in subtable '{subtable_title}'."),
+        ]
+        self._reduced_row = self._table_builder.create_fixedwidth_table(
+            [reduced_columns],
+            [
+                self._table_style.column_widths[0],
+                sum(self._table_style.column_widths[1:]),
+            ],
+        )
+
     def _init_full_row(self) -> List[XMLCell]:
         """Initialize the single table row containing all information from the XML input
 
@@ -120,38 +143,39 @@ class XMLRow(Element):
         """
         table_columns = [
             self._cell_styler(self._concatenate_tags_content(column.tag))
-            for column in columns
+            for column in COLUMNS
         ]
         self._full_row = self._table_builder.create_fixedwidth_table([table_columns])
         return table_columns
 
-    def get_full_row(self, subtable_title: str = None) -> Table:
+    def get_full_row(self, subtable_title: str) -> Table:
         """Return a table row with all the row's information
 
         This ensures, that in subclasses we can override this function and after
         handing over the full information, the reduced version with a reference to
-        the subtable containing the full version can be created via a decorator.
+        the subtable containing the full version can be created.
 
         See :class:`Event` for an example implementation of this pattern.
 
         :param subtable_title: the title of the subtable in which the row will
             be integrated
-        :returns: a table row with all the event's information
+        :returns: a table row with all the element's information
         """
+        self._init_reduced_row(subtable_title)
         return self._full_row
 
     @property
     def criteria(self) -> Set[str]:
-        """Return the event's criteria
+        """Return the row's criteria
 
-        :returns: a list of the event's criteria
+        :returns: a list of the row's criteria
         :rtype: Set[str]
         """
         return self._criteria
 
     @property
     def identifier(self) -> str:
-        """Return the identifier of the event
+        """Return the identifier of the row
 
         :returns: identifier
         :rtype: str
@@ -162,7 +186,7 @@ class XMLRow(Element):
         """Return the table row representation of the XML tag
 
         This is the API of :py:class:`XMLRow` for getting the
-        table row representation of the event. It allows for reacting to the
+        table row representation of the row. It allows for reacting to the
         distribution of the XML tags content by creating a shorter version
         referencing the main subtable. See :meth:`get_full_row` for details.
 
@@ -171,10 +195,6 @@ class XMLRow(Element):
         :returns: a table row representation of the XML tag's content
         :rtype: Table
         """
-        # We check if the reduced row was produced before, which means in turn,
-        # that :meth:`get_table_row` was called at least once before. Otherwise we call
-        # :meth:`get_full_row` which automatically triggers the creation of the
-        # reduced row for later uses.
         try:
             return self._reduced_row
         except AttributeError:

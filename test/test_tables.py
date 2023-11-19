@@ -1,16 +1,16 @@
-from typing import Callable, List
+from typing import List
 
 import pytest
 from hypothesis import given, HealthCheck, settings, strategies as hst
 
 from pyxml2pdf.core.types import SubtableSetting  # type: ignore
-from pyxml2pdf.input.properties import subtable_settings  # type: ignore
+from pyxml2pdf.input.properties import SUBTABLE_SETTINGS  # type: ignore
 from pyxml2pdf.tables.tables import XMLTable
 
 
 @pytest.fixture
 def test_table_settings() -> SubtableSetting:
-    return subtable_settings[0]
+    return SUBTABLE_SETTINGS[0]
 
 
 @pytest.fixture
@@ -24,8 +24,8 @@ def test_xmltable_init(test_table):
         assert isinstance(filter, List)
     assert isinstance(test_table.rows, List)
     assert isinstance(test_table.title, str)
-    assert isinstance(test_table.append, Callable)
-    assert isinstance(test_table.extend, Callable)
+    assert callable(test_table.append)
+    assert callable(test_table.extend)
 
 
 def test_xmltable_set_and_get_rows(test_table, test_row):
@@ -54,11 +54,11 @@ def test_xmltable_set_and_get_filters(test_table, filters):
 
 def test_xmltable_append(test_table, test_row):
     """Check if a row can be appended."""
-    test_table.append(test_row.get_table_row(test_table.title))
-    assert test_table.rows[-1] == test_row.get_table_row(test_table.title)
+    test_table.append(test_row.get_table_row("non-informative during tests"))
+    assert test_table.rows[-1] == test_row.get_full_row("non-informative during tests")
 
 
 def test_xmltable_extend(test_table, test_row):
     """Check if a list of one row can be appended."""
-    test_table.extend([test_row.get_table_row(test_table.title)])
-    assert test_table.rows[-1] == test_row.get_table_row(test_table.title)
+    test_table.extend([test_row.get_table_row("non-informative during tests")])
+    assert test_table.rows[-1] == test_row.get_full_row("non-informative during tests")

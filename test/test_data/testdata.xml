@@ -42,7 +42,7 @@
     <Ort1>Berlins grüner Nordwesten</Ort1>
     <Termin1ISO>2019-12-01T10:00:00Z</Termin1ISO>
     <TerminDatumVon1>01.12.2019 10:00</TerminDatumVon1>
-    <TerminDatumBis1>01.12.2019 17:00</TerminDatumBis1>
+    <TerminDatumBis1>01.12.2099 17:00</TerminDatumBis1>
     <Ort2></Ort2>
     <TerminDatumVon2></TerminDatumVon2>
     <TerminDatumBis2></TerminDatumBis2>
@@ -52,7 +52,7 @@
     <Anmeldeschluss>25.11.2019</Anmeldeschluss>
     <Kursleiter>Maxi Musterfrau</Kursleiter>
     <Kursart>G</Kursart>
-    <TrainerURL></TrainerURL>
+    <TrainerURL>https://no.ne</TrainerURL>
     <Zielgruppe>Menschen mit Freude an Naturerlebnis und Bewegung</Zielgruppe>
 </kurs>
 <kurs>

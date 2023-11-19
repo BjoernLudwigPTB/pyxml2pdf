@@ -10,13 +10,13 @@ executors:
     parameters:
       tag:
         type: string
-        default: "3.10"
+        default: "3.11"
     docker:
       - image: cimg/python:<< parameters.tag >>
   publisher:
     working_directory: ~/repo
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.11
 
 commands:
   create_folders_and_venv:
@@ -88,10 +88,6 @@ workflows:
   test_and_deploy:
     jobs:
       - test:
-          name: "test_python_3.7"
-          tag: "3.7"
-          pyenv: "py37"
-      - test:
           name: "test_python_3.8"
           tag: "3.8"
           pyenv: "py38"
@@ -103,13 +99,22 @@ workflows:
           name: "test_python_3.10"
           tag: "3.10"
           pyenv: "py310"
+      - test:
+          name: "test_python_3.11"
+          tag: "3.11"
+          pyenv: "py311"
           posargs: "-- --cov {envsitepackagesdir}/pyxml2pdf"
+      - test:
+          name: "test_python_3.12"
+          tag: "3.12"
+          pyenv: "py312"
       - semantic-release:
           requires:
-              - test_python_3.7
               - test_python_3.8
               - test_python_3.9
               - test_python_3.10
+              - test_python_3.11
+              - test_python_3.12
           filters:
               branches:
                 only: main
@@ -119,10 +124,10 @@ jobs:
     parameters:
       tag:
         type: string
-        default: "3.10"
+        default: "3.11"
       pyenv:
         type: string
-        default: "py310"
+        default: "py311"
       posargs:
         type: string
         default: ""
