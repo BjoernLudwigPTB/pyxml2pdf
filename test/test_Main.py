@@ -1,6 +1,7 @@
 import subprocess
 
 import pytest
+
 from pyxml2pdf import main
 
 
