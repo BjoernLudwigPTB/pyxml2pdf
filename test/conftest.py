@@ -22,7 +22,7 @@ def test_element() -> Element:
     return Element(test_tag, test_attrib)
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def subtable_title() -> str:
     """Create a title for a test subtable
 
