@@ -1,5 +1,4 @@
 import pathlib
-from typing import Tuple
 
 from pyxml2pdf.core.types import Column, Font, FontSize  # type: ignore
 from pyxml2pdf.input.properties import (
@@ -43,7 +42,7 @@ def test_columns():
 
 def test_pagesize():
     # Check if pagesize is of correct type and size.
-    assert isinstance(pagesize, Tuple)
+    assert isinstance(pagesize, tuple)
     assert len(pagesize) == 2
     for size in pagesize:
         assert isinstance(size, float)
