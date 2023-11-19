@@ -5,7 +5,7 @@ from typing import Dict, List, Tuple, Union
 
 from reportlab.lib.colors import black, Color, honeydew  # type: ignore
 from reportlab.lib.pagesizes import mm  # type: ignore
-from reportlab.lib.styles import getSampleStyleSheet, StyleSheet1  # type: ignore
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle  # type: ignore
 from reportlab.pdfbase.pdfmetrics import (  # type: ignore
     registerFont,
     registerFontFamily,
@@ -88,7 +88,7 @@ class XMLTableStyle:
         )
         custom_stylesheet.get("Heading2").fontName = "bold_font"
 
-        self._custom_styles: Dict[str, Union[StyleSheet1, TableStyle]] = {
+        self._custom_styles: Dict[str, Union[ParagraphStyle, TableStyle]] = {
             "heading": TableStyle(
                 [
                     self.VALIGN_MIDDLE,
@@ -161,6 +161,6 @@ class XMLTableStyle:
         return self._table_width
 
     @property
-    def custom_styles(self) -> Dict[str, Union[StyleSheet1, TableStyle]]:
+    def custom_styles(self) -> Dict[str, Union[ParagraphStyle, TableStyle]]:
         """Dict[str, TableStyle]: Return the custom styles"""
         return self._custom_styles

@@ -6,7 +6,7 @@ a class :class:`XMLRow` for xml extracted data.
 from typing import cast, List, Set, Type
 
 import defusedxml  # type: ignore
-from reportlab.lib.styles import StyleSheet1  # type: ignore
+from reportlab.lib.styles import ParagraphStyle  # type: ignore
 from reportlab.platypus import Paragraph, Table  # type: ignore
 
 from pyxml2pdf.input.properties import (
@@ -36,18 +36,18 @@ class XMLCell(Paragraph):
     :param str text: the text to write into row
     """
 
-    _style: StyleSheet1
+    _style: ParagraphStyle
 
     def __init__(self, text: str) -> None:
         super().__init__(text, self.style)
 
     @property
-    def style(self) -> StyleSheet1:
-        """StyleSheet1: The one for all stylesheet to style all cells"""
+    def style(self) -> ParagraphStyle:
+        """The one for all stylesheet to style all cells"""
         return self._style
 
     @style.setter
-    def style(self, value: StyleSheet1) -> None:
+    def style(self, value: ParagraphStyle) -> None:
         """Setter for the one for all stylesheet to style all cells"""
         self._style = value
 
