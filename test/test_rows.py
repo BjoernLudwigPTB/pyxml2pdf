@@ -46,7 +46,7 @@ def test_row_get_criteria(test_row):
 
 
 def test_row_get_identifier(test_row):
-    """Test if set and get of criteria work"""
+    """Test if set and get of identifier work"""
     assert isinstance(test_row.identifier, str)
 
 
