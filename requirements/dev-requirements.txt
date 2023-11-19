@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/dev-requirements.in
 #
--e .
+-e file:///home/bjorn/code/pyxml2pdf
     # via -r requirements/dev-requirements.in
 alabaster==0.7.13
     # via sphinx
@@ -136,7 +136,7 @@ snowballstemmer==2.2.0
     # via sphinx
 sortedcontainers==2.4.0
     # via hypothesis
-sphinx==7.2.6
+sphinx==7.1.2
     # via
     #   -r requirements/dev-requirements.in
     #   sphinx-rtd-theme
