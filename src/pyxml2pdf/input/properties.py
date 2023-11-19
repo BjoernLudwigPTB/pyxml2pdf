@@ -175,9 +175,5 @@ text except table and column headings.
 try:
     fontsize = custom_properties.fontsize  # type: ignore[attr-defined]
 except AttributeError:
-    fontsize = FontSize(
-        normal=6.5,
-        table_heading=12,
-        column_heading=6.5,
-    )
+    fontsize = FontSize(normal=6.5, table_heading=12, column_heading=6.5)
     _inform_about_fallback_setting("fontsize", fontsize)
