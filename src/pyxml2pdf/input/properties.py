@@ -30,7 +30,7 @@ pagesize: PageSize
 """The page size of the output Pdf in mm"""
 
 try:
-    pagesize = custom_properties.pagesize
+    pagesize = custom_properties.pagesize  # type: ignore[attr-defined]
 except AttributeError:
     pagesize = (90.1, 84.3)
     _inform_about_fallback_setting("pagesize", pagesize)
@@ -38,7 +38,7 @@ except AttributeError:
 rows_xmltag: str
 """The XML tag, which will be represented by one row in the table"""
 try:
-    rows_xmltag = custom_properties.rows_xmltag
+    rows_xmltag = custom_properties.rows_xmltag  # type: ignore[attr-defined]
 except AttributeError:
     rows_xmltag = "row_tag"
     _inform_about_fallback_setting("rows_xmltag", rows_xmltag)
@@ -56,7 +56,9 @@ something close to::
     because it does not contain a valid combination of criteria.
 """
 try:
-    identifier_xmltag = custom_properties.identifier_xmltag
+    identifier_xmltag = (
+        custom_properties.identifier_xmltag  # type: ignore[attr-defined]
+    )
 except AttributeError:
     identifier_xmltag = [
         "name_tag",
@@ -72,7 +74,7 @@ If possible the tags' contents will be sorted as dates otherwise they will be so
 alphanumerically, each in ascending order.
 """
 try:
-    sort_xmltag = custom_properties.sort_xmltag
+    sort_xmltag = custom_properties.sort_xmltag  # type: ignore[attr-defined]
 except AttributeError:
     sort_xmltag = "name_tag"
     _inform_about_fallback_setting("sort_xmltag", sort_xmltag)
@@ -89,7 +91,7 @@ shall be displayed in the columns of one and the same row, must each belong to o
 parent tag :attr:`rows_xmltag`. The column widths are specified with 'width' in mm.
 """
 try:
-    columns = custom_properties.columns
+    columns = custom_properties.columns  # type: ignore[attr-defined]
 except AttributeError:
     columns = [
         Column(label="name", tag=["name_tag"], width=30),
@@ -101,7 +103,7 @@ except AttributeError:
 filter_xmltag: str
 """The XML tag used to check for filter criteria in the respective rows"""
 try:
-    filter_xmltag = custom_properties.filter_xmltag
+    filter_xmltag = custom_properties.filter_xmltag  # type: ignore[attr-defined]
 except AttributeError:
     filter_xmltag = "filter_tag"
     _inform_about_fallback_setting("filter_xmltag", filter_xmltag)
@@ -118,7 +120,9 @@ where for comma-separated elements of one list a boolean OR is used and a
 boolean AND for the separate lists.
 """
 try:
-    subtable_settings = custom_properties.subtable_settings
+    subtable_settings = (
+        custom_properties.subtable_settings  # type: ignore[attr-defined]
+    )
 except AttributeError:
     subtable_settings = (
         SubtableSetting(label="filter 1", include=[["filter_1"]]),
@@ -152,7 +156,7 @@ Files with the respective file names are expected to be found inside the subfold
 *pyxml2pdf/styles/fonts/*.
 """
 try:
-    font = custom_properties.font
+    font = custom_properties.font  # type: ignore[attr-defined]
 except AttributeError:
     font = Font(
         normal="LiberationSans-Regular.ttf",
@@ -169,7 +173,7 @@ This is the font sizes used throughout the output table, where *normal* applies 
 text except table and column headings.
 """
 try:
-    fontsize = custom_properties.fontsize
+    fontsize = custom_properties.fontsize  # type: ignore[attr-defined]
 except AttributeError:
     fontsize = FontSize(
         normal=6.5,
