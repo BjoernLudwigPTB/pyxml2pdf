@@ -1,6 +1,18 @@
+from pytest import approx, fixture
 from reportlab.lib.colors import Color  # type: ignore
 from reportlab.lib.styles import StyleSheet1  # type: ignore
 from reportlab.platypus import TableStyle  # type: ignore
+
+from pyxml2pdf.styles.table_styles import XMLTableStyle
+
+
+@fixture
+def table_style():
+    return XMLTableStyle()
+
+
+def test_column_widths(table_style):
+    assert sum(table_style.column_widths) == approx(table_style.table_width)
 
 
 def test_tablestyle_custom_styles(test_table_style):
