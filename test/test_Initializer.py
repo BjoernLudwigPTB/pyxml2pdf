@@ -8,7 +8,7 @@ init_testcases = [None, "one_string", ("one_string", "two_strings")]
 @pytest.mark.parametrize("teststrings", init_testcases)
 def test_initializer_init(teststrings):
     with pytest.raises(TypeError):
-        Initializer(teststrings)  #  type: ignore[call-arg]
+        Initializer(teststrings)  # type: ignore[call-arg]
 
 
 def test_initializer():

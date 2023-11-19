@@ -12,7 +12,7 @@ def test_init_main():
 
 def test_validate_main():
     with pytest.raises(TypeError):
-        main.validate_inputs()  #  type: ignore[call-arg]
+        main.validate_inputs()  # type: ignore[call-arg]
 
 
 def test_validate_main_with_input():
