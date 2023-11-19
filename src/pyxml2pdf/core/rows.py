@@ -75,9 +75,9 @@ class XMLRow(Element):
         super().__init__(element.tag, element.attrib)
         self.extend(list(element))
         # Initialize needed objects especially for table creation.
-        self._cell_styler.style = self._table_style.custom_styles["stylesheet"][
-            "Normal"
-        ]
+        self._cell_styler.style = (  # type: ignore[method-assign]
+            self._table_style.custom_styles["stylesheet"]["Normal"]
+        )
         # Initialize definitely needed instance variables.
         self._criteria = self._init_criteria()
         self._identifier = self._concatenate_tags_content(identifier_xmltag)
