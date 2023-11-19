@@ -181,7 +181,7 @@ class Event(XMLRow):
         return types
 
     @property
-    def responsible(self):
+    def responsible(self) -> str:
         """Return the name of the person being responsible for the event
 
         :returns: first and last name
@@ -190,8 +190,8 @@ class Event(XMLRow):
         return self._responsible
 
     @property
-    def identifier(self):
-        """Return the identifier of the event
+    def identifier(self) -> str:
+        """Return the date as an identifier of the event
 
         :returns: identifier
         :rtype: str
