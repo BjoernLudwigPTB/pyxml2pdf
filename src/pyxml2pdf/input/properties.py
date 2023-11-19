@@ -99,6 +99,7 @@ except AttributeError:
         Column(label="filter", tag=["filter_tag"], width=30),
     ]
     _inform_about_fallback_setting("columns", columns)
+assert sum([column.width for column in columns]) <= pagesize[0]
 
 filter_xmltag: str
 """The XML tag used to check for filter criteria in the respective rows"""
