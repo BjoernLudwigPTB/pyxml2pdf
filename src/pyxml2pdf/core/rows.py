@@ -10,9 +10,9 @@ from reportlab.lib.styles import StyleSheet1  # type: ignore
 from reportlab.platypus import Paragraph, Table  # type: ignore
 
 from pyxml2pdf.input.properties import (
-    columns,
-    filter_xmltag,
-    identifier_xmltag,
+    COLUMNS,
+    FILTER_XMLTAG,
+    IDENTIFIER_XMLTAG,
 )  # type: ignore
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.builder import TableBuilder
@@ -82,12 +82,12 @@ class XMLRow(Element):
         )
         # Initialize definitely needed instance variables.
         self._criteria = self._init_criteria()
-        self._identifier = self._concatenate_tags_content(identifier_xmltag)
+        self._identifier = self._concatenate_tags_content(IDENTIFIER_XMLTAG)
         self._init_full_row()
 
     def _init_criteria(self) -> Set[str]:
         """Initialize the list of criteria from the according xml tag's content"""
-        criteria: str = self._concatenate_tags_content([filter_xmltag])
+        criteria: str = self._concatenate_tags_content([FILTER_XMLTAG])
         return set(criteria.split(", "))
 
     def _concatenate_tags_content(
@@ -121,7 +121,7 @@ class XMLRow(Element):
         :param str subtable_title: title of the subtable which contains the full row
         """
         reduced_columns = [
-            self._cell_styler(self._concatenate_tags_content(columns[0].tag)),
+            self._cell_styler(self._concatenate_tags_content(COLUMNS[0].tag)),
             self._cell_styler(f"Main entry in subtable '{subtable_title}'."),
         ]
         self._reduced_row = self._table_builder.create_fixedwidth_table(
@@ -143,7 +143,7 @@ class XMLRow(Element):
         """
         table_columns = [
             self._cell_styler(self._concatenate_tags_content(column.tag))
-            for column in columns
+            for column in COLUMNS
         ]
         self._full_row = self._table_builder.create_fixedwidth_table([table_columns])
         return table_columns

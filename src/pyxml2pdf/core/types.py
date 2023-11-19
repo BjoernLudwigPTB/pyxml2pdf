@@ -4,7 +4,7 @@ from typing import List, NamedTuple, Tuple
 SubtableSetting = NamedTuple(
     "SubtableSetting", [("label", str), ("include", List[List[str]])]
 )
-"""The subtables headings and :attr:`filter_xmltag`'s content
+"""The subtables headings and :attr:`FILTER_XMLTAG`'s content
 
 All tags from the XML file which are supposed to be listed in the respective subtable
 should match at least one of each of the sublists include-filters. There will be one

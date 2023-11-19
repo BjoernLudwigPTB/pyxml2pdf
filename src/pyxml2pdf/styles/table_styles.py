@@ -13,7 +13,7 @@ from reportlab.pdfbase.pdfmetrics import (  # type: ignore
 from reportlab.pdfbase.ttfonts import TTFont  # type: ignore
 from reportlab.platypus import TableStyle  # type: ignore
 
-from pyxml2pdf.input.properties import columns, font, fontsize  # type: ignore
+from pyxml2pdf.input.properties import COLUMNS, FONT, FONTSIZE  # type: ignore
 
 LineFormattingCommand = Tuple[str, Tuple[int, int], Tuple[int, int], float, Color]
 CellFormattingCommand = Tuple[
@@ -80,7 +80,7 @@ class XMLTableStyle:
         # Get custom_styles for all headings, texts, etc. from sample
         custom_stylesheet = getSampleStyleSheet()
         # Overwrite the sample styles according to our needs.
-        custom_stylesheet.get("Normal").fontSize = fontsize.normal
+        custom_stylesheet.get("Normal").fontSize = FONTSIZE.normal
         custom_stylesheet.get("Normal").leading = (
             custom_stylesheet["Normal"].fontSize * 1.2
         )
@@ -90,13 +90,13 @@ class XMLTableStyle:
             custom_stylesheet["Italic"].fontSize * 1.2
         )
         custom_stylesheet.get("Italic").fontName = "italic_font"
-        custom_stylesheet.get("Heading1").fontSize = fontsize.table_heading
+        custom_stylesheet.get("Heading1").fontSize = FONTSIZE.table_heading
         custom_stylesheet.get("Heading1").alignment = 1
         custom_stylesheet.get("Heading1").leading = (
             custom_stylesheet["Heading1"].fontSize * 1.2
         )
         custom_stylesheet.get("Heading1").fontName = "bold_font"
-        custom_stylesheet.get("Heading2").fontSize = fontsize.column_heading
+        custom_stylesheet.get("Heading2").fontSize = FONTSIZE.column_heading
         custom_stylesheet.get("Heading2").alignment = 1
         custom_stylesheet.get("Heading2").leading = (
             custom_stylesheet["Heading2"].fontSize * 1.2
@@ -132,9 +132,9 @@ class XMLTableStyle:
         )
 
         # Extract the column widths from properties.
-        self._column_widths = [
-            float(column.width) * mm for column in columns
-        ]  # type: List[float]
+        self._column_widths: List[float] = [
+            float(column.width) * mm for column in COLUMNS
+        ]
 
         # Set full table width.
         self._table_width = sum(self._column_widths)  # type: float

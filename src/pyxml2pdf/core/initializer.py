@@ -11,9 +11,9 @@ from pyxml2pdf.core.parser import Parser
 from pyxml2pdf.core.post_processor import PostProcessor
 from pyxml2pdf.core.sorter import Sorter
 from pyxml2pdf.input.properties import (
-    pagesize,
-    rows_xmltag,
-    sort_xmltag,
+    PAGESIZE,
+    ROWS_XMLTAG,
+    SORT_XMLTAG,
 )  # type: ignore
 
 
@@ -32,15 +32,15 @@ class Initializer:
         parser = Parser(self._data)
         pdf = SimpleDocTemplate(
             output_path,
-            pagesize=[size * mm for size in pagesize],
+            pagesize=[size * mm for size in PAGESIZE],
             topMargin=0.0,
             bottomMargin=0.0,
             leftMargin=0.0,
             rightMargin=0.0,
         )
         doc = parse(input_path)
-        sorter = Sorter(doc.findall(rows_xmltag))
-        sorted_courses = sorter.sort_parsed_xml(sort_xmltag)
+        sorter = Sorter(doc.findall(ROWS_XMLTAG))
+        sorted_courses = sorter.sort_parsed_xml(SORT_XMLTAG)
 
         parser.collect_xml_data(sorted_courses)
 

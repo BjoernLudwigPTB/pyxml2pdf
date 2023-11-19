@@ -7,7 +7,7 @@ from reportlab.platypus import Flowable, Paragraph, Table, TableStyle  # type: i
 
 from pyxml2pdf.styles.table_styles import XMLTableStyle
 from pyxml2pdf.tables.tables import XMLTable
-from ..input.properties import columns, subtable_settings  # type: ignore
+from ..input.properties import COLUMNS, SUBTABLE_SETTINGS  # type: ignore
 
 
 class TableBuilder:
@@ -27,7 +27,7 @@ class TableBuilder:
         :rtype: List[XMLTable]
         """
         subtables_list = []
-        for subtable in subtable_settings:
+        for subtable in SUBTABLE_SETTINGS:
             subtable_table = XMLTable(subtable.label, subtable.include)
             subtable_table.extend(self.make_header(subtable.label))
             subtables_list.append(subtable_table)
@@ -56,7 +56,7 @@ class TableBuilder:
         # Create row containing one column per heading.
         columns_list = [
             Paragraph(heading, self._stylesheet.get("Heading2"))
-            for heading in [column.label for column in columns]
+            for heading in [column.label for column in COLUMNS]
         ]
 
         # Concatenate both rows.

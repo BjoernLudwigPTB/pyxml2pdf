@@ -4,12 +4,12 @@ from reportlab.lib.styles import ParagraphStyle  # type: ignore
 
 from pyxml2pdf.core.rows import XMLCell
 from pyxml2pdf.core.types import SubtableSetting  # type: ignore
-from pyxml2pdf.input.properties import subtable_settings  # type: ignore
+from pyxml2pdf.input.properties import SUBTABLE_SETTINGS  # type: ignore
 
 
 @pytest.fixture
 def test_table_settings() -> SubtableSetting:
-    return subtable_settings[0]
+    return SUBTABLE_SETTINGS[0]
 
 
 @pytest.fixture
