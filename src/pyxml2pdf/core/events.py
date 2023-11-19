@@ -1,6 +1,6 @@
 """A wrapper :py:class:`pyxml2pdf.core.events.Event` for xml extracted data"""
 import re
-from typing import List, Type
+from typing import List
 
 import defusedxml  # type: ignore
 from reportlab.platypus import Table  # type: ignore
@@ -26,11 +26,8 @@ class Event(XMLRow):
 
     _categories: List[str]
     _full_row: Table
-    _reduced_row: Table
     _date: str
     _responsible: str
-    _reduced_columns: List[XMLCell]
-    _cell_styler: Type[XMLCell]
 
     def __init__(self, element):
         # Initialize definitely needed instance variables.
@@ -39,60 +36,6 @@ class Event(XMLRow):
         super().__init__(element)
         self._date = self._init_date()
         self._responsible = self._concatenate_tags_content(["Kursleiter"])
-        self._reduced_columns = self._init_full_row()
-
-    def _init_reduced_row(self, subtable_title):
-        """Initializes the reduced version of the event
-
-        Create a table row in proper format but just containing a brief description
-        of the event and a reference to the fully described event at another place,
-        namely the subtable with the given title.
-
-        :param str subtable_title: title of the subtable which contains the full event
-
-        .. warning:: Do not call this function directly since it is automatically
-            called right after :meth:`get_full_row` is invoked.
-        """
-        self._reduced_columns.append(
-            self._cell_styler(self._build_description(link=subtable_title))
-        )
-        self._reduced_row = self._table_builder.create_fixedwidth_table(
-            [self._reduced_columns],
-            self._table_style.column_widths[:4]
-            + [sum(self._table_style.column_widths[4:])],
-        )
-
-    def create_reduced_after_full(func):
-        """Decorator to execute :meth:`_init_reduced_row` with :meth:`get_full_row`
-
-        :returns: the return value of :meth:`get_full_row`
-        :rtype: Table
-        """
-
-        def execute_get_full_and_init_reduced_row(self, *args, **kwargs):
-            """Exchange a table row with all the event's information against a
-            subtable's title
-
-            This ensures, that after handing over the full information, the reduced
-            version with a reference to the subtable containing the full version is
-            created.
-
-            .. note:: This is ensured by a decorator, which is why the function
-                signature on `ReadTheDocs.org
-                <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#core.events
-                .Event.get_full_row>`_ is displayed incorrectly. The parameter and
-                return value are as follows...
-
-            :param str subtable_title: the title of the subtable in which the row will
-                be integrated
-            :returns: a table row with all the event's information
-            :rtype: Table
-            """
-            return_table = func(self, *args, **kwargs)
-            self._init_reduced_row(args[0])
-            return return_table
-
-        return execute_get_full_and_init_reduced_row
 
     def _init_full_row(self) -> List[XMLCell]:
         """Initialize the single table row containing all information of the event
@@ -237,27 +180,6 @@ class Event(XMLRow):
 
         return types
 
-    @create_reduced_after_full
-    def get_full_row(self, subtable_title: str = None) -> Table:
-        """Exchange a table row with all the event's information against a
-        subtable's title
-
-        This ensures, that after handing over the full information, the reduced
-        version with a reference to the subtable containing the  full version is
-        created.
-
-        .. note:: This is ensured by a decorator, which is why the function
-            signature on `ReadTheDocs.org
-            <https://pyxml2pdf.readthedocs.io/en/latest/pyxml2pdf.html#core.events
-            .Event.get_full_row>`_ is displayed incorrectly. The parameter and
-            return value are as follows...
-
-        :param subtable_title: the title of the subtable in which the row will
-            be integrated
-        :returns: a table row with all the event's information
-        """
-        return self._full_row
-
     @property
     def responsible(self):
         """Return the name of the person being responsible for the event
@@ -275,26 +197,3 @@ class Event(XMLRow):
         :rtype: str
         """
         return self._date
-
-    def get_table_row(self, subtable_title):
-        """Return the table row representation of the event
-
-        This is the API of :py:class:`pyxml2pdf.core.events.Event` for getting the
-        table row
-        representation of the event. It makes sure, that on the first call
-        :meth:`get_full_row` is invoked and otherwise
-        :attr:`pyxml2pdf.core.events.Event._reduced_row` is returned.
-
-        :param str subtable_title: the title of the subtable in which the row will
-            be integrated
-        :returns: a table row representation of the event
-        :rtype: Table
-        """
-        # We check if the reduced row was produced before, which means in turn,
-        # that :meth:`get_table_row` was called at least once before. Otherwise we call
-        # :meth:`get_full_row` which automatically triggers the creation of the
-        # reduced row for later uses.
-        try:
-            return self._reduced_row
-        except AttributeError:
-            return self.get_full_row(subtable_title)
