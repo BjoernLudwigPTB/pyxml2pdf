@@ -28,7 +28,7 @@ class Initializer:
 
     def __init__(self, input_path: str, output_path: str):
         #: The processed content of the XML file as table rows and columns
-        self._data = []  # type: List[KeepTogether]
+        self._data: List[KeepTogether] = []
         parser = Parser(self._data)
         pdf = SimpleDocTemplate(
             output_path,

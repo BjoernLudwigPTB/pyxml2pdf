@@ -14,11 +14,9 @@ class TableBuilder:
     """Takes over all tasks for building and working with the tables created"""
 
     def __init__(self):
-        self._table_style = XMLTableStyle()  # type: XMLTableStyle
-        self._stylesheet = self._table_style.custom_styles[
-            "stylesheet"
-        ]  # type: TableStyle
-        self._subtables = self.create_subtables()  # type: List[XMLTable]
+        self._table_style: XMLTableStyle = XMLTableStyle()
+        self._stylesheet: TableStyle = self._table_style.custom_styles["stylesheet"]
+        self._subtables: List[XMLTable] = self.create_subtables()
 
     def create_subtables(self) -> List[XMLTable]:
         """Create subtables for all different kinds of rows

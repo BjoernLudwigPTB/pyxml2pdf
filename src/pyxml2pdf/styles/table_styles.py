@@ -32,43 +32,28 @@ class XMLTableStyle:
     """
 
     # Prepare a reusable constant for assigning settings to all cells of an area.
-    FULL_ROW = (
-        (0, 0),
-        (-1, -1),
-    )  # type: Tuple[Tuple[int, int], Tuple[int, int]]
+    FULL_ROW: Tuple[Tuple[int, int], Tuple[int, int]] = ((0, 0), (-1, -1))
 
     # Set important defaults for the table.
-    LINE_THICKNESS = 0.25  # type: float
-    LINE_COLOR = black  # type: Color
-    BACKGROUND_COLOR = honeydew  # type: Color
-    PADDING = 3  # type: int
+    LINE_THICKNESS: float = 0.25
+    LINE_COLOR: Color = black
+    BACKGROUND_COLOR: Color = honeydew
+    PADDING: int = 3
 
-    ALIGN_CENTER = ("ALIGN", *FULL_ROW, "CENTER")  # type: CellFormattingCommand
-    VALIGN_MIDDLE = ("VALIGN", *FULL_ROW, "MIDDLE")  # type: CellFormattingCommand
-    VALIGN_TOP = ("VALIGN", *FULL_ROW, "TOP")  # type: CellFormattingCommand
-    ALIGN_LEFT = ("ALIGN", *FULL_ROW, "LEFT")  # type: CellFormattingCommand
-    LEFTPADDING_REDUCE = (
-        "LEFTPADDING",
-        *FULL_ROW,
-        PADDING,
-    )  # type: CellFormattingCommand
-    RIGHTPADDING_REDUCE = (
-        "RIGHTPADDING",
-        *FULL_ROW,
-        PADDING,
-    )  # type: CellFormattingCommand
-    BACKGROUND = (
-        "BACKGROUND",
-        *FULL_ROW,
-        BACKGROUND_COLOR,
-    )  # type: CellFormattingCommand
-    BOX = ("BOX", *FULL_ROW, 0.25, LINE_COLOR)  # type: LineFormattingCommand
-    INNERGRID = (
+    ALIGN_CENTER: CellFormattingCommand = ("ALIGN", *FULL_ROW, "CENTER")
+    VALIGN_MIDDLE: CellFormattingCommand = ("VALIGN", *FULL_ROW, "MIDDLE")
+    VALIGN_TOP: CellFormattingCommand = ("VALIGN", *FULL_ROW, "TOP")
+    ALIGN_LEFT: CellFormattingCommand = ("ALIGN", *FULL_ROW, "LEFT")
+    LEFTPADDING_REDUCE: CellFormattingCommand = ("LEFTPADDING", *FULL_ROW, PADDING)
+    RIGHTPADDING_REDUCE: CellFormattingCommand = ("RIGHTPADDING", *FULL_ROW, PADDING)
+    BACKGROUND: CellFormattingCommand = ("BACKGROUND", *FULL_ROW, BACKGROUND_COLOR)
+    BOX: LineFormattingCommand = ("BOX", *FULL_ROW, 0.25, LINE_COLOR)
+    INNERGRID: LineFormattingCommand = (
         "INNERGRID",
         *FULL_ROW,
         LINE_THICKNESS,
         LINE_COLOR,
-    )  # type: LineFormattingCommand
+    )
 
     def __init__(self):
         """Initialise font and cell formatting"""
@@ -137,7 +122,7 @@ class XMLTableStyle:
         ]
 
         # Set full table width.
-        self._table_width = sum(self._column_widths)  # type: float
+        self._table_width: float = sum(self._column_widths)
 
         # Register font with reportlab.
         self._init_font_family()
