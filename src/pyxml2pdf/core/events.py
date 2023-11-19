@@ -193,7 +193,7 @@ class Event(XMLRow):
     def identifier(self) -> str:
         """Return the date as an identifier of the event
 
-        :returns: identifier
+        :returns: date
         :rtype: str
         """
         return self._date
