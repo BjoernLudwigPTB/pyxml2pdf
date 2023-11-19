@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/dev-requirements.in
 #
--e file:///home/bjorn/code/pyxml2pdf
+-e .
     # via -r requirements/dev-requirements.in
 alabaster==0.7.13
     # via sphinx
