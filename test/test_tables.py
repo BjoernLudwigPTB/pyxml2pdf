@@ -1,4 +1,4 @@
-from typing import Callable, List
+from typing import List
 
 import pytest
 from hypothesis import given, HealthCheck, settings, strategies as hst
@@ -24,8 +24,8 @@ def test_xmltable_init(test_table):
         assert isinstance(filter, List)
     assert isinstance(test_table.rows, List)
     assert isinstance(test_table.title, str)
-    assert isinstance(test_table.append, Callable)
-    assert isinstance(test_table.extend, Callable)
+    assert callable(test_table.append)
+    assert callable(test_table.extend)
 
 
 def test_xmltable_set_and_get_rows(test_table, test_row):
