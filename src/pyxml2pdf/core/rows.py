@@ -125,7 +125,7 @@ class XMLRow(Element):
         self._full_row = self._table_builder.create_fixedwidth_table([table_columns])
         return table_columns
 
-    def get_full_row(self, subtable_title: str = None) -> Table:
+    def get_full_row(self, subtable_title: str | None = None) -> Table:
         """Return a table row with all the row's information
 
         This ensures, that in subclasses we can override this function and after
