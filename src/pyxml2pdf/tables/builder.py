@@ -94,7 +94,7 @@ class TableBuilder:
                 "XML row identified by "
                 + row.identifier
                 + " would not be printed, because it does not contain a valid"
-                " combination of criteria. Currently it contains "
+                " combination of criteria. Currently, it contains "
                 + str(row.criteria)
                 + ". If it is supposed to be shown please adapt the tables' "
                 "include-filters or adapt the XML tag's content.",
