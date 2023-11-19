@@ -91,7 +91,7 @@ class XMLRow(Element):
     def _concatenate_tags_content(
         self, cell_tags: List[str], separator: str = " - "
     ) -> str:
-        """Form one string from the texts of a set of XML tags's to fill a cell
+        """Form one string from the texts of a set of XML tags to fill a cell
 
         Form a string of the content for all desired XML tags by
         concatenating them together with a separator. This is especially necessary,
