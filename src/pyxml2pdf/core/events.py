@@ -89,12 +89,12 @@ class Event(XMLRow):
             ["TerminDatumVon3", "TerminDatumBis3"],
         ]
 
-        extracted_dates = [
+        raw_dates: List[str] = [
             self._concatenate_tags_content(date)
             for date in dates
             if self._concatenate_tags_content(date)
         ]
-        extracted_dates = "<br/>und<br/>".join(extracted_dates)
+        extracted_dates: str = "<br/>und<br/>".join(raw_dates)
 
         # Replace any extracted_dates of a form similar to 31.12.2099 with "on request".
         if "2099" in extracted_dates:
