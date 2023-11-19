@@ -1,5 +1,6 @@
 -c requirements.txt
 
+-e .
 black
 hypothesis
 mypy
