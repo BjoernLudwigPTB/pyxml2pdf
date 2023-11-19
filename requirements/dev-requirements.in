@@ -2,6 +2,7 @@
 
 -e .
 black
+flake8
 hypothesis
 mypy
 pylint
