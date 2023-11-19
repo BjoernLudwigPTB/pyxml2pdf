@@ -2,7 +2,7 @@
 
 import os
 
-from PyPDF2 import PageObject, PdfFileReader, PdfFileWriter
+from PyPDF2 import PageObject, PdfReader, PdfWriter  # type: ignore
 
 
 class PostProcessor:
@@ -23,8 +23,8 @@ class PostProcessor:
         self._output_directory_name = os.path.dirname(path)
         self._output_base_filename = os.path.splitext(os.path.basename(path))[0]
 
-    def finalize_print_preparation(self):
-        """Take the resulting multi page PDF and split into rotated single pages
+    def finalize_print_preparation(self) -> None:
+        """Take the resulting multipage PDF and split into rotated single pages
 
         Taken from `pythonlibrary.org
         <https://www.blog.pythonlibrary.org/2018/04/11/splitting-and-merging-pdfs
@@ -32,12 +32,12 @@ class PostProcessor:
         <https://www.johndcook.com/blog/2015/05/01/rotating-pdf-pages-with-python/>`_
         """
 
-        pdf: PdfFileReader = PdfFileReader(self._full_output_path_)
-        for page_number in range(pdf.getNumPages()):
-            pdf_writer: PdfFileWriter = PdfFileWriter()
-            page: PageObject = pdf.getPage(page_number)
-            page.rotateCounterClockwise(90)
-            pdf_writer.addPage(page)
+        pdf: PdfReader = PdfReader(self._full_output_path_)
+        for page_number in range(len(pdf.pages)):
+            pdf_writer: PdfWriter = PdfWriter()
+            page: PageObject = pdf.pages[page_number]
+            page.rotate(270)
+            pdf_writer.add_page(page)
             output_filename: str = (
                 f"{self._output_base_filename}_page_"
                 f"{str(page_number + 1).zfill(2)}.pdf"
@@ -50,7 +50,7 @@ class PostProcessor:
 
         path_to_pdf = os.path.join(os.getcwd(), self._full_output_path_)
         print(
-            f"Create {pdf.getNumPages()} single paged PDFs.\n\n"
+            f"Create {len(pdf.pages)} single paged PDFs.\n\n"
             f"You can find them concatenated at file://"
             f"{path_to_pdf}"
         )
