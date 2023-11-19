@@ -33,7 +33,7 @@ class PostProcessor:
         """
 
         pdf: PdfReader = PdfReader(self._full_output_path_)
-        for page_number in range(len(pdf.pages)):
+        for page_number, _ in enumerate(pdf.pages):
             pdf_writer: PdfWriter = PdfWriter()
             page: PageObject = pdf.pages[page_number]
             page.rotate(270)
