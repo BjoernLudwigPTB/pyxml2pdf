@@ -57,7 +57,7 @@ class XMLTableStyle:
 
     def __init__(self):
         """Initialise font and cell formatting"""
-        self._font = font
+        self._font = FONT
 
         # Set the resulting tables' styling with all the customization of
         # margins, fonts, fontsizes, etc...
