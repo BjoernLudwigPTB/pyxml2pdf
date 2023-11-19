@@ -7,6 +7,6 @@ mypy
 pylint
 pytest
 pytest-cov
-sphinx
+sphinx<7.2  # This is needed for Python 3.8.
 sphinx_rtd_theme
 tox
