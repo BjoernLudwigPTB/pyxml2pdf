@@ -85,7 +85,7 @@ class XMLRow(Element):
         self._identifier = self._concatenate_tags_content(identifier_xmltag)
         self._init_full_row()
 
-    def _init_criteria(self) -> set[str]:
+    def _init_criteria(self) -> Set[str]:
         """Initialize the list of criteria from the according xml tag's content"""
         criteria: str = self._concatenate_tags_content([filter_xmltag])
         return set(criteria.split(", "))
