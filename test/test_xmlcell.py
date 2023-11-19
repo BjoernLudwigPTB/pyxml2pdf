@@ -1,6 +1,6 @@
 import pytest
 from hypothesis import given, HealthCheck, settings, strategies as hst
-from reportlab.lib.styles import ParagraphStyle  # type: ignore
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle  # type: ignore
 
 from pyxml2pdf.core.rows import XMLCell
 from pyxml2pdf.core.types import SubtableSetting  # type: ignore
@@ -28,3 +28,16 @@ def test_xmlcell(test_xmlcell_class, text):
     assert isinstance(my_cell, XMLCell)
     assert isinstance(my_cell.style, ParagraphStyle)
     assert my_cell.text == text
+
+
+def test_xmlcell_get_style(test_xmlcell_class):
+    """Test, if style getter works"""
+    assert isinstance(test_xmlcell_class("test content").style, ParagraphStyle)
+
+
+def test_xmlcell_set_style(test_xmlcell_class, test_table_style):
+    """Test, if style getter works"""
+    test_xmlcell_instance = test_xmlcell_class("test content")
+    old_style = test_xmlcell_instance.style
+    test_xmlcell_instance.style = getSampleStyleSheet()  # type: ignore[method-assign]
+    assert old_style != test_xmlcell_instance.style
