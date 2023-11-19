@@ -38,7 +38,7 @@ class XMLCell(Paragraph):
 
     _style: StyleSheet1
 
-    def __init__(self, text: str):
+    def __init__(self, text: str) -> None:
         super().__init__(text, self.style)
 
     @property
@@ -47,7 +47,7 @@ class XMLCell(Paragraph):
         return self._style
 
     @style.setter
-    def style(self, value: StyleSheet1):
+    def style(self, value: StyleSheet1) -> None:
         self._style = value
 
 
@@ -69,7 +69,7 @@ class XMLRow(Element):
     _identifier: str
     _cell_styler: Type[XMLCell] = XMLCell
 
-    def __init__(self, element):
+    def __init__(self, element: Element) -> None:
         # Call Element constructor and extend ourselves by extending all children
         # tags to create an underlying copy of element.
         super().__init__(element.tag, element.attrib)
@@ -83,7 +83,7 @@ class XMLRow(Element):
         self._identifier = self._concatenate_tags_content(identifier_xmltag)
         self._mandatory_columns = self._init_full_row()
 
-    def _init_criteria(self):
+    def _init_criteria(self) -> set[str]:
         """Initialize the list of criteria from the according xml tag's content"""
         criteria: str = self._concatenate_tags_content([filter_xmltag])
         return set(criteria.split(", "))
